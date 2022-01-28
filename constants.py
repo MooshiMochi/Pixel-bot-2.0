@@ -18,6 +18,7 @@ class Constants:
             'commands.reaction_roles',
             'commands.restricted',
             'commands.verification',
-            'commands.whack_a_steve')
+            'commands.whack_a_steve',
+            'commands.level_system')
 
 const = Constants()
