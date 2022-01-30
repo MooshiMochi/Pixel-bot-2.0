@@ -19,20 +19,18 @@ e_conv = EmojiConverter()
 class url(str):
     def __init__(self, link):
 
-        # noinspection RegExpUnnecessaryNonCapturingGroup
         if not link:
             self.link = "None"
         else:
             check = re.findall("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*(),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", link)
             if check:
-                if str(link[-4:]) in [".jpg", "jpeg", ".png", ".gif", "webm"]:
-                    if str(link[-5:]) == ".webm":
-                        link = link.replace(".webm", ".png")
-                    pass
+                link = str(link).replace(".webm", ".png")
+
+                if not any([True for ext in [".jpg", "jpeg", ".png", ".gif"] if ext in str(link)]):
+
+                    self.link = "None"
                 else:
-                    if ".png" not in str(link):
-                        link += ".png"
-                self.link = link
+                    self.link = link
             else:
                 self.link = "None"
 

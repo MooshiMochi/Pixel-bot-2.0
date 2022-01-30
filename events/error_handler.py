@@ -3,6 +3,8 @@ from discord.ext import commands
 import traceback
 from utils.exceptions import *
 from datetime import datetime
+from discord_slash import SlashContext
+from discord_slash import error as Error
 
 
 class ErrorHandler(commands.Cog):
@@ -10,9 +12,10 @@ class ErrorHandler(commands.Cog):
         self.client = client
 
     @commands.Cog.listener()
-    async def on_slash_command_error(self, ctx, error):
+    async def on_slash_command_error(self, ctx: SlashContext, error):
+
         # This prevents any commands with local handlers being handled here in on_command_error.
-        if hasattr(ctx.command, 'on_error'):
+        if hasattr(self.client.slash.commands[ctx.command], 'on_error'):
             return
 
         # This prevents any cogs with an overwritten cog_command_error being handled here.
@@ -23,14 +26,22 @@ class ErrorHandler(commands.Cog):
 
         error = getattr(error, "original", error)
 
-        # If a user tries to run a nonexistant command
-        if isinstance(error, commands.CommandNotFound):
-            return  # we dont need to reset the cooldown, it doesnt exist
 
-        elif isinstance(error, discord.NotFound) or isinstance(error, discord.Forbidden):
+        if isinstance(error, discord.NotFound) or isinstance(error, discord.Forbidden):
             # probably because a message got deleted, so we'll ignore it.
-            pass
-            # return ctx.command.reset_cooldown(ctx)
+            return self.client.slash.commands[ctx.command].reset_cooldown(ctx)
+
+        elif isinstance(error, Error.RequestFailure):
+            self.client.slash.commands[ctx.command].reset_cooldown(ctx)
+            embed = discord.Embed(title="Oops, something went wrong.",
+                                  description=f"Something's gone terribly wrong. " +
+                                              f"Please forward the following output to a server administrator." +
+                                              f"\n```\n{f'Request failed with resp: {error.status} | {error.msg}'}\n```",
+                                  color=self.client.failure)
+            try:
+                await ctx.embed(embed, footer="Error Handler")
+            except discord.HTTPException:
+                pass
 
         elif isinstance(error, commands.MaxConcurrencyReached):
             d = {commands.BucketType.default: "globally",
@@ -54,7 +65,7 @@ class ErrorHandler(commands.Cog):
                 return
 
         elif isinstance(error, commands.MissingRole):
-            # ctx.command.reset_cooldown(ctx)
+            self.client.slash.commands[ctx.command].reset_cooldown(ctx)
             embed = discord.Embed(title="Hey, you can't do that!",
                                   description=f"Sorry, you need to have the role <@&{error.missing_role}> " +
                                                "to execute that command.",
@@ -65,7 +76,7 @@ class ErrorHandler(commands.Cog):
                 return
 
         elif isinstance(error, commands.MissingAnyRole):
-            # ctx.command.reset_cooldown(ctx)
+            self.client.slash.commands[ctx.command].reset_cooldown(ctx)
             embed = discord.Embed(title="Hey, you can't do that!",
                                   description="Sorry, you need to have one of the following roles: " +
                                              f"<@&{'>, <@&'.join(error.missing_roles)}> to execute that command.",
@@ -80,7 +91,7 @@ class ErrorHandler(commands.Cog):
             perms = ', '.join(error.missing_perms)
             if 'send_messages' in perms:
                 return
-            # ctx.command.reset_cooldown(ctx)
+            self.client.slash.commands[ctx.command].reset_cooldown(ctx)
             embed = discord.Embed(title="I can't do that.",
                                   description=f"Sorry, I require the permission(s) `{perms}` to " +
                                                "execute that command. Please contact a server " +
@@ -92,7 +103,7 @@ class ErrorHandler(commands.Cog):
                 return
 
         elif isinstance(error, commands.TooManyArguments):
-            # ctx.command.reset_cooldown(ctx)
+            self.client.slash.commands[ctx.command].reset_cooldown(ctx)
             embed = discord.Embed(title="That's not right.",
                                   description="That's a lot of arguments. Too many in fact.", color=self.client.failure)
             try:
@@ -100,20 +111,9 @@ class ErrorHandler(commands.Cog):
             except discord.HTTPException:
                 return
 
-        # If a user doesn't provide a required argument
-        elif isinstance(error, commands.MissingRequiredArgument):
-            param = str(error.param.name).replace("_", " ")
-            # ctx.command.reset_cooldown(ctx)
-            embed = discord.Embed(title="That's not right.", description=f"Please provide the `{param}` argument.",
-                                  color=self.client.failure)
-            try:
-                return await ctx.embed(embed)
-            except discord.HTTPException:
-                return
-
         elif isinstance(error, commands.BadUnionArgument):
             param = str(error.param.name).replace("_", " ")
-            # ctx.command.reset_cooldown(ctx)
+            self.client.slash.commands[ctx.command].reset_cooldown(ctx)
             embed = discord.Embed(title="That's not right.",
                                   description=f"Invalid `{param}` argument. Please try again.", color=self.client.failure)
             try:
@@ -123,7 +123,7 @@ class ErrorHandler(commands.Cog):
 
         # If a user tries to run a restricted command
         elif isinstance(error, commands.NotOwner):
-            # ctx.command.reset_cooldown(ctx)
+            self.client.slash.commands[ctx.command].reset_cooldown(ctx)
             embed = discord.Embed(title="Hey, you can't do that!", description="This command is restricted.",
                                   color=self.client.failure)
             try:
@@ -132,7 +132,7 @@ class ErrorHandler(commands.Cog):
                 return
 
         elif isinstance(error, commands.MemberNotFound):
-            # ctx.command.reset_cooldown(ctx)
+            self.client.slash.commands[ctx.command].reset_cooldown(ctx)
             embed = discord.Embed(title="That's not right.", description="Invalid member. Please try again.",
                                   color=self.client.failure)
             try:
@@ -141,7 +141,7 @@ class ErrorHandler(commands.Cog):
                 return
 
         elif isinstance(error, commands.UserNotFound):
-            # ctx.command.reset_cooldown(ctx)
+            self.client.slash.commands[ctx.command].reset_cooldown(ctx)
             embed = discord.Embed(title="That's not right.", description="Invalid user. Please try again.",
                                   color=self.client.failure)
             try:
@@ -150,7 +150,7 @@ class ErrorHandler(commands.Cog):
                 return
 
         elif isinstance(error, commands.RoleNotFound):
-            # ctx.command.reset_cooldown(ctx)
+            self.client.slash.commands[ctx.command].reset_cooldown(ctx)
             embed = discord.Embed(title="That's not right.", description="Invalid role. Please try again.",
                                   color=self.client.failure)
             try:
@@ -159,7 +159,7 @@ class ErrorHandler(commands.Cog):
                 return
 
         elif isinstance(error, commands.ChannelNotFound):
-            # ctx.command.reset_cooldown(ctx)
+            self.client.slash.commands[ctx.command].reset_cooldown(ctx)
             embed = discord.Embed(title="That's not right.", description="Invalid channel. Please try again.",
                                   color=self.client.failure)
             try:
@@ -169,7 +169,7 @@ class ErrorHandler(commands.Cog):
 
         # If the command is disabled
         elif isinstance(error, commands.DisabledCommand):
-            # ctx.command.reset_cooldown(ctx)
+            self.client.slash.commands[ctx.command].reset_cooldown(ctx)
             embed = discord.Embed(title="Hey, you can't do that!", description="This command is disabled.",
                                   color=self.client.failure)
             try:
@@ -209,7 +209,7 @@ class ErrorHandler(commands.Cog):
                                                                                      commands.ExpectedClosingQuoteError
                                                                                      ) or isinstance(
                 error, commands.UnexpectedQuoteError):
-            # ctx.command.reset_cooldown(ctx)
+            self.client.slash.commands[ctx.command].reset_cooldown(ctx)
             embed = discord.Embed(title="That's not right.",
                                   description="I don't like quotes, please omit any quotes in the command.",
                                   color=self.client.failure)
@@ -221,7 +221,7 @@ class ErrorHandler(commands.Cog):
         # If the user doesnt have enough permissions to run a command
         elif isinstance(error, commands.MissingPermissions):
             perms = ', '.join(error.missing_perms)
-            # ctx.command.reset_cooldown(ctx)
+            self.client.slash.commands[ctx.command].reset_cooldown(ctx)
             if len(error.missing_perms) == 1:
                 embed = discord.Embed(title="Hey, you can't do that!",
                                       description=f"Sorry, you need the permission `{perms}` to execute this command.",
@@ -243,14 +243,15 @@ class ErrorHandler(commands.Cog):
 
         # If the error is not recognized
         else:
-            # ctx.command.reset_cooldown(ctx)
+            self.client.slash.commands[ctx.command].reset_cooldown(ctx)
+            
             embed = discord.Embed(title="Oops, something went wrong.",
                                   description=f"Something's gone terribly wrong. " +
                                               f"Please forward the following output to a server administrator." +
                                               f"\n```\n{str(error)}\n```",
                                   color=self.client.failure)
             try:
-                await ctx.embed(embed)
+                await ctx.embed(embed, footer="Error Handler")
             except discord.HTTPException:
                 pass
 
@@ -264,23 +265,20 @@ class ErrorHandler(commands.Cog):
             if self.client.config.log_channel is not None:
                 channel = self.client.get_channel(self.client.config.log_channel)
                 if channel is not None:
+                    
+                    embed = discord.Embed(title=f"Exception in '{ctx.command}'",
+                                              description=f"Command Invoker: {ctx.author.mention}\n" +
+                                                          f"Command: `{ctx.name} {ctx.args}`\n\n```\n{tb}",
+                                              color=self.client.failure)
+                    embed.set_footer(text="Error Handler", icon_url=self.client.png)
+                    embed.timestamp = datetime.utcnow()
+                    
                     if len(tb) < 2000:
                         file = None
-                        embed = discord.Embed(title=f"Exception in '{ctx.command}'",
-                                              description=f"Command Invoker: {ctx.author.mention}\n" +
-                                                          f"Command: `{ctx.message.content}`\n\n```\n{tb}\n```",
-                                              color=self.client.failure)
-                        embed.set_footer(text="Error Handler", icon_url=self.client.png)
-                        embed.timestamp = datetime.utcnow()
+                        embed.description += "\n```"
+                        
                     else:
-                        embed = discord.Embed(title=f"Exception in '{ctx.command}'",
-                                              description=f"Command Invoker: {ctx.author.mention}\n" +
-                                                          f"Command: `{ctx.message.content}`\n\n" +
-                                                          f"```\n" +
-                                                          f"Traceback is too long to be displayed.```",
-                                              color=self.client.failure)
-                        embed.set_footer(text="Error Handler", icon_url=self.client.png)
-                        embed.timestamp = datetime.utcnow()
+                        embed.description += f"\nTraceback is too long to be displayed.```"
                         
                         with open('logs/last_command_error.log', 'a') as latest_logfile:
                             latest_logfile.write(tb)
@@ -289,7 +287,7 @@ class ErrorHandler(commands.Cog):
                     await channel.send(embed=embed, file=file) if file else await channel.send(embed=embed)
 
                 else:
-                    raise ValueError("Logchannel does not exist.")
+                    raise ValueError("Log channel does not exist.")
 
     
     @commands.Cog.listener()
@@ -312,8 +310,7 @@ class ErrorHandler(commands.Cog):
 
         elif isinstance(error, discord.NotFound) or isinstance(error, discord.Forbidden):
             # probably because a message got deleted, so we'll ignore it.
-            pass
-            # return ctx.command.reset_cooldown(ctx)
+            return ctx.command.reset_cooldown(ctx)
 
         elif isinstance(error, commands.MaxConcurrencyReached):
             d = {commands.BucketType.default: "globally",
@@ -337,7 +334,7 @@ class ErrorHandler(commands.Cog):
                 return
 
         elif isinstance(error, commands.MissingRole):
-            # ctx.command.reset_cooldown(ctx)
+            ctx.command.reset_cooldown(ctx)
             embed = discord.Embed(title="Hey, you can't do that!",
                                   description=f"Sorry, you need to have the role <@&{error.missing_role}> " +
                                                "to execute that command.",
@@ -348,7 +345,7 @@ class ErrorHandler(commands.Cog):
                 return
 
         elif isinstance(error, commands.MissingAnyRole):
-            # ctx.command.reset_cooldown(ctx)
+            ctx.command.reset_cooldown(ctx)
             embed = discord.Embed(title="Hey, you can't do that!",
                                   description="Sorry, you need to have one of the following roles: " +
                                              f"<@&{'>, <@&'.join(error.missing_roles)}> to execute that command.",
@@ -363,7 +360,7 @@ class ErrorHandler(commands.Cog):
             perms = ', '.join(error.missing_perms)
             if 'send_messages' in perms:
                 return
-            # ctx.command.reset_cooldown(ctx)
+            ctx.command.reset_cooldown(ctx)
             embed = discord.Embed(title="I can't do that.",
                                   description=f"Sorry, I require the permission(s) `{perms}` to " +
                                                "execute that command. Please contact a server " +
@@ -375,7 +372,7 @@ class ErrorHandler(commands.Cog):
                 return
 
         elif isinstance(error, commands.TooManyArguments):
-            # ctx.command.reset_cooldown(ctx)
+            ctx.command.reset_cooldown(ctx)
             embed = discord.Embed(title="That's not right.",
                                   description="That's a lot of arguments. Too many in fact.", color=self.client.failure)
             try:
@@ -386,7 +383,7 @@ class ErrorHandler(commands.Cog):
         # If a user doesn't provide a required argument
         elif isinstance(error, commands.MissingRequiredArgument):
             param = str(error.param.name).replace("_", " ")
-            # ctx.command.reset_cooldown(ctx)
+            ctx.command.reset_cooldown(ctx)
             embed = discord.Embed(title="That's not right.", description=f"Please provide the `{param}` argument.",
                                   color=self.client.failure)
             try:
@@ -396,7 +393,7 @@ class ErrorHandler(commands.Cog):
 
         elif isinstance(error, commands.BadUnionArgument):
             param = str(error.param.name).replace("_", " ")
-            # ctx.command.reset_cooldown(ctx)
+            ctx.command.reset_cooldown(ctx)
             embed = discord.Embed(title="That's not right.",
                                   description=f"Invalid `{param}` argument. Please try again.", color=self.client.failure)
             try:
@@ -406,7 +403,7 @@ class ErrorHandler(commands.Cog):
 
         # If a user tries to run a restricted command
         elif isinstance(error, commands.NotOwner):
-            # ctx.command.reset_cooldown(ctx)
+            ctx.command.reset_cooldown(ctx)
             embed = discord.Embed(title="Hey, you can't do that!", description="This command is restricted.",
                                   color=self.client.failure)
             try:
@@ -415,7 +412,7 @@ class ErrorHandler(commands.Cog):
                 return
 
         elif isinstance(error, commands.MemberNotFound):
-            # ctx.command.reset_cooldown(ctx)
+            ctx.command.reset_cooldown(ctx)
             embed = discord.Embed(title="That's not right.", description="Invalid member. Please try again.",
                                   color=self.client.failure)
             try:
@@ -424,7 +421,7 @@ class ErrorHandler(commands.Cog):
                 return
 
         elif isinstance(error, commands.UserNotFound):
-            # ctx.command.reset_cooldown(ctx)
+            ctx.command.reset_cooldown(ctx)
             embed = discord.Embed(title="That's not right.", description="Invalid user. Please try again.",
                                   color=self.client.failure)
             try:
@@ -433,7 +430,7 @@ class ErrorHandler(commands.Cog):
                 return
 
         elif isinstance(error, commands.RoleNotFound):
-            # ctx.command.reset_cooldown(ctx)
+            ctx.command.reset_cooldown(ctx)
             embed = discord.Embed(title="That's not right.", description="Invalid role. Please try again.",
                                   color=self.client.failure)
             try:
@@ -442,7 +439,7 @@ class ErrorHandler(commands.Cog):
                 return
 
         elif isinstance(error, commands.ChannelNotFound):
-            # ctx.command.reset_cooldown(ctx)
+            ctx.command.reset_cooldown(ctx)
             embed = discord.Embed(title="That's not right.", description="Invalid channel. Please try again.",
                                   color=self.client.failure)
             try:
@@ -452,7 +449,7 @@ class ErrorHandler(commands.Cog):
 
         # If the command is disabled
         elif isinstance(error, commands.DisabledCommand):
-            # ctx.command.reset_cooldown(ctx)
+            ctx.command.reset_cooldown(ctx)
             embed = discord.Embed(title="Hey, you can't do that!", description="This command is disabled.",
                                   color=self.client.failure)
             try:
@@ -492,7 +489,7 @@ class ErrorHandler(commands.Cog):
                                                                                      commands.ExpectedClosingQuoteError
                                                                                      ) or isinstance(
                 error, commands.UnexpectedQuoteError):
-            # ctx.command.reset_cooldown(ctx)
+            ctx.command.reset_cooldown(ctx)
             embed = discord.Embed(title="That's not right.",
                                   description="I don't like quotes, please omit any quotes in the command.",
                                   color=self.client.failure)
@@ -504,7 +501,7 @@ class ErrorHandler(commands.Cog):
         # If the user doesnt have enough permissions to run a command
         elif isinstance(error, commands.MissingPermissions):
             perms = ', '.join(error.missing_perms)
-            # ctx.command.reset_cooldown(ctx)
+            ctx.command.reset_cooldown(ctx)
             if len(error.missing_perms) == 1:
                 embed = discord.Embed(title="Hey, you can't do that!",
                                       description=f"Sorry, you need the permission `{perms}` to execute this command.",
@@ -526,7 +523,7 @@ class ErrorHandler(commands.Cog):
 
         # If the error is not recognized
         else:
-            # ctx.command.reset_cooldown(ctx)
+            ctx.command.reset_cooldown(ctx)
             embed = discord.Embed(title="Oops, something went wrong.",
                                   description=f"Something's gone terribly wrong. " +
                                               f"Please forward the following output to a server administrator." +
@@ -543,6 +540,7 @@ class ErrorHandler(commands.Cog):
                 tb = traceback.format_exc()
             self.client.logger.error(f"An unhandled error has occurred: {str(error)} - More details can be found in logs/error.log")
             with open('logs/error.log', 'a') as logfile:
+                logfile.write("NEW ERROR\n\n")
                 logfile.write(tb)
             if self.client.config.log_channel is not None:
                 channel = self.client.get_channel(self.client.config.log_channel)
@@ -572,7 +570,7 @@ class ErrorHandler(commands.Cog):
                     await channel.send(embed=embed, file=file) if file else await channel.send(embed=embed)
 
                 else:
-                    raise ValueError("Logchannel does not exist.")
+                    raise ValueError("Log channel does not exist.")
 
 
 def setup(client):

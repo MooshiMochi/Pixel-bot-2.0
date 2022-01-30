@@ -134,7 +134,9 @@ class Paginator:
 
 class TextPageSource:
     """ Get pages for text paginator """
-    def __init__(self, text, *, prefix='```', suffix='```', max_size=2000):
+    def __init__(self, text, *, prefix='```', suffix='```', max_size=2000, code_block=False):
+        if code_block:
+            prefix += "py\n"
         pages = CommandPaginator(prefix=prefix, suffix=suffix, max_size=max_size - 200)
         for line in text.split('\n'):
             pages.add_line(line)

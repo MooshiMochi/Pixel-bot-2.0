@@ -1,5 +1,5 @@
 from discord.ext import commands
-from utils.exceptions import NotGuildOwner, NotBotSetOwner
+from utils.exceptions import NotGuildOwner
 
 bool_args = {
     'y': True,

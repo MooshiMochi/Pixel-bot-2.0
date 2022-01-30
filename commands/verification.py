@@ -1,14 +1,19 @@
+from xmlrpc.client import Boolean
 import discord
 import json
 
 from constants import const
 
 from discord.ext import commands, tasks
+from utils.dpy import Converters
 
 from discord_slash import cog_ext, ComponentContext
 from discord_slash.utils.manage_commands import create_option, create_choice
 from discord_slash.utils.manage_components import create_actionrow, create_button
 from discord_slash.model import ButtonStyle
+
+
+bool_converter = Converters.Boolean
 
 
 class Verification(commands.Cog):
@@ -57,6 +62,8 @@ class Verification(commands.Cog):
         action_row = create_actionrow(*[create_button(style=ButtonStyle.green, label="Get Verified!", custom_id="verification_button")])
         
         await ctx.send("Success!", hidden=True)
+
+        send_as_embed = await bool_converter.convert(ctx, send_as_embed)
 
         if send_as_embed:
             em = discord.Embed(color=self.client.success)

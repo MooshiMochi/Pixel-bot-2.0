@@ -9,7 +9,8 @@ from datetime import datetime
 import discord
 from discord.ext import commands
 
-from discord_slash import SlashCommand
+import discord_slash
+from discord_slash import SlashCommand, SlashContext
 from discord_slash.utils.manage_commands import create_option, create_choice
 
 
@@ -30,9 +31,7 @@ logger.addHandler(handler)
 
 class PixelContext(commands.Context):
     async def embed(self, embed, *, footer=None):
-        # modify the embed
-        # tips would go as 'SkyKings | <tip>'
-        # footer will display as 'SkyKings | <footer>'
+
         if footer is None:
             footer = "Pixel Housing"
         embed.set_footer(icon_url=self.bot.png, text=f"Pixel | {footer}")
@@ -42,6 +41,34 @@ class PixelContext(commands.Context):
             return await self.send(embed=embed)
         except discord.HTTPException as e:   
             raise e
+            
+class PixelSlashContext(SlashContext):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.mooshi = "Hai"
+
+    async def embed(self, embed, *, footer=None):
+
+        if footer is None:
+            footer = "Pixel Housing"
+        embed.set_footer(icon_url=self.bot.png, text=f"Pixel | {footer}")
+        embed.timestamp = datetime.utcnow()
+
+        try:
+            if self._deferred_hidden:
+                if not self.responded:
+                    return await self.send(embed=embed, hidden=True)
+                
+                return await self.bot.get_guild(self.guild_id).get_channel(self.channel_id).send(embed=embed)
+
+            return await self.send(embed=embed)
+        except discord.HTTPException as e:   
+            raise e
+
+
+discord_slash.context.SlashContext = PixelSlashContext
+
 
 class BotConfig:
     def __init__(self, config):

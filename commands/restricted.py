@@ -128,16 +128,18 @@ class Restricted(commands.Cog):
         code = self.cleanup_code(code)
         stdout = io.StringIO()
 
-        to_compile = f'async def func():\n{textwrap.indent(code, "  ")}'
+        to_compile = f'async def func():\n{textwrap.indent(code, "    ")}'
 
         try:
             exec(to_compile, env)
         except Exception as e:
-            pages = TextPageSource(str(e.__class__.__name__) + ': ' + str(e)).getPages()
+            pages = TextPageSource(str(e.__class__.__name__) + ': ' + str(e), code_block=True).getPages()
             if len(pages) == 1:
                 await ctx.send(pages[0][:-8].strip())
             else:
                 await paginator(pages, ctx).run()
+            return
+            
         else:
             func = env['func']
 
@@ -146,7 +148,7 @@ class Restricted(commands.Cog):
                     ret = await func()
             except Exception as e:
                 value = stdout.getvalue()
-                pages = TextPageSource(value + str(traceback.format_exc(e, e, e.__traceback__))).getPages()
+                pages = TextPageSource(value + str("".join(traceback.format_exception(e, e, e.__traceback__))), code_block=True).getPages()
                 if len(pages) == 1:
                     await ctx.send(pages[0][:-8].strip())
                 else:
@@ -154,18 +156,18 @@ class Restricted(commands.Cog):
             else:
                 value = stdout.getvalue()
 
-                if ret is None:
-                    if value != '':
-                        pages = TextPageSource(value).getPages()
-                        if len(pages) == 1:
-                            await ctx.send(pages[0][:-8].strip())
-                        else:
-                            await paginator(pages, ctx).run()
+                if ret is None and value != '':
+                    pages = TextPageSource(value, code_block=True).getPages()
+                    if len(pages) == 1:
+                        await ctx.send(pages[0][:-8].strip())
+                    else:
+                        await paginator(pages, ctx).run()
+                    return
                 else:
                     self._last_result = ret
                     if value != '' or ret != '':
-                        pages = TextPageSource(value + str(ret)).getPages()
-                        if len(pages) == 0:
+                        pages = TextPageSource(value + str(ret), code_block=True).getPages()
+                        if len(pages) == 1:
                             await ctx.send(pages[0][:-8].strip())
                         else:
                             await paginator(pages, ctx).run()
