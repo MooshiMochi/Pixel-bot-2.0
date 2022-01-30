@@ -169,10 +169,8 @@ client.logger.info(len(client.extensions), "extensions loaded,", skipped, "skipp
 @slash.slash(name="reload", guild_ids = [932736074139185292],description="Reload a client extension.", options=[
     create_option(name="filename", description="The name of the extension file to reload.", option_type=str,
     required=True, choices=[create_choice(value=f'commands.{x.replace(".py", "")}', name=x) for x in os.listdir("commands") if x.endswith("py")])])
+@commands.is_owner()
 async def reload(ctx, filename):
-    if ctx.author.id not in [186896273742233600, 383287544336613385]:
-        return await ctx.send("You're not allowed to run this command.", hidden=True)
-
     try:
         client.unload_extension(filename)
         client.load_extension(filename)
@@ -188,10 +186,8 @@ async def reload(ctx, filename):
 @slash.slash(name="load", guild_ids = [932736074139185292], description="Load a client extension.", options=[
     create_option(name="filename", description="The name of the extension file to load.", option_type=str,
     required=True, choices=[create_choice(value=f'commands.{x.replace(".py", "")}', name=x) for x in os.listdir("commands") if x.endswith("py")])])
+@commands.is_owner()
 async def load(ctx, filename):
-    if ctx.author.id not in client.owner_ids:
-        return await ctx.send("You're not allowed to run this command.")
-
     try:
         client.load_extension(filename)
         return await ctx.send(f"Loaded `{filename}.py`.", hidden=True)
