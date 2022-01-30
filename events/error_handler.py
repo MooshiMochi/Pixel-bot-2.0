@@ -268,7 +268,7 @@ class ErrorHandler(commands.Cog):
                     
                     embed = discord.Embed(title=f"Exception in '{ctx.command}'",
                                               description=f"Command Invoker: {ctx.author.mention}\n" +
-                                                          f"Command: `{ctx.name} {ctx.args}`\n\n```\n{tb}",
+                                                          f"Command: `{ctx.name} {ctx.kwargs}`\n\n```\n{tb}",
                                               color=self.client.failure)
                     embed.set_footer(text="Error Handler", icon_url=self.client.png)
                     embed.timestamp = datetime.utcnow()

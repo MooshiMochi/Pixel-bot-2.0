@@ -1,4 +1,3 @@
-from xmlrpc.client import Boolean
 import discord
 import json
 
@@ -87,7 +86,7 @@ class Verification(commands.Cog):
         self.verification_role = verification_role
 
         with open("data/verification.json", "w") as f:
-            self.v_role_data = {str(ctx.guild.id): verification_role.id}
+            self.v_role_data[str(ctx.guild.id)] = verification_role.id
             json.dump(self.v_role_data, f, indent=2)
 
     

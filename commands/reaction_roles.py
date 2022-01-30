@@ -205,6 +205,12 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
         elif role.is_integration():
             return await ctx.send("I cannot add that as a reaction role as it is managed by an integration.", hidden=True)
 
+        elif role.is_default():
+            return await ctx.send("I cannot add that as a reaction role as it is a 'default'.", hidden=True)
+
+        elif ctx.guild.roles.index(role) >= ctx.guild.roles.index(ctx.guild.me.top_role):
+                return await ctx.send("Unfortunatelly I do not have enough permissiosn to manage that role.", hidden=True)
+
         message_id = str(message_id)
         ch = None
         msg = None

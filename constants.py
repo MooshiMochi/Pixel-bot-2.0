@@ -19,6 +19,7 @@ class Constants:
             'commands.restricted',
             'commands.verification',
             'commands.whack_a_steve',
-            'commands.level_system')
+            'commands.level_system',
+            'commands.leaderboards')
 
 const = Constants()

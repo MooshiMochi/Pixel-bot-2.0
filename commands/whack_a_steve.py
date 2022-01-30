@@ -8,5 +8,8 @@ class WhackASteve(commands.Cog):
         self.client = client
 
 
+    
+
+
 def setup(client):
     client.add_cog(WhackASteve(client=client))

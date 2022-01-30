@@ -41,12 +41,12 @@ class PixelContext(commands.Context):
             return await self.send(embed=embed)
         except discord.HTTPException as e:   
             raise e
-            
+
+
 class PixelSlashContext(SlashContext):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.mooshi = "Hai"
 
     async def embed(self, embed, *, footer=None):
 
@@ -86,8 +86,8 @@ class MyClient(commands.Bot):
         self.failure = 0xff0000
         self.warn = 0xffff00
 
-        self.yes = "❌"
-        self.no = "✅"
+        self.no = "❌"
+        self.yes = "✅"
 
         self.config = BotConfig(const.log_channel_id)
 
@@ -99,6 +99,24 @@ class MyClient(commands.Bot):
 
     async def on_connect(self):
         self.session = aiohttp.ClientSession()
+
+    async def check_user(self, msg: discord.Message):
+
+        if str(msg.author.id) not in self.chatlb.keys():
+            self.chatlb[str(msg.author.id)] = {
+                "name": msg.author.name,
+                "display_name": msg.author.display_name if msg.author.display_name else None,
+                "disc": msg.author.discriminator,
+                "xp": 0,
+                "total_xp": 0,
+                "level": 0
+            }
+            return True
+
+        elif str(msg.author.id) in self.chatlb.keys():
+            return True
+        else:
+            return False
 
     async def close(self):
         await self.session.close()
