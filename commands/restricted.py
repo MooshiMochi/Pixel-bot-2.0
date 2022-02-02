@@ -1,3 +1,4 @@
+from sre_constants import OP_IGNORE
 import subprocess
 import asyncio
 from discord.ext import commands
@@ -9,6 +10,9 @@ import textwrap
 import os
 from utils.paginator import TextPageSource, Paginator as paginator
 from contextlib import redirect_stdout
+from discord_slash.cog_ext import cog_slash
+from discord_slash import SlashContext
+from discord_slash.utils.manage_commands import create_option
 
 
 class Restricted(commands.Cog):
@@ -171,6 +175,17 @@ class Restricted(commands.Cog):
                             await ctx.send(pages[0][:-8].strip())
                         else:
                             await paginator(pages, ctx).run()
+
+
+    @cog_slash(name="error", description="Raises ValueError", guild_ids=[const.guild_id], options=[
+        create_option(name="error_message", description="The error message to return", option_type=3, required=False)])
+    @commands.is_owner()
+    async def _raise_error(self, ctx:SlashContext, error_message:str="No error message"):
+        
+        await ctx.send(f"{self.client.yes} Success!", hidden=True)
+
+        raise ValueError(error_message)
+
 
 def setup(client):
     client.add_cog(Restricted(client))

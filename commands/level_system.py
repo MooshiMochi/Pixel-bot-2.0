@@ -6,7 +6,9 @@ from discord.ext import commands, tasks
 
 from discord_slash import SlashContext
 from discord_slash.cog_ext import cog_slash
-from discord_slash.utils.manage_commands import create_option
+from discord_slash.utils.manage_commands import create_option, create_choice
+
+from datetime import datetime
 
 from constants import const
 
@@ -19,11 +21,6 @@ class LevelSystem(commands.Cog):
 
         self.ready = False
 
-        with open("data/level_system/config.json", "r") as f:
-            self.config = json.load(f)
-
-        with open("data/level_system/chatlb.json", "r") as f:
-            self.client.chatlb = json.load(f)
 
     async def check_levelup(self, msg: discord.Message):
 
@@ -40,13 +37,36 @@ class LevelSystem(commands.Cog):
 
         await self.client.check_user(msg)
 
-        if str(msg.guild.id) not in self.config.keys():
-            self.config[str(msg.guild.id)] = {"xp_required": 1000, "max_lvl": 100}
+        if str(msg.guild.id) not in self.client.lvlsys_config.keys():
+            self.client.lvlsys_config[str(msg.guild.id)] = {"xp_required": 1000, "max_lvl": 100, "disabled_channels": []}
+        
+        if "disabled_channels" not in self.client.lvlsys_config[str(msg.guild.id)].keys():
+            self.client.lvlsys_config[str(msg.guild.id)]["disabled_channels"] = []
 
-        xp_threshold = self.config[str(msg.guild.id)].get("xp_required", 1000)
-        max_lvl = self.config[str(msg.guild.id)].get("max_lvl", 100)
+        if msg.channel.id in self.client.lvlsys_config[str(msg.guild.id)]["disabled_channels"]:
+            return
 
-        self.client.chatlb[author_id]["total_xp"] += 1
+        xp_threshold = self.client.lvlsys_config[str(msg.guild.id)].get("xp_required", 1000)
+        max_lvl = self.client.lvlsys_config[str(msg.guild.id)].get("max_lvl", 100)
+
+        xp_per_msg = 1
+
+        if "event" in self.client.lvlsys_config[str(msg.guild.id)].keys():
+            ts = self.client.lvlsys_config[str(msg.guild.id)]["event"]["timestamp"]
+            if ts and datetime.utcnow().timestamp() >= ts:
+                
+                await msg.channel.send("⚠️ **XP event has ended. Congratulations to those who participated!** ⚠️")
+
+                self.client.lvlsys_config[str(msg.guild.id)]["event"]["timestamp"] = None
+                self.client.lvlsys_config[str(msg.guild.id)]["event"]["xp_per_message"] = 1
+                
+                with open("data/level_system/config.json", "w") as f:
+                    json.dump(self.client.lvlsys_config, f, indent=2)
+
+            elif ts and datetime.utcnow().timestamp() < ts:
+                xp_per_msg = self.client.lvlsys_config[str(msg.guild.id)]["event"]["xp_per_message"]
+
+        self.client.chatlb[author_id]["total_xp"] += xp_per_msg
 
         if self.client.chatlb[author_id]["xp"] >= xp_threshold:
             
@@ -71,14 +91,14 @@ class LevelSystem(commands.Cog):
 
                 await msg.reply(emebd=em)
                 return
-        
-        self.client.chatlb[author_id]["xp"] += 1
+        else:
+            self.client.chatlb[author_id]["xp"] += xp_per_msg
 
 
     @tasks.loop(count=1)
     async def load_level_roles(self):
         for guild in self.client.guilds:
-            if (str(guild.id) in self.config) and (self.client.config[str(guild.id)].get("level_roles", False)):
+            if (str(guild.id) in self.client.lvlsys_config) and (self.client.config[str(guild.id)].get("level_roles", False)):
                 for level, role_id in self.client.config[str(guild.id)]["level_roles"].items():
                     role_obj = guild.get_role(role_id)
                     if role_obj:
@@ -94,7 +114,7 @@ class LevelSystem(commands.Cog):
         await self.check_levelup(msg)
 
     
-    @cog_slash(name="set_xp_threshold", description="Set the xp required to reach the next level", 
+    @cog_slash(name="set_xp_threshold", description="[STAFF] Set the xp required to reach the next level", 
     guild_ids=[const.guild_id], options=[
         create_option(name="new_xp", description="The xp required to reach next level", option_type=4, required=True)
     ])
@@ -105,19 +125,19 @@ class LevelSystem(commands.Cog):
             await ctx.send(f"**{self.client.no} | Failed!**", hidden=True)
             raise commands.MissingPermissions("Manage Roles")
 
-        if str(ctx.guild_id) in self.config.keys():
-            self.config[str(ctx.guild_id)]["xp_required"] = new_xp
+        if str(ctx.guild_id) in self.client.lvlsys_config.keys():
+            self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"] = new_xp
         
         else:
-            self.config[str(ctx.guild_id)] = {"xp_required": new_xp, "max_lvl": 100, "level_roles": {}}
+            self.client.lvlsys_config[str(ctx.guild_id)] = {"xp_required": new_xp, "max_lvl": 100, "level_roles": {}}
 
         with open("data/level_system/config.json", "w") as f:
-                json.dump(self.config, f, indent=2)
+                json.dump(self.client.lvlsys_config, f, indent=2)
 
         return await ctx.send(f"Users will now need to accumulate {new_xp} xp before they can level up!", hidden=True)
 
 
-    @cog_slash(name="set_level_threshold", description="Set the max level somoene can reach", 
+    @cog_slash(name="set_level_threshold", description="[STAFF] Set the max level somoene can reach", 
     guild_ids=[const.guild_id], options=[
         create_option(name="new_level_cap", description="The max level someone can reach", option_type=4, required=True)
     ])
@@ -128,18 +148,18 @@ class LevelSystem(commands.Cog):
             await ctx.send(f"{self.client.no} | Failed!", hidden=True)
             raise commands.MissingPermissions("Manage Roles")
 
-        if str(ctx.guild.id) in self.config.keys():
-            self.config[str(ctx.guild_id)]["max_lvl"] = new_level_cap
+        if str(ctx.guild.id) in self.client.lvlsys_config.keys():
+            self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"] = new_level_cap
         else:
-            self.config[str(ctx.guild_id)] = {"xp_required": 1000, "max_lvl": new_level_cap, "level_roles": {}}
+            self.client.lvlsys_config[str(ctx.guild_id)] = {"xp_required": 1000, "max_lvl": new_level_cap, "level_roles": {}}
 
         with open("data/level_system/config.json", "w") as f:
-            json.dump(self.config, f, indent=2) 
+            json.dump(self.client.lvlsys_config, f, indent=2) 
 
         return await ctx.send(f"The level cap has been set to `{new_level_cap}`", hidden=True)
 
 
-    @cog_slash(name="set_level_role", description="Set the role for a specific leve",
+    @cog_slash(name="set_level_role", description="[STAFF] Set the role for a specific leve",
     guild_ids=[const.guild_id], 
     options=[
         create_option(name="level", description="The level you want to give a role to", option_type=4,
@@ -166,10 +186,10 @@ class LevelSystem(commands.Cog):
             elif ctx.guild.roles.index(role) >= ctx.guild.roles.index(ctx.guild.me.top_role):
                 return await ctx.send("Unfortunatelly I do not have enough permissiosn to manage that role.", hidden=True)
 
-        if str(ctx.guild_id) not in self.config.keys():
+        if str(ctx.guild_id) not in self.client.lvlsys_config.keys():
             copy_dict = {"max_lvl": 100, "xp_required": 1000, "level_roles": {}}
         else:
-            copy_dict = self.config[str(ctx.guild_id)].copy()
+            copy_dict = self.client.lvlsys_config[str(ctx.guild_id)].copy()
 
         if level > copy_dict["max_lvl"]:
             return await ctx.send(f"You cannot select a level higher than the max level (`{copy_dict['max_lvl']}`)", hidden=True)
@@ -190,10 +210,10 @@ class LevelSystem(commands.Cog):
             else:
                 return await ctx.send("You do not have any roles configuerd for any levels yet.", hidden=True)
 
-        self.config[str(ctx.guild_id)] = copy_dict
+        self.client.lvlsys_config[str(ctx.guild_id)] = copy_dict
 
         with open("data/level_system/config.json", "w") as f:
-            json.dump(self.config, f, indent=2)
+            json.dump(self.client.lvlsys_config, f, indent=2)
 
         if role:
             return await ctx.send(f"Role {role.mention} will be given when a user reaches level `{level}`", hidden=True)
@@ -204,14 +224,10 @@ class LevelSystem(commands.Cog):
     async def display_level_roles(self, ctx:SlashContext):
 
         await ctx.defer(hidden=True)
-        
-        if not ctx.author.guild_permissions.manage_roles:
-            await ctx.send(f"{self.client.no} | Failed!", hidden=True)
-            raise commands.MissingPermissions("Manage Roles")
 
 
-        if (str(ctx.guild_id) not in self.config.keys()) or ("level_roles" not in self.config[str(ctx.guild_id)].keys()) or (
-            not self.config[str(ctx.guild_id)]["level_roles"]
+        if (str(ctx.guild_id) not in self.client.lvlsys_config.keys()) or ("level_roles" not in self.client.lvlsys_config[str(ctx.guild_id)].keys()) or (
+            not self.client.lvlsys_config[str(ctx.guild_id)]["level_roles"]
         ):
             return await ctx.send("There are no level roles set up for this guild yet!", hidden=True)
 
@@ -219,11 +235,206 @@ class LevelSystem(commands.Cog):
 
         em = discord.Embed(color=self.client.success, title="Level Roles")
 
-        text = "\n".join([f"**{x[0]}** - <@&{x[1]}>" for x in self.config[str(ctx.guild_id)]["level_roles"].items()])
+        text = "\n".join([f"**{x[0]}** - <@&{x[1]}>" for x in self.client.lvlsys_config[str(ctx.guild_id)]["level_roles"].items()])
         
         em.description = text
 
         await ctx.embed(em)
+
+    @cog_slash(name="level", description="Display your current level, ranking and xp till next level", guild_ids=[const.guild_id],
+    options=[create_option(name="member", description="The member to check the stats for.", option_type=6, required=False)])
+    async def _level(self, ctx:SlashContext, member:discord.User=None):
+        
+        await ctx.defer(hidden=True)
+
+        if not member:
+            member = ctx.author
+
+        ranked = sorted(self.client.chatlb, key=lambda f: self.client.chatlb[f]["total_xp"], reverse=True)
+
+        position = ranked.index(str(member.id)) + 1 if str(member.id) in ranked else "N/A"
+
+        xp_next_lvl = f'{self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"] - self.client.chatlb[str(member.id)]["xp"]}' if str(member.id) in self.client.chatlb.keys() else "N/A"
+
+        curr_xp =  f'{self.client.chatlb[str(member.id)]["xp"]}/{self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"]}' if str(member.id) in self.client.chatlb.keys() else "N/A"
+
+        total_xp =  await self.client.round_int(self.client.chatlb[str(member.id)]["total_xp"]) if str(member.id) in self.client.chatlb.keys() else "N/A"
+
+        curr_lvl = f'{self.client.chatlb[str(ctx.author_id)]["level"]}' if str(member.id) in self.client.chatlb.keys() else "N/A"
+
+        em = discord.Embed(color=self.client.failure, title=member)
+        em.set_thumbnail(url=member.avatar_url_as(static_format="png", size=2048)) if member else em.set_thumbnail(url=self.client.png)
+
+        em.description = (
+            "" + ("━"*14).center(30) + "\n"
+            f"🏆 Level: **{curr_lvl}**" + "\n"
+            f"👤 Leaderboard Ranking: **#{position}**".center(30) + "\n" 
+            f"🎉 Current xp: **{curr_xp}**".center(30) + "\n"
+            f"🥳 Total xp: **{total_xp}**".center(30) + "\n"
+            f"⏳ XP until next level: **{xp_next_lvl}**".center(30) + "\n"
+            "" + ("━"*14).center(30) + "\n"
+            "Use **`/lb`** to see the leaderboard"
+            )
+        
+        await ctx.embed(embed=em, footer="Level System")
+    
+
+    @cog_slash(name="add_xp", description="Add 'x' amount of xp to someone", guild_ids=[const.guild_id], options=[
+        create_option(name="user", description="The person to add xp to", option_type=6, required=True),
+        create_option(name="amount", description="The amount of xp to add", option_type=4, required=True)
+    ])
+    @commands.has_permissions(manage_messages=True)
+    async def add_xp(self, ctx:SlashContext, user:discord.User=None, amount:int=None):
+
+        await ctx.defer(hidden=True)
+
+        if amount <= 0:
+            return await ctx.send("Failed. Amount must be >= 0", hidden=True)
+
+        if str(user.id) not in self.client.chatlb.keys():
+            level = amount % self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"]
+            self.client.chatlb[str(user.id)] = {
+                    "name": user.name,
+                    "display_name": "N/A",
+                    "disc": user.discriminator,
+                    "xp": 0,
+                    "total_xp": amount,
+                    "level":  level if level <= self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"] else self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"]
+                }
+
+        else:
+            level = (amount  // self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"]) + self.client.chatlb[str(user.id)]["level"]
+
+            self.client.chatlb[str(user.id)]["total_xp"] += amount
+            self.client.chatlb[str(user.id)]["level"] = level if level <= self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"] else self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"]
+
+        return await ctx.send(f"Success! {user.mention}'s xp was increased by {amount}.", hidden=True)
+
+
+    @cog_slash(name="remove_xp", description="Remove 'x' amount of xp from someone", guild_ids=[const.guild_id], options=[
+        create_option(name="user", description="The person to remove xp form", option_type=6, required=True),
+        create_option(name="amount", description="The amount of xp to remove", option_type=4, required=True)
+    ])
+    @commands.has_permissions(manage_messages=True)
+    async def remove_xp(self, ctx:SlashContext, user:discord.User=None, amount:int=None):
+
+        await ctx.defer(hidden=True)
+
+        if amount <= 0:
+            return await ctx.send("Failed. Amount must be >= 0", hidden=True)
+
+        if str(user.id) not in self.client.chatlb.keys():
+            return await ctx.send("That person isn't on the leaderboard therefore you cannot remove any xp from them.", hidden=True)
+
+
+        level = (self.client.chatlb[str(user.id)]["total_xp"] - amount  // self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"])
+
+        if level >= 0:
+            self.client.chatlb[str(user.id)]["total_xp"] -= amount
+        else:
+            self.client.chatlb[str(user.id)]["total_xp"] = 0
+
+        self.client.chatlb[str(user.id)]["level"] = level if level >= self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"] else 0
+
+        return await ctx.send(f"Success! {user.mention}'s xp was decreased by {amount}.", hidden=True)
+
+
+    @cog_slash(name="disable_xp", description="Disable XP gain in a specific channel", guild_ids=[const.guild_id],
+    options=[create_option(name="channel", description="The channel to disable XP gain in", option_type=7, required=True)])
+    @commands.has_permissions(manage_messages=True)
+    async def disable_xp(self, ctx:SlashContext, channel:discord.TextChannel=None):
+        
+        await ctx.defer(hidden=True)
+        
+        if "disabled_channels" not in self.client.lvlsys_config[str(ctx.guild_id)].keys():
+            self.client.lvlsys_config[str(ctx.guild_id)]["disabled_channels"] = []
+
+        elif channel.id in self.client.lvlsys_config[str(ctx.guild_id)]["disabled_channels"]:
+            await ctx.channel.send("XP gain in that channel has already been disabled.", hidden=True)
+            
+            with open("data/level_system/config.json", "w") as f:
+                json.dump(self.client.lvlsys_config, f, indent=2)
+            
+            return 
+
+        self.client.lvlsys_config[str(ctx.guild_id)]["disabled_channels"].append(channel.id)
+
+        self.client.lvlsys_config[str(ctx.guild_id)]["disabled_channels"] = list(set(self.client.lvlsys_config[str(ctx.guild_id)]["disabled_channels"]))
+
+        with open("data/level_system/config.json", "w") as f:
+            json.dump(self.client.lvlsys_config, f, indent=2)
+        
+        return await ctx.send(f"Disabled XP gain in <#{channel.id}>", hidden=True)
+
+    
+    @cog_slash(name="enable_xp", description="Enable XP gain in a disabled channel", guild_ids=[const.guild_id],
+    options=[create_option(name="channel", description="The channel to enable XP gain in", option_type=7, required=True)])
+    @commands.has_permissions(manage_messages=True)
+    async def enable_xp(self, ctx:SlashContext, channel:discord.TextChannel=None):
+        
+        await ctx.defer(hidden=True)
+
+        if "disabled_channels" not in self.client.lvlsys_config[str(ctx.guild_id)].keys():
+            return await ctx.channel.send("XP gain in that channel is enabled by default.", hidden=True)
+        
+        if channel.id not in self.client.lvlsys_config[str(ctx.guild_id)]["disabled_channels"]:
+            return await ctx.send("The XP gain in that channel is not disabled.", hidden=True)
+
+        self.client.lvlsys_config[str(ctx.guild_id)]["disabled_channels"].remove(channel.id)
+
+        self.client.lvlsys_config[str(ctx.guild_id)]["disabled_channels"] = list(set(self.client.lvlsys_config[str(ctx.guild_id)]["disabled_channels"]))
+
+        with open("data/level_system/config.json", "w") as f:
+            json.dump(self.client.lvlsys_config, f, indent=2)
+        
+        return await ctx.send(f"Enabled XP gain in <#{channel.id}>", hidden=True)
+
+    @cog_slash(name="xp_event", description="Create an event that will give x amount of xp per message for y duration", guild_ids=[const.guild_id], options=[
+        create_option(name="xp_per_message", description="The xp awarded per message during the event period", option_type=4, required=True), 
+        create_option(name="duration", description="How long the event will last", option_type=3, required=True)])
+    @commands.has_permissions(manage_messages=True)
+    async def xp_event(self, ctx:SlashContext, xp_per_message:int=None, duration:str=None):
+        
+        await ctx.defer(hidden=True)
+        
+        duration = await self.client.format_duration(duration)
+
+        if duration <= 0:
+            return await ctx.send("Duration incorrect. Use format `5m`, `1w`, `1mo` to specify a duration.", hidden=True)
+            
+        if xp_per_message <= 0:
+            return await ctx.send("XP per message must be 1 or higher.", hidden=True)
+        
+        send_notification = True
+
+        if "event" not in self.client.lvlsys_config[str(ctx.guild_id)].keys():
+            self.client.lvlsys_config[str(ctx.guild_id)]["event"] = {
+                "timestamp": datetime.utcnow().timestamp() + duration,
+                "xp_per_message": xp_per_message}
+            response = f"Event will begin shortly with {xp_per_message} xp per message and will end <t:{datetime.utcnow().timestamp() + duration}:R>"
+
+        elif self.client.lvlsys_config[str(ctx.guild_id)]["event"]["timestamp"]:
+            self.client.lvlsys_config[str(ctx.guild_id)]["event"]["xp_per_message"] = xp_per_message
+            response = f"An event was already in progress. Changed the xp per message to {xp_per_message} until the event ends."
+            send_notification = False
+
+        else:
+            self.client.lvlsys_config[str(ctx.guild_id)]["event"]["timestamp"] = datetime.utcnow().timestamp() + duration
+            self.client.lvlsys_config[str(ctx.guild_id)]["event"]["xp_per_message"] = xp_per_message
+            response = f"Event is now will begin shortly with {xp_per_message} xp per message and will end <t:{int(datetime.utcnow().timestamp() + duration)}:R>"
+
+        with open("data/level_system/config.json", "w") as f:
+            json.dump(self.client.lvlsys_config, f, indent=2)
+
+        await ctx.send(response, hidden=True)
+
+        if send_notification:
+            await asyncio.sleep(5)
+            
+            await ctx.channel.send(f"🎉 **A XP event is starting. From now until** <t:{int(datetime.utcnow().timestamp() + duration)}> **you will receive {xp_per_message} xp per message!** 🥳")
+
+        return
+
 
 def setup(client):
     client.add_cog(LevelSystem(client=client))

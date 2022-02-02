@@ -125,10 +125,74 @@ class MyClient(commands.Bot):
     async def on_ready(self):
         print(f"\033[1;32m┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n" + "\033[1;32mBot is Online".center(78) + "\n\033[1;32m┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛")
         self.logger.info(f"Logged in as {self.user}: {self.user.id}")
+    
+    @staticmethod
+    async def format_duration(ts_duration: str):
+        number = ""
+        totalamountofseconds = 0
+        for i in ts_duration.lower():
+            if i == "s" and len(number) != 0:
+                totalamountofseconds += float(number)
+                number = ""
+            elif i == "m" and len(number) != 0:
+                totalamountofseconds += float(number) * 60
+                number = ""
+            elif i == "h" and len(number) != 0:
+                totalamountofseconds += float(number) * 3600
+                number = ""
+            elif i == "d" and len(number) != 0:
+                totalamountofseconds += float(number) * 86400
+                number = ""
+            elif i == "w" and len(number) != 0:
+                totalamountofseconds += float(number) * 604800
+                number = ""
+            elif i in ("mo", "month") and len(number) != 0:
+                totalamountofseconds += float(number) * 2678400
+                number = ""
+            elif i == "y" and len(number) != 0:
+                totalamountofseconds += float(number) * 32140800
+                number = ""
+            else:
+                try:
+                    int(i)
+                    number += i
+                except ValueError:
+                    if i == ".":
+                        number += i
+
+        if not totalamountofseconds and number:
+            totalamountofseconds = float(number)
+
+        return round(totalamountofseconds, 2)
+
+    @staticmethod
+    async def round_int(my_val):
+        def truncate(n, decimals=0):
+            multiplier = 10 ** decimals
+            return int(n * multiplier) / multiplier
+    
+        if my_val >= 1000000000000:
+            return f"{truncate(my_val / 1000000000000, 1)}T"
+        elif my_val >= 1000000000:
+            return f"{truncate(my_val / 1000000000, 1)}B"
+        elif 1000000 <= my_val <= 1000000000:
+            return f"{truncate(my_val / 1000000, 1)}M"
+        elif 1000 <= my_val <= 1000000:
+            return f"{int(truncate(my_val / 1000, 0))}K"
+        else:
+            return my_val
 
 
 client = MyClient(command_prefix=commands.when_mentioned_or(const.prefix), case_insensitive=True,
                   allowed_mentions=discord.AllowedMentions(everyone=False, roles=False), intents=discord.Intents.all())
+
+
+with open("data/level_system/config.json", "r") as f:
+    client.lvlsys_config = json.load(f)
+
+with open("data/level_system/chatlb.json", "r") as f:
+    client.chatlb = json.load(f)
+
 
 client.load_extension('utils.logger')
 client.logger = client.get_cog('Logger')
@@ -166,7 +230,7 @@ for dir_name in ["utils"]:
 client.logger.info(len(client.extensions), "extensions loaded,", skipped, "skipped.")
 
 
-@slash.slash(name="reload", guild_ids = [932736074139185292],description="Reload a client extension.", options=[
+@slash.slash(name="reload", guild_ids = [932736074139185292],description="[DEVELOPER] Reload a client extension.", options=[
     create_option(name="filename", description="The name of the extension file to reload.", option_type=str,
     required=True, choices=[create_choice(value=f'commands.{x.replace(".py", "")}', name=x) for x in os.listdir("commands") if x.endswith("py")])])
 @commands.is_owner()
@@ -183,7 +247,7 @@ async def reload(ctx, filename):
         await ctx.send(f"```yaml\n{e}\n```")
 
 
-@slash.slash(name="load", guild_ids = [932736074139185292], description="Load a client extension.", options=[
+@slash.slash(name="load", guild_ids = [932736074139185292], description="[DEVELOPER] Load a client extension.", options=[
     create_option(name="filename", description="The name of the extension file to load.", option_type=str,
     required=True, choices=[create_choice(value=f'commands.{x.replace(".py", "")}', name=x) for x in os.listdir("commands") if x.endswith("py")])])
 @commands.is_owner()
@@ -199,7 +263,7 @@ async def load(ctx, filename):
         await ctx.send(f"```yaml\n{e}\n```")
 
 
-@slash.slash(name="unload", guild_ids = [932736074139185292],description="Unload a client extension.", options=[
+@slash.slash(name="unload", guild_ids = [932736074139185292], description="[DEVELOPER] Unload a client extension.", options=[
     create_option(name="filename", description="The name of the extension file to unload.", option_type=str,
     required=True, choices=[create_choice(value=f'commands.{x.replace(".py", "")}', name=x) for x in os.listdir("commands") if x.endswith("py")])])
 async def unload(ctx, filename):
