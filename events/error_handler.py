@@ -14,7 +14,9 @@ class ErrorHandler(commands.Cog):
 
     @commands.Cog.listener()
     async def on_slash_command_error(self, ctx: SlashContext, error):
-
+    
+        if not ctx.deferred:
+            await ctx.defer(hidden=True)
         # # This prevents any commands with local handlers being handled here in on_command_error.
         # if hasattr(self.client.slash.commands[ctx.command], 'on_error'):
         #     return

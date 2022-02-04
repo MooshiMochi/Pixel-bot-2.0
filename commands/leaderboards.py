@@ -29,7 +29,7 @@ class LeaderboardCommands(commands.Cog):
         await self.client.wait_until_ready()
 
 
-    @cog_slash(name="leaderboard", description="Display the messages leaderboard", guild_ids=[const.guild_id])
+    @cog_slash(name="leaderboard", description="Display the messages leaderboard", guild_ids=const.slash_guild_ids)
     async def leaderboard(self, ctx:SlashContext):
         
         await ctx.defer(hidden=False)

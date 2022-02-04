@@ -12,6 +12,7 @@ from discord.ext import commands
 import discord_slash
 from discord_slash import SlashCommand, SlashContext
 from discord_slash.utils.manage_commands import create_option, create_choice
+from discord_slash.error import AlreadyResponded
 
 
 from constants import const
@@ -56,16 +57,23 @@ class PixelSlashContext(SlashContext):
         embed.timestamp = datetime.utcnow()
 
         try:
-            if self._deferred_hidden:
+            if self.deferred:
                 if not self.responded:
-                    return await self.send(embed=embed, hidden=True)
+                    return await self.send(embed=embed, hidden=self._deferred_hidden)
                 
-                return await self.bot.get_guild(self.guild_id).get_channel(self.channel_id).send(embed=embed)
+                return await self.channel.send(embed=embed)
+            if not self.responded:
+                return await self.send(embed=embed)
+            
+            try:
+                return await self.channel.send(embed=embed)
+            except AlreadyResponded:
+                guild = self.bot.get_guild(self.guild_id)
+                ch = guild.get_channel(self.channel_id)
+                return await ch.send(embed=embed)
 
-            return await self.send(embed=embed)
         except discord.HTTPException as e:   
             raise e
-
 
 discord_slash.context.SlashContext = PixelSlashContext
 
@@ -181,6 +189,25 @@ class MyClient(commands.Bot):
             return f"{int(truncate(my_val / 1000, 0))}K"
         else:
             return my_val
+
+    @staticmethod
+    async def sec_to_time(seconds:int):
+        try:
+            seconds = int(seconds)
+        except ValueError:
+            return f"ValueError: {seconds} is not convertible to INTEGER"
+
+        m, sec = divmod(seconds, 60)
+        h, m = divmod(m, 60)
+
+        msg = f"{sec} second"
+        msg += "s." if sec != 1 else "."
+
+        msg = f"{m} minutes " + msg if m and m != 1 else f"{m} minute " + msg if m else msg
+
+        msg = f"{h} hours " + msg if h and h != 1 else f"{h} hour " + msg if h else msg
+
+        return msg
 
 
 client = MyClient(command_prefix=commands.when_mentioned_or(const.prefix), case_insensitive=True,

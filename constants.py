@@ -5,6 +5,8 @@ class Constants:
         
         self.guild_id = 932736074139185292
 
+        self.slash_guild_ids = [self.guild_id, 892877446284738610]
+
         self.log_channel_id = 934079085137764474
 
         self.rr_type_config = {

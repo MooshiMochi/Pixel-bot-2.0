@@ -177,13 +177,11 @@ class Restricted(commands.Cog):
                             await paginator(pages, ctx).run()
 
 
-    @cog_slash(name="error", description="Raises ValueError", guild_ids=[const.guild_id], options=[
+    @cog_slash(name="error", description="[DEVELOPER] Raises ValueError", guild_ids=const.slash_guild_ids, options=[
         create_option(name="error_message", description="The error message to return", option_type=3, required=False)])
     @commands.is_owner()
     async def _raise_error(self, ctx:SlashContext, error_message:str="No error message"):
         
-        await ctx.send(f"{self.client.yes} Success!", hidden=True)
-
         raise ValueError(error_message)
 
 
