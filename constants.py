@@ -26,6 +26,7 @@ class Constants:
             'commands.level_system',
             'commands.leaderboards',
             'commands.games.whack_a_steve',
-            'commands.games.mc_madness')
+            'commands.games.mc_madness',
+            'commands.games.riddles')
 
 const = Constants()

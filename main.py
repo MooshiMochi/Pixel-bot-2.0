@@ -101,6 +101,8 @@ class MyClient(commands.Bot):
 
         self.owner_ids = {383287544336613385}
 
+        self.user_cache = {}
+
     async def get_context(self, message, *, cls=PixelContext):
         # override get_context
         return await super().get_context(message, cls=cls)
@@ -244,6 +246,8 @@ with open("data/leaderboards.json", "r") as f:
     client.lbs["mm_tournament"] = {} if "mm_tournament" not in client.lbs.keys() else client.lbs["mm_tournament"]
 
     client.lbs["mm_casual"] = {} if "mm_casual" not in client.lbs.keys() else client.lbs["mm_casual"]
+
+    client.lbs["riddles"] = {} if "riddles" not in client.lbs.keys() else client.lbs["riddles"]
 
 with open("data/games/payouts.json", "r") as f:
     client.payouts = json.load(f)

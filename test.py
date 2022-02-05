@@ -1,3 +1,6 @@
+import random
+
+
 def sec_to_time(seconds:int):
         try:
             seconds = int(seconds)
@@ -20,20 +23,11 @@ print(sec_to_time(1361315))
 
 # 87 hard questions
 
-Question_to_edit = "How are you?"
-Difficulty = "easy"
-Answer = "I am well!"
-First_Incorrect_Option = "I am not well!"
-Second_Incorrect_Option = "I am fantastic!"
+def scramblestring(string: str):
+    result = []
+    for word in string.split(" "):
+        result.append("".join(random.sample(word, len(word))))
 
-text = (
-    f"Question data changed to:\n"
-    f"> Question: {Question_to_edit}\n"
-    f"> Difficulty: {Difficulty.capitalize()}\n"
-    f"> Correct Answer: {Answer}\n"
-    f"> First Incorrect Answer: {First_Incorrect_Option}"
-)
+    return " ".join(result)
 
-text += f"\n> Second Incorrect Answer: {Second_Incorrect_Option}" if Second_Incorrect_Option else ""
-
-print(text)
+print(scramblestring("Hello"))

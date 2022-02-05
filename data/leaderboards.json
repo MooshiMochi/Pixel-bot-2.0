@@ -4,8 +4,8 @@
       "name": "Mooshi",
       "display_name": "Mooshi",
       "disc": "6669",
-      "xp": 149,
-      "total_xp": 5149,
+      "xp": 150,
+      "total_xp": 5150,
       "level": 5
     },
     "186896273742233600": {
@@ -44,5 +44,8 @@
   "mm_tournament": {},
   "mm_casual": {
     "383287544336613385": 2
+  },
+  "riddles": {
+    "383287544336613385": 1
   }
 }

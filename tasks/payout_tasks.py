@@ -12,6 +12,12 @@ class PayoutTasks(commands.Cog):
         self.client = client
 
         self.mm_monthly_payout.start()
+        self.clear_user_cache.start()
+    
+    @tasks.loop(hours=24)
+    async def clear_user_cache(self):
+        self.client.user_cache = {}
+
 
     @tasks.loop(minutes=1)
     async def mm_monthly_payout(self):
