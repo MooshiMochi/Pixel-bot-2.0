@@ -17,3 +17,23 @@ def sec_to_time(seconds:int):
         return msg
 
 print(sec_to_time(1361315))
+
+# 87 hard questions
+
+Question_to_edit = "How are you?"
+Difficulty = "easy"
+Answer = "I am well!"
+First_Incorrect_Option = "I am not well!"
+Second_Incorrect_Option = "I am fantastic!"
+
+text = (
+    f"Question data changed to:\n"
+    f"> Question: {Question_to_edit}\n"
+    f"> Difficulty: {Difficulty.capitalize()}\n"
+    f"> Correct Answer: {Answer}\n"
+    f"> First Incorrect Answer: {First_Incorrect_Option}"
+)
+
+text += f"\n> Second Incorrect Answer: {Second_Incorrect_Option}" if Second_Incorrect_Option else ""
+
+print(text)

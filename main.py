@@ -89,7 +89,7 @@ class MyClient(commands.Bot):
         super().__init__(*args, **kwargs)
         self._BotBase__cogs = commands.core._CaseInsensitiveDict()
 
-        self.png = "https://cdn.discordapp.com/attachments/932736074139185295/934271790698618930/sdgR.png?size=2048"
+        self.png = "https://cdn.discordapp.com/attachments/932411327727677462/939247777785983066/HD-T-ICON.png?size=2048"
         self.success = 0x00FF00
         self.failure = 0xff0000
         self.warn = 0xffff00
@@ -110,8 +110,8 @@ class MyClient(commands.Bot):
 
     async def check_user(self, msg: discord.Message):
 
-        if str(msg.author.id) not in self.chatlb.keys():
-            self.chatlb[str(msg.author.id)] = {
+        if str(msg.author.id) not in self.lbs["chatlb"].keys():
+            self.lbs["chatlb"][str(msg.author.id)] = {
                 "name": msg.author.name,
                 "display_name": msg.author.display_name if msg.author.display_name else None,
                 "disc": msg.author.discriminator,
@@ -121,10 +121,29 @@ class MyClient(commands.Bot):
             }
             return True
 
-        elif str(msg.author.id) in self.chatlb.keys():
+        elif str(msg.author.id) in self.lbs["chatlb"].keys():
             return True
         else:
             return False
+
+    async def addcoins(self, userid, amount):
+        if amount < 0:
+            async with client.session.get(f"https://unbelievaboat.com/api/v1/guilds/{const.guild_id}/users/{userid}", headers={"Authorization": const.unbelievaboattoken}) as r:
+                if r.status == 200:
+                    r = await r.json()
+                    if r["bank"] < (amount/-1):
+                        return "You are too poor to afford a private chat."
+                else:
+                    print(r.status, await r.json())
+                    return
+                    
+        headers = {"Authorization": const.unbelievaboattoken,
+                   'Accept': 'application/json'}
+        async with client.session.patch(f"https://unbelievaboat.com/api/v1/guilds/{const.guild_id}/users/{userid}",
+                                        headers=headers,
+                                        json={"bank": amount, "reason": "Guessed the riddle correct."}) as f:
+            data = await f.json()
+            return data
 
     async def close(self):
         await self.session.close()
@@ -217,8 +236,19 @@ client = MyClient(command_prefix=commands.when_mentioned_or(const.prefix), case_
 with open("data/level_system/config.json", "r") as f:
     client.lvlsys_config = json.load(f)
 
-with open("data/level_system/chatlb.json", "r") as f:
-    client.chatlb = json.load(f)
+with open("data/leaderboards.json", "r") as f:
+    client.lbs = json.load(f)
+
+    client.lbs["chatlb"] = {} if "chatlb" not in client.lbs.keys() else client.lbs["chatlb"]
+    
+    client.lbs["mm_tournament"] = {} if "mm_tournament" not in client.lbs.keys() else client.lbs["mm_tournament"]
+
+    client.lbs["mm_casual"] = {} if "mm_casual" not in client.lbs.keys() else client.lbs["mm_casual"]
+
+with open("data/games/payouts.json", "r") as f:
+    client.payouts = json.load(f)
+
+    client.payouts["mm"] = {"ts": 0, "month": 1} if "mm" not in client.payouts.keys() else client.payouts["mm"]
 
 
 client.load_extension('utils.logger')
@@ -259,7 +289,7 @@ client.logger.info(len(client.extensions), "extensions loaded,", skipped, "skipp
 
 @slash.slash(name="reload", guild_ids = [932736074139185292],description="[DEVELOPER] Reload a client extension.", options=[
     create_option(name="filename", description="The name of the extension file to reload.", option_type=str,
-    required=True, choices=[create_choice(value=f'commands.{x.replace(".py", "")}', name=x) for x in os.listdir("commands") if x.endswith("py")])])
+    required=True, choices=[create_choice(value=x, name=x) for x in const.command_exts])])
 @commands.is_owner()
 async def reload(ctx, filename):
     try:
@@ -276,7 +306,7 @@ async def reload(ctx, filename):
 
 @slash.slash(name="load", guild_ids = [932736074139185292], description="[DEVELOPER] Load a client extension.", options=[
     create_option(name="filename", description="The name of the extension file to load.", option_type=str,
-    required=True, choices=[create_choice(value=f'commands.{x.replace(".py", "")}', name=x) for x in os.listdir("commands") if x.endswith("py")])])
+    required=True, choices=[create_choice(value=x, name=x) for x in const.command_exts])])
 @commands.is_owner()
 async def load(ctx, filename):
     try:
@@ -292,7 +322,7 @@ async def load(ctx, filename):
 
 @slash.slash(name="unload", guild_ids = [932736074139185292], description="[DEVELOPER] Unload a client extension.", options=[
     create_option(name="filename", description="The name of the extension file to unload.", option_type=str,
-    required=True, choices=[create_choice(value=f'commands.{x.replace(".py", "")}', name=x) for x in os.listdir("commands") if x.endswith("py")])])
+    required=True, choices=[create_choice(value=x, name=x) for x in const.command_exts])])
 async def unload(ctx, filename):
     if ctx.author.id not in client.owner_ids:
         return await ctx.send("You're not allowed to run this command.")

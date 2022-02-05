@@ -1,0 +1,2406 @@
+{
+    "easy": {
+      "How many lives do you get in hardcore before you have to delete the world?": {
+        "options": [
+          "0",
+          "1",
+          "3"
+        ],
+        "answer": "1"
+      },
+      "Which two blocks are affected by gravity in the game \"Minecraft\"?": {
+        "options": [
+          "Splash Potions and arrows",
+          "Gravel and sand",
+          "Chickens and slimes"
+        ],
+        "answer": "Gravel and sand"
+      },
+      "Name the most precious material in the game \"Minecraft\"?": {
+        "options": [
+          "Gold",
+          "Dirt",
+          "Diamond"
+        ],
+        "answer": "Diamond"
+      },
+      "Which one is the latest version of \"Minecraft\"?": {
+        "options": [
+          "Version 1.17",
+          "Version 1.17.8",
+          "Version 1.18.1"
+        ],
+        "answer": "Version 1.18.1"
+      },
+      "Which is the second rarest ore in \"Minecraft\"?": {
+        "options": [
+          "Gold ore",
+          "Emerald ore",
+          "Diamond ore"
+        ],
+        "answer": "Diamond ore"
+      },
+      "Which tool is used to get wood faster than usual in \"Minecraft\"?": {
+        "options": [
+          "A Hoe",
+          "A Shovel",
+          "An Axe"
+        ],
+        "answer": "An Axe"
+      },
+      "Name the most precious thing found in \"Minecraft\".": {
+        "options": [
+          "Gold",
+          "Emeralds",
+          "Diamond"
+        ],
+        "answer": "Diamond"
+      },
+      "Where are Dungons found in \"Minecraft\"?": {
+        "options": [
+          "On the surface",
+          "At y=20",
+          "Deep Down"
+        ],
+        "answer": "Deep Down"
+      },
+      "How is enderman provoked in Minecraft\"?": {
+        "options": [
+          "By trying to hug it",
+          "By pushing it in the water",
+          "By attacking it or looking in the eyes"
+        ],
+        "answer": "By attacking it or looking in the eyes"
+      },
+      "What do snow golems wear on their heads?": {
+        "options": [
+          "Helmets",
+          "Pumpkins",
+          "Shawls"
+        ],
+        "answer": "Pumpkins"
+      },
+      "Which species in minecraft can't teleport in a hole that's two blocks deep?": {
+        "options": [
+          "Creeper",
+          "Vex",
+          "Enderman"
+        ],
+        "answer": "Enderman"
+      },
+      "What color is the bottle in a brewing stand?": {
+        "options": [
+          "Blue",
+          "Red",
+          "Purple"
+        ],
+        "answer": "Red"
+      },
+      "Which food item has the highest chance of causing food poisoning?": {
+        "options": [
+          "Chicken",
+          "Flesh",
+          "Pufferfish"
+        ],
+        "answer": "Pufferfish"
+      },
+      "Which of the following mobs drops no xp when killed?": {
+        "options": [
+          "Chickens",
+          "Bats",
+          "Sheep"
+        ],
+        "answer": "Bats"
+      },
+      "How many health points does a player start with?": {
+        "options": [
+          "5",
+          "10",
+          "20"
+        ],
+        "answer": "20"
+      },
+      "What is a biome?": {
+        "options": [
+          "An Oceanic Location",
+          "Different Geographical Regions",
+          "Specialized Mobs made in Labs"
+        ],
+        "answer": "Different Geographical Regions"
+      },
+      "How can you give extra-damage to a water-based mob?": {
+        "options": [
+          "Poison the Water",
+          "Tridents enchanted with Impaling",
+          "Potion of Healing"
+        ],
+        "answer": "Tridents enchanted with Impaling"
+      },
+      "How many iron ingots do you need to craft an iron sword?": {
+        "options": [
+          "2",
+          "4",
+          "8"
+        ],
+        "answer": "2"
+      },
+      "What is the rarest ore in Minecraft?": {
+        "options": [
+          "Emerald",
+          "Diamond",
+          "Nether Gold"
+        ],
+        "answer": "Emerald"
+      },
+      "Can you trun a zombie villager back into a villager?": {
+        "options": [
+          "No, a dead man stays dead.",
+          "Yes, if you use a golden apple",
+          "Yes, if you get a medic"
+        ],
+        "answer": "Yes, if you use a golden apple"
+      },
+      "Which of these maps includes a floating island where players must survive with limited resources?": {
+        "options": [
+          "Skyblocks",
+          "Cube Survival",
+          "Stranded Raft"
+        ],
+        "answer": "Skyblocks"
+      },
+      "Which of these materials is not involved in crafting a powered rail?": {
+        "options": [
+          "Gold",
+          "Stick",
+          "Silver"
+        ],
+        "answer": "Silver"
+      },
+      "Which unbreaking enchantment increased an item's lifetime by 300%?": {
+        "options": [
+          "Unbreaking 1",
+          "Unbreaking 3",
+          "Unbreaking 4"
+        ],
+        "answer": "Unbreaking 3"
+      },
+      "How many blocks high is the world in Minecraft?": {
+        "options": [
+          "128",
+          "256",
+          "319"
+        ],
+        "answer": "319"
+      },
+      "Which one of these is a hostile mob?": {
+        "options": [
+          "Stray",
+          "Iron Golem",
+          "Snow golem"
+        ],
+        "answer": "Stray"
+      },
+      "Which item can you use to make a Nether Portal without mining?": {
+        "options": [
+          "Bucket of Water",
+          "Jack o'Lantern",
+          "Fire Charge"
+        ],
+        "answer": "Bucket of Water"
+      },
+      "How you spawn an iron golem?": {
+        "options": [
+          "Kidnap all the villagers",
+          "Kill a villager and its babies",
+          "Place 4 iron blocks in a T shape"
+        ],
+        "answer": "Place 4 iron blocks in a T shape"
+      },
+      "Who is the creator of the game? ": {
+        "options": [
+          "Notch",
+          "Mojang",
+          "Steve"
+        ],
+        "answer": "Notch"
+      },
+      "Why would you want to keep doors in your inventory while underwater?": {
+        "options": [
+          "They light up the way",
+          "To repel hostile mobs",
+          "To breathe underwater"
+        ],
+        "answer": "To breathe underwater"
+      },
+      "Can you find a Creeper spawner?": {
+        "options": [
+          "No, Creeper spawners don't exist",
+          "Yes, if you look hard enough",
+          "No, you'll find TNT instead"
+        ],
+        "answer": "No, Creeper spawners don't exist"
+      },
+      "Which Pickaxe mines the fastest?": {
+        "options": [
+          "Netherite Pickaxe",
+          "Diamond Pickaxe",
+          "Gold Pickaxe"
+        ],
+        "answer": "Gold Pickaxe"
+      },
+      "Which item is not blast resistant?": {
+        "options": [
+          "Cobblestone",
+          "Anvil",
+          "Enchantment Table"
+        ],
+        "answer": "Cobblestone"
+      },
+      "How many items are there in a stack?": {
+        "options": [
+          "69",
+          "420",
+          "64"
+        ],
+        "answer": "64"
+      },
+      "How do you stay invisible from the Enderman?": {
+        "options": [
+          "Drink Milk",
+          "Wear a Carved Pumpkin",
+          "Run fast!"
+        ],
+        "answer": "Wear a Carved Pumpkin"
+      },
+      "What will happen if you throw an egg?": {
+        "options": [
+          "It might hatch a baby chicken",
+          "Nothing",
+          "It will break"
+        ],
+        "answer": "It might hatch a baby chicken"
+      },
+      "What is the crafting recipe for a beacon?": {
+        "options": [
+          "Nether Star",
+          "Blaze Powder",
+          "Wood"
+        ],
+        "answer": "Nether Star"
+      },
+      "What is the weakness of Enderman?": {
+        "options": [
+          "Water",
+          "Diamond Sword",
+          "Lava Bucket"
+        ],
+        "answer": "Water"
+      },
+      "Can you dig straight down?": {
+        "options": [
+          "No, that's against Minecraft rules",
+          "Heck yeah! I'm a Minecraft veteran",
+          "No, you might fall into lava or get killed by mobs"
+        ],
+        "answer": "No, you might fall into lava or get killed by mobs"
+      },
+      "Is it okay to jump into the water from a high place?": {
+        "options": [
+          "No, you'll die",
+          "No, you'll drown",
+          "Yes, if you land in water"
+        ],
+        "answer": "Yes, if you land in water"
+      },
+      "What would happen if you sleep in the Nether?": {
+        "options": [
+          "Zombie Pigmen will attack you",
+          "Your bed will explode",
+          "You will see a dream sequence"
+        ],
+        "answer": "Your bed will explode"
+      },
+      "What is the default Minecraft name?": {
+        "options": [
+          "Mario",
+          "Alex",
+          "Steve"
+        ],
+        "answer": "Steve"
+      },
+      "Can you use pigs for transportation?": {
+        "options": [
+          "Nope",
+          "Yes, if you give them wheat",
+          "Yes, with a saddle"
+        ],
+        "answer": "Yes, with a saddle"
+      },
+      "Who is Minecraft's final boss?": {
+        "options": [
+          "Elder Guardian",
+          "Ender Dragon",
+          "The Wither"
+        ],
+        "answer": "Ender Dragon"
+      },
+      "What do zombies drop, if pigs drop pork chops and skeletons drop bones?": {
+        "options": [
+          "Robust Flesh",
+          "Roses",
+          "Rotten flesh"
+        ],
+        "answer": "Rotten flesh"
+      },
+      "What is the premise of 'Minecraft'?": {
+        "options": [
+          "Teach kids how to survive in the wild",
+          "Destroy the mentality of fellow gamers with a toxic community",
+          "Destroy, collect build and interact in the world of blocks"
+        ],
+        "answer": "Destroy, collect build and interact in the world of blocks"
+      },
+      "Who is the Endermen's commander?": {
+        "options": [
+          "Endermites",
+          "Enderma Chief",
+          "Ender Dragon"
+        ],
+        "answer": "Ender Dragon"
+      },
+      "On which consoles can you play 'Minecraft'?": {
+        "options": [
+          "Computer, Xbox and Wii",
+          "PSP",
+          "Gameboy"
+        ],
+        "answer": "Computer, Xbox and Wii"
+      },
+      "Name some main characters of 'Minecraft'.": {
+        "options": [
+          "Notch, Mojang, Hypixel, Pixepel",
+          "Alexandra, Stephany, Robert, Michael, Trevor, Franklin, David",
+          "Steve, Alex, Herobrine, Enderman, Wither, Zombie Pigman, Ender Dragon and Skeleton"
+        ],
+        "answer": "Steve, Alex, Herobrine, Enderman, Wither, Zombie Pigman, Ender Dragon and Skeleton"
+      },
+      "Which equipment must you utilize to mine stone and ores in 'Minecraft'?": {
+        "options": [
+          "Baby Villagers",
+          "Diamond Hoe",
+          "Pickaxe"
+        ],
+        "answer": "Pickaxe"
+      },
+      "Which ingredients are required to make arrows?": {
+        "options": [
+          "1 piece of flint, 1 stick and 1 feather",
+          "Don't craft them, buy them from wallmart",
+          "1 piece of cobblestone, 1 stick and 1 feather"
+        ],
+        "answer": "1 piece of flint, 1 stick and 1 feather"
+      },
+      "To spawn the Wither which block is needed?": {
+        "options": [
+          "Holy Water",
+          "Black Roses",
+          "Soul Sand"
+        ],
+        "answer": "Soul Sand"
+      },
+      "What is the size of the large chest?": {
+        "options": [
+          "1.9 blocks",
+          "Smaller than Mooshi's brain \ud83d\ude0f",
+          "Twice the size of a small chest"
+        ],
+        "answer": "Twice the size of a small chest"
+      },
+      "When you create a portal out of obsidian, where does it take you?": {
+        "options": [
+          "On a different planet",
+          "The Abyss",
+          "The Nether"
+        ],
+        "answer": "The Nether"
+      },
+      "What is the function of Silk Touch?": {
+        "options": [
+          "To maximize the amount of drops from mining a block",
+          "To prevent you from mining blocks like gravel and sand",
+          "To mine the actual ore of a block"
+        ],
+        "answer": "To mine the actual ore of a block"
+      },
+      "Which is the most important block type in mine craft and is used to make everything else?": {
+        "options": [
+          "Diamonds",
+          "Planks",
+          "Wood"
+        ],
+        "answer": "Wood"
+      },
+      "To collect wool from sheep which tool is used?": {
+        "options": [
+          "Knife",
+          "Money",
+          "Shears "
+        ],
+        "answer": "Shears"
+      },
+      "What is used to make a nether portal?": {
+        "options": [
+          "Obsidian",
+          "Coal Blocks",
+          "Magic Potions"
+        ],
+        "answer": "Obsidian"
+      },
+      "What is the only block that cannot be broken in survival mode?": {
+        "options": [
+          "End Crystals",
+          "Obsidian",
+          "Bedrock"
+        ],
+        "answer": "Bedrock"
+      },
+      "How many slime balls are slime blocks made from?": {
+        "options": [
+          "Six",
+          "Four",
+          "Nine"
+        ],
+        "answer": "Nine"
+      },
+      "Which two materials are used to make a bed?": {
+        "options": [
+          "Wooden planks and string",
+          "Wooden planks and cobweb",
+          "Wooden planks and wool"
+        ],
+        "answer": "Wooden planks and wool"
+      },
+      "Name the material that you couldn't collect without using tools?": {
+        "options": [
+          "Dirt",
+          "Gravel",
+          "Obsidian"
+        ],
+        "answer": "Obsidian"
+      },
+      "What is a function of the slime block?": {
+        "options": [
+          "Break your legs",
+          "Swallow you",
+          "Bounce you"
+        ],
+        "answer": "Bounce you"
+      },
+      "How many blocks of soul sand are needed to spawn the Wither?": {
+        "options": [
+          "Three",
+          "Five",
+          "Four"
+        ],
+        "answer": "Four"
+      },
+      "To make arrows how many ingredients are needed?": {
+        "options": [
+          "One",
+          "Two",
+          "Three"
+        ],
+        "answer": "Three"
+      },
+      "How is a large chest is made?": {
+        "options": [
+          "Using a magic wand on a single chest",
+          "Using a duplicator glitch to duplicate a single chest",
+          "By placing two chests next to each other without crouching"
+        ],
+        "answer": "By placing two chests next to each other without crouching"
+      },
+      "To collect water or lava what do you use?": {
+        "options": [
+          "A shovel",
+          "Your fists",
+          "A bucket"
+        ],
+        "answer": "A bucket"
+      },
+      "What number of hearts does an average Steve has?": {
+        "options": [
+          "Eleven",
+          "Twenty",
+          "Ten"
+        ],
+        "answer": "Ten"
+      },
+      "How many wooden planks are needed for crafting a table?": {
+        "options": [
+          "8",
+          "9",
+          "4"
+        ],
+        "answer": "4"
+      },
+      "What item can locate Strongholds?": {
+        "options": [
+          "Eye of Ender",
+          "End Rod",
+          "Ender Pearl"
+        ],
+        "answer": "Eye of Ender"
+      },
+      "What are the most durable type of Leggings?": {
+        "options": [
+          "Gold",
+          "Netherite",
+          "Stone"
+        ],
+        "answer": "Netherite"
+      },
+      "Paper is crafted using 3 of what item?": {
+        "options": [
+          "Wheat",
+          "Leather",
+          "Sugar Cane"
+        ],
+        "answer": "Sugar Cane"
+      },
+      "What item is used to power Enchanting Tables?": {
+        "options": [
+          "Glowstone dust",
+          "Lapis Lazuli",
+          "Gunpowder"
+        ],
+        "answer": "Lapis Lazuli"
+      },
+      "What items do defeated Squids drop?": {
+        "options": [
+          "Kelp",
+          "Leather",
+          "Ink Sac"
+        ],
+        "answer": "Ink Sac"
+      },
+      "What is required to make a Piston \"sticky\"?": {
+        "options": [
+          "Slime Block",
+          "Magma cream",
+          "Slimeball"
+        ],
+        "answer": "Slimeball"
+      },
+      "What do Snow Golems use to attack?": {
+        "options": [
+          "Pumpkin Pie",
+          "Snowballs",
+          "Carved Pumpkin"
+        ],
+        "answer": "Snowballs"
+      },
+      "What birds can dance around Jukeboxes?": {
+        "options": [
+          "Parrots",
+          "Parakeets",
+          "Bees"
+        ],
+        "answer": "Parrots"
+      },
+      "Phantoms can fly - True or False?": {
+        "options": [
+          "True",
+          "False"
+        ],
+        "answer": "True"
+      },
+      "Ocelots are only found in Jungles - True or False?": {
+        "options": [
+          "True",
+          "False"
+        ],
+        "answer": "True"
+      },
+      "Cave Spiders cannot poison you - True or False?": {
+        "options": [
+          "False",
+          "True"
+        ],
+        "answer": "False"
+      },
+      "Iron Trapdoors are made with 5 Iron Ingots - True or False?": {
+        "options": [
+          "False",
+          "True"
+        ],
+        "answer": "False"
+      },
+      "Crossbows can shoot Fireworks - True or False?": {
+        "options": [
+          "True",
+          "False"
+        ],
+        "answer": "True"
+      },
+      "What enemy spawns near Ocean Monuments?": {
+        "options": [
+          "Wither",
+          "Ender Dragon",
+          "Guardians"
+        ],
+        "answer": "Guardians"
+      },
+      "What enchantment gives unlimited arrows?": {
+        "options": [
+          "Infinity II",
+          "Deep Quiver",
+          "Infinity"
+        ],
+        "answer": "Infinity"
+      },
+      "What weapon does a defeated Drowned drop?": {
+        "options": [
+          "Trident",
+          "Stone Sword",
+          "Stick"
+        ],
+        "answer": "Trident"
+      },
+      "What enemy hides in Infested Blocks?": {
+        "options": [
+          "Baby zombies",
+          "Silverfish",
+          "Endermites"
+        ],
+        "answer": "Silverfish"
+      },
+      "What two colors of clothes does Zombie wear?": {
+        "options": [
+          "Pink and Red",
+          "Blue and green",
+          "Black and White"
+        ],
+        "answer": "Blue and green"
+      },
+      "What does the creeper mob drop after it is killed?": {
+        "options": [
+          "Gunpowder",
+          "Fire",
+          "Water drops"
+        ],
+        "answer": "Gunpowder"
+      },
+      "In the Un-Modded game, which Mob Spawns underwater?": {
+        "options": [
+          "Squid",
+          "Slime",
+          "Zombie"
+        ],
+        "answer": "Squid"
+      },
+      "Which tool do Skeletons use to shoot when you get into their sight?": {
+        "options": [
+          "Arrows",
+          "Guns",
+          "Swords"
+        ],
+        "answer": "Arrows"
+      },
+      "In Minecraft what is the best way to kill a Spider?": {
+        "options": [
+          "with an arrow",
+          "with a gun",
+          "with a sword"
+        ],
+        "answer": "with a sword"
+      },
+      "Which character in Minecraft drops bones and arrows?": {
+        "options": [
+          "Skeleton",
+          "Spiders",
+          "Mob Spawns"
+        ],
+        "answer": "Skeleton"
+      },
+      "Which studio has developed Minecraft?": {
+        "options": [
+          "'Mojang Studios', a Swedish video game developer based in Stockholm",
+          "'EA Games', an American video game developer company based in California",
+          "'Whimsy Games', a British video game developer company based in London"
+        ],
+        "answer": "'Mojang Studios', a Swedish video game developer based in Stockholm"
+      },
+      "What is the main objective of Minecraft?": {
+        "options": [
+          "Kill the Elder Guardian",
+          "Kill the Wither ",
+          "Kill the Ender Dragon"
+        ],
+        "answer": "Kill the Ender Dragon"
+      },
+      "The game also contains a material, which can be used to make primitive mechanical devices, electrical circuits, and logic gates. What is that material?": {
+        "options": [
+          "CPU's",
+          "Bluestone",
+          "Redstone"
+        ],
+        "answer": "Redstone"
+      },
+      "How many alternative dimensions Minecraft has, besides the overworld the Nether, and the End?": {
+        "options": [
+          "No alternative dimensions",
+          "Two alternative dimensions",
+          "Three alternative dimensions"
+        ],
+        "answer": "No alternative dimensions"
+      },
+      "What is a boss dragon called that dwells on the main island?": {
+        "options": [
+          "The Wither",
+          "The Enderman",
+          "The Ender Dragon"
+        ],
+        "answer": "The Ender Dragon"
+      },
+      "To collect water and lava what should a player use?": {
+        "options": [
+          "Shovel",
+          "Fist",
+          "Bucket"
+        ],
+        "answer": "Bucket"
+      },
+      "Skeletons drop bones, and pigs drop pork chops. What do zombies drop?": {
+        "options": [
+          "Robust Flesh",
+          "Roses",
+          "Rotten flesh"
+        ],
+        "answer": "Rotten flesh"
+      },
+      "One block of which ore does it take to make one iron ingot?": {
+        "options": [
+          "Alloy ore",
+          "Metal ore",
+          "Iron ore"
+        ],
+        "answer": "Iron ore"
+      },
+      "The two blocks of Sand and Gravel are affected by which force?": {
+        "options": [
+          "Air reistance",
+          "Thrust",
+          "Gravity"
+        ],
+        "answer": "Gravity"
+      },
+      "In which mode do players have access to nearly all resources and items in the game through the inventory menu, and can place or remove them instantly?": {
+        "options": [
+          "In Spectator Mode",
+          "In Survival Mode",
+          "In Creative Mode"
+        ],
+        "answer": "In Creative Mode"
+      },
+      "Which game mode helps players focus on building and creating projects of any size without worrying about resources?": {
+        "options": [
+          "Survival Mode",
+          "Mental Mode",
+          "Creative Mode"
+        ],
+        "answer": "Creative Mode"
+      },
+      "Who do you fight at the climax of the game?": {
+        "options": [
+          "The Guardian",
+          "The Wither",
+          "Ender Dragon"
+        ],
+        "answer": "Ender Dragon"
+      },
+      "What rock can you construct complex machines with?": {
+        "options": [
+          "Chests",
+          "Bluestone",
+          "Redstone"
+        ],
+        "answer": "Redstone"
+      },
+      "Which block the player can use to cook things?": {
+        "options": [
+          "Saw mill",
+          "Crafting Table",
+          "Furnace"
+        ],
+        "answer": "Furnace"
+      },
+      "Which mob has a small chance of dropping Carrots?": {
+        "options": [
+          "Zombie",
+          "Rabbit",
+          "Villager"
+        ],
+        "answer": "Zombie"
+      },
+      "Which item is Dropped by Slimes?": {
+        "options": [
+          "Feathers",
+          "Magma cream",
+          "Slime balls"
+        ],
+        "answer": "Slime balls"
+      },
+      "Which new food does sheep drop?": {
+        "options": [
+          "Spoiled Beef",
+          "Raw mutton",
+          "Cooked Ham"
+        ],
+        "answer": "Raw mutton"
+      },
+      "What are the two colors of clothes does Zombie wears?": {
+        "options": [
+          "Blue and green",
+          "Aqua and purple",
+          "Red and yellow"
+        ],
+        "answer": "Blue and green"
+      },
+      "What does the creeper mob drops after it is killed?": {
+        "options": [
+          "Music Discs",
+          "Gunpowder",
+          "Rotten Flesh"
+        ],
+        "answer": "Gunpowder"
+      },
+      "When does the Zombie Pig-Men attacks you?": {
+        "options": [
+          "When you place a block near them",
+          "When you look them in the eyes",
+          "When you attack them "
+        ],
+        "answer": "When you attack them"
+      },
+      "In the un-modded game, which mob spawns underwater?": {
+        "options": [
+          "Aquaman",
+          "Zombies",
+          "Squid"
+        ],
+        "answer": "Squid"
+      },
+      "Which is the only mob that is found in two different dimensions?": {
+        "options": [
+          "Endermite",
+          "Silverfish",
+          "Endermen"
+        ],
+        "answer": "Endermen"
+      },
+      "Which do Skeletons shoot when you get into their sight?": {
+        "options": [
+          "Sticks",
+          "Arrows",
+          "A Bow"
+        ],
+        "answer": "Arrows"
+      },
+      "What is the best way to kill spider in the Minecraft?": {
+        "options": [
+          "With an axe",
+          "With a shovel",
+          "With a sword"
+        ],
+        "answer": "With a sword"
+      },
+      "What does the Endermen drop after being killed?": {
+        "options": [
+          "Eyes of Ender",
+          "Blaze Rods",
+          "Ender Pearls"
+        ],
+        "answer": "Ender Pearls"
+      },
+      "Which mob is responsible for droping Ink sacs?": {
+        "options": [
+          "Squid",
+          "Alex",
+          "Fish"
+        ],
+        "answer": "Squid"
+      },
+      "Among zombie pigman, blaze, and wither skeleton which mob is neutral?": {
+        "options": [
+          "Wither",
+          "Blaze",
+          "Zombie Pigman"
+        ],
+        "answer": "Zombie Pigman"
+      },
+      "Which character in Minecraft drops Bones and arrows?": {
+        "options": [
+          "Pillager",
+          "Zombie",
+          "Skeletons"
+        ],
+        "answer": "Skeletons"
+      },
+      "Which item is dropped by slimes?": {
+        "options": [
+          "Feathers",
+          "Magma cream",
+          "Slime balls"
+        ],
+        "answer": "Slime balls"
+      },
+      "Which weapon is wielded by Skeleton?": {
+        "options": [
+          "Stick",
+          "Sword",
+          "Bow"
+        ],
+        "answer": "Bow"
+      },
+      "How much wool is required to build a bed?": {
+        "options": [
+          "Four",
+          "Two",
+          "Three"
+        ],
+        "answer": "Three"
+      },
+      "Which alias is the creator of minecraft known as?": {
+        "options": [
+          "Herobrine",
+          "Steve",
+          "Notch"
+        ],
+        "answer": "Notch"
+      },
+      "Which two main weapons don't exist in the game?": {
+        "options": [
+          "Swords and shovels",
+          "Hoes and axes",
+          "Guns and maces"
+        ],
+        "answer": "Guns and maces"
+      },
+      "Ender men most commonly spawn in which dimension?": {
+        "options": [
+          "The Oveworld",
+          "The Nether",
+          "The End"
+        ],
+        "answer": "The End"
+      },
+      "Which block type can't be crafted into armor?": {
+        "options": [
+          "Iron",
+          "Gold",
+          "Wood"
+        ],
+        "answer": "Wood"
+      },
+      "In a full set how many pieces of armor are there?": {
+        "options": [
+          "Too many to count",
+          "Five",
+          "Four"
+        ],
+        "answer": "Four"
+      },
+      "What do you need to mine obsidian?": {
+        "options": [
+          "A diamond hoe",
+          "A gold pickaxe",
+          "A diamond pickaxe"
+        ],
+        "answer": "A diamond pickaxe"
+      },
+      "Who currently owns Minecraft?": {
+        "options": [
+          "Microsoft",
+          "Notch",
+          "Mojang"
+        ],
+        "answer": "Microsoft"
+      },
+      "On the Minecraft server Hypixel, how many TNT Games games are there?": {
+        "options": [
+          "5",
+          "6",
+          "4"
+        ],
+        "answer": "5"
+      },
+      "What are the two alternative dimensions besides the overworld Minecraft has?": {
+        "options": [
+          "Nether and End",
+          "Dark Web and Scorched Earth",
+          "Abyss and Enchanted Forest"
+        ],
+        "answer": "Nether and End"
+      }
+    },
+    "normal": {
+      "How often do Chickens lay eggs in \"Mine craft\"?": {
+        "options": [
+          "Every 15 to 30 minutes",
+          "Every minute",
+          "Every 5 to 10 minutes"
+        ],
+        "answer": "Every 5 to 10 minutes"
+      },
+      "In the game \"Minecraft\" which is the smallest animal?": {
+        "options": [
+          "Small Magma Cube",
+          "Slime",
+          "Chicken"
+        ],
+        "answer": "Chicken"
+      },
+      "How many unique blocks are there in \"Minecraft\"?": {
+        "options": [
+          "500+",
+          "300",
+          "150"
+        ],
+        "answer": "500+"
+      },
+      "Among roses, dandelions and allium which is the rarest to find in \"Minecraft\"?": {
+        "options": [
+          "Allium",
+          "Dandelions",
+          "Roses"
+        ],
+        "answer": "Roses"
+      },
+      "What type of game is \"Minecraft\"?": {
+        "options": [
+          "FPS",
+          "RPG",
+          "Sandbox"
+        ],
+        "answer": "Sandbox"
+      },
+      "Name the country were Notch the founder of \"Minecraft\" was originally born?": {
+        "options": [
+          "Norway",
+          "USA",
+          "Sweden"
+        ],
+        "answer": "Sweden"
+      },
+      "\"Minecraft\" is written in which programming language?": {
+        "options": [
+          "C++",
+          "Python",
+          "Java"
+        ],
+        "answer": "Java"
+      },
+      "The development on \"Minecraft\" begins in what year?": {
+        "options": [
+          "2015",
+          "2011",
+          "2009"
+        ],
+        "answer": "2009"
+      },
+      "Which mobs scares the Creeper in \"Minecraft\"?": {
+        "options": [
+          "Endermites",
+          "Chickens",
+          "Ocelot"
+        ],
+        "answer": "Ocelot"
+      },
+      "If you stumble into a dungeon, how many chests can it contain?": {
+        "options": [
+          "Always 1",
+          "0-2",
+          "1-3"
+        ],
+        "answer": "0-2"
+      },
+      "What's the key bind to clear your chat spam?": {
+        "options": [
+          "F4+A",
+          "F3+D",
+          "Shift+F3"
+        ],
+        "answer": "F3+D"
+      },
+      "How many different colored wools are there?": {
+        "options": [
+          "22",
+          "14",
+          "16"
+        ],
+        "answer": "16"
+      },
+      "When you touch a cactus, how much damage do you take?": {
+        "options": [
+          ".5 hearts",
+          "1 heart",
+          "3.5 hearts"
+        ],
+        "answer": ".5 hearts"
+      },
+      "How is a zombie pigman get created?": {
+        "options": [
+          "A pig gets struck by lightning",
+          "A player kills too many pigs",
+          "Feed a pig rotten flesh"
+        ],
+        "answer": "A pig gets struck by lightning"
+      },
+      "How long did it take to create the first version of minecraft?": {
+        "options": [
+          "6 Days",
+          "6 Months",
+          "13 Days"
+        ],
+        "answer": "6 Days"
+      },
+      "Which of these items cannot be enchanted?": {
+        "options": [
+          "Wooden Shield",
+          "Diamond Helmet",
+          "Horse Armor"
+        ],
+        "answer": "Horse Armor"
+      },
+      "Which of these mobs is exclusive to minecraft earth?": {
+        "options": [
+          "Tropical Slime",
+          "Cluckshroom",
+          "Manta Ray"
+        ],
+        "answer": "Cluckshroom"
+      },
+      "What are skeletons immune to?": {
+        "options": [
+          "Impailing",
+          "Arrows",
+          "Drowning"
+        ],
+        "answer": "Drowning"
+      },
+      "Which is the only hostile mob in the game unable to deal you damage?": {
+        "options": [
+          "Small Slime",
+          "Baby Hoglin",
+          "Small Magma Cube"
+        ],
+        "answer": "Small Slime"
+      },
+      "What are creepers scared of?": {
+        "options": [
+          "Ocelots",
+          "Rats",
+          "Villagers"
+        ],
+        "answer": "Ocelots"
+      },
+      "Daniel Rosenfeld, the German composer responsible for much of Minecraft's music and sound, is better known by what name?": {
+        "options": [
+          "RC39P0",
+          "RJD2",
+          "C418"
+        ],
+        "answer": "C418"
+      },
+      "How tall is a GHAST (not including tentacles)?": {
+        "options": [
+          "6 blocks",
+          "4 blocks",
+          "3 blocks"
+        ],
+        "answer": "4 blocks"
+      },
+      "How many hearts does the ender dragon have?": {
+        "options": [
+          "100",
+          "50",
+          "200"
+        ],
+        "answer": "100"
+      },
+      "Can combine two damaged fishing rods to create a new fishing rod?": {
+        "options": [
+          "Yes, in all versions of minecraft",
+          "No, that was never a game mechanic",
+          "Yes, only in previous versions"
+        ],
+        "answer": "Yes, in all versions of minecraft"
+      },
+      "How many hunger chops does raw mutton replenish?": {
+        "options": [
+          "1",
+          "2",
+          "3"
+        ],
+        "answer": "2"
+      },
+      "How many hunger chops does rabbit stew replenish?": {
+        "options": [
+          "8",
+          "10",
+          "6"
+        ],
+        "answer": "10"
+      },
+      "How many hunger chops does a steak replenish?": {
+        "options": [
+          "6",
+          "2",
+          "4"
+        ],
+        "answer": "4"
+      },
+      "How many blocks do players usually travel to get to a Woodland Mansion?": {
+        "options": [
+          "20,000 blocks",
+          "20,001 blocks",
+          "500, as long as they have the map"
+        ],
+        "answer": "20,200 blocks"
+      },
+      "What is the piston push limit?": {
+        "options": [
+          "12",
+          "13",
+          "11"
+        ],
+        "answer": "12"
+      },
+      "Which item cannot be used as fuel?": {
+        "options": [
+          "Boat",
+          "Chest",
+          "Sapling"
+        ],
+        "answer": "Boat"
+      },
+      "At what height (Y-coordinate) do diamonds appear most?": {
+        "options": [
+          "Y-12",
+          "Y-13",
+          "Y-11"
+        ],
+        "answer": "Y-12"
+      },
+      "What food item can you use to make the stairs?": {
+        "options": [
+          "Watermelon",
+          "Beatroot soup",
+          "Pumpkin"
+        ],
+        "answer": "Watermelon"
+      },
+      "Can you make a Nether Portal in any size and shape?": {
+        "options": [
+          "As long as it's rectangular",
+          "Yes, even with a circle",
+          "No, it won't do a thing"
+        ],
+        "answer": "As long as it's rectangular"
+      },
+      "Which of these jobs are not real in Minecraft?": {
+        "options": [
+          "Unemployed",
+          "Medic",
+          "Nitwit"
+        ],
+        "answer": "Medic"
+      },
+      "How can you get the raid event?": {
+        "options": [
+          "By killing an illager captain",
+          "By killing a villager",
+          "By stealing the wheat"
+        ],
+        "answer": "By killing an illager captain"
+      },
+      "Can a bed save you when falling from a high place?": {
+        "options": [
+          "Yes, if it isn't is too high",
+          "No, the bed will break",
+          "No, you will die regardless"
+        ],
+        "answer": "Yes, if it isn't is too high"
+      },
+      "What's the best way for zombies to survive the daylight?": {
+        "options": [
+          "By swimming in water",
+          "No, they can't",
+          "Find some shades"
+        ],
+        "answer": "By swimming in water"
+      },
+      "Which mob cannot eat wheat?": {
+        "options": [
+          "Sheep",
+          "Mooshrooms",
+          "Player"
+        ],
+        "answer": "Player"
+      },
+      "Which item can't be used to catch fish?": {
+        "options": [
+          "Bucket",
+          "Fishing Rod",
+          "Bamboo"
+        ],
+        "answer": "Bamboo"
+      },
+      "How is a Charged Creeper built?": {
+        "options": [
+          "You light it on fire and make it walk in the water",
+          "Right click it with a flint and steel",
+          "When lightning strikes within four blocks of a Creeper"
+        ],
+        "answer": "When lightning strikes within four blocks of a Creeper"
+      },
+      "What can you wear to avoid Enderman ambushing you?": {
+        "options": [
+          "Ender Dragon Head",
+          "An enderman head",
+          "A pumpkin"
+        ],
+        "answer": "A pumpkin"
+      },
+      "What are creepers petrified of?": {
+        "options": [
+          "Rocks",
+          "Cobblestone",
+          "Ocelots"
+        ],
+        "answer": "Ocelots"
+      },
+      "How many slabs of iron ore are used to make one iron ingot?": {
+        "options": [
+          "Two",
+          "Five",
+          "One"
+        ],
+        "answer": "One"
+      },
+      "How many versions of 'Minecraft' are there?": {
+        "options": [
+          "More than seventeen",
+          "One",
+          "Two"
+        ],
+        "answer": "Two"
+      },
+      "What are the two things that you cannot see through glass that is being broken?": {
+        "options": [
+          "Mobs",
+          "The sun",
+          "Rain and snow"
+        ],
+        "answer": "Rain and snow"
+      },
+      "In which shape should soul sand be arranged and what should you put on it?": {
+        "options": [
+          "+ shape and place 3 skulls on top of it",
+          "L shape and place your head on it",
+          "\"T\" shape and skull is placed on it"
+        ],
+        "answer": "\"T\" shape and 3 skulls are placed on it"
+      },
+      "To completely fill a cauldron how many water bottles are needed?": {
+        "options": [
+          "One",
+          "Two",
+          "Three"
+        ],
+        "answer": "Three"
+      },
+      "How much time does TNT take to explode?": {
+        "options": [
+          "3 seconds",
+          "5 seconds",
+          "4 seconds"
+        ],
+        "answer": "4 seconds"
+      },
+      "What is produced when flowing water hits a lava source block?": {
+        "options": [
+          "Stone",
+          "Cobblestone",
+          "Obsidian"
+        ],
+        "answer": "Obsidian"
+      },
+      "Which ingredients do you need to craft a cauldron?": {
+        "options": [
+          "5 iron ingots",
+          "7 iron ingots",
+          "9 iron ingots"
+        ],
+        "answer": "7 iron ingots"
+      },
+      "To craft a brewing stand what ingredients are used?": {
+        "options": [
+          "3 cobblestone, 1 blaze rod ",
+          "2 cobblestone, 2 blaze rod",
+          "3 cobblestone, 2 blaze rods"
+        ],
+        "answer": "3 cobblestone, 1 blaze rod "
+      },
+      "How is wolf's health determined?": {
+        "options": [
+          "By the color of their neck",
+          "By it's fur color",
+          "By its tail position"
+        ],
+        "answer": "By its tail position"
+      },
+      "What do Zombies attack without being provoked?": {
+        "options": [
+          "Player's farmland",
+          "Bats",
+          "Villager"
+        ],
+        "answer": "Villager"
+      },
+      "What usually grows on a sand block next to water?": {
+        "options": [
+          "Moss",
+          "Flowers",
+          "Sugar Cane"
+        ],
+        "answer": "Sugar Cane"
+      },
+      "What is bone meal used for in Minecraft?": {
+        "options": [
+          "To multiply the crops u get per harvest",
+          "To make bread as a substitute to flower",
+          "To grow things faster"
+        ],
+        "answer": "To grow things faster"
+      },
+      "How many wooden planks do you need to craft 4 sticks?": {
+        "options": [
+          "One",
+          "Four",
+          "Two"
+        ],
+        "answer": "Two"
+      },
+      "What are controlled with a Carrot on a Stick?": {
+        "options": [
+          "Pandas",
+          "Pigs",
+          "Cats"
+        ],
+        "answer": "Pigs"
+      },
+      "Llamas eat Hay Bales and what else?": {
+        "options": [
+          "Wheat",
+          "Carrots",
+          "Pumpkins"
+        ],
+        "answer": "Wheat"
+      },
+      "There are 15 unique Music Discs - True or False?": {
+        "options": [
+          "True",
+          "False"
+        ],
+        "answer": "False"
+      },
+      "The Ender Dragon is Female - True or False?": {
+        "options": [
+          "True",
+          "False"
+        ],
+        "answer": "True"
+      },
+      "Striders can walk on lava - True or False?": {
+        "options": [
+          "True",
+          "False"
+        ],
+        "answer": "True"
+      },
+      "Cats cannot take fall damage - True or False?": {
+        "options": [
+          "True",
+          "False"
+        ],
+        "answer": "True"
+      },
+      "The Thorns enchantment can be applied to Helmets - True or False?": {
+        "options": [
+          "False",
+          "True"
+        ],
+        "answer": "False"
+      },
+      "Who drops Totems of Undying?": {
+        "options": [
+          "Pillagers",
+          "Shulkers",
+          "Evokers"
+        ],
+        "answer": "Evokers"
+      },
+      "What zombie type is only found in Deserts?": {
+        "options": [
+          "Normal Zombie",
+          "Zombies don't spawn in deserts",
+          "Husk"
+        ],
+        "answer": "Husk"
+      },
+      "What armour stops Piglins attacking you?": {
+        "options": [
+          "Netherite",
+          "Diamond",
+          "Golden"
+        ],
+        "answer": "Golden"
+      },
+      "As a fun bonus, if you can get a Skeleton to accidentally shoot a Creeper, it will drop a_______.": {
+        "options": [
+          "Iron Ingot",
+          "Gold Ingot",
+          "Music Disc"
+        ],
+        "answer": "Music disc"
+      },
+      "What must players gather in the environment to craft certain blocks and items to survive?": {
+        "options": [
+          "Duplicated resources such as cobblestone to build pillars around the world",
+          "Natural resources such as water and sand to make a water pool",
+          "Natural resources such as wood and stone are found in the environment"
+        ],
+        "answer": "Natural resources such as wood and stone are found in the environment"
+      },
+      "The tool 'Pickaxe' is used by the player for what purpose?": {
+        "options": [
+          "To mine crops from soil",
+          "To mine trees and leaves",
+          "To mine stone and ores"
+        ],
+        "answer": "To mine stone and ores"
+      },
+      "Which version of Minecraft is an augmented reality game?": {
+        "options": [
+          "Minecraft Realm",
+          "Minecraft VR",
+          "Minecraft Earth"
+        ],
+        "answer": "Minecraft Earth"
+      },
+      "What currency does Minecraft Earth use?": {
+        "options": [
+          "Diamonds",
+          "Coins",
+          "Rubies"
+        ],
+        "answer": "Rubies"
+      },
+      "Which Social media sites played a significant role in popularizing Minecraft?": {
+        "options": [
+          "None",
+          "Discord, Instagram",
+          "YouTube, Facebook, and Reddit"
+        ],
+        "answer": "YouTube, Facebook, and Reddit"
+      },
+      "Some hostile mobs, such as zombies, skeletons, and drowned burn under the sun if they don't have what?": {
+        "options": [
+          "Chest gear",
+          "Footwear",
+          "Head gear"
+        ],
+        "answer": "Head gear"
+      },
+      "What is the background music in Minecraft?": {
+        "options": [
+          "Orchestral music",
+          "Inspirational homework music",
+          "It is instrumental ambient music"
+        ],
+        "answer": "It is instrumental ambient music"
+      },
+      "What do you need to tame an Ocelot?": {
+        "options": [
+          "Pufferfish",
+          "Cooked Fish",
+          "Raw fish"
+        ],
+        "answer": "Raw fish"
+      },
+      "Which mob only spawn underground?": {
+        "options": [
+          "Fish",
+          "Chicken",
+          "Slime"
+        ],
+        "answer": "Slime"
+      },
+      "Iron Golem mob has more health than which mob?": {
+        "options": [
+          "A Buffalo",
+          "A Dragon",
+          "An Enderman"
+        ],
+        "answer": "An Enderman"
+      },
+      "What do the Creepers drop when they are killed by the skeleton?": {
+        "options": [
+          "Redstone",
+          "Powered Rails",
+          "Music discs"
+        ],
+        "answer": "Music discs"
+      },
+      "Which mob can swim against a current in Minecraft?": {
+        "options": [
+          "Horse",
+          "Chicken",
+          "Squid"
+        ],
+        "answer": "Squid"
+      },
+      "What quantity of paper is required to craft a book?": {
+        "options": [
+          "Six",
+          "Four",
+          "Three"
+        ],
+        "answer": "Three"
+      },
+      "Who is known by it's demented growling sounds?": {
+        "options": [
+          "Creeper",
+          "Bat",
+          "Zombie"
+        ],
+        "answer": "Zombie"
+      },
+      "What type of sound does a Spider mob produces?": {
+        "options": [
+          "Sounds of boiling kettle",
+          "Musical sounds",
+          "Hissing sounds"
+        ],
+        "answer": "Hissing sounds"
+      },
+      "Which is the second largest mob in 'Minecraft'?": {
+        "options": [
+          "Panda",
+          "Enderman",
+          "Ghast"
+        ],
+        "answer": "Ghast"
+      }
+    },
+    "hard": {
+      "Where was Minecon 2019 held?": {
+        "options": [
+          "Tennessee",
+          "London",
+          "Oklahoma"
+        ],
+        "answer": "Tennessee"
+      },
+      "Is there a way to play on seed \"0\" in minecraft?": {
+        "options": [
+          "Yes, just enter in when choosing a world seed",
+          "No, the game will generate a random seed instead",
+          "Yes, but you have to enter a combination of special characters to get it"
+        ],
+        "answer": "Yes, but you have to enter a combination of special characters to get it"
+      },
+      "How many damage points does an enderman deal per hit?": {
+        "options": [
+          "2",
+          "4",
+          "1"
+        ],
+        "answer": "4"
+      },
+      "When were diamonds first added in \"Minecraft\"?": {
+        "options": [
+          "In Alpha Version",
+          "In Beta Version",
+          "In Classic version"
+        ],
+        "answer": "In Classic version"
+      },
+      "In which \"Minecraft\" version Zombie was changed to drop rotten flesh instead of feathers?": {
+        "options": [
+          "Version 1.4.3",
+          "Version 1.7",
+          "Version 1.8"
+        ],
+        "answer": "Version 1.8"
+      },
+      "What is full name of Notch who created \"Minecraft\" game?": {
+        "options": [
+          "Markus D. Persson",
+          "Markus J. Persson",
+          "Markus A. Persson"
+        ],
+        "answer": "Markus A. Persson"
+      },
+      "In which \"Minecraft\" version were Skeletons first added?": {
+        "options": [
+          "In Beta version",
+          "In Alpha version",
+          "In Classic version"
+        ],
+        "answer": "In Classic version"
+      },
+      "There are over 150 different type of blocks in minecraft, but which 2 blocks have the exact same looks?": {
+        "options": [
+          "None, every block in minecraft looks different",
+          "Wheat and Sugar Cane",
+          "Stone and Monster Eggs"
+        ],
+        "answer": "Stone and Monster Eggs"
+      },
+      "How much damage do diamond swords deal?": {
+        "options": [
+          "1.5 hearts",
+          "3.5 hearts",
+          "2 hearts"
+        ],
+        "answer": "3.5 hearts"
+      },
+      "How many block can a stone tool mine before breaking?": {
+        "options": [
+          "137",
+          "168",
+          "243"
+        ],
+        "answer": "137"
+      },
+      "Which direction do brewing stands always face?": {
+        "options": [
+          "East",
+          "West",
+          "North"
+        ],
+        "answer": "East"
+      },
+      "Which mob was accidentally created while trying to make a pig?": {
+        "options": [
+          "Stray",
+          "Creeper",
+          "Vex"
+        ],
+        "answer": "Creeper"
+      },
+      "How many types of potions are available to players of minecraft?": {
+        "options": [
+          "28",
+          "36",
+          "32"
+        ],
+        "answer": "32"
+      },
+      "How long does a player have left to live once they run out of drumsticks in the food bar?": {
+        "options": [
+          "2 Minutes",
+          "3 Minutes",
+          "80 Seconds"
+        ],
+        "answer": "80 Seconds"
+      },
+      "What did notch call ender dragons at first?": {
+        "options": [
+          "Shenron",
+          "King Ghidorah",
+          "Raqreqentba"
+        ],
+        "answer": "Raqreqentba"
+      },
+      "How many different types of biomes are there?": {
+        "options": [
+          "94",
+          "67",
+          "78"
+        ],
+        "answer": "78"
+      },
+      "How tall is Steve in feet and inches according to the game's scale?": {
+        "options": [
+          "5'9\"",
+          "6'1\"",
+          "5'11\""
+        ],
+        "answer": "5'11\""
+      },
+      "In which country do they let you play Minecraft in school?": {
+        "options": [
+          "Sweden",
+          "United States",
+          "Norway"
+        ],
+        "answer": "Sweden"
+      },
+      "In which version of the game were skeletons first introduced?": {
+        "options": [
+          "Beta Version",
+          "Snapshot 1.16.3a",
+          "Alpha version"
+        ],
+        "answer": "Alpha version"
+      },
+      "How many night creatures can you find in 'Minecraft'?": {
+        "options": [
+          "Six",
+          "Eight",
+          "Five"
+        ],
+        "answer": "Five"
+      },
+      "How many days did it take to create the first version of 'Minecraft'?": {
+        "options": [
+          "Thirty days",
+          "Ten days",
+          "Six days"
+        ],
+        "answer": "Six days"
+      },
+      "Which real life animal was recorded to produce the sound effects of the Ghasts?": {
+        "options": [
+          "Fox",
+          "Dog",
+          "Cat"
+        ],
+        "answer": "Cat"
+      },
+      "The 'Minecraft' world is enormous, and is made out of trillions of blocks. If 'Minecraft' was real, how big would it be?": {
+        "options": [
+          "Larger than the Sun",
+          "Larger than the Milky Way",
+          "Larger than the planet Neptune"
+        ],
+        "answer": "Larger than the planet Neptune"
+      },
+      "How many people like to play 'Minecraft' every month?": {
+        "options": [
+          "54 million",
+          "56 million",
+          "55 million"
+        ],
+        "answer": "55 million"
+      },
+      "When was 'Minecraft' released?": {
+        "options": [
+          "7 February 2009",
+          "Yesterday",
+          "18 November 2011"
+        ],
+        "answer": "18 November 2011"
+      },
+      "How do you enter Diversity Three 'Minecraft'?": {
+        "options": [
+          "You try to sneak in and hope they don't notice you're there",
+          "You bribe some of their members with diamonds and netherite",
+          "You have to complete the monument by collecting the colored wool"
+        ],
+        "answer": "You have to complete the monument by collecting the colored wool"
+      },
+      "Do leggings protect you from how much damage?": {
+        "options": [
+          "30 Percent",
+          "25 Percet",
+          "24 Percent"
+        ],
+        "answer": "24 Percent"
+      },
+      "What is one of the only blocks on which Redstone dust cannot be placed?": {
+        "options": [
+          "Double Stone Slabs",
+          "Smooth Stone",
+          "Glowstone"
+        ],
+        "answer": "Glowstone"
+      },
+      "Name the Rarest item in a typical survival world?": {
+        "options": [
+          "An emerald",
+          "A wither Star",
+          "A Dragon Egg"
+        ],
+        "answer": "A Dragon Egg"
+      },
+      "A diamond chest plate provide with how many armor points?": {
+        "options": [
+          "Sixteen Points",
+          "Four Points",
+          "Eight Points"
+        ],
+        "answer": "Eight Points"
+      },
+      "A compass is crafted from which ingredients?": {
+        "options": [
+          "4 gold and 1 redstone",
+          "2 iron and 2 gold",
+          "4 iron ingots and 1 redstone"
+        ],
+        "answer": "4 iron ingots and 1 redstone"
+      },
+      "Which ingredients are used to craft a clock?": {
+        "options": [
+          "4 gold and 1 redstone",
+          "2 iron and 2 gold",
+          "4 iron ingots and 1 redstone"
+        ],
+        "answer": "4 gold ingots and 1 redstone"
+      },
+      "With how many hits are blocks broken in creative mode?": {
+        "options": [
+          "Ten hits",
+          "Twenty hits",
+          "One hit"
+        ],
+        "answer": "One hit"
+      },
+      "What does Rotten Flesh do?": {
+        "options": [
+          "It increases hunger for ocelots",
+          "It heals players",
+          "It heals wolves"
+        ],
+        "answer": "It heals wolves"
+      },
+      "What was Notch trying to program when it came out to be creeper?": {
+        "options": [
+          "Zombie",
+          "Skeleton",
+          "Pig"
+        ],
+        "answer": "Pig"
+      },
+      "According to Minecraft 1.6 version how many mobs are there?": {
+        "options": [
+          "20",
+          "5",
+          "14"
+        ],
+        "answer": "14"
+      },
+      "A baby villager takes how many minutes to grow up?": {
+        "options": [
+          "Two",
+          "Five",
+          "Twenty"
+        ],
+        "answer": "Twenty"
+      },
+      "What condition does Tonic cure?": {
+        "options": [
+          "Blindness",
+          "Nausea",
+          "Levitation"
+        ],
+        "answer": "Nausea"
+      },
+      "Apples restore how many full Hunger Points?": {
+        "options": [
+          "2",
+          "4",
+          "6"
+        ],
+        "answer": "2"
+      },
+      "What item enhances a Potion's level?": {
+        "options": [
+          "Gunpowder",
+          "Redstone Dust",
+          "Glowstone Dust"
+        ],
+        "answer": "Glowstone Dust"
+      },
+      "What is used to heal Iron Golems?": {
+        "options": [
+          "Iron Blocks",
+          "Iron Ingot",
+          "Roses"
+        ],
+        "answer": "Iron Ingot"
+      },
+      "Who is the founder of Sky City?": {
+        "options": [
+          "Vos",
+          "Xara",
+          "Isa"
+        ],
+        "answer": "Isa"
+      },
+      "What animals can make you swim faster?": {
+        "options": [
+          "Dolphins",
+          "Pufferfish",
+          "Guardians"
+        ],
+        "answer": "Dolphins"
+      },
+      "What animals bring you gifts when you sleep?": {
+        "options": [
+          "Pandas",
+          "Parrots",
+          "Cats"
+        ],
+        "answer": "Cats"
+      },
+      "How many Hearts does a Chicken have?": {
+        "options": [
+          "5",
+          "2",
+          "4"
+        ],
+        "answer": "2"
+      },
+      "How many colours of Axolotl are there?": {
+        "options": [
+          "5",
+          "7",
+          "10"
+        ],
+        "answer": "5"
+      },
+      "What is the name of Jesse's pet Pig?": {
+        "options": [
+          "Geoff",
+          "Lluna",
+          "Reuben"
+        ],
+        "answer": "Reuben"
+      },
+      "Endermen have how many Health Points?": {
+        "options": [
+          "10",
+          "20",
+          "40"
+        ],
+        "answer": "40"
+      },
+      "What is the real villain in Minecraft Dungeons (Story Mode)?": {
+        "options": [
+          "Ivor",
+          "Wither Storm",
+          "Orb of Dominance"
+        ],
+        "answer": "Orb of Dominance"
+      },
+      "What do Hoglins become in the Overworld?": {
+        "options": [
+          "Boglins",
+          "Moglins",
+          "Zoglins"
+        ],
+        "answer": "Zoglins"
+      },
+      "What was the Founder's First \"Working Name\" for Minecraft?": {
+        "options": [
+          "Markus",
+          "Cave Gam",
+          "Persson"
+        ],
+        "answer": "Cave Gamm"
+      },
+      "How far away can you be from a ghast for it to see you?": {
+        "options": [
+          "100 blocks",
+          "200 blocks",
+          "50 blocks"
+        ],
+        "answer": "100 blocks"
+      },
+      "Around how many zombie spawns will be born as miniaturized \"baby\" zombies, who can ride chickens?": {
+        "options": [
+          "10%",
+          "50%",
+          "5%"
+        ],
+        "answer": "5%"
+      },
+      "Who has founded Minecraft in 2009?": {
+        "options": [
+          "The independent musician named Jason Derulo",
+          "The independent video game designer Thomas R. Norwell",
+          "The independent video game designer Markus Persson"
+        ],
+        "answer": "By the independent video game designer Markus Persson"
+      },
+      "In which year was Mojang rebranded as Mojang Studios?": {
+        "options": [
+          "In May 2019",
+          "in May 2017",
+          "In May 2020"
+        ],
+        "answer": "In May 2020"
+      },
+      "For how much was Mojang and Minecraft intellectual property purchased by Microsoft in 2014?": {
+        "options": [
+          "For $3.5 billion",
+          "For $1.0 billion",
+          "For $2.5 billion"
+        ],
+        "answer": "For $2.5 billion"
+      },
+      "What are the non-player characters called in the game which encounters players?": {
+        "options": [
+          "Hostile mobs such as skeletons and zombies to scare you at",
+          "Friendly animals, villagers and pets such as parrots and sheep",
+          "Both answers are correct"
+        ],
+        "answer": "'Mobs such as animals, villagers, and hostile creatures"
+      },
+      "You must complete the monument by collecting the colored wool to enter which Diversity 'Minecraft'?": {
+        "options": [
+          "Diversity Two",
+          "Diversity Four",
+          "Diversity Three"
+        ],
+        "answer": "Diversity Three"
+      },
+      "In which month was 'Minecraft' released?": {
+        "options": [
+          "7 of February",
+          "10 of September",
+          "18 of November"
+        ],
+        "answer": "18 of November"
+      },
+      "What vegetable can you use to make a night vision mixture?": {
+        "options": [
+          "A glistening melon",
+          "A carrot",
+          "A golden carrot"
+        ],
+        "answer": "A golden carrot"
+      },
+      "Playing 'Minecraft' in school is allowed in which country?": {
+        "options": [
+          "Sweden",
+          "United States",
+          "Norway"
+        ],
+        "answer": "Sweden"
+      },
+      "Which update was announced at MINECON 2019?": {
+        "options": [
+          "The Cave updates",
+          "The End updates",
+          "The Nether updates"
+        ],
+        "answer": "The Nether updates"
+      },
+      "In November 2019, how many copies of Minecraft had been sold?": {
+        "options": [
+          "100 million",
+          "150 million",
+          "180 million"
+        ],
+        "answer": "180 million"
+      },
+      "Which version of Minecraft was announced by Microsoft in May 2019?": {
+        "options": [
+          "Minecraft 1.14",
+          "Minecraft 1.16",
+          "Minecraft Earth"
+        ],
+        "answer": "Minecraft Earth"
+      },
+      "In which year Minecraft had a beta release and was rolled out fully in late 2019?": {
+        "options": [
+          "In January 2019",
+          "In September 2019",
+          "In July 2019"
+        ],
+        "answer": "In July 2019"
+      },
+      "In September 2019, which British daily newspaper classified Minecraft as the best video game of the 21st century?": {
+        "options": [
+          "The Telegraph",
+          "The Sun",
+          "The Guardian"
+        ],
+        "answer": "The Guardian"
+      },
+      "Which American magazine gave Minecraft a special mention in a list of the best video games of the 2010s, in December 2019?": {
+        "options": [
+          "The Guardian",
+          "NY Times",
+          "Forbes"
+        ],
+        "answer": "Forbes"
+      },
+      "What was the name of the educational organization which was formed with the goal of introducing Minecraft into schools?": {
+        "options": [
+          "Learn with Playing",
+          "Games Education",
+          "Minecraft Edu"
+        ],
+        "answer": "Minecraft Edu"
+      },
+      "In September 2012, Mojang began which project in cooperation with UN-Habitat to create real-world environments in Minecraft?": {
+        "options": [
+          "The Overhaul project",
+          "The MC-Expansion project",
+          "The Block-by-Block project"
+        ],
+        "answer": "The Block-by-Block project"
+      },
+      "Which Australian gaming program selected Minecraft as their choice for Best Downloadable Game of 2010?": {
+        "options": [
+          "Ubisoft",
+          "Epic Games",
+          "Good Game"
+        ],
+        "answer": "Good Game"
+      },
+      "New players have a randomly selected default character skin of either Steve or Alex, in which year is the option to create custom skins?": {
+        "options": [
+          "2012",
+          "2011",
+          "2010"
+        ],
+        "answer": "2010"
+      },
+      "Who has produced Minecraft's music and sound effects?": {
+        "options": [
+          "By Sweden musician Thomas Rosenfeld(C418)",
+          "By English musician Lincoln Rosenfeld(C418)",
+          "By German musician Daniel Rosenfeld(C418)"
+        ],
+        "answer": "By German musician Daniel Rosenfeld(C418)"
+      },
+      "For which console did 4J Studios develop the Minecraft version released on 9 May 2012?": {
+        "options": [
+          "PS3",
+          "PS4",
+          "Xbox 360"
+        ],
+        "answer": "Xbox 360"
+      },
+      "In the Alpha version of the game which creatures were first introduced?": {
+        "options": [
+          "Creepers",
+          "Zombies",
+          "Skeletons"
+        ],
+        "answer": "Skeletons"
+      },
+      "What can you do when you get an Enchanted Music Disc in Cosmic Sky server?": {
+        "options": [
+          "Put it on a trohpy wall as it has no use",
+          "Use it as a high value item to trade with other players",
+          "Insert it in the jukebox to change the game's music"
+        ],
+        "answer": "Insert it in the jukebox to change the game's music"
+      },
+      "When did the first trailer for the game was shown at Minecon revealing some of the game's features?": {
+        "options": [
+          "On 25 February 2009",
+          "On 30 June 2010",
+          "On 4 July 2015"
+        ],
+        "answer": "On 4 July 2015"
+      },
+      "When did the first major update, dubbed Alpha, was released?": {
+        "options": [
+          "On 11 June 2013",
+          "On 25 February 2009",
+          "On 30 June 2010"
+        ],
+        "answer": "On 30 June 2010"
+      },
+      "Which plant is the rarer Dandelions?": {
+        "options": [
+          "Allium",
+          "Dandelions",
+          "Roses"
+        ],
+        "answer": "Roses"
+      },
+      "What were the villagers used to called?": {
+        "options": [
+          "Villagers",
+          "Workers",
+          "Testificates"
+        ],
+        "answer": "Testificates"
+      },
+      "Which was the first enemy introduced to 'Minecraft'?": {
+        "options": [
+          "The Skeleton",
+          "The Creeper",
+          "The Zombie"
+        ],
+        "answer": "The Zombie"
+      },
+      "In which Minecraft stage were the Ghasts created?": {
+        "options": [
+          "Classic",
+          "Beta",
+          "Alpha"
+        ],
+        "answer": "Alpha"
+      },
+      "During the Pretty Scary Update which hostile mob was added?": {
+        "options": [
+          "Endermites",
+          "Vex",
+          "Witch"
+        ],
+        "answer": "Witch"
+      },
+      "Which enemy was released with the adventure update?": {
+        "options": [
+          "Creeper",
+          "Silverfish",
+          "Enderman"
+        ],
+        "answer": "Enderman"
+      },
+      "Among Pumpkins and diamonds which is the rarest to find?": {
+        "options": [
+          "They are equally rare",
+          "Diamonds",
+          "Pumpkins"
+        ],
+        "answer": "Pumpkins"
+      },
+      "How many aggressive mobs are there in 1.6 versions?": {
+        "options": [
+          "4",
+          "3",
+          "2"
+        ],
+        "answer": "2"
+      },
+      "What protects you from 12% of the damage?": {
+        "options": [
+          "Leggings",
+          "Boots",
+          "A helmet"
+        ],
+        "answer": "A helmet"
+      },
+      "How many seconds does coal or charcoal last as fuel in a furnace?": {
+        "options": [
+          "Fourty seconds",
+          "Sixty seconds",
+          "Eighty seconds"
+        ],
+        "answer": "Eighty seconds"
+      }
+    }
+  }

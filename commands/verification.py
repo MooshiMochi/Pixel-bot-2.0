@@ -57,6 +57,12 @@ class Verification(commands.Cog):
     async def verification_setup(self, ctx, verification_role:discord.Role=None, send_as_embed:str=None, title:str=None, content:str=None):
         
         await ctx.defer(hidden=True)
+
+        if verification_role.is_bot_managed() or verification_role.is_integration() or verification_role.is_default():
+            return await ctx.send("Invalid Verification Role! Use /set_verification_role to set a new verification role.", hidden=True)
+        
+        elif ctx.guild.roles.index(verification_role) >= ctx.guild.roles.index(ctx.guild.me.top_role):
+            return await ctx.send(f"Unfortunatelly I do not have enough permissiosn to manage {verification_role.mention}. Please move it below my top role and try again!", hidden=True)
         
         action_row = create_actionrow(*[create_button(style=ButtonStyle.green, label="Get Verified!", custom_id="verification_button")])
         
@@ -114,6 +120,12 @@ class Verification(commands.Cog):
 
         if not self.verification_role:
                 return await ctx.embed(embed=(discord.Embed(color=self.client.failure, description="The verification role was not set up!")), footer="Verification")
+
+        if self.verification_role.is_bot_managed() or self.verification_role.is_integration() or self.verification_role.is_default():
+            return await ctx.send("Invalid Verification Role! Use /set_verification_role to set a new verification role.", hidden=True)
+        
+        elif ctx.guild.roles.index(self.verification_role) >= ctx.guild.roles.index(ctx.guild.me.top_role):
+            return await ctx.send(f"Unfortunatelly I do not have enough permissiosn to manage {self.verification_role.mention}. Please move it below my top role!", hidden=True)
 
         if member and otherwise:
             if self.verification_role not in member.roles:

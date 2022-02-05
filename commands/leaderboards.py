@@ -21,8 +21,8 @@ class LeaderboardCommands(commands.Cog):
     @tasks.loop(minutes=1.0)
     async def update_leaderboards(self):
 
-        with open("data/level_system/chatlb.json", "w") as f:
-            json.dump(self.client.chatlb, f, indent=2)
+        with open("data/leaderboards.json", "w") as f:
+            json.dump(self.client.lbs, f, indent=2)
     
     @update_leaderboards.before_loop
     async def before_update_leaderboards(self):
@@ -34,26 +34,26 @@ class LeaderboardCommands(commands.Cog):
         
         await ctx.defer(hidden=False)
 
-        if not self.client.chatlb:
+        if not self.client.lbs.get("chatlb", None):
             return await ctx.send("I have no leaderboard data yet. Please wait for someone to start talking.")
 
-        ranked = sorted(self.client.chatlb, key=lambda f: self.client.chatlb[f]["total_xp"], reverse=True)
+        ranked = sorted(self.client.lbs["chatlb"], key=lambda f: self.client.lbs["chatlb"][f]["total_xp"], reverse=True)
 
         embeds = []
 
-        add_on = [y for y in range(9, len(self.client.chatlb), 10)] if len(self.client.chatlb) >= 10 else [len(self.client.chatlb)-1]
+        add_on = [y for y in range(9, len(self.client.lbs["chatlb"]), 10)] if len(self.client.lbs["chatlb"]) >= 10 else [len(self.client.lbs["chatlb"])-1]
 
         if len(add_on) > 1 and add_on[-1] % 10 != 0:
-            add_on.append(len(self.client.chatlb)-1)
+            add_on.append(len(self.client.lbs["chatlb"])-1)
         
-        em = discord.Embed(color=self.client.failure, title="Messages Leadernoard Rakings", description="")
+        em = discord.Embed(color=self.client.failure, title="Levels Leaderboard", description="")
         
         MyID = str(ctx.author_id)
 
-        for x in range(len(self.client.chatlb)):
+        for x in range(len(self.client.lbs["chatlb"])):
             
-            name = self.client.chatlb[ranked[x]]["name"]
-            level = self.client.chatlb[ranked[x]]["level"]
+            name = self.client.lbs["chatlb"][ranked[x]]["name"]
+            level = self.client.lbs["chatlb"][ranked[x]]["level"]
             
             if x == 0:
                 if ranked[x] == MyID:
@@ -77,11 +77,11 @@ class LeaderboardCommands(commands.Cog):
                     em.description += f"**{x+1}. {name}** - lvl {level}\n"
 
             if x in add_on:
-                em.set_footer(text=f"Pixel | Leveling Systep | Page {add_on.index(x)+1}/{len(add_on)}",
+                em.set_footer(text=f"TN | Leveling System | Page {add_on.index(x)+1}/{len(add_on)}",
                 icon_url=self.client.png)
                 embeds.append(em)
 
-                em = discord.Embed(color=self.client.failure, title="Messages Leadernoard Rakings", description="")
+                em = discord.Embed(color=self.client.failure, title="Levels Leaderboard", description="")
 
         await paginator(embeds, ctx).run()
 

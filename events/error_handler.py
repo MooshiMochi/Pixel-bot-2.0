@@ -16,7 +16,10 @@ class ErrorHandler(commands.Cog):
     async def on_slash_command_error(self, ctx: SlashContext, error):
     
         if not ctx.deferred:
-            await ctx.defer(hidden=True)
+            try:
+                await ctx.defer(hidden=True)
+            except Error.AlreadyResponded:
+                pass
         # # This prevents any commands with local handlers being handled here in on_command_error.
         # if hasattr(self.client.slash.commands[ctx.command], 'on_error'):
         #     return
@@ -267,7 +270,7 @@ class ErrorHandler(commands.Cog):
             except Exception:
                 tb = traceback.format_exc()
             self.client.logger.error(f"An unhandled error has occurred: {str(error)} - More details can be found in logs/error.log")
-            with open('logs/error.log', 'a', encoding="utf-8") as logfile:
+            with open('logs/error.log', 'a', encoding="utf8") as logfile:
                 logfile.write("NEW ERROR\n\n")
                 logfile.write(str(tb))
 
@@ -294,7 +297,7 @@ class ErrorHandler(commands.Cog):
                         with open('logs/last_command_error.log', 'a') as latest_logfile:
                             latest_logfile.write(str(tb))
                         
-                        file = discord.File(fp="last_command_error.log", filename="last_command_error.log")
+                        file = discord.File(fp="logs/last_command_error.log", filename="last_command_error.log")
                     await channel.send(embed=embed, file=file) if file else await channel.send(embed=embed)
 
                 else:
@@ -557,7 +560,7 @@ class ErrorHandler(commands.Cog):
             except Exception:
                 tb = traceback.format_exc()
             self.client.logger.error(f"An unhandled error has occurred: {str(error)} - More details can be found in logs/error.log")
-            with open('logs/error.log', 'a', encoding="utf-8") as logfile:
+            with open('logs/error.log', 'a', encoding="utf8") as logfile:
                 logfile.write("NEW ERROR\n\n")
                 logfile.write(str(tb))
             if self.client.config.log_channel is not None:
@@ -584,7 +587,7 @@ class ErrorHandler(commands.Cog):
                         with open('logs/last_command_error.log', 'a') as latest_logfile:
                             latest_logfile.write(str(tb))
                         
-                        file = discord.File(fp="last_command_error.log", filename="last_command_error.log")
+                        file = discord.File(fp="logs/last_command_error.log", filename="last_command_error.log")
                     await channel.send(embed=embed, file=file) if file else await channel.send(embed=embed)
 
                 else:

@@ -1,24 +1,23 @@
 from uuid import uuid4
-from typing import Iterable
+from typing import Iterable, Union
 from asyncio import TimeoutError
 
 from discord.embeds import Embed
 from discord.errors import NotFound
 from discord.ext.commands import Context, Paginator as CommandPaginator
 
-from discord_slash import ComponentContext
+from discord_slash import ComponentContext, SlashContext
 from discord_slash.model import ButtonStyle
 from discord_slash.utils import manage_components
 
 
 class Paginator:
-    def __init__(self, _iterable:list=None, ctx:Context=None) -> None:
+    def __init__(self, _iterable:list=None, ctx:Union[SlashContext, Context]=None) -> None:
         self._iterable = _iterable
         self.ctx = ctx
 
-        self.button_left_id = str(uuid4()).replace("-", "_")
-        self.button_right_id = str(uuid4()).replace("-", "_")
-        self.button_stop_id = str(uuid4()).replace("-", "_")
+        self.button_left_id = f'paginator__{str(uuid4()).replace("-", "_")}'
+        self.button_right_id = f'paginator__{str(uuid4()).replace("-", "_")}'
 
         if not self._iterable and not self.ctx:
             raise AttributeError("A list of items of type 'Union[str, int, discord.Embed]' was not provided to iterate through as well as the invocation context.")
@@ -42,17 +41,12 @@ class Paginator:
         command_buttons = [
         manage_components.create_button(
             style=ButtonStyle.blue,
-            label="◀",
+            label="Previous Page",
             custom_id=self.button_left_id
         ),
         manage_components.create_button(
             style=ButtonStyle.blue,
-            label="⏹",
-            custom_id=self.button_stop_id
-        ),
-        manage_components.create_button(
-            style=ButtonStyle.blue,
-            label="▶",
+            label="Next Page",
             custom_id=self.button_right_id
         )]
 
@@ -63,25 +57,23 @@ class Paginator:
             disabled=True
         )]
 
-        cancel_buttons = [manage_components.create_button(
-            style=ButtonStyle.danger,
-            label="Cancelled.",
-            custom_id="paginator_button_cancel",
-            disabled=True
-        )]
-
         my_action_row = manage_components.create_actionrow(*command_buttons)
 
         timeout_action_row = manage_components.create_actionrow(*timeout_buttons)
 
-        cancel_action_row = manage_components.create_actionrow(*cancel_buttons)
-
         if isinstance(self._iterable[0], Embed):
-            msg = await self.ctx.send(embed=self._iterable[0], components=[my_action_row])
+            if isinstance(self.ctx, Context):
+                msg = await self.ctx.send(embed=self._iterable[0], components=[my_action_row])
+            else:
+                msg = await self.ctx.send(embed=self._iterable[0], components=[my_action_row], hidden=self.ctx._deferred_hidden)
         else:
-            msg = await self.ctx.send(content=self._iterable[0], components=[my_action_row])
-
+            if isinstance(self.ctx, Context):
+                msg = await self.ctx.send(content=self._iterable[0], components=[my_action_row])
+            else:
+                msg = await self.ctx.send(content=self._iterable[0], components=[my_action_row], hidden=self.ctx._deferred_hidden)
+        
         page = 0
+
         while 1:
 
             try:
@@ -98,17 +90,6 @@ class Paginator:
                     if page == -1:
                         page = len(self._iterable)-1
 
-                elif button_ctx.custom_id == self.button_stop_id:
-                    await button_ctx.defer(edit_origin=True)
-                    try:
-                        if isinstance(self._iterable[page], Embed):
-                            await msg.edit(embed=self._iterable[page], components=[cancel_action_row])
-                        else:
-                            await msg.edit(content=self._iterable[page], components=[cancel_action_row])
-                    except NotFound:
-                        # message was probably deleted so we will ignore this error
-                        pass
-                    return
 
                 elif button_ctx.custom_id == self.button_right_id:
                     page += 1
@@ -125,10 +106,12 @@ class Paginator:
                     return
 
             except TimeoutError:
-                if isinstance(self._iterable[page], Embed):
-                    await msg.edit(embed=self._iterable[page], components=[timeout_action_row])
-                else:
-                    await msg.edit(content=self._iterable[page], components=[timeout_action_row])
+                
+                if isinstance(self.ctx, Context):
+                    if isinstance(self._iterable[page], Embed):
+                        await msg.edit(embed=self._iterable[page], components=[timeout_action_row])
+                    else:
+                        await msg.edit(content=self._iterable[page], components=[timeout_action_row])
                 break
 
 

@@ -63,7 +63,7 @@ class Restricted(commands.Cog):
     async def developer_sync(self, ctx):
         out = subprocess.check_output("git pull", shell=True)
         embed=discord.Embed(title="git pull",
-                            description=f"```py\n{out.decode('utf-8')}\n```",
+                            description=f"```py\n{out.decode('utf8')}\n```",
                             color=self.client.success)
         await ctx.embed(embed)
 

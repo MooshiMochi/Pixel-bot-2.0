@@ -64,33 +64,33 @@ class LevelSystem(commands.Cog):
 
         xp_per_msg = self.xp_per_msg.get(str(msg.guild.id), 1)
 
-        self.client.chatlb[author_id]["total_xp"] += xp_per_msg
+        self.client.lbs["chatlb"][author_id]["total_xp"] += xp_per_msg
 
-        if self.client.chatlb[author_id]["xp"] >= xp_threshold:
+        if self.client.lbs["chatlb"][author_id]["xp"] >= xp_threshold:
             
-            self.client.chatlb[author_id]["xp"] = 0
+            self.client.lbs["chatlb"][author_id]["xp"] = 0
 
-            if self.client.chatlb[author_id]["level"] < max_lvl:
-                self.client.chatlb[author_id]["level"] += 1
+            if self.client.lbs["chatlb"][author_id]["level"] < max_lvl:
+                self.client.lbs["chatlb"][author_id]["level"] += 1
                 
                 if str(msg.guild.id) in self.level_roles.keys():
                     
                     for role in self.level_roles[str(msg.guild.id)].values():
                         await msg.author.remove_roles(role)
 
-                    level = str(self.client.chatlb[author_id]["level"])
+                    level = str(self.client.lbs["chatlb"][author_id]["level"])
 
                     if level in self.level_roles[str(msg.guild.id)].keys():
                         await msg.author.add_roles(self.level_roles[str(msg.guild.id)][level])
 
                 em = discord.Embed(color=self.client.success, title="You leveld up!",
-                description=f"**Congratulations, you are now level `{self.client.chatlb[author_id]['level']}`!")
+                description=f"**Congratulations, you are now level `{self.client.lbs['chatlb'][author_id]['level']}`!")
                 em.set_footer(icon_url=self.client.png, text="Pixel | Level System")
 
                 await msg.reply(emebd=em)
                 return
         else:
-            self.client.chatlb[author_id]["xp"] += xp_per_msg
+            self.client.lbs["chatlb"][author_id]["xp"] += xp_per_msg
 
 
     @tasks.loop(count=1)
@@ -248,17 +248,17 @@ class LevelSystem(commands.Cog):
         if not member:
             member = ctx.author
 
-        ranked = sorted(self.client.chatlb, key=lambda f: self.client.chatlb[f]["total_xp"], reverse=True)
+        ranked = sorted(self.client.lbs["chatlb"], key=lambda f: self.client.lbs["chatlb"][f]["total_xp"], reverse=True)
 
         position = ranked.index(str(member.id)) + 1 if str(member.id) in ranked else "N/A"
 
-        xp_next_lvl = f'{self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"] - self.client.chatlb[str(member.id)]["xp"]}' if str(member.id) in self.client.chatlb.keys() else "N/A"
+        xp_next_lvl = f'{self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"] - self.client.lbs["chatlb"][str(member.id)]["xp"]}' if str(member.id) in self.client.lbs["chatlb"].keys() else "N/A"
 
-        curr_xp =  f'{self.client.chatlb[str(member.id)]["xp"]}/{self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"]}' if str(member.id) in self.client.chatlb.keys() else "N/A"
+        curr_xp =  f'{self.client.lbs["chatlb"][str(member.id)]["xp"]}/{self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"]}' if str(member.id) in self.client.lbs["chatlb"].keys() else "N/A"
 
-        total_xp =  await self.client.round_int(self.client.chatlb[str(member.id)]["total_xp"]) if str(member.id) in self.client.chatlb.keys() else "N/A"
+        total_xp =  await self.client.round_int(self.client.lbs["chatlb"][str(member.id)]["total_xp"]) if str(member.id) in self.client.lbs["chatlb"].keys() else "N/A"
 
-        curr_lvl = f'{self.client.chatlb[str(ctx.author_id)]["level"]}' if str(member.id) in self.client.chatlb.keys() else "N/A"
+        curr_lvl = f'{self.client.lbs["chatlb"][str(ctx.author_id)]["level"]}' if str(member.id) in self.client.lbs["chatlb"].keys() else "N/A"
 
         em = discord.Embed(color=self.client.failure, title=member)
         em.set_thumbnail(url=member.avatar_url_as(static_format="png", size=2048)) if member else em.set_thumbnail(url=self.client.png)
@@ -271,7 +271,7 @@ class LevelSystem(commands.Cog):
             f"🥳 Total xp: **{total_xp}**".center(30) + "\n"
             f"⏳ XP until next level: **{xp_next_lvl}**".center(30) + "\n"
             "" + ("━"*14).center(30) + "\n"
-            "Use **`/lb`** to see the leaderboard"
+            "Use **`/leaderboard`** to see the leaderboard"
             )
         
         await ctx.embed(embed=em, footer="Level System")
@@ -289,9 +289,9 @@ class LevelSystem(commands.Cog):
         if amount <= 0:
             return await ctx.send("Failed. Amount must be >= 0", hidden=True)
 
-        if str(user.id) not in self.client.chatlb.keys():
+        if str(user.id) not in self.client.lbs["chatlb"].keys():
             level = amount % self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"]
-            self.client.chatlb[str(user.id)] = {
+            self.client.lbs["chatlb"][str(user.id)] = {
                     "name": user.name,
                     "display_name": "N/A",
                     "disc": user.discriminator,
@@ -301,10 +301,10 @@ class LevelSystem(commands.Cog):
                 }
 
         else:
-            level = (amount  // self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"]) + self.client.chatlb[str(user.id)]["level"]
+            level = (amount  // self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"]) + self.client.lbs["chatlb"][str(user.id)]["level"]
 
-            self.client.chatlb[str(user.id)]["total_xp"] += amount
-            self.client.chatlb[str(user.id)]["level"] = level if level <= self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"] else self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"]
+            self.client.lbs["chatlb"][str(user.id)]["total_xp"] += amount
+            self.client.lbs["chatlb"][str(user.id)]["level"] = level if level <= self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"] else self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"]
 
         return await ctx.send(f"Success! {user.mention}'s xp was increased by {amount}.", hidden=True)
 
@@ -321,18 +321,18 @@ class LevelSystem(commands.Cog):
         if amount <= 0:
             return await ctx.send("Failed. Amount must be >= 0", hidden=True)
 
-        if str(user.id) not in self.client.chatlb.keys():
+        if str(user.id) not in self.client.lbs["chatlb"].keys():
             return await ctx.send("That person isn't on the leaderboard therefore you cannot remove any xp from them.", hidden=True)
 
 
-        level = (self.client.chatlb[str(user.id)]["total_xp"] - amount  // self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"])
+        level = (self.client.lbs["chatlb"][str(user.id)]["total_xp"] - amount  // self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"])
 
         if level >= 0:
-            self.client.chatlb[str(user.id)]["total_xp"] -= amount
+            self.client.lbs["chatlb"][str(user.id)]["total_xp"] -= amount
         else:
-            self.client.chatlb[str(user.id)]["total_xp"] = 0
+            self.client.lbs["chatlb"][str(user.id)]["total_xp"] = 0
 
-        self.client.chatlb[str(user.id)]["level"] = level if level >= self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"] else 0
+        self.client.lbs["chatlb"][str(user.id)]["level"] = level if level >= self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"] else 0
 
         return await ctx.send(f"Success! {user.mention}'s xp was decreased by {amount}.", hidden=True)
 
@@ -454,7 +454,7 @@ class LevelSystem(commands.Cog):
             self.client.lvlsys_config[str(request_guild_id)]["event"]["timestamp"] = None
             self.client.lvlsys_config[str(request_guild_id)]["event"]["xp_per_message"] = 1
             
-            self.xp_per_msg.pop(str(request_guild_id))
+            self.xp_per_msg.pop(str(request_guild_id), None)
                     
             with open("data/level_system/config.json", "w") as f:
                 json.dump(self.client.lvlsys_config, f, indent=2)
