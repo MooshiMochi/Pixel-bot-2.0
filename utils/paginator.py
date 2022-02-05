@@ -1,6 +1,7 @@
-from uuid import uuid4
+from turtle import st
 from typing import Iterable, Union
 from asyncio import TimeoutError
+from datetime import datetime
 
 from discord.embeds import Embed
 from discord.errors import NotFound
@@ -16,8 +17,8 @@ class Paginator:
         self._iterable = _iterable
         self.ctx = ctx
 
-        self.button_left_id = f'paginator__{str(uuid4()).replace("-", "_")}'
-        self.button_right_id = f'paginator__{str(uuid4()).replace("-", "_")}'
+        self.button_left_id = f'paginator__{datetime.utcnow().timestamp()}_l'
+        self.button_right_id = f'paginator__{datetime.utcnow().timestamp()}_r'
 
         if not self._iterable and not self.ctx:
             raise AttributeError("A list of items of type 'Union[str, int, discord.Embed]' was not provided to iterate through as well as the invocation context.")
@@ -36,19 +37,25 @@ class Paginator:
 
         self._iterable = list(self._iterable)
 
-    async def run(self):
-
+    async def create_buttons(self):
+        btnLeftID = f"paginator__{datetime.utcnow().timestamp()}_l"
+        btnRightID = f"paginator__{datetime.utcnow().timestamp()}_r"
         command_buttons = [
-        manage_components.create_button(
-            style=ButtonStyle.blue,
-            label="Previous Page",
-            custom_id=self.button_left_id
-        ),
-        manage_components.create_button(
-            style=ButtonStyle.blue,
-            label="Next Page",
-            custom_id=self.button_right_id
-        )]
+            manage_components.create_button(
+                style=ButtonStyle.blue,
+                label="Previous Page",
+                custom_id=btnLeftID),
+            manage_components.create_button(
+                style=ButtonStyle.blue,
+                label="Next Page",
+                custom_id=btnRightID)]
+
+        my_action_row = manage_components.create_actionrow(*command_buttons)
+        self.button_left_id = btnLeftID; self.button_right_id = btnRightID
+        return my_action_row
+
+
+    async def run(self):
 
         timeout_buttons = [manage_components.create_button(
             style=ButtonStyle.danger,
@@ -57,9 +64,9 @@ class Paginator:
             disabled=True
         )]
 
-        my_action_row = manage_components.create_actionrow(*command_buttons)
-
         timeout_action_row = manage_components.create_actionrow(*timeout_buttons)
+
+        my_action_row = await self.create_buttons()
 
         if isinstance(self._iterable[0], Embed):
             if isinstance(self.ctx, Context):
@@ -97,10 +104,11 @@ class Paginator:
                         page = 0
 
                 try:
+                    my_action_row = await self.create_buttons()
                     if isinstance(self._iterable[page], Embed):
-                        await button_ctx.edit_origin(embed=self._iterable[page])
+                        await button_ctx.edit_origin(embed=self._iterable[page], components=[my_action_row])
                     else:
-                        await button_ctx.edit_origin(content=self._iterable[page])
+                        await button_ctx.edit_origin(content=self._iterable[page], components=[my_action_row])
                 except NotFound:
                     # message was probably deleted so we will return without raising TimeoutError
                     return

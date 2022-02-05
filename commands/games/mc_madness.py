@@ -89,7 +89,7 @@ class McMadness(commands.Cog):
         self.event_channel = guild.get_channel(self.mm_channel_id)
         self.mm_channel = guild.get_channel(self.mm_channel_id)
         self.tournament_channel = guild.get_channel(self.tournament_id)
-        self.game_explanation = (discord.Embed(color=0x00F8EF, title="Welcome to 'Minecraft Madness'!",
+        self.game_explanation = (discord.Embed(color=self.client.failure, title="Welcome to 'Minecraft Madness'!",
         description="This is a 'Minecraft Trivia Quiz' where people compete against\neach other to win the top prize (if there is one).\n\n"
         "You will be asked a series of multiple choice questions with increasing difficulty. You have to answer them by pressing the correct button.\n"
         "\nYou only get one chance per game. Good luck!").set_thumbnail(url=self.client.png))
@@ -131,7 +131,7 @@ class McMadness(commands.Cog):
     async def join_event(self, channel):
         start_time = datetime.utcnow().timestamp() + 60
 
-        em = discord.Embed(color=0x00F8EF, title="Minecraft Madness Event!", 
+        em = discord.Embed(color=self.client.failure, title="Minecraft Madness Event!", 
         description=f"*The event will begin <t:{int(start_time)}:R>*\n")
 
         em.add_field(name="Participants:", value="`No participants yet!`")
@@ -181,7 +181,7 @@ class McMadness(commands.Cog):
                 
                 result = "\n".join([f'**{pos[0]}.** <@!{pos[1][0]}> ({pos[1][1]})' for pos in templi])
 
-                em = discord.Embed(color=0x00F8EF, title="GAME OVER!",
+                em = discord.Embed(color=self.client.failure, title="GAME OVER!",
                 description="It looks like you already answered all the questions that I had... damn!\nHere's the Leaderboard:\n"+result)
                 
                 await self.clear_variables()
@@ -190,7 +190,7 @@ class McMadness(commands.Cog):
             if before_start:
                 before_start = False
                 if len(self.participants) <= 1:
-                    dont_start = discord.Embed(color=0x00F8EF)
+                    dont_start = discord.Embed(color=self.client.failure)
                     if len(self.participants) == 1:
                         member = await self.get_user(list(self.participants.keys())[0])
                         dont_start.set_author(name=f"Looks like the event is cancelled for today!\nOnly {member} joined :(",
@@ -213,7 +213,7 @@ class McMadness(commands.Cog):
             stop_ts = datetime.utcnow().timestamp() + sleep_time[0] + sleep_time[1]
             sent_notif = False
 
-            reminder = discord.Embed(color=0x00F8EF).set_author(name=f"{sleep_time[1]} SECONDS LEFT TO GUESS", icon_url=self.client.user.avatar_url_as(static_format="png", size=2048))
+            reminder = discord.Embed(color=self.client.failure).set_author(name=f"{sleep_time[1]} SECONDS LEFT TO GUESS", icon_url=self.client.user.avatar_url_as(static_format="png", size=2048))
 
             while datetime.utcnow().timestamp() < stop_ts:
 
@@ -247,7 +247,7 @@ class McMadness(commands.Cog):
             
             disqualified = disqualified[-(250 - len(disc_text)):]
 
-            disc_em = discord.Embed(color=0x00F8EF, description=disc_text + disqualified)
+            disc_em = discord.Embed(color=self.client.failure, description=disc_text + disqualified)
             if disqualified:
                 await self.event_channel.send(embed=disc_em, delete_after=10)
             
@@ -268,7 +268,7 @@ class McMadness(commands.Cog):
                         if self.unbelievaboat_api_enabled:
                             await self.client.addcoins(winner_id, 10000)
                     
-                win_em = discord.Embed(title="Game Over!", description=text, color=0x00F8EF)
+                win_em = discord.Embed(title="Game Over!", description=text, color=self.client.failure)
                 win_em.set_thumbnail(url=self.client.user.avatar_url_as(static_format="png", size=2048))
 
                 await self.clear_variables()
@@ -293,7 +293,7 @@ class McMadness(commands.Cog):
                         if self.unbelievaboat_api_enabled:
                             await self.client.addcoins(winner_id, 10000)
                     
-                win_em = discord.Embed(title="Game Over!", description=text, color=0x00F8EF)
+                win_em = discord.Embed(title="Game Over!", description=text, color=self.client.failure)
                 win_em.set_thumbnail(url=self.client.user.avatar_url_as(static_format="png", size=2048))
 
 
@@ -429,7 +429,7 @@ class McMadness(commands.Cog):
         elif (16 <= self.game_cache["easy"] <= 20) and self.game_cache["normal"] == 0 and self.game_cache["hard"] == 0:
             sleep_time = [10, 5]
 
-        em = discord.Embed(color=0x00F8EF, title=chosen_question, description=desc)
+        em = discord.Embed(color=self.client.failure, title=chosen_question, description=desc)
         em.set_author(name=f"Difficulty: {difficulty.lower().title()} | Level {len(self.used_questions)}",
         icon_url=self.client.user.avatar_url_as(static_format="png", size=2048))
         em.set_footer(text=f"⏳ Try to answer it within {sleep_time[0] + sleep_time[1]} seconds", icon_url=self.client.png)
@@ -441,26 +441,26 @@ class McMadness(commands.Cog):
         await ctx.defer(hidden=True)
         
         if ctx.author_id in self.users_guessed:
-            em = discord.Embed(color=0x00F8EF, description=f"Your current score is: **{self.all_game_participants[ctx.author_id]}**")
+            em = discord.Embed(color=self.client.failure, description=f"Your current score is: **{self.all_game_participants[ctx.author_id]}**")
             em.set_author(name="You already answered this question.",
             icon_url=self.client.user.avatar_url_as(static_format="png", size=2048))
             return await ctx.reply(embed=em, hidden=True)
 
         elif (ctx.author_id in self.eliminated):
-            em = discord.Embed(color=0x00F8EF, description=f"Your score: **{self.all_game_participants[ctx.author_id]}**")
+            em = discord.Embed(color=self.client.failure, description=f"Your score: **{self.all_game_participants[ctx.author_id]}**")
             em.set_author(name="You are already disqualified from the game!",
             icon_url=self.client.user.avatar_url_as(static_format="png", size=2048))
             return await ctx.reply(embed=em, hidden=True)
         
         elif (ctx.author_id not in self.participants.keys()) and (
             ctx.author_id in self.all_game_participants.keys()):
-            em = discord.Embed(color=0x00F8EF, description=f"Your score: **{self.all_game_participants[ctx.author_id]}**")
+            em = discord.Embed(color=self.client.failure, description=f"Your score: **{self.all_game_participants[ctx.author_id]}**")
             em.set_author(name="You are already disqualified from the game!",
             icon_url=self.client.user.avatar_url_as(static_format="png", size=2048))
             return await ctx.reply(embed=em, hidden=True)
 
         elif (ctx.author_id not in self.all_game_participants.keys()):
-            em = discord.Embed(color=0x00F8EF)
+            em = discord.Embed(color=self.client.failure)
             em.set_author(name="You cannot participate in this event right now.",
             icon_url=self.client.user.avatar_url_as(static_format="png", size=2048))
             return await ctx.reply(embed=em, hidden=True)
@@ -518,7 +518,7 @@ class McMadness(commands.Cog):
         self.all_game_participants[ctx.author_id] = self.participants[ctx.author_id]
         self.users_guessed.append(ctx.author_id)
 
-        em = discord.Embed(color=0x00F8EF)
+        em = discord.Embed(color=self.client.failure)
         em.set_author(name="Your answer is correct! You're moving on to the next round.", 
         icon_url=self.client.user.avatar_url_as(static_format="png", size=2048))
 
@@ -529,13 +529,13 @@ class McMadness(commands.Cog):
         await ctx.defer(hidden=True)
 
         if (ctx.author.id not in self.participants.keys()) and (ctx.author.id not in self.all_game_participants.keys()):
-            em = discord.Embed(color=0x00F8EF)
+            em = discord.Embed(color=self.client.failure)
             em.set_author(name="You cannot participate in this event right now.",
             icon_url=self.client.user.avatar_url_as(static_format="png", size=2048))
             return await ctx.reply(embed=em, hidden=True)
 
         if ctx.author_id in self.users_guessed and ctx.author_id in self.participants.keys():
-            em = discord.Embed(color=0x00F8EF)
+            em = discord.Embed(color=self.client.failure)
             em.set_author(name="You already answered this question.",
             icon_url=self.client.user.avatar_url_as(static_format="png", size=2048))
             return await ctx.reply(embed=em, hidden=True)
@@ -547,7 +547,7 @@ class McMadness(commands.Cog):
             except KeyError:
                 pass
             
-            em = discord.Embed(color=0x00F8EF, description="You are now eliminated from the game!\n"
+            em = discord.Embed(color=self.client.failure, description="You are now eliminated from the game!\n"
             f"You accumulated a total of **{self.all_game_participants[ctx.author_id]}** points.")
             em.set_author(name=f"Wrong Answer, it was {self.correct_option}",
             icon_url=self.client.user.avatar_url_as(static_format="png", size=2048))
@@ -558,24 +558,24 @@ class McMadness(commands.Cog):
                 await ctx.reply(embed=em, hidden=True)
                 self.eliminated.append(ctx.author_id)
 
-                await self.event_channel.send(embed=(discord.Embed(description=f"**{ctx.author.name}** was disqualified with **{self.all_game_participants[ctx.author_id]}**\n**{len(self.participants) - len(self.eliminated)}** players remaining", color=0x00F8EF).set_author(name="R.I.P",
+                await self.event_channel.send(embed=(discord.Embed(description=f"**{ctx.author.name}** was disqualified with **{self.all_game_participants[ctx.author_id]}**\n**{len(self.participants) - len(self.eliminated)}** players remaining", color=self.client.failure).set_author(name="R.I.P",
                 icon_url=self.client.user.avatar_url_as(static_format="png", size=2048))), delete_after=5)
                 return
             
             except KeyError:
-                em = discord.Embed(color=0x00F8EF, description=f"Your score: **{self.all_game_participants[ctx.author_id]}**")
+                em = discord.Embed(color=self.client.failure, description=f"Your score: **{self.all_game_participants[ctx.author_id]}**")
                 em.set_author(name="You are already disqualified from the game!",
                 icon_url=self.client.user.avatar_url_as(static_format="png", size=2048))
                 return await ctx.reply(embed=em, hidden=True)
 
         elif ctx.author_id in self.all_game_participants.keys() and ctx.author_id in self.eliminated:
-            em = discord.Embed(color=0x00F8EF, description=f"Your score: **{self.all_game_participants[ctx.author_id]}**")
+            em = discord.Embed(color=self.client.failure, description=f"Your score: **{self.all_game_participants[ctx.author_id]}**")
             em.set_author(name="You are already disqualified from the game!",
             icon_url=self.client.user.avatar_url_as(static_format="png", size=2048))
             return await ctx.reply(embed=em, hidden=True)
 
         else:
-            em = discord.Embed(color=0x00F8EF)
+            em = discord.Embed(color=self.client.failure)
             em.set_author(name="You cannot participate in this event right now.",
             icon_url=self.client.user.avatar_url_as(static_format="png", size=2048))
             return await ctx.reply(embed=em, hidden=True)
@@ -593,7 +593,8 @@ class McMadness(commands.Cog):
             await self.handle_incorrect_answer(ctx)
 
         elif str(ctx.custom_id).startswith("paginator__"):
-            return await ctx.send("This button no longer accepts any inputs. Pleas run the command again!", hidden=True)
+            if datetime.utcnow().timestamp() - int(float(str(ctx.custom_id).replace("paginator__", "")[:-2])) > 30:
+                return await ctx.send("Button timed out. Please run the command again!", hidden=True)
 
 
     @cog_slash(name='mm', guild_ids=const.slash_guild_ids, description='Start a Minecraft Madness game')

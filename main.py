@@ -89,7 +89,7 @@ class MyClient(commands.Bot):
         super().__init__(*args, **kwargs)
         self._BotBase__cogs = commands.core._CaseInsensitiveDict()
 
-        self.png = "https://cdn.discordapp.com/attachments/932411327727677462/939247777785983066/HD-T-ICON.png?size=2048"
+        self.png = "https://cdn.discordapp.com/attachments/932736074139185295/939389969246617620/T-ICON-DISCORD.png?size=2048"
         self.success = 0x00FF00
         self.failure = 0xff0000
         self.warn = 0xffff00
@@ -249,10 +249,14 @@ with open("data/leaderboards.json", "r") as f:
 
     client.lbs["riddles"] = {} if "riddles" not in client.lbs.keys() else client.lbs["riddles"]
 
+    client.lbs["msgs"] = {} if "msgs" not in client.lbs.keys() else client.lbs["msgs"]
+
 with open("data/games/payouts.json", "r") as f:
     client.payouts = json.load(f)
 
     client.payouts["mm"] = {"ts": 0, "month": 1} if "mm" not in client.payouts.keys() else client.payouts["mm"]
+
+    client.payouts["msgs"] = {"ts": 1643605260, "month": 1} if "msgs" not in client.payouts.keys() else client.payouts["msgs"]
 
 
 client.load_extension('utils.logger')

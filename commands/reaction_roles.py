@@ -86,7 +86,7 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
             return
 
         if send_as_embed == "True":
-            em = discord.Embed(color=0x8b46d3)
+            em = discord.Embed(color=self.client.failure)
 
             em.set_footer(icon_url=str(self.client.user.avatar_url_as(static_format='png', size=2048)),
                           text=ctx.guild.name)

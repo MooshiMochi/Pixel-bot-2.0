@@ -1,5 +1,4 @@
 import asyncio
-from click import option
 import discord
 import json
 
@@ -7,7 +6,7 @@ from discord.ext import commands, tasks
 
 from discord_slash import SlashContext
 from discord_slash.cog_ext import cog_slash
-from discord_slash.utils.manage_commands import create_option, create_choice
+from discord_slash.utils.manage_commands import create_option
 
 from datetime import datetime
 
@@ -37,14 +36,16 @@ class LevelSystem(commands.Cog):
         if msg.author.id == self.client.user.id:
             return
 
+        if str(msg.author.id) not in self.client.lbs["msgs"].keys():
+            self.client.lbs["msgs"][str(msg.author.id)] = 0
+        self.client.lbs["msgs"][str(msg.author.id)] += 1
+
         anti_spam_ts = self.anti_spam.get(msg.author.id, None)
         if anti_spam_ts:
             if datetime.utcnow().timestamp() - anti_spam_ts < 7:
                 return
 
         self.anti_spam[msg.author.id] = datetime.utcnow().timestamp()
-
-
 
         author_id = str(msg.author.id)
 
@@ -248,20 +249,23 @@ class LevelSystem(commands.Cog):
         if not member:
             member = ctx.author
 
+        if not isinstance(member, int):
+            member = member.id
+
         ranked = sorted(self.client.lbs["chatlb"], key=lambda f: self.client.lbs["chatlb"][f]["total_xp"], reverse=True)
 
-        position = ranked.index(str(member.id)) + 1 if str(member.id) in ranked else "N/A"
+        position = ranked.index(str(member)) + 1 if str(member) in ranked else "N/A"
 
-        xp_next_lvl = f'{self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"] - self.client.lbs["chatlb"][str(member.id)]["xp"]}' if str(member.id) in self.client.lbs["chatlb"].keys() else "N/A"
+        xp_next_lvl = f'{self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"] - self.client.lbs["chatlb"][str(member)]["xp"]}' if str(member) in self.client.lbs["chatlb"].keys() else "N/A"
 
-        curr_xp =  f'{self.client.lbs["chatlb"][str(member.id)]["xp"]}/{self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"]}' if str(member.id) in self.client.lbs["chatlb"].keys() else "N/A"
+        curr_xp =  f'{self.client.lbs["chatlb"][str(member)]["xp"]}/{self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"]}' if str(member) in self.client.lbs["chatlb"].keys() else "N/A"
 
-        total_xp =  await self.client.round_int(self.client.lbs["chatlb"][str(member.id)]["total_xp"]) if str(member.id) in self.client.lbs["chatlb"].keys() else "N/A"
+        total_xp =  await self.client.round_int(self.client.lbs["chatlb"][str(member)]["total_xp"]) if str(member) in self.client.lbs["chatlb"].keys() else "N/A"
 
-        curr_lvl = f'{self.client.lbs["chatlb"][str(ctx.author_id)]["level"]}' if str(member.id) in self.client.lbs["chatlb"].keys() else "N/A"
+        curr_lvl = f'{self.client.lbs["chatlb"][str(ctx.author_id)]["level"]}' if str(member) in self.client.lbs["chatlb"].keys() else "N/A"
 
-        em = discord.Embed(color=self.client.failure, title=member)
-        em.set_thumbnail(url=member.avatar_url_as(static_format="png", size=2048)) if member else em.set_thumbnail(url=self.client.png)
+        em = discord.Embed(color=self.client.failure, title=self.client.lbs["chatlb"][str(member)]["name"] + "#" + self.client.lbs["chatlb"][str(member)]["disc"] if str(member) in self.client.lbs["chatlb"].keys() else f"{member}\nNot Ranked!")
+        em.set_thumbnail(url=member.avatar_url_as(static_format="png", size=2048)) if not isinstance(member, int) else em.set_thumbnail(url=self.client.png)
 
         em.description = (
             "" + ("━"*14).center(30) + "\n"
@@ -271,7 +275,7 @@ class LevelSystem(commands.Cog):
             f"🥳 Total xp: **{total_xp}**".center(30) + "\n"
             f"⏳ XP until next level: **{xp_next_lvl}**".center(30) + "\n"
             "" + ("━"*14).center(30) + "\n"
-            "Use **`/leaderboard`** to see the leaderboard"
+            "Use **`/lb`** to see the leaderboard"
             )
         
         await ctx.embed(embed=em, footer="Level System")

@@ -57,7 +57,10 @@ class Riddles(commands.Cog):
         if not self.active: return
 
         cat_opts = [key for key in self.riddles.keys() if key not in self.used_categories]
-        cat_opts = [key for key in self.riddles.keys() if key != self.used_categories[-1]] if not cat_opts else cat_opts
+
+        if not cat_opts:
+            cat_opts = [key for key in self.riddles.keys() if key != self.used_categories[-1]]
+            self.used_categories = []
 
         cat = choice(list(self.riddles.keys()))
         self.used_categories.append(cat)
@@ -66,7 +69,10 @@ class Riddles(commands.Cog):
             self.used_riddles[cat] = {}
         
         riddle_opts = [key for key in self.riddles[cat].keys() if key not in self.used_riddles[cat].keys()]
-        riddle_opts = [key for key in self.riddles[cat].keys() if key != self.used_riddles[cat].keys()[-1]] if not riddle_opts else riddle_opts
+        
+        if not riddle_opts:
+            riddle_opts = [key for key in self.riddles[cat].keys() if key != list(self.used_riddles[cat].keys())[-1]]
+            self.used_riddles[cat] = {}
 
         riddle_num = choice(riddle_opts)
 
@@ -81,7 +87,7 @@ class Riddles(commands.Cog):
 
         self.random_win = randint(500, 2500)
 
-        em = discord.Embed(color=0x00F8EF, title="New Riddle", description=msg+f"\n\n*Answer the riddle correctly for {self.random_win} <:money:903467440829259796>!*")
+        em = discord.Embed(color=self.client.failure, title="New chat riddle", description=msg+f"\n\n*Answer the riddle correctly for {self.random_win} <:money:903467440829259796>!*")
         em.set_footer(text="TN | Riddles", icon_url=self.client.png)
 
         self.is_riddle_guessed = False
@@ -119,7 +125,7 @@ class Riddles(commands.Cog):
 
                 em = discord.Embed(
                     description=f"Congratulations {msg.author.mention}!         You guessed the riddle! You got `{self.random_win}` cash",
-                    color=0x00f8ef)
+                    color=self.client.failure)
                 em.set_footer(text="TN | Riddles",
                               icon_url=str(self.client.user.avatar_url_as(static_format="png", size=2048)))
 

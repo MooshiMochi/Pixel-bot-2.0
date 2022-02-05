@@ -31,3 +31,8 @@ def scramblestring(string: str):
     return " ".join(result)
 
 print(scramblestring("Hello"))
+
+from datetime import datetime
+
+print(datetime.utcnow().timestamp())
+print(datetime.utcnow().timestamp())
