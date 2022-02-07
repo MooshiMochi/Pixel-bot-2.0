@@ -25,6 +25,8 @@ class Constants:
             'commands.verification',
             'commands.level_system',
             'commands.leaderboards',
+            'commands.misc',
+            'commands.economy',
             'commands.games.whack_a_steve',
             'commands.games.mc_madness',
             'commands.games.riddles')

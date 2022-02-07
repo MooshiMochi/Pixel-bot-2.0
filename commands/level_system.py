@@ -117,6 +117,8 @@ class LevelSystem(commands.Cog):
     guild_ids=const.slash_guild_ids, options=[
         create_option(name="new_xp", description="The xp required to reach next level", option_type=4, required=True)
     ])
+    @commands.has_permissions(manage_messages=True)
+    @commands.guild_only()
     async def set_xp_threshold(self, ctx: SlashContext, new_xp:int=None):
         
         if not ctx.author.guild_permissions.manage_roles:
@@ -140,6 +142,8 @@ class LevelSystem(commands.Cog):
     guild_ids=const.slash_guild_ids, options=[
         create_option(name="new_level_cap", description="The max level someone can reach", option_type=4, required=True)
     ])
+    @commands.has_permissions(manage_messages=True)
+    @commands.guild_only()
     async def set_level_threshold(self, ctx: SlashContext, new_level_cap:int=None):
 
         if not ctx.author.guild_permissions.manage_roles:
@@ -165,6 +169,8 @@ class LevelSystem(commands.Cog):
         required=True),
         create_option(name="role", description="The role that will be given when the user reaches that level", option_type=8, required=False)
         ])
+    @commands.has_permissions(manage_roles=True)
+    @commands.guild_only()
     async def set_level_role(self, ctx:SlashContext, level:int=None, role:discord.Role=None):
                 
         if not ctx.author.guild_permissions.manage_roles:
@@ -221,9 +227,7 @@ class LevelSystem(commands.Cog):
 
     @cog_slash(name="display_level_roles", description="Display configured level roles", guild_ids=const.slash_guild_ids)
     async def display_level_roles(self, ctx:SlashContext):
-
         await ctx.defer(hidden=True)
-
 
         if (str(ctx.guild_id) not in self.client.lvlsys_config.keys()) or ("level_roles" not in self.client.lvlsys_config[str(ctx.guild_id)].keys()) or (
             not self.client.lvlsys_config[str(ctx.guild_id)]["level_roles"]
@@ -281,11 +285,12 @@ class LevelSystem(commands.Cog):
         await ctx.embed(embed=em, footer="Level System")
     
 
-    @cog_slash(name="add_xp", description="Add 'x' amount of xp to someone", guild_ids=const.slash_guild_ids, options=[
+    @cog_slash(name="add_xp", description="[STAFF] Add 'x' amount of xp to someone", guild_ids=const.slash_guild_ids, options=[
         create_option(name="user", description="The person to add xp to", option_type=6, required=True),
         create_option(name="amount", description="The amount of xp to add", option_type=4, required=True)
     ])
     @commands.has_permissions(manage_messages=True)
+    @commands.guild_only()
     async def add_xp(self, ctx:SlashContext, user:discord.User=None, amount:int=None):
 
         await ctx.defer(hidden=True)
@@ -313,11 +318,12 @@ class LevelSystem(commands.Cog):
         return await ctx.send(f"Success! {user.mention}'s xp was increased by {amount}.", hidden=True)
 
 
-    @cog_slash(name="remove_xp", description="Remove 'x' amount of xp from someone", guild_ids=const.slash_guild_ids, options=[
+    @cog_slash(name="remove_xp", description="[STAFF] Remove 'x' amount of xp from someone", guild_ids=const.slash_guild_ids, options=[
         create_option(name="user", description="The person to remove xp form", option_type=6, required=True),
         create_option(name="amount", description="The amount of xp to remove", option_type=4, required=True)
     ])
     @commands.has_permissions(manage_messages=True)
+    @commands.guild_only()
     async def remove_xp(self, ctx:SlashContext, user:discord.User=None, amount:int=None):
 
         await ctx.defer(hidden=True)
@@ -341,9 +347,10 @@ class LevelSystem(commands.Cog):
         return await ctx.send(f"Success! {user.mention}'s xp was decreased by {amount}.", hidden=True)
 
 
-    @cog_slash(name="disable_xp", description="Disable XP gain in a specific channel", guild_ids=const.slash_guild_ids,
+    @cog_slash(name="disable_xp", description="[STAFF] Disable XP gain in a specific channel", guild_ids=const.slash_guild_ids,
     options=[create_option(name="channel", description="The channel to disable XP gain in", option_type=7, required=True)])
     @commands.has_permissions(manage_messages=True)
+    @commands.guild_only()
     async def disable_xp(self, ctx:SlashContext, channel:discord.TextChannel=None):
         
         await ctx.defer(hidden=True)
@@ -369,9 +376,10 @@ class LevelSystem(commands.Cog):
         return await ctx.send(f"Disabled XP gain in <#{channel.id}>", hidden=True)
 
     
-    @cog_slash(name="enable_xp", description="Enable XP gain in a disabled channel", guild_ids=const.slash_guild_ids,
+    @cog_slash(name="enable_xp", description="[STAFF] Enable XP gain in a disabled channel", guild_ids=const.slash_guild_ids,
     options=[create_option(name="channel", description="The channel to enable XP gain in", option_type=7, required=True)])
     @commands.has_permissions(manage_messages=True)
+    @commands.guild_only()
     async def enable_xp(self, ctx:SlashContext, channel:discord.TextChannel=None):
         
         await ctx.defer(hidden=True)
@@ -391,12 +399,13 @@ class LevelSystem(commands.Cog):
         
         return await ctx.send(f"Enabled XP gain in <#{channel.id}>", hidden=True)
 
-    @cog_slash(name="xp_event", description="Create an event that will give x amount of xp per message for y duration", guild_ids=const.slash_guild_ids, options=[
+    @cog_slash(name="xp_event", description="[STAFF] Create an event that will give x amount of xp per message for y duration", guild_ids=const.slash_guild_ids, options=[
         create_option(name="xp_per_message", description="The xp awarded per message during the event period", option_type=4, required=True), 
         create_option(name="duration", description="How long the event will last", option_type=3, required=True),
         create_option(name="optional_ping", description="A role to ping when event notifcation is sent (OPTIONAL)", option_type=8,
         required=True)])
     @commands.has_permissions(manage_messages=True)
+    @commands.guild_only()
     async def xp_event(self, ctx:SlashContext, xp_per_message:int=None, duration:str=None, optional_ping:discord.Role=None):
         
         await ctx.defer(hidden=True)

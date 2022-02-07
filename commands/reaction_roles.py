@@ -65,7 +65,7 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
             json.dump(self.data, f, indent=2)
 
 
-    @cog_ext.cog_slash(name="rr_msg", guild_ids=const.slash_guild_ids, description="Create a new reaction roles message",
+    @cog_ext.cog_slash(name="rr_msg", guild_ids=const.slash_guild_ids, description="[STAFF] Create a new reaction roles message",
     options=[
         manage_commands.create_option(
             name="send_as_embed", description="Choose whether the message should be in an embed or not.", option_type=3, required=True, choices=[
@@ -74,6 +74,7 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
         
         manage_commands.create_option(name="title", description="Set the title for the reaction role message. (Ignore if you don't want a title.)", option_type=3, required=False)
     ])
+    @commands.has_permissions(manage_roles=True)
     @commands.guild_only()
     async def rr_msg(self, ctx, send_as_embed: str = None, title: str = None):
         """Create a new message for reaction roles."""
@@ -111,10 +112,12 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
 
             
 
-    @cog_ext.cog_slash(name="delete_msg", guild_ids=const.slash_guild_ids, description="Delete a reaction roles message",
+    @cog_ext.cog_slash(name="delete_msg", guild_ids=const.slash_guild_ids, description="[STAFF] Delete a reaction roles message",
     options=[
         manage_commands.create_option(name="message_id", description="The ID of the reaction roles message", option_type=3, required=True)
     ])
+    @commands.guild_only()
+    @commands.has_permissions(manage_roles=True)
     async def delete_msg(self, ctx, message_id: str = None):
 
         await ctx.defer(hidden=True)
@@ -140,12 +143,13 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
         else:
             return await ctx.send("I haven't found any messages with that ID. Please check and try again.", hidden=True)
 
-    @cog_ext.cog_slash(name="set_img", guild_ids=const.slash_guild_ids, description="Set an image for a reaction roles message",
+    @cog_ext.cog_slash(name="set_img", guild_ids=const.slash_guild_ids, description="[STAFF] Set an image for a reaction roles message",
     options=[
         manage_commands.create_option(name="message_id", description="The ID of the reaction roles message", option_type=3, required=True),
-        manage_commands.create_option(name="url", description="The URL of the image", option_type=3, required=True)
+        manage_commands.create_option(name="url", description="The URL of the image (Don't choose this option to remove the image)", option_type=3, required=True)
     ])
     @commands.guild_only()
+    @commands.has_permissions(manage_roles=True)
     async def set_img(self, ctx, message_id: str = None, url: url = None):
 
         await ctx.defer(hidden=True)
@@ -182,7 +186,7 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
         else:
             return await ctx.send("I haven't found any messages with that ID. Please check and try again.", hidden=True)
 
-    @cog_ext.cog_slash(name="add_rr", guild_ids=const.slash_guild_ids, description="Add a reaction role to a reaction roles message",
+    @cog_ext.cog_slash(name="add_rr", guild_ids=const.slash_guild_ids, description="[STAFF] Add a reaction role to a reaction roles message",
     options=[
         manage_commands.create_option(name="message_id", description="The ID of the reaction roles message", required=True, option_type=3),
         manage_commands.create_option(name="role", description="The role to give when the user reacts", option_type=8, required=True),
@@ -190,6 +194,7 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
         manage_commands.create_option(name="description", description="The description of the reaction role entry", option_type=3,
         required=True)
     ])
+    @commands.has_permissions(manage_roles=True)
     @commands.guild_only()
     async def add_rr(self, ctx, message_id:str = None, role:discord.Role = None, emoji:str=None, description:str = None):
 
@@ -265,12 +270,13 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
         await msg.add_reaction(emoji)
         return await ctx.send("Reaction role menu updated", hidden=True)
 
-    @cog_ext.cog_slash(name="remove_rr", guild_ids=const.slash_guild_ids, description="Remove a reaction role to a reaction roles message",
+    @cog_ext.cog_slash(name="remove_rr", guild_ids=const.slash_guild_ids, description="[STAFF] Remove a reaction role to a reaction roles message",
     options=[
         manage_commands.create_option(name="message_id", description="The ID of the reaction roles message", option_type=3, required=True),
         manage_commands.create_option(name="emoji", description="The emoji corresponding to the reaction role", option_type=3, required=True)
     ])
     @commands.guild_only()
+    @commands.has_permissions(manage_roles=True)
     async def remove_rr(self, ctx, message_id: str = None, emoji: str = None):
 
         await ctx.defer(hidden=True)
@@ -345,7 +351,7 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
         await ctx.send("Success!", hidden=True)
 
 
-    @cog_ext.cog_slash(name="rr_config", guild_ids=const.slash_guild_ids, description="Configure a reaction roles message",
+    @cog_ext.cog_slash(name="rr_config", guild_ids=const.slash_guild_ids, description="[STAFF] Configure a reaction roles message",
     options=[
         manage_commands.create_option(name="message_id", description="The ID of the reaction roles message", option_type=3, required=True),
         manage_commands.create_option(
@@ -356,6 +362,7 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
                 manage_commands.create_choice(value=3, name="Can obtain only 1 role")]),
 
     ])
+    @commands.has_permissions(manage_roles=True)
     @commands.guild_only()
     async def rr_config(self, ctx, message_id: str = None, type: int = None):
         

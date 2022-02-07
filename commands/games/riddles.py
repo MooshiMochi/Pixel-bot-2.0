@@ -8,6 +8,11 @@ from random import choice, randint
 from discord.ext import commands
 from discord.ext import tasks
 
+from discord_slash import SlashContext
+from discord_slash.cog_ext import cog_slash
+from discord_slash.utils.manage_commands import create_option, create_choice
+
+from utils.paginator import Paginator
 
 from constants import const
 
@@ -19,11 +24,16 @@ class Riddles(commands.Cog):
         with open("data/games/riddles_config.json", "r") as f:
             self.config = json.load(f)
 
+            if "channel_id" not in self.config.keys():
+                self.config["channel_id"] = None
+
+            if "active" not in self.config.keys():
+                self.config["active"] = False
+
         with open("data/games/riddles.json", "r") as f:
             self.riddles = json.load(f)
 
         self.main_ch = self.config.get("channel_id", None)
-        self.active = self.config.get("active", False)
         
         self.riddle_nonce = "aerhagj33££!34$$bea13513te131UKW!²╪Ur134hthh[}{ajwhd[]9a}_--=-#~jkwnanjavOKEadk:!@!"
 
@@ -54,7 +64,7 @@ class Riddles(commands.Cog):
     @tasks.loop(minutes=5.0)
     async def run_riddles(self):
 
-        if not self.active: return
+        if not self.config['active']: return
 
         cat_opts = [key for key in self.riddles.keys() if key not in self.used_categories]
 
@@ -103,7 +113,6 @@ class Riddles(commands.Cog):
     async def before_get_ready(self):
         await self.client.wait_until_ready()
 
-
     @commands.Cog.listener()
     async def on_message(self, msg):
         if msg.author.bot:
@@ -111,8 +120,8 @@ class Riddles(commands.Cog):
         
         elif self.is_riddle_guessed:
             return
-
-        elif self.active:
+        
+        elif self.config["active"]:
             if msg.content.lower() == self.current_riddle["answer"].lower():
                 self.is_riddle_guessed = True
 
@@ -131,6 +140,150 @@ class Riddles(commands.Cog):
 
                 await msg.channel.send(embed=em)
 
+    @cog_slash(name="riddles_config", description="[ADMIN] Configure riddles", guild_ids=const.slash_guild_ids, options=[
+        create_option(name="active", description="Activate or deactivate riddles", option_type=5, required=False),
+        create_option(name="riddles_channel", description="Channel where riddles will be sent", option_type=7, required=False),
+    ])
+    @commands.has_permissions(administrator=True)
+    @commands.guild_only()
+    async def riddles_config(self, ctx:SlashContext, active:bool=None, riddles_channel:discord.TextChannel=None):
+        
+        await ctx.defer(hidden=True)
+
+        text = "Config settings:\n"
+
+        if active is not None:
+            if active == self.config["active"]:
+                text += f"> Activated: Already set to `{active}`\n"
+            else:
+                self.config["active"] = active
+                text += f"> Activated: Set to `{active}`\n"
+        else:
+            text += f"> Activated: `{active}` (unchanged)\n"
+
+        if riddles_channel:
+            if riddles_channel.id != self.config["channel_id"]:
+                if isinstance(riddles_channel, discord.VoiceChannel):
+                    return await ctx.send("Riddles channel must be a Text Channel, not a Voice Channel!", hidden=True)
+
+                self.config["channel_id"] = riddles_channel.id
+                self.main_ch = riddles_channel
+                text += f"> Channel: Set to <#{riddles_channel.id}>\n"
+            else:
+                text += f"> Channel: Already set to <#{self.config['channel_id']}>\n"
+        
+        else:
+            text += f"> Channel: <#{self.config['channel_id']}> (unchanged)"
+
+        with open("data/games/riddles_config.json", "w") as f:
+            json.dump(self.config, f, indent=2)
+
+        return await ctx.send(text, hidden=True)
+
+
+    @cog_slash(name="riddles_add", description="[ADMIN] Add a riddle", guild_ids=const.slash_guild_ids, options=[
+        create_option(name="type", description="Type of riddle", option_type=3, required=True, choices=[
+            create_choice(value="question", name="Question"),
+            create_choice(value="trivia", name="Trivia"),
+            create_choice(value="riddle", name="Riddle"),
+            create_choice(value="unscramble", name="Unscramble")
+        ]),
+        create_option(name="question", description="The question the users have to answer", option_type=3, required=True),
+        create_option(name="answer", description="The answer to the question", option_type=3, required=True)
+    ])
+    @commands.has_permissions(administrator=True)
+    @commands.guild_only()
+    async def riddles_add(self, ctx:SlashContext, type:str=None, question:str=None, answer:str=None):
+        
+        await ctx.defer(hidden=True)
+
+        self.riddles[type][str(len(self.riddles[type])+1)] = {
+            "question": question,
+            "answer": answer
+        }
+
+        em = discord.Embed(color=self.client.failure, title="New riddle added", 
+        description=f"**Type: __{type.capitalize()}__**\n\n`#{len(self.riddles[type])+1}. {question}`\n> {answer}")
+        
+        with open("data/games/riddles.json", "w") as f:
+            json.dump(self.riddles, f, indent=2)
+
+        return await ctx.embed(embed=em, footer="Riddles")
+
+
+    @cog_slash(name="riddles_delete", description="[ADMIN] Delete a riddle", guild_ids=const.slash_guild_ids, options=[
+        create_option(name="type", description="Type of riddle", option_type=3, required=True, choices=[
+            create_choice(value="question", name="Question"),
+            create_choice(value="trivia", name="Trivia"),
+            create_choice(value="riddle", name="Riddle"),
+            create_choice(value="unscramble", name="Unscramble")
+        ]),
+        create_option(name="riddle_number", description="The number of the riddle (use /riddles_questions)", option_type=4, required=True)
+    ])
+    @commands.has_permissions(administrator=True)
+    @commands.guild_only()
+    async def riddles_delete(self, ctx:SlashContext, type:str=None, riddle_number:int=None):
+        
+        await ctx.defer(hidden=True)
+
+        if not str(riddle_number) in self.riddles[type].keys():
+            return await ctx.send(f"That riddle doesn't exist in the {type.capitalize()} category.", hidden=True)
+
+        question = self.riddles[type][int(riddle_number)]["question"]
+        answer = self.riddles[type][int(riddle_number)]["answer"]
+        
+        if not self.riddles[type].pop(str(riddle_number), False):
+            return await ctx.send(f"That riddle doesn't exist in the {type.capitalize()} category.", hidden=True)
+
+        em = discord.Embed(color=self.client.failure, title="Riddle deleted", 
+        description=f"**Type: __{type.capitalize()}__**\n\n`#{len(self.riddles[type])+1}. {question}`\n> {answer}")
+        
+        with open("data/games/riddles.json", "w") as f:
+            json.dump(self.riddles, f, indent=2)
+
+        return await ctx.embed(embed=em, footer="Riddles")
+
+
+    @cog_slash(name="riddles_questions", description="[ADMIN] Display all Riddles questions and answers", guild_ids=const.slash_guild_ids, options=[
+        create_option(name="type", description="Type of riddles", option_type=3, required=True, choices=[
+            create_choice(value="question", name="Question"),
+            create_choice(value="trivia", name="Trivia"),
+            create_choice(value="riddle", name="Riddle"),
+            create_choice(value="unscramble", name="Unscramble")
+        ]) | {"focused": True}])
+    @commands.has_permissions(administrator=True)
+    @commands.guild_only()
+    async def riddles_questions(self, ctx:SlashContext, type:str=None):
+        await ctx.defer(hidden=True)
+        
+        ranked = list(self.riddles[type].keys())
+
+        embeds = []
+
+        add_on = [y for y in range(9, len(self.riddles[type]), 10)] if len(self.riddles[type]) >= 10 else [len(self.riddles[type])-1]
+
+        if len(add_on) > 1 and add_on[-1] % 10 != 0:
+            add_on.append(len(self.riddles[type])-1)
+        
+        em = discord.Embed(color=self.client.failure, title=f"Riddles Q & A's ({type.capitalize()})", description="")
+        
+        for x in range(len(self.riddles[type])):
+            
+            question = self.riddles[type][ranked[x]]["question"]
+            answer = self.riddles[type][ranked[x]]["answer"]
+            
+            em.description += f"`#{ranked[x]}. {question}`\n"
+            em.description += f"> {answer}\n\n"
+
+            if x in add_on:
+                em.set_footer(text=f"TN | Riddles | Page {add_on.index(x)+1}/{len(add_on)}",
+                icon_url=self.client.png)
+                embeds.append(em)
+
+                em = discord.Embed(color=self.client.failure, title=f"Riddles Q & A's ({type.capitalize()})", description="")
+
+        return await Paginator(embeds, ctx).run()
+        
 
 def setup(client):
     client.add_cog(Riddles(client))

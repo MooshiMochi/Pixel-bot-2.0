@@ -53,6 +53,7 @@ class Verification(commands.Cog):
         create_option(name="content", description="The contents of the verification message", option_type=3, required=True),
         create_option(name="title", description="The title of the message that will be sent", option_type=3, required=False)        
             ])
+    @commands.guild_only()
     @commands.has_permissions(manage_roles=True)
     async def verification_setup(self, ctx, verification_role:discord.Role=None, send_as_embed:str=None, title:str=None, content:str=None):
         
@@ -98,6 +99,7 @@ class Verification(commands.Cog):
 
     @cog_ext.cog_slash(name="set_verification_role", description="[STAFF] The role that will be given to users whenver they get verified", guild_ids=const.slash_guild_ids, options=[create_option(name="role", description="The verification role to be given", option_type=8, required=True)])
     @commands.has_permissions(manage_roles=True)
+    @commands.guild_only()
     async def set_verification_role(self, ctx:SlashContext, role:discord.Role=None):
 
         self.verification_role = role
@@ -114,6 +116,7 @@ class Verification(commands.Cog):
         create_option(name="otherwise", description="Forcefully verify everyone that isn't verified", option_type=3, required=False, choices=[create_choice(value="otherwise", name="All unverified members")]) | {"focused": True}
         ])
     @commands.has_permissions(manage_roles=True)
+    @commands.guild_only()
     async def verify(self, ctx:SlashContext, member:discord.Member=None, otherwise:str=None):
 
         await self.client.wait_until_ready()

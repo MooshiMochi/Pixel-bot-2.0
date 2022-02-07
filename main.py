@@ -30,12 +30,12 @@ handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(me
 logger.addHandler(handler)
 
 
-class PixelContext(commands.Context):
+class TNContext(commands.Context):
     async def embed(self, embed, *, footer=None):
 
         if footer is None:
-            footer = "Pixel Housing"
-        embed.set_footer(icon_url=self.bot.png, text=f"Pixel | {footer}")
+            footer = "Titan Network"
+        embed.set_footer(icon_url=self.bot.png, text=f"TN | {footer}")
         embed.timestamp = datetime.utcnow()
 
         try:
@@ -44,7 +44,7 @@ class PixelContext(commands.Context):
             raise e
 
 
-class PixelSlashContext(SlashContext):
+class TNSlashContext(SlashContext):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -52,8 +52,8 @@ class PixelSlashContext(SlashContext):
     async def embed(self, embed, *, footer=None):
 
         if footer is None:
-            footer = "Pixel Housing"
-        embed.set_footer(icon_url=self.bot.png, text=f"Pixel | {footer}")
+            footer = "Titan Network"
+        embed.set_footer(icon_url=self.bot.png, text=f"TN | {footer}")
         embed.timestamp = datetime.utcnow()
 
         try:
@@ -75,7 +75,7 @@ class PixelSlashContext(SlashContext):
         except discord.HTTPException as e:   
             raise e
 
-discord_slash.context.SlashContext = PixelSlashContext
+discord_slash.context.SlashContext = TNSlashContext
 
 
 class BotConfig:
@@ -89,7 +89,7 @@ class MyClient(commands.Bot):
         super().__init__(*args, **kwargs)
         self._BotBase__cogs = commands.core._CaseInsensitiveDict()
 
-        self.png = "https://cdn.discordapp.com/attachments/932736074139185295/939389969246617620/T-ICON-DISCORD.png?size=2048"
+        self.png = "https://cdn.discordapp.com/attachments/932411327727677462/939629297331740702/T-ICON-DISCORD.png?size=2048"
         self.success = 0x00FF00
         self.failure = 0xff0000
         self.warn = 0xffff00
@@ -103,7 +103,7 @@ class MyClient(commands.Bot):
 
         self.user_cache = {}
 
-    async def get_context(self, message, *, cls=PixelContext):
+    async def get_context(self, message, *, cls=TNContext):
         # override get_context
         return await super().get_context(message, cls=cls)
 
@@ -154,6 +154,8 @@ class MyClient(commands.Bot):
     async def on_ready(self):
         print(f"\033[1;32m┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n" + "\033[1;32mBot is Online".center(78) + "\n\033[1;32m┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛")
         self.logger.info(f"Logged in as {self.user}: {self.user.id}")
+
+        await client.change_presence(status=discord.Status.online, activity=discord.Game(name="titan.network"))
     
     @staticmethod
     async def format_duration(ts_duration: str):
@@ -295,7 +297,7 @@ for dir_name in ["utils"]:
 client.logger.info(len(client.extensions), "extensions loaded,", skipped, "skipped.")
 
 
-@slash.slash(name="reload", guild_ids = [932736074139185292],description="[DEVELOPER] Reload a client extension.", options=[
+@slash.slash(name="reload", guild_ids=const.slash_guild_ids, description="[DEVELOPER] Reload a client extension.", options=[
     create_option(name="filename", description="The name of the extension file to reload.", option_type=str,
     required=True, choices=[create_choice(value=x, name=x) for x in const.command_exts])])
 @commands.is_owner()
@@ -312,7 +314,7 @@ async def reload(ctx, filename):
         await ctx.send(f"```yaml\n{e}\n```")
 
 
-@slash.slash(name="load", guild_ids = [932736074139185292], description="[DEVELOPER] Load a client extension.", options=[
+@slash.slash(name="load", guild_ids=const.slash_guild_ids, description="[DEVELOPER] Load a client extension.", options=[
     create_option(name="filename", description="The name of the extension file to load.", option_type=str,
     required=True, choices=[create_choice(value=x, name=x) for x in const.command_exts])])
 @commands.is_owner()
@@ -328,9 +330,10 @@ async def load(ctx, filename):
         await ctx.send(f"```yaml\n{e}\n```")
 
 
-@slash.slash(name="unload", guild_ids = [932736074139185292], description="[DEVELOPER] Unload a client extension.", options=[
+@slash.slash(name="unload", guild_ids=const.slash_guild_ids, description="[DEVELOPER] Unload a client extension.", options=[
     create_option(name="filename", description="The name of the extension file to unload.", option_type=str,
     required=True, choices=[create_choice(value=x, name=x) for x in const.command_exts])])
+@commands.is_owner()
 async def unload(ctx, filename):
     if ctx.author.id not in client.owner_ids:
         return await ctx.send("You're not allowed to run this command.")

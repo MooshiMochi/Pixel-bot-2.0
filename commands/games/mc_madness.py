@@ -31,10 +31,19 @@ class McMadness(commands.Cog):
 
         with open("data/games/mm_config.json", "r") as f:
             self.config = json.load(f)
+            if "active" not in self.config.keys():
+                self.config["active"] = False
+            if "mm_channel_id" not in self.config.keys():
+                self.config["mm_channel_id"] = None
+            if "tournament_id" not in self.config.keys():
+                self.config["tournament_id"] = None
+            if "ping_role_id" not in self.config.keys():
+                self.config["ping_role_id"] = "\u200b"
 
         self.mm_channel_id = self.config.get("mm_channel_id", None)
         self.tournament_id = self.config.get("tournament_id", None)
         self.ping_role_str = self.config.get("ping_role_id", "\u200b")
+
         if self.ping_role_str:
             self.ping_role_str = "<@&"+str(self.ping_role_str)+">"
 
@@ -307,7 +316,10 @@ class McMadness(commands.Cog):
 
     @tasks.loop(minutes=470)
     async def tournamet(self):
-    
+        
+        if not self.config["active"]:
+            return
+
         await self.client.wait_until_ready()
 
         await self.tournament_channel.send(f"{self.ping_role_str}, a tournament will begin in 10 minutes. Get ready!", allowed_mentions=AllowedMentions(roles=True))
@@ -580,7 +592,6 @@ class McMadness(commands.Cog):
             icon_url=self.client.user.avatar_url_as(static_format="png", size=2048))
             return await ctx.reply(embed=em, hidden=True)
 
-
     @commands.Cog.listener()
     async def on_component(self, ctx:ComponentContext):
         if ctx.custom_id == "i_joined":
@@ -613,7 +624,7 @@ class McMadness(commands.Cog):
         self.is_event_ongoing = True
         
         if not ctx.channel_id == self.event_channel.id:
-            await ctx.send(f"A 'Minecraft Madness' event has started in <#{self.event_channel.id}>. Head there to join the fun!")
+            await ctx.channel.send(f"A 'Minecraft Madness' event has started in <#{self.event_channel.id}>. Head there to join the fun!")
 
         await ctx.send("Success!", hidden=True)
 
@@ -630,7 +641,7 @@ class McMadness(commands.Cog):
         self.is_event_ongoing = False
 
 
-    @cog_slash(name="mm_add", description="Add a new question to the Minecraft Madness Quiz Game", guild_ids=const.slash_guild_ids, 
+    @cog_slash(name="mm_add", description="[ADMIN] Add a new question to the Minecraft Madness Quiz Game", guild_ids=const.slash_guild_ids, 
     options=[
         create_option(name="question", description="The question that players will have to answer", option_type=3, required=True) | {"focused": True},
         create_option(name="difficulty", description="The difficulty leve of the question", option_type=3, required=True, choices=[
@@ -669,7 +680,7 @@ class McMadness(commands.Cog):
         return await ctx.send(text, hidden=True)
 
     
-    @cog_slash(name='mm_edit', description='Edit an existing question.', guild_ids=const.slash_guild_ids, 
+    @cog_slash(name='mm_edit', description='[ADMIN] Edit an existing question.', guild_ids=const.slash_guild_ids, 
      options=[
         create_option("question_to_edit", "The question to edit", 3, True) | {"focused": True},
         create_option('difficulty', 'The difficulty level of the question', 3, True, choices=[
@@ -710,7 +721,7 @@ class McMadness(commands.Cog):
         return await ctx.send(text, hidden=True)
 
 
-    @cog_slash(name='mm_delete', description='Delete a question from the questions bank.', guild_ids=const.slash_guild_ids, options=[
+    @cog_slash(name='mm_delete', description='[ADMIN] Delete a question from the questions bank.', guild_ids=const.slash_guild_ids, options=[
         create_option('difficulty', 'The difficulty level of the question', 3, True),
         create_option("question_to_delete", "The question to delete", 3, True),
     ])
@@ -728,7 +739,7 @@ class McMadness(commands.Cog):
         return await ctx.send(f"Deleted `{question_to_delete}` from the {difficulty.capitalize()} questions.", hidden=True)
 
     
-    @cog_slash(name="mm_questions", description="Display all Minecraft Madness questions and answers", guild_ids=const.slash_guild_ids, options=[
+    @cog_slash(name="mm_questions", description="[ADMIN] Display all Minecraft Madness questions and answers", guild_ids=const.slash_guild_ids, options=[
         create_option(name="difficulty", description="Display questions and answers for a specific difficulty", option_type=3, required=True, choices=[
             create_choice(value="easy", name="Easy"),
             create_choice(value="normal", name="Normal"),
@@ -773,7 +784,72 @@ class McMadness(commands.Cog):
                 em = discord.Embed(color=self.client.failure, title=f"Minecraft Madness Q & A's ({difficulty.capitalize()})", description="")
 
         await Paginator(embeds, ctx).run()
+
+    @cog_slash(name="mm_config", description="[ADMIN] Configure Minecraft Madness", guild_ids=const.slash_guild_ids, options=[
+        create_option(name="active", description="Activate or deactivate Minecraft Madness", option_type=5, required=False),
+        create_option(name="tournament_channel", description="Channel where tournaments will take place", option_type=7, required=False),
+        create_option(name="ping_role", description="The role that will be pinged for tournament notifications", option_type=8, required=False),
+        create_option(name="casual_channel", description="Channel where casual games will take place", option_type=7, required=False),
+    ])
+    @commands.has_permissions(administrator=True)
+    @commands.guild_only()
+    async def mm_config(self, ctx:SlashContext, active:bool=None, tournament_channel:discord.TextChannel=None, ping_role:discord.Role=None, casual_channel:discord.TextChannel=None):
         
+        await ctx.defer(hidden=True)
+
+        text = "Config settings:\n"
+
+        if active is not None:
+            if active == self.config["active"]:
+                text += f"> Activated: Already set to `{active}`\n"
+            else:
+                self.config["active"] = active
+                text += f"> Activated: Set to `{active}`\n"
+        else:
+            text += f"> Activated: `{active}` (unchanged)\n"
+
+        if tournament_channel:
+            if tournament_channel.id != self.config["tournament_id"]:
+                if isinstance(tournament_channel, discord.VoiceChannel):
+                    return await ctx.send("Channel must be a Text Channel, not a Voice Channel!", hidden=True)
+
+                self.config["tournament_id"] = tournament_channel.id
+                self.main_ch = tournament_channel
+                text += f"> Tournament Channel: Set to <#{tournament_channel.id}>"
+            else:
+                text += f"> Tournament Channel: Already set to <#{self.config['tournament_id']}>\n"
+        
+        else:
+            text += f"> Tournament Channel: <#{self.config['tournament_id']}> (unchanged)\n"
+
+        if ping_role:
+            if ping_role.id != self.config["ping_role_id"]:
+                self.config["ping_role_id"] = ping_role.id
+                self.ping_role_str = f"<@&{ping_role.id}>"
+
+        if casual_channel:
+            if casual_channel.id != self.config["mm_channel_id"]:
+                if isinstance(casual_channel, discord.VoiceChannel):
+                    return await ctx.send("Channel must be a Text Channel, not a Voice Channel!", hidden=True)
+
+                self.config["mm_channel_id"] = casual_channel.id
+                self.main_ch = casual_channel
+                text += f"> Casual Channel: Set to <#{casual_channel.id}>\n"
+            else:
+                text += f"> Casual Channel: Already set to <#{self.config['mm_channel_id']}>\n"
+        
+        else:
+            text += f"> Casual Channel: <#{self.config['mm_channel_id']}> (unchanged)"
+
+        with open("data/games/mm_config.json", "w") as f:
+            json.dump(self.config, f, indent=2)
+
+        if self.tournamet.is_running():
+            self.tournamet.cancel()
+        
+        self.get_ready.start()
+
+        return await ctx.send(text, hidden=True)
 
 def setup(client):
     client.add_cog(McMadness(client))

@@ -1,5 +1,6 @@
 {
-    "mm_channel_id": 939159149760086036,
-    "tournament_id": 939159133364576368,
-    "ping_role_id": 939297460403200040
+  "mm_channel_id": 939159149760086036,
+  "tournament_id": 939159133364576368,
+  "ping_role_id": 939297460403200040,
+  "active": false
 }
