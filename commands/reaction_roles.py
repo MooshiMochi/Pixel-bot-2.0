@@ -323,6 +323,8 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
         if emoji_str not in [str(e) for e in msg.reactions]:
             return await ctx.send("That reaction role doesn't exist.", hidden=True)
 
+        new_desc = ""
+        
         if emoji_str in msg.content:
             entries = [x for x in entries if emoji_str not in x]
             # entries.pop(reaction_number - 1)
