@@ -391,8 +391,8 @@ class EconomyCommands(commands.Cog):
             "category": item_category,
             "show_in_inv": show_in_inv,
             "best_before": time_in_seconds,
-            "role_to_receive": role_to_receive.id if role_to_receive else None,
-            "role_to_remove": role_to_remove.id if role_to_remove else None,
+            "role_to_receive": role_to_receive.id if role_to_receive else role_to_receive,
+            "role_to_remove": role_to_remove.id if role_to_remove else role_to_remove,
             "min_balance": min_balance,
             "reply_msg": message_when_purchased
         }
