@@ -73,7 +73,8 @@ class Restricted(commands.Cog):
         for dir_name in ["events"]:
             for file in os.listdir(dir_name):
                 if file.endswith(".py"):
-                    self.client.load_extension(f"{dir_name}.{file}".replace('.py', ''))
+                        self.client.unload_extension(f"{dir_name}.{file}".replace('.py', ''))
+                        self.client.load_extension(f"{dir_name}.{file}".replace('.py', ''))
 
         skipped = 0
         for dir_name in ["utils"]:
