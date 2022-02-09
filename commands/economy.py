@@ -123,6 +123,51 @@ class EconomyCommands(commands.Cog):
             return None
 
 
+    @cog_slash(name="economy_config", description="Configure Economy System", guild_ids=const.slash_guild_ids,
+    options=[
+        create_option(name="money_changes", description="Log money changes", option_type=5, required=True),
+        create_option(name="inventory_usage", description="Log inventory usage", option_type=5, required=True),
+        create_option(name="money_logs_channel", description="The channel where to send the 'money changes' logs", option_type=7, required=False),
+        create_option(name="inv_logs_channel", description="The channel where to send the 'inventory usage' logs", option_type=7, required=False)
+    ])
+    @commands.has_permissions(administrator=True)
+    @commands.guild_only()
+    async def economy_config(self, ctx:SlashContext, money_changes:bool=False, inventory_usage:bool=False, money_logs_channel:discord.TextChannel=None, inv_logs_channel:discord.TextChannel=None):
+        await ctx.defer(hidden=True)
+
+        em = discord.Embed(color=self.client.failure, title="Economy Config Finished", description="")
+        if money_changes:
+            if not money_logs_channel:
+                return await ctx.send("Param `money_logs_channel` must be specified if `money_changes` param is set to **`True`**", hidden=True)
+            elif not isinstance(money_logs_channel, discord.TextChannel):
+                return await ctx.send("Channel for `money_logs_channel` MUST be a TEXT CHANNEL", hidden=True)
+            
+            self.config["money_changes"] = money_changes
+            self.config["log_channel_id"] = money_logs_channel.id
+
+            em.description += f"**Money Changes Logs:**\n> Activated: `True`\n> Channel: <#{money_logs_channel.id}>\n\n"
+        else:
+            em.description += f"**Money Changes Logs:**\n> Activated `{self.config['money_changes']}` (unchanged)\n> Channel: <#{self.config['log_channel_id']}>\n\n"
+
+        if inventory_usage:
+            if not inv_logs_channel:
+                return await ctx.send("Param `inv_logs_channel` must be specified if `inventory_usage` param is set to **`True`**", hidden=True)
+            elif not isinstance(inv_logs_channel, discord.TextChannel):
+                return await ctx.send("Channel for `inv_logs_channel` MUST be a TEXT CHANNEL", hidden=True)
+            
+            self.config["inventory_usage"] = inventory_usage
+            self.config["inv_usage_channel_id"] = inv_logs_channel.id
+
+            em.description += f"**Inventory Usage Logs:**\n> Activated: `True`\n> Channel: <#{inv_logs_channel.id}>\n\n"
+        else:
+            em.description += f"**Inventory Usage Logs:**\n> Activated `{self.config['inventory_usage']}` (unchanged)\n> Channel: <#{self.config['inv_usage_channel_id']}>\n\n"
+
+        with open("data/economy/config.json", "w") as f:
+            json.dump(self.config, f, indent=2)
+
+        return await ctx.embed(embed=em, footer="Economy")
+        
+
     @cog_slash(name="balance", description="Check your or a member's bank and wallet balance", guild_ids=const.slash_guild_ids, options=[
         create_option(name="member", description="The server memebr to check the balance for", option_type=6, required=False)])
     @commands.guild_only()
@@ -871,7 +916,7 @@ class EconomyCommands(commands.Cog):
     ])
     @commands.guild_only()
     async def use(self, ctx:SlashContext, item_name:str=None):
-
+        await ctx.defer(hidden=True)
         found = False
         userdata = await self.check_user(ctx.author.id)
         for item in userdata["inventory"]:
@@ -879,9 +924,8 @@ class EconomyCommands(commands.Cog):
 
                 if item["min_balance"] is not None:
                     if userdata["wallet"] + userdata["bank"] < item["min_balance"]:
-                        await ctx.send(
-                            f"You need atleast **__{await self.client.round_int(item['min_balance'])}💵__** to use this item.")
-                        return
+                        return await ctx.send(
+                            f"You need atleast **__{await self.client.round_int(item['min_balance'])}💵__** to use this item.", hidden=True)
 
                 itemdata = self.client.economydata[str(ctx.author.id)]["inventory"].pop(userdata["inventory"].index(item))
                 found = True
@@ -899,7 +943,7 @@ class EconomyCommands(commands.Cog):
             await ctx.author.remove_roles(guildrole)
 
         if itemdata.get("reply_msg", None):
-            await ctx.send(itemdata["reply_msg"])
+            await ctx.send(itemdata["reply_msg"], hidden=True)
 
         if self.config["inventory_usage"]:
             channel = self.guild.get_channel(self.config["inv_usage_channel_id"])
@@ -911,69 +955,95 @@ class EconomyCommands(commands.Cog):
             await channel.send(embed=embed)
 
         return await ctx.send(f"Used {itemdata['name']} 🥳", hidden=True)
+
+
+    @cog_slash(name="give_item", description="Give an item from your inventory to a server member", guild_ids=const.slash_guild_ids, options=[
+        create_option(name="item_name", description="The name of the item", option_type=3, required=True),
+        create_option(name="member", description="The person who will be receiving the item", option_type=6, required=True)
+    ])
+    @commands.guild_only()
+    async def giveitem(self, ctx:SlashContext, item_name:str=None, member:discord.Member=None):
+        await ctx.defer(hidden=True)
         
-    # @commands.command()
-    # async def giveitem(self, ctx, member=None, *, itemname=None):
-    #     if isinstance(itemname, list):
-    #         itemname = " ".join(itemname)
+        await self.check_user(member.id if not isinstance(member, int) else member)
 
-    #     if itemname is None:
-    #         await ctx.send("You didn't specify a item.")
+        userdata = await self.check_user(ctx.author.id)
 
-    #     if member is None:
-    #         await ctx.send("You didn't specify a member.")
-    #         return
+        found = False
+        for item in userdata["inventory"]:
+            if item_name.lower() in item["name"].lower():
+                itemdata = self.client.economydata[str(ctx.author.id)]["inventory"].pop(userdata["inventory"].index(item))
+                self.client.economydata[str(member.id if not isinstance(member, int) else member)]["inventory"].append(itemdata)
+                found = True
+                break
 
-    #     try:
-    #         guild = ctx.guild
-    #         discordid = member.replace("<@!", "").replace(">", "").replace("<@", "")
-    #         discorduser = guild.get_member(int(discordid))
-    #     except ValueError:
-    #         await ctx.send("That is not a valid member.")
-    #         return
+        if found is False:
+            return await ctx.send("Was not able to find that item.", hidden=True)
 
-    #     if discorduser is None:
-    #         await ctx.send("That is not a valid member.")
-    #         return
+        embed = discord.Embed(description=f"**{ctx.author.mention} Gave {f'<@!{member.id}>' if not isinstance(member, int) else f'<@!{member}>'}:**",
+                              color=self.client.failure)
 
-    #     if self.client.user == discorduser:
-    #         await ctx.send("I'm not even a real person <:angrypepe:878257251020849212>")
-    #         return
+        embed.add_field(name=itemdata['name'],
+                        value=f"{itemdata['desc']}", inline=False)
 
-    #     memberdata = await self.check_user(discorduser.id)
+        await ctx.embed(embed=embed, footer="Economy")
 
-    #     userdata = await self.check_user(ctx.author.id)
+        if const.logging["inventory_usage"]:
+            channel = self.guild.get_channel(const.logchannelid)
+            embed = discord.Embed(title="User gave item",
+                                  description=f"Username: {ctx.author.mention}\nItem given: {itemdata['name']}\nReceiver: {f'<@!{member.id}>' if not isinstance(member, int) else f'<@!{member}>'}",
+                                  color=self.client.failure)
+            embed.set_footer(text="TN | Economy",
+                             icon_url=self.client.png)
+            await channel.send(embed=embed)
 
-    #     found = False
-    #     for item in userdata["inventory"]:
-    #         if itemname.lower() in item["name"].lower():
-    #             itemdata = self.client.economydata[str(ctx.author.id)]["inventory"].pop(userdata["inventory"].index(item))
-    #             self.client.economydata[str(discorduser.id)]["inventory"].append(itemdata)
-    #             found = True
-    #             break
+    @cog_slash(name="add_stock", description="Add stock to an item in store", guild_ids=const.slash_guild_ids, options=[
+        create_option(name="item_name", description="The item to increase the stock for", option_type=3, required=True),
+        create_option(name="stock_amount", description="The new stock of item available", option_type=4, required=True)
+    ])
+    @commands.guild_only()
+    @commands.has_permissions(administrator=True)
+    async def add_stock(self, ctx:SlashContext, item_name:str=None, stock_amount:int=None):
+        await ctx.defer(hidden=True)
 
-    #     if found is False:
-    #         await ctx.send("Was not able to find that item.")
-    #         return
+        found = False
+        for key in self.shopdata.keys():
+            if item_name.lower() in key.lower():
+                itemdata = self.shopdata[key].copy()
+                found = True
+                break
+        if found is False:
+            return await ctx.send("Was not able to find that item.", hidden=True)
 
-    #     embed = discord.Embed(description=f"**{ctx.author.mention} Gave {discorduser.mention}:**",
-    #                           color=0x8b46d3)
+        if itemdata.get('stock', None) is not None:
+            self.shopdata[itemdata['name']]['stock'] += stock_amount
+            em = discord.Embed(color=self.client.failure, title="Stock Updated", 
+            description=f"New stock for **{itemdata['name']}**: `{self.shopdata[itemdata['name']]['stock']}`")
+            return await ctx.embed(embed=em, footer="Economy")
+        
+        else:
+            em = discord.Embed(color=self.client.failure, title="Failed stock update",
+            description=f"There is an unlimited amount of this item in stock.\nThere is no need to increase stock")
+            return await ctx.embed(embed=em, footer="Economy")
 
-    #     embed.add_field(name=itemdata['name'],
-    #                     value=f"{itemdata['description']}", inline=False)
+    @cog_slash(name="delete_item", description="Delete an item from /shop", guild_ids=const.slash_guild_ids, options=[
+        create_option(name="item_name", description="The item to delete", option_type=3, required=True) | {"focused": True}
+    ])
+    @commands.has_permissions(administrator=True)
+    @commands.guild_only()
+    async def delete_item(self, ctx:SlashContext, item_name:str=None):
+        await ctx.defer(hidden=True)
 
-    #     embed.set_footer(text="TN | Economy",
-    #                      icon_url=str(self.client.user.avatar_url_as(static_format='png', size=2048)))
-    #     await ctx.send(embed=embed)
-
-    #     if const.logging["inventory_usage"]:
-    #         channel = self.guild.get_channel(const.logchannelid)
-    #         embed = discord.Embed(title="User give item",
-    #                               description=f"Username: {ctx.author.mention}\nItem given: {itemdata['name']}\nReceiver: {discorduser.mention}",
-    #                               color=0x8b46d3)
-    #         embed.set_footer(text="TN | Economy",
-    #                          icon_url=str(self.client.user.avatar_url_as(static_format='png', size=2048)))
-    #         await channel.send(embed=embed)
+        found = False
+        for key in self.shopdata.keys():
+            if item_name.lower() in key.lower():
+                result = self.shopdata.pop(key, False)
+                if result:
+                    em = discord.Embed(color=self.client.failure, title="Item deleted", description="This item will no longer appear in stores")
+                    return await ctx.embed(embed=em, footer="Economy")
+                
+        if found is False:
+            return await ctx.send("Was not able to find that item.", hidden=True)
 
     # @commands.command(aliases=["banklb", "bankleaderboard", "moneyleaderboard", "coinleaderboard", "coinlb", "moneylb", "economylb", "rich"])
     # async def baltop(self, ctx):
@@ -1078,8 +1148,6 @@ class EconomyCommands(commands.Cog):
     #                              icon_url=str(self.client.user.avatar_url_as(static_format='png', size=2048)))
     #             await msg.edit(embed=embed)
     #             break
-
-
 
     @on_ready_replacement.before_loop
     @update_loop.before_loop

@@ -1,4 +1,6 @@
 {
-    "log_channel_id": 939643261348348016,
-    "money_changes": true
+  "log_channel_id": 939643261348348016,
+  "money_changes": true,
+  "inventory_usage": true,
+  "inv_usage_channel_id": 940876218083967037
 }

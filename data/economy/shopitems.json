@@ -3,7 +3,7 @@
     "name": "Mooshi",
     "desc": "Get noticed by Mooshi",
     "price": 1000000,
-    "stock": 3,
+    "stock": 53,
     "category": "gems",
     "show_in_inv": false,
     "best_before": 86400,
@@ -16,7 +16,7 @@
     "name": "mooshis feet pics",
     "desc": "very epic",
     "price": 69,
-    "stock": 420,
+    "stock": 419,
     "category": "gems",
     "show_in_inv": true,
     "best_before": 600,
@@ -24,33 +24,5 @@
     "role_to_remove": null,
     "min_balance": 0,
     "reply_msg": "Jk, I was trolling!"
-  },
-  "test": {
-    "name": "test",
-    "desc": "test",
-    "price": 1,
-    "stock": 1,
-    "category": "perks",
-    "show_in_inv": true,
-    "best_before": null,
-    "role_to_receive": null,
-    "role_to_remove": null,
-    "min_balance": 0,
-    "reply_msg": null,
-    "role_req": null
-  },
-  "inv_item": {
-    "name": "inv_item",
-    "desc": "it will appear in your inventory",
-    "price": 50000,
-    "stock": null,
-    "category": "gems",
-    "show_in_inv": true,
-    "best_before": null,
-    "role_to_receive": null,
-    "role_to_remove": null,
-    "min_balance": 0,
-    "reply_msg": null,
-    "role_req": null
   }
 }
