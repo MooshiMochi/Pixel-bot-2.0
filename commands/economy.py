@@ -181,11 +181,11 @@ class EconomyCommands(commands.Cog):
 
         embed = discord.Embed(title=f"{member.name}'s Balance \💰", color=self.client.failure)
 
-        embed.add_field(name="<:wallet:892887812909727744> **Wallet:**",
+        embed.add_field(name="👛 **Wallet:**",
                         value=f"{await self.client.round_int(int(data['wallet']))}💎",
                         inline=True)
 
-        embed.add_field(name="🏧 **Bank:**",
+        embed.add_field(name="🏦 **Bank:**",
                         value=f"{await self.client.round_int(int(data['bank']))}💎",
                         inline=True)
 
