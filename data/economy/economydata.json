@@ -1,13 +1,59 @@
 {
   "383287544336613385": {
-    "wallet": 0,
-    "bank": 5364936,
-    "inventory": []
+    "wallet": 9876543192,
+    "bank": 5364909,
+    "inventory": [
+      {
+        "name": "yes",
+        "desc": "\u201d\u201d",
+        "price": 9,
+        "stock": null,
+        "category": "perks",
+        "show_in_inv": true,
+        "best_before": null,
+        "role_to_receive": null,
+        "role_to_remove": null,
+        "min_balance": 0,
+        "reply_msg": null,
+        "role_req": null,
+        "count": 1
+      },
+      {
+        "name": "yes",
+        "desc": "\u201d\u201d",
+        "price": 9,
+        "stock": null,
+        "category": "perks",
+        "show_in_inv": true,
+        "best_before": null,
+        "role_to_receive": null,
+        "role_to_remove": null,
+        "min_balance": 0,
+        "reply_msg": null,
+        "role_req": null
+      }
+    ]
   },
   "230118817412415489": {
     "wallet": 0,
     "bank": 0,
-    "inventory": []
+    "inventory": [
+      {
+        "name": "yes",
+        "desc": "\u201d\u201d",
+        "price": 9,
+        "stock": null,
+        "category": "perks",
+        "show_in_inv": true,
+        "best_before": null,
+        "role_to_receive": null,
+        "role_to_remove": null,
+        "min_balance": 0,
+        "reply_msg": null,
+        "role_req": null,
+        "count": 1
+      }
+    ]
   },
   "932386561117552680": {
     "wallet": 0,

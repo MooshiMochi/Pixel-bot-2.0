@@ -25,6 +25,8 @@ class LevelSystem(commands.Cog):
 
         self.anti_spam = {}
 
+        self.async_tasks = {}
+
     async def check_levelup(self, msg: discord.Message):
 
         await self.client.wait_until_ready()
@@ -407,7 +409,7 @@ class LevelSystem(commands.Cog):
         create_option(name="xp_per_message", description="The xp awarded per message during the event period", option_type=4, required=True), 
         create_option(name="duration", description="How long the event will last", option_type=3, required=True),
         create_option(name="optional_ping", description="A role to ping when event notifcation is sent (OPTIONAL)", option_type=8,
-        required=True)])
+        required=False)])
     @commands.has_permissions(manage_messages=True)
     @commands.guild_only()
     async def xp_event(self, ctx:SlashContext, xp_per_message:int=None, duration:str=None, optional_ping:discord.Role=None):
@@ -428,16 +430,16 @@ class LevelSystem(commands.Cog):
 
         if "event" not in self.client.lvlsys_config[str(ctx.guild_id)].keys():
             self.client.lvlsys_config[str(ctx.guild_id)]["event"] = {
-                "timestamp": datetime.utcnow().timestamp() + duration,
+                "timestamp": datetime.utcnow().timestamp() + duration + 5,
                 "xp_per_message": xp_per_message}
-            response = f"Event will begin shortly with {xp_per_message} xp per message and will end <t:{datetime.utcnow().timestamp() + duration}:R>"
+            response = f"Event will begin shortly with {xp_per_message} xp per message and will end <t:{int(datetime.utcnow().timestamp() + duration)}:R>"
 
         elif self.client.lvlsys_config[str(ctx.guild_id)]["event"]["timestamp"] and datetime.utcnow().timestamp() < self.client.lvlsys_config[str(ctx.guild_id)]["event"]["timestamp"]:
             await ctx.send(f"Sorry, an event was already in progress. Try again when the event ends: <t:{int(self.client.lvlsys_config[str(ctx.guild_id)]['event']['timestamp'])}:R>", hidden=True)
             return
 
         else:
-            self.client.lvlsys_config[str(ctx.guild_id)]["event"]["timestamp"] = datetime.utcnow().timestamp() + duration
+            self.client.lvlsys_config[str(ctx.guild_id)]["event"]["timestamp"] = datetime.utcnow().timestamp() + duration + 5
             self.client.lvlsys_config[str(ctx.guild_id)]["event"]["xp_per_message"] = xp_per_message
             response = f"Event is now will begin shortly with {xp_per_message} xp per message and will end <t:{int(datetime.utcnow().timestamp() + duration)}:R>"
 
@@ -452,9 +454,36 @@ class LevelSystem(commands.Cog):
         
         self.xp_per_msg[str(ctx.guild.id)] = self.client.lvlsys_config[str(ctx.guild.id)]["event"]["xp_per_message"]
 
-        await self.trigger_xp_event(ctx.guild_id, ctx.channel)
+        self.async_tasks[str(ctx.guild_id)] = (self.client.loop.create_task(self.trigger_xp_event(ctx.guild_id, ctx.channel)), ctx.channel)
+        # await self.trigger_xp_event(ctx.guild_id, ctx.channel)
 
         return
+
+    @cog_slash(name="cancel_xp_event", description="[STAFF] Cancel an ongoing xp event", guild_ids=const.slash_guild_ids)
+    @commands.has_permissions(manage_messages=True)
+    @commands.guild_only()
+    async def cancel_xp_event(self, ctx:SlashContext):
+        await ctx.defer(hidden=True)
+        task, channel = self.async_tasks.get(str(ctx.guild_id), None)
+        if not task:
+            return await ctx.send("There is no xp event in progress at the moment.", hidden=True)
+        
+        task.cancel()
+        self.async_tasks.pop(str(ctx.guild_id), None)
+        message = "⚠️ **XP event has been cancelled. Congratulations to those who participated!** ⚠️"
+        await channel.send(message)
+
+        self.client.lvlsys_config[str(ctx.guild_id)]["event"]["timestamp"] = None
+        self.client.lvlsys_config[str(ctx.guild_id)]["event"]["xp_per_message"] = 1
+        
+        self.xp_per_msg.pop(str(ctx.guild_id), None)
+
+
+        with open("data/level_system/config.json", "w") as f:
+                json.dump(self.client.lvlsys_config, f, indent=2)
+                
+        return await ctx.send("Event cancelled!", hidden=True)
+
 
     async def trigger_xp_event(self, request_guild_id:int=None, channel:discord.TextChannel=None):
         if "event" in self.client.lvlsys_config[str(request_guild_id)].keys():
@@ -472,6 +501,8 @@ class LevelSystem(commands.Cog):
             self.client.lvlsys_config[str(request_guild_id)]["event"]["xp_per_message"] = 1
             
             self.xp_per_msg.pop(str(request_guild_id), None)
+
+            self.async_tasks.pop(str(request_guild_id), None)
                     
             with open("data/level_system/config.json", "w") as f:
                 json.dump(self.client.lvlsys_config, f, indent=2)

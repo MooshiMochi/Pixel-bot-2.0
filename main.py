@@ -119,7 +119,8 @@ class MyClient(commands.Bot):
                 "disc": msg.author.discriminator,
                 "xp": 0,
                 "total_xp": 0,
-                "level": 0
+                "level": 0,
+                "url": msg.author.avatar_url_as(static_format="png", size=4096)
             }
             return True
 

@@ -59,12 +59,14 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
 
     @tasks.loop(minutes=1)
     async def save_reaction_data(self):
-        await self.client.wait_until_ready()
-
         with open("data/reactions_db.json", "w") as f:
             json.dump(self.data, f, indent=2)
 
+    @save_reaction_data.before_loop
+    async def before_save_reaction_data(self):
+        await self.client.wait_until_ready()
 
+        
     @cog_ext.cog_slash(name="rr_msg", guild_ids=const.slash_guild_ids, description="[STAFF] Create a new reaction roles message",
     options=[
         manage_commands.create_option(

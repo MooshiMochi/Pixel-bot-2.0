@@ -12,17 +12,18 @@
     "min_balance": 1000000,
     "reply_msg": "You will be noticed by Mooshi from now on. Rejoice!"
   },
-  "mooshis feet pics": {
-    "name": "mooshis feet pics",
-    "desc": "very epic",
-    "price": 69,
-    "stock": 419,
-    "category": "gems",
-    "show_in_inv": true,
-    "best_before": 600,
+  "yes": {
+    "name": "yes",
+    "desc": "\u201d\u201d",
+    "price": 9,
+    "stock": null,
+    "category": "perks",
+    "show_in_inv": false,
+    "best_before": null,
     "role_to_receive": null,
     "role_to_remove": null,
     "min_balance": 0,
-    "reply_msg": "Jk, I was trolling!"
+    "reply_msg": null,
+    "role_req": null
   }
 }

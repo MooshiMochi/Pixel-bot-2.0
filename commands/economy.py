@@ -106,7 +106,7 @@ class EconomyCommands(commands.Cog):
                 return
             e = self.client.economydata[str(id1)]
 
-            embed = discord.Embed(title="Gems change",
+            embed = discord.Embed(title="💸 change",
                                   description=f"Username: {member}\nAmount: {await self.client.round_int(amount)}\nBefore: {int(e['wallet'] + e['bank'] - amount)}\nNow: {int(e['wallet'] + e['bank'])}\nReason: {reason}",
                                   color=self.client.failure)
 
@@ -119,11 +119,11 @@ class EconomyCommands(commands.Cog):
             data[where] += amount
 
             if not all:
-                await self.log_money(user.mention, amount, f"{ctx.author.mention} used /add_gems")
+                await self.log_money(user.mention, amount, f"{ctx.author.mention} used /add_money")
             return None
 
 
-    @cog_slash(name="economy_config", description="Configure Economy System", guild_ids=const.slash_guild_ids,
+    @cog_slash(name="economy_config", description="[ADMIN] Configure Economy System", guild_ids=const.slash_guild_ids,
     options=[
         create_option(name="money_changes", description="Log money changes", option_type=5, required=True),
         create_option(name="inventory_usage", description="Log inventory usage", option_type=5, required=True),
@@ -182,11 +182,11 @@ class EconomyCommands(commands.Cog):
         embed = discord.Embed(title=f"{member.name}'s Balance \💰", color=self.client.failure)
 
         embed.add_field(name="👛 **Wallet:**",
-                        value=f"{await self.client.round_int(int(data['wallet']))}💎",
+                        value=f"{await self.client.round_int(int(data['wallet']))}💸",
                         inline=True)
 
         embed.add_field(name="🏦 **Bank:**",
-                        value=f"{await self.client.round_int(int(data['bank']))}💎",
+                        value=f"{await self.client.round_int(int(data['bank']))}💸",
                         inline=True)
 
         embed.set_footer(text="TN | Economy",
@@ -194,18 +194,18 @@ class EconomyCommands(commands.Cog):
         await ctx.send(embed=embed)
 
 
-    @cog_slash(name="add_gems", description="Add x amount of 💎 to a user", guild_ids=const.slash_guild_ids, options=[
-        create_option(name="amount", description="Amount of 💎 to add", option_type=4, required=True),
-        create_option(name="member", description="The member to add the 💎 to", option_type=6, required=False),
-        create_option(name="where", description="Where to add the 💎", option_type=3, required=False, choices=[
+    @cog_slash(name="add_money", description="[ADMIN] Add x amount of 💸 to a user", guild_ids=const.slash_guild_ids, options=[
+        create_option(name="amount", description="Amount of 💸 to add", option_type=4, required=True),
+        create_option(name="member", description="The member to add the 💸 to", option_type=6, required=False),
+        create_option(name="where", description="Where to add the 💸", option_type=3, required=False, choices=[
             create_choice(value="wallet", name="Wallet"),
             create_choice(value="bank", name="Bank")
         ]),
-        create_option(name="add_to_everyone", description="Whether to add x amount of 💎 to every member", option_type=5, required=False)
+        create_option(name="add_to_everyone", description="Whether to add x amount of 💸 to every member", option_type=5, required=False)
     ])
     @commands.has_permissions(administrator=True)
     @commands.guild_only()
-    async def add_gems(self, ctx, member:discord.Member=None, amount:int=None, where:str="wallet", add_to_everyone:bool=False):
+    async def add_money(self, ctx, member:discord.Member=None, amount:int=None, where:str="wallet", add_to_everyone:bool=False):
         await ctx.defer(hidden=True)
 
         if amount <= 0:
@@ -217,7 +217,7 @@ class EconomyCommands(commands.Cog):
                 if not mem.bot:
                     await self.check_user(mem.id)
                     await self.add_coins(ctx, user=mem, amount=amount, were=where, all=True)
-            await self.log_money("@everyone", amount, f"{ctx.author.mention} used /add_gems")
+            await self.log_money("@everyone", amount, f"{ctx.author.mention} used /add_money")
 
         else:
             if not member:
@@ -226,26 +226,26 @@ class EconomyCommands(commands.Cog):
             await self.check_user(member.id)
 
             await self.add_coins(ctx, user=member, amount=amount, where=where, all=False)
-            await self.log_money(member.mention, amount, f"{ctx.author.mention} used /add_gems")
+            await self.log_money(member.mention, amount, f"{ctx.author.mention} used /add_money")
             resp_content = member.mention
 
         embed = discord.Embed(
 
-            description=f"Added **__{await self.client.round_int(int(amount))} Titan Gems__** 💎 to {resp_content}'s {where} 🤑 ",
+            description=f"Added **__{await self.client.round_int(int(amount))}__** 💸 to {resp_content}'s {where} 🤑 ",
             color=self.client.failure)
         embed.set_footer(text="TN | Economy",
                          icon_url=self.client.png)
         return await ctx.send(embed=embed, hidden=True)
 
 
-    @cog_slash(name="remove_gems", description="Remove x amount of 💎 from a member", guild_ids=const.slash_guild_ids, options=[
-        create_option(name="amount", description="Amount of 💎 to remove", option_type=4, required=True) | {"focused": True},
-        create_option(name="member", description="The member to remove the 💎 from", option_type=6, required=False),
-        create_option(name="remove_from_everyone", description="Remove 💎 from everyone or not", option_type=5, required=False)
+    @cog_slash(name="remove_money", description="[ADMIN] Remove x amount of 💸 from a member", guild_ids=const.slash_guild_ids, options=[
+        create_option(name="amount", description="Amount of 💸 to remove", option_type=4, required=True) | {"focused": True},
+        create_option(name="member", description="The member to remove the 💸 from", option_type=6, required=False),
+        create_option(name="remove_from_everyone", description="Remove 💸 from everyone or not", option_type=5, required=False)
     ])
     @commands.has_permissions(administrator=True)
     @commands.guild_only()
-    async def remove_gems(self, ctx, amount:int=None, member:discord.Member=None, remove_from_everyone:bool=False):
+    async def remove_money(self, ctx, amount:int=None, member:discord.Member=None, remove_from_everyone:bool=False):
         await ctx.defer(hidden=True)
 
         if amount <= 0:
@@ -263,7 +263,7 @@ class EconomyCommands(commands.Cog):
                     else:
                         self.clint.economydata[str(mem.id)]["wallet"] -= amount
 
-            await self.log_money("@everyone", -amount, f"{ctx.author.mention} used /remove_gems")
+            await self.log_money("@everyone", -amount, f"{ctx.author.mention} used /remove_money")
             result = "@everyone"
 
         else:
@@ -274,7 +274,7 @@ class EconomyCommands(commands.Cog):
             if data["wallet"] - amount < 0:
                 if (data["wallet"] + data["bank"]) - amount < 0:
                     embed = discord.Embed(
-                        description=f"That person only has **__{await self.client.round_int(data['wallet'] + data['bank'])} Titan Gems.💎__**",
+                        description=f"That person only has **__{await self.client.round_int(data['wallet'] + data['bank'])} 💸__**",
                         color=self.client.failure)
                     embed.set_footer(text="TN | Economy",
                                     icon_url=str(self.client.user.avatar_url_as(static_format='png', size=2048)))
@@ -288,11 +288,11 @@ class EconomyCommands(commands.Cog):
             else:
                 self.client.economydata[str(member.id)]["wallet"] -= amount
 
-            await self.log_money(member.mention, -amount, f"{ctx.author.mention} used /remove_gems")
+            await self.log_money(member.mention, -amount, f"{ctx.author.mention} used /remove_money")
             result = member.mention
 
         embed = discord.Embed(
-            description=f"Removed **__{await self.client.round_int(amount)} Titan Gems__** 💎 from {result} 😭",
+            description=f"Removed **__{await self.client.round_int(amount)}__** 💸 from {result} 😭",
             color=self.client.failure)
         embed.set_footer(text="TN | Economy",
                          icon_url=str(self.client.user.avatar_url_as(static_format='png', size=2048)))
@@ -302,9 +302,9 @@ class EconomyCommands(commands.Cog):
 
    
 
-    @cog_slash(name="deposit", description="Deposit 💎 from your wallet into your bank", guild_ids=const.slash_guild_ids,
+    @cog_slash(name="deposit", description="Deposit 💸 from your wallet into your bank", guild_ids=const.slash_guild_ids,
     options=[
-        create_option(name="amount", description="The amount to deposit (ignore to deposit ALL 💎)", option_type=4, required=False)
+        create_option(name="amount", description="The amount to deposit (ignore to deposit ALL 💸)", option_type=4, required=False)
     ])
     async def deposit(self, ctx, amount:int=0):
         await ctx.defer(hidden=True)
@@ -333,7 +333,7 @@ class EconomyCommands(commands.Cog):
         
 
         em = discord.Embed(
-                description=f"Deposited **__{await self.client.round_int(int(dep_amount))} Titan Gems__** 💎",
+                description=f"Deposited **__{await self.client.round_int(int(dep_amount))}__** 💸",
                 color=self.client.failure)
         em.set_footer(text="TN | Economy",
                          icon_url=self.client.png)
@@ -341,9 +341,9 @@ class EconomyCommands(commands.Cog):
         return await ctx.send(embed=em, hidden=True)
 
 
-    @cog_slash(name="withdraw", description="Withdraw 💎 from your bank", guild_ids=const.slash_guild_ids,
+    @cog_slash(name="withdraw", description="Withdraw 💸 from your bank", guild_ids=const.slash_guild_ids,
     options=[
-        create_option(name="amount", description="The amount to withdraw (ignore to withdraw ALL 💎)", option_type=4, required=False)
+        create_option(name="amount", description="The amount to withdraw (ignore to withdraw ALL 💸)", option_type=4, required=False)
     ])
     async def withdraw(self, ctx, amount:int=0):
         await ctx.defer(hidden=True)
@@ -370,14 +370,14 @@ class EconomyCommands(commands.Cog):
         
 
         em = discord.Embed(
-                description=f"You withdrew **__{await self.client.round_int(int(with_amount))} gems__** 💎",
+                description=f"You withdrew **__{await self.client.round_int(int(with_amount))}__** 💸",
                 color=self.client.failure)
 
         return await ctx.embed(embed=em, footer="Economy")
 
-    @cog_slash(name="transfer", description="Give someone 💎 fromr your wallet", guild_ids=const.slash_guild_ids, options=[
-        create_option(name="member", description="The person who will be receiving the 💎", option_type=6, required=True) | {"focused": True},
-        create_option(name="amount", description="The amount of 💎 to give (ignore to transfer ALL (wallet) 💎)", option_type=4, required=False)
+    @cog_slash(name="transfer", description="Give someone 💸 fromr your wallet", guild_ids=const.slash_guild_ids, options=[
+        create_option(name="member", description="The person who will be receiving the 💸", option_type=6, required=True) | {"focused": True},
+        create_option(name="amount", description="The amount of 💸 to give (ignore to transfer ALL (wallet) 💸)", option_type=4, required=False)
     ])
     async def transfer(self, ctx:SlashContext, amount:int=0, member:discord.Member=None):
         await ctx.defer(hidden=True)
@@ -401,7 +401,7 @@ class EconomyCommands(commands.Cog):
         await self.log_money(member.mention, amount, f"Transfer from {ctx.author.mention}")
 
         embed = discord.Embed(
-            description=f"💎 | Gave **__{await self.client.round_int(int(amount))} Titan Gems__** to {member.mention} 👍",
+            description=f"💸 | Gave **__{await self.client.round_int(int(amount))}__** 💸 to {member.mention} 👍",
             color=self.client.failure)
         return await ctx.embed(embed=embed, footer="Economy")
 
@@ -426,7 +426,7 @@ class EconomyCommands(commands.Cog):
         ])
     @commands.has_permissions(manage_roles=True)
     @commands.guild_only()
-    async def create_item(self, ctx:SlashContext, item_name:str=None, item_description:str=None, price:int=100000, stock_amount:int=None, item_category:str=None, show_in_inv:bool=True, availability_duration:str=None, role_to_receive:discord.Role=None, role_to_remove:discord.Role=None, min_balance:int=0, message_when_purchased:str=None, role_required:discord.Role=None):
+    async def create_item(self, ctx:SlashContext, item_name:str=None, item_description:str=None, price:int=100000, stock_amount:int=None, item_category:str=None, show_in_inv:bool=False, availability_duration:str=None, role_to_receive:discord.Role=None, role_to_remove:discord.Role=None, min_balance:int=0, message_when_purchased:str=None, role_required:discord.Role=None):
         await ctx.defer(hidden=True)
         
         if availability_duration:
@@ -458,7 +458,7 @@ class EconomyCommands(commands.Cog):
         return await ctx.send("🎉 Item created successfully!", hidden=True)
 
     
-    @cog_slash(name="shop", description="View the store 💎", guild_ids=const.slash_guild_ids)
+    @cog_slash(name="shop", description="View the store 💸", guild_ids=const.slash_guild_ids)
     async def shop(self, ctx:SlashContext):
         await ctx.defer(hidden=False)
         
@@ -479,31 +479,31 @@ class EconomyCommands(commands.Cog):
         for price, data in shoplist:  # categories: gems, perks, roles
             if data["stock"] != 0:
                 if data["category"] == "gems" and tg_count <= 10:
-                    tg.add_field(name=f"💎 {await self.client.round_int(price)} - {data['name']}",
+                    tg.add_field(name=f"💸 {await self.client.round_int(price)} - {data['name']}",
                     value=f"{data['desc']}\n\u200b", inline=False)
                     tg_count += 1
 
                 elif data["category"] == "perks" and cp_count <= 10:
-                    cp.add_field(name=f"💎 {await self.client.round_int(price)} - {data['name']}", 
+                    cp.add_field(name=f"💸 {await self.client.round_int(price)} - {data['name']}", 
                     value=f"{data['desc']}", inline=False)
                     cp_count += 1
                 elif data["category"] == "roles" and cr_count <= 10:
-                    cr.add_field(name=f"💎 {await self.client.round_int(price)} - {data['name']}",
+                    cr.add_field(name=f"💸 {await self.client.round_int(price)} - {data['name']}",
                     value=f"{data['desc']}\n\u200b", inline=False)
                     cr_count += 1
             else:
                 if data["category"] == "gems" and tg_count <= 10:
-                    tg.add_field(name=f"💎 ~~{await self.client.round_int(price)} - {data['name']}~~ | `out of stock`",
+                    tg.add_field(name=f"💸 ~~{await self.client.round_int(price)} - {data['name']}~~ | `out of stock`",
                     value=f"{data['desc']}\n\u200b", inline=False)
                     tg_count += 1
 
                 elif data["category"] == "perks" and cp_count <= 10:
-                    cp.add_field(name=f"💎 ~~{await self.client.round_int(price)} - {data['name']}~~ | `out of stock`", 
+                    cp.add_field(name=f"💸 ~~{await self.client.round_int(price)} - {data['name']}~~ | `out of stock`", 
                     value=f"{data['desc']}\n\u200b", inline=False)
                     cp_count += 1
 
                 elif data["category"] == "roles" and cr_count <= 10:
-                    cr.add_field(name=f"💎 ~~{await self.client.round_int(price)} - {data['name']}~~ | `out of stock`",
+                    cr.add_field(name=f"💸 ~~{await self.client.round_int(price)} - {data['name']}~~ | `out of stock`",
                     value=f"{data['desc']}\n\u200b", inline=False)
                     cr_count += 1
 
@@ -763,7 +763,7 @@ class EconomyCommands(commands.Cog):
             if itemdata.get("min_balance", 0):
                 if userdata["wallet"] + userdata["bank"] < itemdata["min_balance"]:
                     return await ctx.send(
-                        f"You need at least **__{await self.client.round_int(itemdata['min_balance'])} 💵__**")
+                        f"You need at least **__{await self.client.round_int(itemdata['min_balance'])} 💸__**")
 
             if itemdata["price"] > 0:
                 price = int(itemdata["price"])
@@ -800,6 +800,8 @@ class EconomyCommands(commands.Cog):
 
             if itemdata.get("reply_msg", None):
                 await ctx.send(itemdata["reply_msg"], hidden=True)
+            else:
+                return await ctx.send(f"You purchased **{itemdata['name']}** for {await self.client.round_int(itemdata['price'])} 💸", hidden=True)
 
         if itemdata.get("show_in_inv", False):
             if itemdata["price"] > 0:
@@ -839,7 +841,7 @@ class EconomyCommands(commands.Cog):
                 await channel.send(embed=embed)
             return
 
-    @cog_slash(name="delete_item", description="Delete an item from /shop", guild_ids=const.slash_guild_ids, options=[
+    @cog_slash(name="delete_item", description="[ADMIN] Delete an item from /shop", guild_ids=const.slash_guild_ids, options=[
         create_option(name="item_name", description="The name of the item to delete", option_type=3, required=True) | {"focused": True}
     ])
     @commands.guild_only()
@@ -904,7 +906,7 @@ class EconomyCommands(commands.Cog):
 
         for itemdata in gotenbefore:
             embed.add_field(
-                name=f"{itemdata['count']}x 💵 {await self.client.round_int(itemdata['price'])} - {itemdata['name']}",
+                name=f"{itemdata['count']}x 💸 {await self.client.round_int(itemdata['price'])} - {itemdata['name']}",
                 value=f"{itemdata['desc']}", inline=False)
             count += 1
 
@@ -925,7 +927,7 @@ class EconomyCommands(commands.Cog):
                 if item["min_balance"] is not None:
                     if userdata["wallet"] + userdata["bank"] < item["min_balance"]:
                         return await ctx.send(
-                            f"You need atleast **__{await self.client.round_int(item['min_balance'])}💵__** to use this item.", hidden=True)
+                            f"You need atleast **__{await self.client.round_int(item['min_balance'])}💸__** to use this item.", hidden=True)
 
                 itemdata = self.client.economydata[str(ctx.author.id)]["inventory"].pop(userdata["inventory"].index(item))
                 found = True
@@ -988,8 +990,8 @@ class EconomyCommands(commands.Cog):
 
         await ctx.embed(embed=embed, footer="Economy")
 
-        if const.logging["inventory_usage"]:
-            channel = self.guild.get_channel(const.logchannelid)
+        if self.config["inventory_usage"]:
+            channel = self.guild.get_channel(self.config["inv_usage_channel_id"])
             embed = discord.Embed(title="User gave item",
                                   description=f"Username: {ctx.author.mention}\nItem given: {itemdata['name']}\nReceiver: {f'<@!{member.id}>' if not isinstance(member, int) else f'<@!{member}>'}",
                                   color=self.client.failure)
@@ -997,7 +999,7 @@ class EconomyCommands(commands.Cog):
                              icon_url=self.client.png)
             await channel.send(embed=embed)
 
-    @cog_slash(name="add_stock", description="Add stock to an item in store", guild_ids=const.slash_guild_ids, options=[
+    @cog_slash(name="add_stock", description="[ADMIN] Add stock to an item in store", guild_ids=const.slash_guild_ids, options=[
         create_option(name="item_name", description="The item to increase the stock for", option_type=3, required=True),
         create_option(name="stock_amount", description="The new stock of item available", option_type=4, required=True)
     ])
@@ -1026,7 +1028,7 @@ class EconomyCommands(commands.Cog):
             description=f"There is an unlimited amount of this item in stock.\nThere is no need to increase stock")
             return await ctx.embed(embed=em, footer="Economy")
 
-    @cog_slash(name="delete_item", description="Delete an item from /shop", guild_ids=const.slash_guild_ids, options=[
+    @cog_slash(name="delete_item", description="[ADMIN] Delete an item from /shop", guild_ids=const.slash_guild_ids, options=[
         create_option(name="item_name", description="The item to delete", option_type=3, required=True) | {"focused": True}
     ])
     @commands.has_permissions(administrator=True)
