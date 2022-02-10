@@ -97,7 +97,7 @@ class Riddles(commands.Cog):
 
         self.random_win = randint(500, 2500)
 
-        em = discord.Embed(color=self.client.failure, title="New chat riddle", description=msg+f"\n\n*Answer the riddle correctly for {self.random_win} <:money:903467440829259796>!*")
+        em = discord.Embed(color=self.client.failure, title="New chat riddle", description=msg+f"\n\n*Answer the riddle correctly for {self.random_win} 💸!*")
         em.set_footer(text="TN | Riddles", icon_url=self.client.png)
 
         self.is_riddle_guessed = False
@@ -130,10 +130,10 @@ class Riddles(commands.Cog):
                 else:
                     self.client.lbs["riddles"][str(msg.author.id)] += 1
 
-                await self.client.addcoins(msg.author.id, self.random_win)
+                await self.client.addcoins(msg.author.id, self.random_win, reason="Guessed riddle correctly!")
 
                 em = discord.Embed(
-                    description=f"Congratulations {msg.author.mention}!         You guessed the riddle! You got `{self.random_win}` cash",
+                    description=f"Congratulations {msg.author.mention}!         You guessed the riddle! You got `{self.random_win}` 💸",
                     color=self.client.failure)
                 em.set_footer(text="TN | Riddles",
                               icon_url=str(self.client.user.avatar_url_as(static_format="png", size=2048)))
@@ -173,10 +173,19 @@ class Riddles(commands.Cog):
                 text += f"> Channel: Already set to <#{self.config['channel_id']}>\n"
         
         else:
+            if not self.config['channel_id'] and self.config['active']:
+                return await ctx.send("'Riddles channel' parameter MUST be specified if 'active' parameter is set to TRUE", hidden=True)
             text += f"> Channel: <#{self.config['channel_id']}> (unchanged)"
 
         with open("data/games/riddles_config.json", "w") as f:
             json.dump(self.config, f, indent=2)
+
+        if self.config['active']:
+            self.run_riddles.start()
+        
+        else:
+            if self.run_riddles.is_running():
+                self.run_riddles.cancel()
 
         return await ctx.send(text, hidden=True)
 

@@ -152,74 +152,74 @@ class LeaderboardCommands(commands.Cog):
             if x == 0:
                 if ranked[x] == MyID:
                     em.description += f"🏆 - **`(Me)` {name}** - ({brckt})"
-                    em.description += " - <:money:903467440829259796> 500k\n" if game_type in check_tup else "\n"
+                    em.description += " - 💸 500k\n" if game_type in check_tup else "\n"
                 else:
                     em.description += f"🏆 - **{name}** - ({brckt})"
-                    em.description += " - <:money:903467440829259796> 500k\n" if game_type in check_tup else "\n"
+                    em.description += " - 💸 500k\n" if game_type in check_tup else "\n"
             elif x == 1:
                 if ranked[x] == MyID:
                     em.description += f"🥈 - **`(Me)` {name}** - ({brckt})"
-                    em.description += f" - <:money:903467440829259796> 400k\n" if game_type in check_tup else "\n"
+                    em.description += f" - 💸 400k\n" if game_type in check_tup else "\n"
                 else:
                     em.description += f"🥈 - **{name}** - ({brckt})"
-                    em.description += f" - <:money:903467440829259796> 400k\n" if game_type in check_tup else "\n"
+                    em.description += f" - 💸 400k\n" if game_type in check_tup else "\n"
             elif x == 2:
                 if ranked[x] == MyID:
                     em.description += f"🥉 - **`(Me)` {name}** - ({brckt})" 
-                    em.description += " - <:money:903467440829259796> 300k\n" if game_type in check_tup else "\n"
+                    em.description += " - 💸 300k\n" if game_type in check_tup else "\n"
                 else:
                     em.description += f"🥉 - **{name}** - ({brckt})"
-                    em.description += " - <:money:903467440829259796> 300k\n" if game_type in check_tup else "\n"
+                    em.description += " - 💸 300k\n" if game_type in check_tup else "\n"
 
             elif x == 3:
                 if ranked[x] == MyID:
                     em.description += f"**{x+1}.** - **`(Me)` {name}** - ({brckt})"
-                    em.description += " - <:money:903467440829259796> 200k\n" if game_type in check_tup else "\n"
+                    em.description += " - 💸 200k\n" if game_type in check_tup else "\n"
                 else:
                     em.description += f"**{x+1}.** - **{name}** - ({brckt})"
-                    em.description += " - <:money:903467440829259796> 200k\n" if game_type in check_tup else "\n"
+                    em.description += " - 💸 200k\n" if game_type in check_tup else "\n"
             elif x == 4:
                 if ranked[x] == MyID:
                     em.description += f"**{x+1}.** - **`(Me)` {name}** - ({brckt})"
-                    em.description += " - <:money:903467440829259796> 100k\n" if game_type in check_tup else "\n"
+                    em.description += " - 💸 100k\n" if game_type in check_tup else "\n"
                 else:
                     em.description += f"**{x+1}.** - **{name}** - ({brckt})"
-                    em.description += " - <:money:903467440829259796> 100k\n" if game_type in check_tup else "\n"
+                    em.description += " - 💸 100k\n" if game_type in check_tup else "\n"
             elif x == 5:
                 if ranked[x] == MyID:
                     em.description += f"**{x+1}.** - **`(Me)` {name}** - ({brckt})"
-                    em.description += " - <:money:903467440829259796> 80k\n" if game_type in check_tup else "\n"
+                    em.description += " - 💸 80k\n" if game_type in check_tup else "\n"
                 else:
                     em.description += f"**{x+1}.** - **{name}** - ({brckt})"
-                    em.description += " - <:money:903467440829259796> 80k\n" if game_type in check_tup else "\n"
+                    em.description += " - 💸 80k\n" if game_type in check_tup else "\n"
             elif x == 6:
                 if ranked[x] == MyID:
                     em.description += f"**{x+1}.** - **`(Me)` {name}** - ({brckt})"
-                    em.description += " - <:money:903467440829259796> 60k\n" if game_type in check_tup else "\n"
+                    em.description += " - 💸 60k\n" if game_type in check_tup else "\n"
                 else:
                     em.description += f"**{x+1}.** - **{name}** - ({brckt})"
-                    em.description += " - <:money:903467440829259796> 60k\n" if game_type in check_tup else "\n"
+                    em.description += " - 💸 60k\n" if game_type in check_tup else "\n"
             elif x == 7:
                 if ranked[x] == MyID:
                     em.description += f"**{x+1}.** - **`(Me)` {name}** - ({brckt})"
-                    em.description += " - <:money:903467440829259796> 40k\n" if game_type in check_tup else "\n"
+                    em.description += " - 💸 40k\n" if game_type in check_tup else "\n"
                 else:
                     em.description += f"**{x+1}.** - **{name}** - ({brckt})"
-                    em.description += " - <:money:903467440829259796> 40k\n" if game_type in check_tup else "\n"
+                    em.description += " - 💸 40k\n" if game_type in check_tup else "\n"
             elif x == 8:
                 if ranked[x] == MyID:
                     em.description += f"**{x+1}.** - **`(Me)` {name}** - ({brckt})"
-                    em.description += " - <:money:903467440829259796> 20k\n" if game_type in check_tup else "\n"
+                    em.description += " - 💸 20k\n" if game_type in check_tup else "\n"
                 else:
                     em.description += f"**{x+1}.** - **{name}** - ({brckt})"
-                    em.description += " - <:money:903467440829259796> 20k\n" if game_type in check_tup else "\n"
+                    em.description += " - 💸 20k\n" if game_type in check_tup else "\n"
             elif x == 9:
                 if ranked[x] == MyID:
                     em.description += f"**{x+1}.** - **`(Me)` {name}** - ({brckt})"
-                    em.description += " - <:money:903467440829259796> 10k\n" if game_type in check_tup else "\n"
+                    em.description += " - 💸 10k\n" if game_type in check_tup else "\n"
                 else:
                     em.description += f"**{x+1}.** - **{name}** - ({brckt})"
-                    em.description += " - <:money:903467440829259796> 10k\n" if game_type in check_tup else "\n"
+                    em.description += " - 💸 10k\n" if game_type in check_tup else "\n"
             else:
                 if ranked[x] == MyID:
                     em.description += f"**{x+1}. - `(Me)` {name}** - ({brckt})\n"

@@ -171,9 +171,9 @@ class McMadness(commands.Cog):
         action_row = [manage_components.create_actionrow(*no_more_joins)]
         
         if self.give_10k_to_winner:
-            self.game_cache["embed"].description += "\n\nThe prize for the winner will be <:money:903467440829259796> **10,000**"
+            self.game_cache["embed"].description += "\n\nThe prize for the winner will be 💸 **10,000**"
         elif self.is_tournament:
-            self.game_cache["embed"].description += f"\n\nThe prize for the winner will be <:money:903467440829259796> **{len(self.participants.keys())*10000:,}**"
+            self.game_cache["embed"].description += f"\n\nThe prize for the winner will be 💸 **{len(self.participants.keys())*10000:,}**"
 
         await msg.edit(embed=self.game_cache["embed"], components=action_row)
 
@@ -266,16 +266,16 @@ class McMadness(commands.Cog):
                 text = f"<@!{winner_id}>, You are the last player standing with **{winner_points}** points!"
                 if self.is_tournament:
                     await self.update_tournament_lb(winner_id) 
-                    text += f"\n\nAs the sole survivor, you will receive <:money:903467440829259796> **{self.prize_pool:,}**!"
+                    text += f"\n\nAs the sole survivor, you will receive 💸 **{self.prize_pool:,}**!"
                     if self.unbelievaboat_api_enabled:
-                        await self.client.addcoins(winner_id, self.prize_pool)
+                        await self.client.addcoins(winner_id, self.prize_pool, "Sole surviver of Minecraft Madness Tournament")
                 else:
                     await self.update_casual_lb(winner_id) 
                     if self.give_10k_to_winner:
-                        text += f"\n\nAs the sole survivor, you will receive <:money:903467440829259796> **10,000**!"
+                        text += f"\n\nAs the sole survivor, you will receive 💸 **10,000**!"
 
                         if self.unbelievaboat_api_enabled:
-                            await self.client.addcoins(winner_id, 10000)
+                            await self.client.addcoins(winner_id, 10000, "Won in a Minecraft Madness game with 5+ participants")
                     
                 win_em = discord.Embed(title="Game Over!", description=text, color=self.client.failure)
                 win_em.set_thumbnail(url=self.client.user.avatar_url_as(static_format="png", size=2048))
@@ -291,16 +291,16 @@ class McMadness(commands.Cog):
                 text = f"<@!{winner_id}>, You are the last player standing with **{winner_points}** points!"
                 if self.is_tournament:
                     await self.update_tournament_lb(winner_id) 
-                    text += f"\n\nAs the sole survivor, you will receive <:money:903467440829259796> **{self.prize_pool:,}**!"
+                    text += f"\n\nAs the sole survivor, you will receive 💸 **{self.prize_pool:,}**!"
                     if self.unbelievaboat_api_enabled:
-                        await self.client.addcoins(winner_id, self.prize_pool)
+                        await self.client.addcoins(winner_id, self.prize_pool, "Sole surviver of Minecraft Madness Tournament")
                 else:
                     await self.update_casual_lb(winner_id) 
                     if self.give_10k_to_winner:
-                        text += f"\n\nAs the sole survivor, you will receive <:money:903467440829259796> **10,000**!"
+                        text += f"\n\nAs the sole survivor, you will receive 💸 **10,000**!"
 
                         if self.unbelievaboat_api_enabled:
-                            await self.client.addcoins(winner_id, 10000)
+                            await self.client.addcoins(winner_id, 10000, "Won in a Minecraft Madness game with 5+ participants")
                     
                 win_em = discord.Embed(title="Game Over!", description=text, color=self.client.failure)
                 win_em.set_thumbnail(url=self.client.user.avatar_url_as(static_format="png", size=2048))

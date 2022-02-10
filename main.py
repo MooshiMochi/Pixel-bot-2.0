@@ -135,12 +135,12 @@ class MyClient(commands.Bot):
 
     async def addcoins(self, userid:int, amount:int, reason:str=None):
         
-        e = self.__check_user(userid)
+        e = await self.__check_user(userid)
         
         e['bank'] += amount
 
         if self.eco_config.get("income_logs", False):
-            channel_id = self.eco_config.get("incole_logs_channel_id", 0)
+            channel_id = self.eco_config.get("income_logs_channel_id", 0)
             if channel_id:
                 guild = self.get_guild(const.guild_id)
                 ch = guild.get_channel(channel_id)
