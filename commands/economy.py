@@ -252,7 +252,7 @@ class EconomyCommands(commands.Cog):
     @cog_slash(name="balance", description="Check your or a member's bank and wallet balance", guild_ids=const.slash_guild_ids, options=[
         create_option(name="member", description="The server memebr to check the balance for", option_type=6, required=False)])
     @commands.guild_only()
-    async def balance(self, ctx, member:discord.Member=None):
+    async def balance(self, ctx:SlashContext, member:discord.Member=None):
         await ctx.defer(hidden=True)
 
         if member is None:
@@ -272,7 +272,7 @@ class EconomyCommands(commands.Cog):
 
         embed.set_footer(text="TN | Economy",
                          icon_url=self.client.png)
-        await ctx.send(embed=embed)
+        await ctx.send(embed=embed, hidden=True)
 
 
     @cog_slash(name="add_money", description="[ADMIN] Add x amount of 💸 to a user", guild_ids=const.slash_guild_ids, options=[
@@ -677,9 +677,9 @@ class EconomyCommands(commands.Cog):
         if not shoplist:
             em = discord.Embed(title=f"Titan Network Store", description=main_desc + "\n\n`Store Empty`", color=self.client.failure)
             em.set_footer(text="TN | Economy", icon_url=self.client.png)
-            return await ctx.send(embed=em)
+            return await ctx.send(embed=em, hidden=False)
 
-        msg = await ctx.send(embed=em_li_in_use[0], components=[ar_in_use])
+        msg = await ctx.send(embed=em_li_in_use[0], components=[ar_in_use], hidden=False)
 
         while 1:
 
@@ -843,7 +843,7 @@ class EconomyCommands(commands.Cog):
             if itemdata.get("min_balance", 0):
                 if userdata["wallet"] + userdata["bank"] < itemdata["min_balance"]:
                     return await ctx.send(
-                        f"You need at least **__{await self.client.round_int(itemdata['min_balance'])} 💸__**")
+                        f"You need at least **__{await self.client.round_int(itemdata['min_balance'])} 💸__**", hidden=True)
 
             if itemdata["price"] > 0:
                 price = int(itemdata["price"])
