@@ -1,6 +1,9 @@
 {
-  "log_channel_id": 939643261348348016,
-  "money_changes": true,
-  "inventory_usage": true,
-  "inv_usage_channel_id": 940876218083967037
+  "inv_usage_channel_id": 940876218083967037,
+  "cash_logs": true,
+  "cash_logs_channel_id": 939643261348348016,
+  "income_logs": true,
+  "income_logs_channel_id": 940876218083967037,
+  "pay_logs": true,
+  "pay_logs_channel_id": 941104610674880553
 }

@@ -17,6 +17,8 @@ from asyncio import TimeoutError
 
 from constants import const
 
+from utils.paginator import Paginator
+
 
 class EconomyCommands(commands.Cog):
 
@@ -27,21 +29,14 @@ class EconomyCommands(commands.Cog):
         self.guild = const.guild_id
 
         with open("data/economy/config.json", "r") as f:
-            self.config = json.load(f)
+            self.client.eco_config = json.load(f)
 
-            if "money_changes" not in self.config.keys():
-                self.config["money_changes"] = False
-
-            if "log_channel_id" not in self.config.keys():
-                self.config["log_channel_id"] = None
-
-            if "inventory_usage" not in self.config.keys():
-                self.config["inventory_usage"] = False
-
-            if "inv_usage_channel_id" not in self.config.keys():
-                self.config["inv_usage_channel_id"] = None
+        with open("data/economy/user_logs.json", "r") as f:
+            self.eco_user_logs = json.load(f)
         
-        self.log_channel = self.config.get("log_channel_id", 0)
+        self.cash_logs_channel = self.client.eco_config.get("cash_logs_channel_id", 0)
+        self.income_logs_channel = self.client.eco_config.get("income_logs_channel_id", 0)
+        self.pay_logs_channel = self.client.eco_config.get("pay_logs_channel_id", 0)
 
         with open("data/economy/shopitems.json", "r") as f:
             self.shopdata = json.load(f)
@@ -56,7 +51,9 @@ class EconomyCommands(commands.Cog):
     async def on_ready_replacement(self):
         
         self.guild = self.client.get_guild(self.guild)
-        self.log_channel = self.guild.get_channel(self.log_channel)
+        self.cash_logs_channel = self.guild.get_channel(self.cash_logs_channel)
+        self.income_logs_channel = self.guild.get_channel(self.income_logs_channel)
+        self.pay_logs_channel = self.guild.get_channel(self.pay_logs_channel)
         self.update_loop.start()
         self.isready = True
 
@@ -85,7 +82,6 @@ class EconomyCommands(commands.Cog):
                 "bank": 0,
                 "inventory": [],
             }
-        
         try:
             return self.client.economydata[str(authorid)]
         except KeyError:
@@ -96,9 +92,13 @@ class EconomyCommands(commands.Cog):
             }
             return self.client.economydata[str(authorid)]
 
-    async def log_money(self, member, amount: int, reason: str):
-        if self.config["money_changes"]:
-            channel = self.log_channel
+    async def economy_log(self, _type, member, amount: int, reason: str):
+        if self.client.eco_config[_type]:
+            channel = self.cash_logs_channel
+
+            if _type == "pay_logs":
+                channel = self.pay_logs_channel
+            
             id1 = str(member).replace("<@", "").replace("!", "").replace(">", "")
             try:
                 await self.check_user(id1)
@@ -106,64 +106,145 @@ class EconomyCommands(commands.Cog):
                 return
             e = self.client.economydata[str(id1)]
 
-            embed = discord.Embed(title="💸 change",
+            embed = discord.Embed(title="💸 Change",
                                   description=f"Username: {member}\nAmount: {await self.client.round_int(amount)}\nBefore: {int(e['wallet'] + e['bank'] - amount)}\nNow: {int(e['wallet'] + e['bank'])}\nReason: {reason}",
                                   color=self.client.failure)
 
             embed.set_footer(text="TN | Economy", icon_url=self.client.png)
             await channel.send(embed=embed)
 
+        log_to_add = {"money_before": e['wallet'] + e['bank'] - amount,
+                    "money_after": e['wallet'] + e['bank'],
+                    "reason": reason}
+
+        if not self.eco_user_logs.get(str(id1), False):
+            self.eco_user_logs[str(id1)] = {
+                "pay_logs": [],
+                "income_logs": [],
+                "cash_logs": []
+                }
+            self.eco_user_logs[str(id1)][_type] = [log_to_add]
+        else:
+            self.eco_user_logs[str(id1)][_type].append(log_to_add)
+
     async def add_coins(self, ctx, user:discord.Member, amount:int, where:str="wallet", all:bool=False):
-            data = await self.check_user(user.id)
+        data = await self.check_user(user.id)
 
-            data[where] += amount
+        data[where] += amount
 
-            if not all:
-                await self.log_money(user.mention, amount, f"{ctx.author.mention} used /add_money")
-            return None
+        if not all:
+            await self.economy_log("pay_logs", user.mention, amount, f"{ctx.author.mention} used /add_money")
+        return None
+
+    @cog_slash(name="economy_logs", description="[STAFF] Check the economy logs of a user", guild_ids=const.slash_guild_ids,
+    options=[
+        create_option(name="log_type", description="Type of logs to check", choices=[
+            create_choice(value="cash_logs", name="Logs of money used"),
+            create_choice(value="pay_logs", name="Logs when staff used /add_money or /remove_money on user"),
+            create_choice(value="income_logs", name="Logs when winning money from games")
+        ], option_type=3, required=True),
+        create_option(name="member", description="The person's logs to check", option_type=6, required=True)
+    ])
+    @commands.has_permissions(administrator=True)
+    @commands.guild_only()
+    async def economy_logs(self, ctx:SlashContext, log_type:str="cash_logs", member:discord.Member=None):
+        await ctx.defer(hidden=True)
+
+        member_id = member.id if not isinstance(member, int) else member.id
+
+        all_logs = self.eco_user_logs.get(str(member_id))
+
+        if not all_logs:
+            return await ctx.send(f"<@!{member_id}> has no economy logs.", hidden=True)
+        
+        my_log_type = log_type.replace("cash_logs", "logs of money used").replace("pay_logs", "logs when staff used /add_money or /remove_money on user").replace("income_logs", "logs when winning money from games")
+        logs = all_logs.get(log_type, False)
+        if not logs:
+            return await ctx.send(f"<@!{member_id}> has no {my_log_type}.", hidden=True)
+        
+        else:
+            em = discord.Embed(title=f"{log_type.replace('_', ' ').title()}: {member}", description="", color=self.client.failure)
+            em.set_footer(text="TN | Economy", icon_url=self.client.png)
+            
+            embeds = []
+        
+            for index, dic in enumerate(logs):
+                if (index + 1) % 10 == 0 or (index+1) == len(logs): 
+                    em.description += f"**Log #{index+1}:**\n\n> Money Before: `{dic['money_before']}`\n> Money After:`{dic['money_after']}`\n> Reason: `{dic['reason']}`"
+                
+                    embeds.append(em)
+
+                    em = discord.Embed(title=f"{log_type.replace('_', ' ').title()}: {member}", description="", color=self.client.failure)
+                    em.set_footer(text="TN | Economy", icon_url=self.client.png)
+
+                else:
+                    em.description += f"**Log #{index+1}:**\n\n> Money Before: `{dic['money_before']}`\n> Money After:`{dic['money_after']}`\n> Reason: `{dic['reason']}`"
+
+            if len(embeds) == 1:
+                return await ctx.send(embed=embeds[0], hidden=True)
+            else:
+                await Paginator(embeds, ctx).run()
 
 
     @cog_slash(name="economy_config", description="[ADMIN] Configure Economy System", guild_ids=const.slash_guild_ids,
     options=[
-        create_option(name="money_changes", description="Log money changes", option_type=5, required=True),
-        create_option(name="inventory_usage", description="Log inventory usage", option_type=5, required=True),
-        create_option(name="money_logs_channel", description="The channel where to send the 'money changes' logs", option_type=7, required=False),
-        create_option(name="inv_logs_channel", description="The channel where to send the 'inventory usage' logs", option_type=7, required=False)
+        create_option(name="cash_logs", description="Log users using their money", option_type=5, required=True),
+        create_option(name="income_logs", description="Log users getting money from games, etc", option_type=5, required=True),
+        create_option(name="pay_logs", description="Log staff using /add_money and /remove_money", option_type=5, required=True),
+        create_option(name="cash_logs_channel", description="The channel to send the 'cash logs' in", option_type=7, required=False),
+        create_option(name="income_logs_channel", description="The channel to send the 'income logs' in", option_type=7, required=False),
+        create_option(name="pay_logs_channel", description="The channel to send the 'pay logs' in", option_type=7, required=False)
     ])
     @commands.has_permissions(administrator=True)
     @commands.guild_only()
-    async def economy_config(self, ctx:SlashContext, money_changes:bool=False, inventory_usage:bool=False, money_logs_channel:discord.TextChannel=None, inv_logs_channel:discord.TextChannel=None):
+    async def economy_config(self, ctx:SlashContext, cash_logs:bool=False, income_logs:bool=False, pay_logs:bool=False, cash_logs_channel:discord.TextChannel=None, income_logs_channel:discord.TextChannel=None, pay_logs_channel:discord.TextChannel=None):
         await ctx.defer(hidden=True)
 
         em = discord.Embed(color=self.client.failure, title="Economy Config Finished", description="")
-        if money_changes:
-            if not money_logs_channel:
-                return await ctx.send("Param `money_logs_channel` must be specified if `money_changes` param is set to **`True`**", hidden=True)
-            elif not isinstance(money_logs_channel, discord.TextChannel):
-                return await ctx.send("Channel for `money_logs_channel` MUST be a TEXT CHANNEL", hidden=True)
+        if cash_logs:
+            if not cash_logs_channel:
+                return await ctx.send("Param `cash_logs_channel` must be specified if `cash_logs` param is set to **`True`**", hidden=True)
+            elif not isinstance(cash_logs_channel, discord.TextChannel):
+                return await ctx.send("Channel for `cash_logs_channel` MUST be a TEXT CHANNEL", hidden=True)
             
-            self.config["money_changes"] = money_changes
-            self.config["log_channel_id"] = money_logs_channel.id
+            self.client.eco_config["cash_logs"] = cash_logs
+            self.client.eco_config["cash_logs_channel_id"] = cash_logs_channel.id
+            self.cash_logs_channel = cash_logs_channel
 
-            em.description += f"**Money Changes Logs:**\n> Activated: `True`\n> Channel: <#{money_logs_channel.id}>\n\n"
+            em.description += f"**Cash Logs:**\n> Activated: `True`\n> Channel: <#{cash_logs_channel.id}>\n\n"
         else:
-            em.description += f"**Money Changes Logs:**\n> Activated `{self.config['money_changes']}` (unchanged)\n> Channel: <#{self.config['log_channel_id']}>\n\n"
+            em.description += f"**Cash Logs:**\n> Activated `{self.client.eco_config['cash_logs']}` (unchanged)\n> Channel: <#{self.client.eco_config['cash_logs_channel_id']}>\n\n"
 
-        if inventory_usage:
-            if not inv_logs_channel:
-                return await ctx.send("Param `inv_logs_channel` must be specified if `inventory_usage` param is set to **`True`**", hidden=True)
-            elif not isinstance(inv_logs_channel, discord.TextChannel):
-                return await ctx.send("Channel for `inv_logs_channel` MUST be a TEXT CHANNEL", hidden=True)
+        if income_logs:
+            if not income_logs_channel:
+                return await ctx.send("Param `income_logs_channel` must be specified if `income_logs` param is set to **`True`**", hidden=True)
+            elif not isinstance(income_logs_channel, discord.TextChannel):
+                return await ctx.send("Channel for `income_logs_channel` MUST be a TEXT CHANNEL", hidden=True)
             
-            self.config["inventory_usage"] = inventory_usage
-            self.config["inv_usage_channel_id"] = inv_logs_channel.id
+            self.client.eco_config["income_logs"] = income_logs
+            self.client.eco_config["income_logs_channel_id"] = income_logs_channel.id
+            self.income_logs_channel = income_logs_channel
 
-            em.description += f"**Inventory Usage Logs:**\n> Activated: `True`\n> Channel: <#{inv_logs_channel.id}>\n\n"
+            em.description += f"**Income Logs:**\n> Activated: `True`\n> Channel: <#{income_logs_channel.id}>\n\n"
         else:
-            em.description += f"**Inventory Usage Logs:**\n> Activated `{self.config['inventory_usage']}` (unchanged)\n> Channel: <#{self.config['inv_usage_channel_id']}>\n\n"
+            em.description += f"**Income Logs:**\n> Activated `{self.client.eco_config['income_logs']}` (unchanged)\n> Channel: <#{self.client.eco_config['income_logs_channel_id']}>\n\n"
+
+        if pay_logs:
+            if not pay_logs_channel:
+                return await ctx.send("Param `pay_logs_channel` must be specified if `pay_logs` param is set to **`True`**", hidden=True)
+            elif not isinstance(pay_logs_channel, discord.TextChannel):
+                return await ctx.send("Channel for `pay_logs_channel` MUST be a TEXT CHANNEL", hidden=True)
+            
+            self.client.eco_config["pay_logs"] = pay_logs
+            self.client.eco_config["pay_logs_channel_id"] = pay_logs_channel.id
+            self.pay_logs_channel = pay_logs_channel
+
+            em.description += f"**Income Logs:**\n> Activated: `True`\n> Channel: <#{pay_logs_channel.id}>\n\n"
+        else:
+            em.description += f"**Income Logs:**\n> Activated `{self.client.eco_config['pay_logs']}` (unchanged)\n> Channel: <#{self.client.eco_config['pay_logs_channel_id']}>\n\n"
 
         with open("data/economy/config.json", "w") as f:
-            json.dump(self.config, f, indent=2)
+            json.dump(self.client.eco_config, f, indent=2)
 
         return await ctx.embed(embed=em, footer="Economy")
         
@@ -217,7 +298,7 @@ class EconomyCommands(commands.Cog):
                 if not mem.bot:
                     await self.check_user(mem.id)
                     await self.add_coins(ctx, user=mem, amount=amount, were=where, all=True)
-            await self.log_money("@everyone", amount, f"{ctx.author.mention} used /add_money")
+            await self.economy_log("pay_logs", "@everyone", amount, f"{ctx.author.mention} used /add_money")
 
         else:
             if not member:
@@ -226,7 +307,6 @@ class EconomyCommands(commands.Cog):
             await self.check_user(member.id)
 
             await self.add_coins(ctx, user=member, amount=amount, where=where, all=False)
-            await self.log_money(member.mention, amount, f"{ctx.author.mention} used /add_money")
             resp_content = member.mention
 
         embed = discord.Embed(
@@ -263,7 +343,7 @@ class EconomyCommands(commands.Cog):
                     else:
                         self.clint.economydata[str(mem.id)]["wallet"] -= amount
 
-            await self.log_money("@everyone", -amount, f"{ctx.author.mention} used /remove_money")
+            await self.economy_log("pay_logs", "@everyone", -amount, f"{ctx.author.mention} used /remove_money")
             result = "@everyone"
 
         else:
@@ -288,7 +368,7 @@ class EconomyCommands(commands.Cog):
             else:
                 self.client.economydata[str(member.id)]["wallet"] -= amount
 
-            await self.log_money(member.mention, -amount, f"{ctx.author.mention} used /remove_money")
+            await self.economy_log("pay_logs", member.mention, -amount, f"{ctx.author.mention} used /remove_money")
             result = member.mention
 
         embed = discord.Embed(
@@ -395,10 +475,10 @@ class EconomyCommands(commands.Cog):
             return await ctx.embed(embed=embed, footer="Economy")
 
         data["wallet"] -= amount
-        await self.log_money(ctx.author.mention, -amount, f"Transfer to {member.mention}")
+        await self.economy_log("cash_logs", ctx.author.mention, -amount, f"Transfer to {member.mention}")
 
         recipient["wallet"] += amount
-        await self.log_money(member.mention, amount, f"Transfer from {ctx.author.mention}")
+        await self.economy_log("cash_logs", member.mention, amount, f"Transfer from {ctx.author.mention}")
 
         embed = discord.Embed(
             description=f"💸 | Gave **__{await self.client.round_int(int(amount))}__** 💸 to {member.mention} 👍",
@@ -785,7 +865,7 @@ class EconomyCommands(commands.Cog):
             if itemdata["price"] < 0:
                 self.client.economydata[str(ctx.author.id)]["wallet"] += abs(itemdata["price"])
 
-            await self.log_money(ctx.author.mention, -itemdata["price"], f"Purchased {itemdata['name']}")
+            await self.economy_log("cash_logs", ctx.author.mention, -itemdata["price"], f"Purchased {itemdata['name']}")
 
             if itemdata.get("stock", 0):
                 self.shopdata[key]["stock"] -= 1
@@ -830,15 +910,6 @@ class EconomyCommands(commands.Cog):
             self.client.economydata[str(ctx.author.id)]["inventory"].append(itemdata)
             await ctx.send(
                 f"Added {itemdata['name']} to your inventory. Use /use to use the item or /inventory to see your inventory.", hidden=True)
-
-            if self.config["inventory_usage"]:
-                channel = self.guild.get_channel(self.config["inv_usage_channel_id"])
-                embed = discord.Embed(title="User used inventory",
-                                      description=f"Username: {ctx.author.mention}\nItem received: {itemdata['name']}",
-                                      color=self.client.failure)
-                embed.set_footer(text="TN | Economy",
-                                 icon_url=str(self.client.user.avatar_url_as(static_format='png', size=2048)))
-                await channel.send(embed=embed)
             return
 
     @cog_slash(name="delete_item", description="[ADMIN] Delete an item from /shop", guild_ids=const.slash_guild_ids, options=[
@@ -869,14 +940,6 @@ class EconomyCommands(commands.Cog):
             member = ctx.author
         elif isinstance(member, int):
             member = member
-
-        if self.config.get("inventory_usage", None):
-            channel = self.guild.get_channel(self.config["inv_usage_channel_id"])
-            embed = discord.Embed(title="User used inventory", description=f"Username: {ctx.author.mention}",
-                                  color=self.client.failure)
-            embed.set_footer(text="TN | Economy",
-                             icon_url=str(self.client.user.avatar_url_as(static_format='png', size=2048)))
-            await channel.send(embed=embed)
 
         if not isinstance(member, int) and self.client.user.id  == member.id:
             return await ctx.send("I'm not even a real person 😤", hidden=True)
@@ -947,15 +1010,6 @@ class EconomyCommands(commands.Cog):
         if itemdata.get("reply_msg", None):
             await ctx.send(itemdata["reply_msg"], hidden=True)
 
-        if self.config["inventory_usage"]:
-            channel = self.guild.get_channel(self.config["inv_usage_channel_id"])
-            embed = discord.Embed(title="User used item",
-                                  description=f"Username: {ctx.author.mention}\nItem used: {itemdata['name']}",
-                                  color=self.client.failure)
-            embed.set_footer(text="TN | Economy",
-                             icon_url=str(self.client.user.avatar_url_as(static_format='png', size=2048)))
-            await channel.send(embed=embed)
-
         return await ctx.send(f"Used {itemdata['name']} 🥳", hidden=True)
 
 
@@ -990,14 +1044,6 @@ class EconomyCommands(commands.Cog):
 
         await ctx.embed(embed=embed, footer="Economy")
 
-        if self.config["inventory_usage"]:
-            channel = self.guild.get_channel(self.config["inv_usage_channel_id"])
-            embed = discord.Embed(title="User gave item",
-                                  description=f"Username: {ctx.author.mention}\nItem given: {itemdata['name']}\nReceiver: {f'<@!{member.id}>' if not isinstance(member, int) else f'<@!{member}>'}",
-                                  color=self.client.failure)
-            embed.set_footer(text="TN | Economy",
-                             icon_url=self.client.png)
-            await channel.send(embed=embed)
 
     @cog_slash(name="add_stock", description="[ADMIN] Add stock to an item in store", guild_ids=const.slash_guild_ids, options=[
         create_option(name="item_name", description="The item to increase the stock for", option_type=3, required=True),

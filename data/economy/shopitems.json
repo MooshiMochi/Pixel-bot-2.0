@@ -3,7 +3,7 @@
     "name": "Mooshi",
     "desc": "Get noticed by Mooshi",
     "price": 1000000,
-    "stock": 53,
+    "stock": 52,
     "category": "gems",
     "show_in_inv": false,
     "best_before": 86400,

@@ -103,6 +103,10 @@ class MyClient(commands.Bot):
 
         self.user_cache = {}
 
+        self.eco_config = {}
+        self.economydata = {}
+        self.eco_user_logs = {}
+
     async def get_context(self, message, *, cls=TNContext):
         # override get_context
         return await super().get_context(message, cls=cls)
@@ -129,24 +133,59 @@ class MyClient(commands.Bot):
         else:
             return False
 
-    async def addcoins(self, userid, amount):
-        if amount < 0:
-            async with client.session.get(f"https://unbelievaboat.com/api/v1/guilds/{const.guild_id}/users/{userid}", headers={"Authorization": const.unbelievaboattoken}) as r:
-                if r.status == 200:
-                    r = await r.json()
-                    if r["bank"] < (amount/-1):
-                        return "You are too poor to afford a private chat."
-                else:
-                    print(r.status, await r.json())
-                    return
-                    
-        headers = {"Authorization": const.unbelievaboattoken,
-                   'Accept': 'application/json'}
-        async with client.session.patch(f"https://unbelievaboat.com/api/v1/guilds/{const.guild_id}/users/{userid}",
-                                        headers=headers,
-                                        json={"bank": amount, "reason": "Guessed the riddle correct."}) as f:
-            data = await f.json()
-            return data
+    async def addcoins(self, userid:int, amount:int, reason:str=None):
+        
+        e = self.__check_user(userid)
+        
+        e['bank'] += amount
+
+        if self.eco_config.get("income_logs", False):
+            channel_id = self.eco_config.get("incole_logs_channel_id", 0)
+            if channel_id:
+                guild = self.get_guild(const.guild_id)
+                ch = guild.get_channel(channel_id)
+                embed = discord.Embed(title="💸 Income Log",
+                                  description=f"Username: <@!{userid}>\nAmount: {await self.round_int(amount)}\nBefore: {int(e['wallet'] + e['bank'] - amount)}\nNow: {int(e['wallet'] + e['bank'])}\nReason: {reason}",
+                                  color=self.failure)
+
+                embed.set_footer(text="TN | Economy", icon_url=self.png)
+                await ch.send(embed=embed)
+
+        if not self.eco_user_logs.get(str(userid), False):
+            self.eco_user_logs[str(userid)] = {
+                "pay_logs": [],
+                "income_logs": [{
+                    "money_before": e['wallet'] + e['bank'] - amount,
+                    "money_after": e['wallet'] + e['bank'],
+                    "reason": reason
+                }],
+                "cash_logs": []
+                }
+        else:
+            self.eco_user_logs[str(userid)]["income_logs"].append(
+                {
+                    "money_before": e['wallet'] + e['bank'] - amount,
+                    "money_after": e['wallet'] + e['bank'],
+                    "reason": reason
+                }
+            )
+
+    async def __check_user(self, authorid):
+        if int(self.user.id) == int(authorid):
+            return {
+                "wallet": 0,
+                "bank": 0,
+                "inventory": [],
+            }
+        try:
+            return self.economydata[str(authorid)]
+        except KeyError:
+            self.economydata[str(authorid)] = {
+                "wallet": 0,
+                "bank": 10000,
+                "inventory": [],
+            }
+            return self.economydata[str(authorid)]
 
     async def close(self):
         await self.session.close()
@@ -260,6 +299,27 @@ with open("data/games/payouts.json", "r") as f:
     client.payouts["mm"] = {"ts": 0, "month": 1} if "mm" not in client.payouts.keys() else client.payouts["mm"]
 
     client.payouts["msgs"] = {"ts": 1643605260, "month": 1} if "msgs" not in client.payouts.keys() else client.payouts["msgs"]
+
+with open("data/economy/config.json", "r") as f:
+    client.eco_config = json.load(f)
+
+    if "cash_logs" not in client.eco_config.keys():
+        client.eco_config["cash_logs"] = False
+
+    if "cash_logs_channel_id" not in client.eco_config.keys():
+        client.eco_config["cash_logs_channel_id"] = None
+
+    if "income_logs" not in client.eco_config.keys():
+        client.eco_config["income_logs"] = False
+
+    if "income_logs_channel_id" not in client.eco_config.keys():
+        client.eco_config["income_logs_channel_id"] = None
+    
+    if "pay_logs" not in client.eco_config.keys():
+        client.eco_config["pay_logs"] = False
+
+    if "pay_logs_channel_id" not in client.eco_config.keys():
+        client.eco_config["pay_logs_channel_id"] = None
 
 
 client.load_extension('utils.logger')
