@@ -478,10 +478,9 @@ class LevelSystem(commands.Cog):
         
         self.xp_per_msg.pop(str(ctx.guild_id), None)
 
-
         with open("data/level_system/config.json", "w") as f:
                 json.dump(self.client.lvlsys_config, f, indent=2)
-                
+
         return await ctx.send("Event cancelled!", hidden=True)
 
 
