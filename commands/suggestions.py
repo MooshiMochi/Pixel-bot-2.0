@@ -77,7 +77,7 @@ class Suggestions(commands.Cog):
 
         em.description = description
 
-        em.set_footer(text=f"TN | Suggestions | {datetime.utcnow().date()}")
+        em.set_footer(text=f"TN | Suggestions | {datetime.utcnow().date()}", icon_url=self.client.png)
 
         em.set_thumbnail(url=ctx.author.avatar_url_as(static_format="png", size=2048))
         
@@ -264,12 +264,12 @@ class Suggestions(commands.Cog):
                     return
                 if (str(msg.embeds[0].color) == "#00ff00") or (str(msg.embeds[0].color) == "#ff0000"):
                     return
-                if msg.embeds[0].footer.text[-1] != f"💬":
-                    my_msg = self.staff_vote_channel.send(embed=msg.embeds[0])
+                if str(msg.embeds[0].color) != "#ffff00":
+                    my_msg = await self.staff_vote_channel.send(embed=msg.embeds[0])
                     await my_msg.add_reaction("✅")
                     await my_msg.add_reaction("❌")
                     em = msg.embeds[0]
-                    em.footer.text += " 💬"
+                    em.color = self.client.warn
                     await msg.edit(embed=em)
             
 
