@@ -4,8 +4,8 @@
       "name": "Mooshi",
       "display_name": "Mooshi",
       "disc": "6669",
-      "xp": 476,
-      "total_xp": 5476,
+      "xp": 510,
+      "total_xp": 5510,
       "level": 5,
       "url": "https://cdn.discordapp.com/avatars/383287544336613385/df07ecd630f7d0f1b51403d4d34424e1.png?size=4096"
     },
@@ -31,8 +31,8 @@
       "name": "PixeI",
       "display_name": "PixeI",
       "disc": "4553",
-      "xp": 50,
-      "total_xp": 50,
+      "xp": 68,
+      "total_xp": 68,
       "level": 0,
       "url": "https://cdn.discordapp.com/avatars/230118817412415489/e4d49ab9a97fbaede609bb37d8a4f167.png?size=4096"
     },
@@ -56,8 +56,8 @@
     "383287544336613385": 8
   },
   "msgs": {
-    "383287544336613385": 276,
-    "230118817412415489": 78,
+    "383287544336613385": 327,
+    "230118817412415489": 101,
     "932386561117552680": 77
   }
 }

@@ -36,3 +36,6 @@ from datetime import datetime
 
 print(datetime.utcnow().timestamp())
 print(datetime.utcnow().timestamp())
+
+mystr = "hello world"
+print(mystr.ljust(150, "-"))

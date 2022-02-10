@@ -27,6 +27,7 @@ class Constants:
             'commands.leaderboards',
             'commands.misc',
             'commands.economy',
+            'commands.suggestions',
             'commands.games.whack_a_steve',
             'commands.games.mc_madness',
             'commands.games.riddles')

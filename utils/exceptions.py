@@ -20,3 +20,6 @@ class NotGuildOwner(commands.CheckFailure):
 
 class NotBotSetOwner(commands.CheckFailure):
     pass
+
+class InvalidURLError(commands.CheckFailure):
+    pass

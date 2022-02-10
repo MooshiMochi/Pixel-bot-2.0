@@ -1,5 +1,7 @@
 from discord.ext import commands
 from utils.exceptions import NotGuildOwner
+from re import findall
+from utils.exceptions import InvalidURLError
 
 bool_args = {
     'y': True,
@@ -40,3 +42,26 @@ class Other:
     def roleIsManaged(role):
         return role.is_default() or role.is_bot_managed() \
         or role.is_premium_subscriber() or role.is_integration()
+
+
+class url:
+    def __init__(self, link):
+
+        if not link:
+            raise ValueError("Could not convert '%s' to url" % link)
+        else:
+            check = findall("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*(),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", link)
+            if check:
+                link = str(link).replace(".webm", ".png")
+
+                if not any([True for ext in [".jpg", "jpeg", ".png", ".gif"] if ext in str(link)]):
+
+                    raise InvalidURLError("The url: '%s' is not valid." % link)
+                else:
+                    self.link = link
+            else:
+                raise InvalidURLError("The url: '%s' is not valid." % link)
+
+    def __str__(self):
+        return str(self.link)
+
