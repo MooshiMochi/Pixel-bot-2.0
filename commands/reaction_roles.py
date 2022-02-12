@@ -8,7 +8,7 @@ import emoji as emojo
 from discord.ext import commands, tasks
 from discord.ext.commands import EmojiConverter
 
-from discord_slash import cog_ext
+from discord_slash import cog_ext, SlashContext
 from discord_slash.utils import manage_commands
 
 from constants import const
@@ -76,17 +76,13 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
         
         manage_commands.create_option(name="title", description="Set the title for the reaction role message. (Ignore if you don't want a title.)", option_type=3, required=False)
     ])
-    @commands.has_permissions(manage_roles=True)
+    @commands.has_permissions(manage_roles=True, manage_emojis=True)
     @commands.guild_only()
-    async def rr_msg(self, ctx, send_as_embed: str = None, title: str = None):
+    async def rr_msg(self, ctx:SlashContext, send_as_embed: str = None, title: str = None):
         """Create a new message for reaction roles."""
 
         await ctx.defer(hidden=True)
         await ctx.send("Success!", hidden=True)
-
-        if not ctx.author.guild_permissions.manage_emojis:
-            await ctx.send("Why are you even trying to use this.😐")
-            return
 
         if send_as_embed == "True":
             em = discord.Embed(color=self.client.failure)

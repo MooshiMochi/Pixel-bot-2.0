@@ -20,6 +20,8 @@ class Constants:
             }
 
         self.command_exts = (
+            'commands.experimental',
+            'commands.giveaways',
             'commands.reaction_roles',
             'commands.restricted',
             'commands.verification',

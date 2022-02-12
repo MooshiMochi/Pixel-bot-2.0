@@ -37,5 +37,7 @@ from datetime import datetime
 print(datetime.utcnow().timestamp())
 print(datetime.utcnow().timestamp())
 
-mystr = "hello world"
-print(mystr.ljust(150, "-"))
+import random
+
+st = "abcdefghijklmnopqrstuvwxyz"
+print("".join(sorted(random.sample(st, len(st)))) == st)
