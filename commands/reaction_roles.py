@@ -1,6 +1,8 @@
 import json
+from multiprocessing.sharedctypes import Value
 import re
 from datetime import datetime
+
 from constants import const
 
 import discord
@@ -8,8 +10,10 @@ import emoji as emojo
 from discord.ext import commands, tasks
 from discord.ext.commands import EmojiConverter
 
-from discord_slash import cog_ext, SlashContext
+from discord_slash import SlashContext, ComponentContext
+from discord_slash.cog_ext import cog_slash
 from discord_slash.utils import manage_commands
+from discord_slash.utils.manage_components import create_select, create_select_option, create_actionrow
 
 from constants import const
 
@@ -67,7 +71,7 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
         await self.client.wait_until_ready()
 
         
-    @cog_ext.cog_slash(name="rr_msg", guild_ids=const.slash_guild_ids, description="[STAFF] Create a new reaction roles message",
+    @cog_slash(name="rr_msg", guild_ids=const.slash_guild_ids, description="[STAFF] Create a new reaction roles message",
     options=[
         manage_commands.create_option(
             name="send_as_embed", description="Choose whether the message should be in an embed or not.", option_type=3, required=True, choices=[
@@ -108,9 +112,98 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
 
         self.data[str(ctx.channel.id)][str(msg.id)] = {"config": 0}
 
+    
+    @cog_slash(name="rr_select", description="Create a reaction roles menu with selects.", guild_ids=const.slash_guild_ids, options=[
+        manage_commands.create_option(name="title", description="The title of the select menu", option_type=3, required=True),
+        manage_commands.create_option(name="description", description="The description of the select menu", option_type=3, required=True),
+        manage_commands.create_option(name="send_as_embed", description="Send the title & description as embed or plain text", option_type=5, required=True),
+        manage_commands.create_option(name="max_role_selections", description="The max number of roles a user can select from this reaction menu", option_type=4, required=True),
+        manage_commands.create_option(name="reaction_1", description="The description and role separated by | . Eg: Ping for giveaways | @giveawayping.", option_type=3, required=True),
+        manage_commands.create_option(name="reaction_2", description="The description and role separated by | . Eg: Ping for giveaways | @giveawayping.", option_type=3, required=False),
+        manage_commands.create_option(name="reaction_3", description="The description and role separated by | . Eg: Ping for giveaways | @giveawayping.", option_type=3, required=False),
+        manage_commands.create_option(name="reaction_4", description="The description and role separated by | . Eg: Ping for giveaways | @giveawayping.", option_type=3, required=False),
+        manage_commands.create_option(name="reaction_5", description="The description and role separated by | . Eg: Ping for giveaways | @giveawayping.", option_type=3, required=False)
+    ])
+    async def rr_select(self, ctx:SlashContext, title:str=None, description:str=None, send_as_embed:bool=False, max_role_selections:int=1, reaction_1:str=None, reaction_2:str=None, reaction_3:str=None, reaction_4:str=None, reaction_5:str=None):
+        await ctx.defer(hidden=True)
+
+        if send_as_embed:
+            type = "embed"
+            em = discord.Embed(title=title, description=description, color=self.client.failure)
+            em.set_footer(text="TN | Reactions", icon_url=self.client.png)
+        else:
+            em = f"**{title}**\n\n{description}"
+            type = "content"
+
+        reactions = (reaction_1, reaction_2, reaction_3, reaction_4, reaction_5)
+        reactions = [[x.strip() for x in r.split("|")] for r in reactions if r]
+
+        if not reactions:
+            return await ctx.send("Cannot create a select with less than 1 reactions.", hidden=True)
+        
+        if max_role_selections <= 0:
+            return await ctx.send("Param `max_role_selections` should be greater than or equal to 1.", hidden=True)
+
+        for pos in range(len(reactions)):
+            try:
+                reactions[pos][1] = int(reactions[pos][1].replace("<", "").replace(">", "").replace("@", "").replace("&", ""))
+            except ValueError:
+                return await ctx.send("You need to mention the role for the reaction role.", hidden=True)
+
+            role = ctx.guild.get_role(reactions[pos][1])
+    
+            if not role:
+                return await ctx.send(f"Sorry, I could not find role <@&{reactions[pos][1]}> in the guild. Please check and try again!", hidden=True)
+
+            elif role.is_bot_managed():
+                return await ctx.send("I cannot add that as a reaction role as it is managed by a robot.", hidden=True)
+            
+            elif role.is_integration():
+                return await ctx.send("I cannot add that as a reaction role as it is managed by an integration.", hidden=True)
+
+            elif role.is_default():
+                return await ctx.send("I cannot add that as a reaction role as it is a 'default'.", hidden=True)
+
+            elif ctx.guild.roles.index(role) >= ctx.guild.roles.index(ctx.guild.me.top_role):
+                return await ctx.send("Unfortunatelly I do not have enough permissiosn to manage that role.", hidden=True)
+
+        if max_role_selections > len(reactions):
+            return await ctx.send("Param `max_role_selections` cannot be greater than the number of reactions", hidden=True)
+        
+        select = create_select(options=[
+            create_select_option(label=y[0], value=str(y[1]), description="Select me to receive the role") for y in reactions
+        ], custom_id="reaction_roles", placeholder=title, max_values=max_role_selections)
+
+        components = [create_actionrow(select)]
+
+        await ctx.channel.send(**{type: em}, components=components)
+
+        await ctx.send("Success!", hidden=True)
+
+    
+    @commands.Cog.listener()
+    async def on_component(self, ctx:ComponentContext):
+        if ctx.custom_id == "reaction_roles":
+            roles_to_give = []
+            await ctx.defer(hidden=True)
+            all_roles = [int(x["value"]) for x in list(ctx.component.values())[2]]
+            all_roles = [ctx.guild.get_role(y) for y in all_roles]
+            
+            for role_id in ctx.selected_options:
+                role_id = int(role_id)
+                role = ctx.guild.get_role(role_id)
+                if role:
+                    roles_to_give.append(role)
+
+            roles_to_remove = [role for role in all_roles if role not in roles_to_give]
+            if roles_to_remove:
+                await ctx.author.remove_roles(*roles_to_remove)
+            if roles_to_give:
+                await ctx.author.add_roles(*roles_to_give)
+            await ctx.send(f'''You received {', '.join(x.mention for x in roles_to_give)}''', hidden=True)
             
 
-    @cog_ext.cog_slash(name="delete_msg", guild_ids=const.slash_guild_ids, description="[STAFF] Delete a reaction roles message",
+    @cog_slash(name="delete_msg", guild_ids=const.slash_guild_ids, description="[STAFF] Delete a reaction roles message",
     options=[
         manage_commands.create_option(name="message_id", description="The ID of the reaction roles message", option_type=3, required=True)
     ])
@@ -141,7 +234,7 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
         else:
             return await ctx.send("I haven't found any messages with that ID. Please check and try again.", hidden=True)
 
-    @cog_ext.cog_slash(name="set_img", guild_ids=const.slash_guild_ids, description="[STAFF] Set an image for a reaction roles message",
+    @cog_slash(name="set_img", guild_ids=const.slash_guild_ids, description="[STAFF] Set an image for a reaction roles message",
     options=[
         manage_commands.create_option(name="message_id", description="The ID of the reaction roles message", option_type=3, required=True),
         manage_commands.create_option(name="url", description="The URL of the image (Don't choose this option to remove the image)", option_type=3, required=True)
@@ -184,7 +277,7 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
         else:
             return await ctx.send("I haven't found any messages with that ID. Please check and try again.", hidden=True)
 
-    @cog_ext.cog_slash(name="add_rr", guild_ids=const.slash_guild_ids, description="[STAFF] Add a reaction role to a reaction roles message",
+    @cog_slash(name="add_rr", guild_ids=const.slash_guild_ids, description="[STAFF] Add a reaction role to a reaction roles message",
     options=[
         manage_commands.create_option(name="message_id", description="The ID of the reaction roles message", required=True, option_type=3),
         manage_commands.create_option(name="role", description="The role to give when the user reacts", option_type=8, required=True),
@@ -268,7 +361,7 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
         await msg.add_reaction(emoji)
         return await ctx.send("Reaction role menu updated", hidden=True)
 
-    @cog_ext.cog_slash(name="remove_rr", guild_ids=const.slash_guild_ids, description="[STAFF] Remove a reaction role to a reaction roles message",
+    @cog_slash(name="remove_rr", guild_ids=const.slash_guild_ids, description="[STAFF] Remove a reaction role to a reaction roles message",
     options=[
         manage_commands.create_option(name="message_id", description="The ID of the reaction roles message", option_type=3, required=True),
         manage_commands.create_option(name="emoji", description="The emoji corresponding to the reaction role", option_type=3, required=True)
@@ -351,7 +444,7 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
         await ctx.send("Success!", hidden=True)
 
 
-    @cog_ext.cog_slash(name="rr_config", guild_ids=const.slash_guild_ids, description="[STAFF] Configure a reaction roles message",
+    @cog_slash(name="rr_config", guild_ids=const.slash_guild_ids, description="[STAFF] Configure a reaction roles message",
     options=[
         manage_commands.create_option(name="message_id", description="The ID of the reaction roles message", option_type=3, required=True),
         manage_commands.create_option(
@@ -502,6 +595,9 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
                     await channel.send("Role not found!")
         except KeyError:
             pass
+
+    
+
 
 
 def setup(client):

@@ -23,12 +23,12 @@ class Experimental(commands.Cog):
         select = create_select(options=[
 
             create_select_option(label="Opt 1", value="select_1", emoji="🥳", description="First select", default=True),
-            create_select_option(label="Opt 2", value="select_2")
+            create_select_option(label="Opt 2 💸", value="select_2", emoji="🎉")
         ],
-        placeholder="Yeet", min_values=1, max_values=1, disabled=False)
+        placeholder="Yeet", min_values=1, max_values=1, disabled=False, custom_id="Restricted")
 
         await ctx.send("test", components=[create_actionrow(select)], hidden=False)
-        print(create_actionrow(select))
+        # print(create_actionrow(select))
     
     @cog_context_menu(name="Add reaction role", guild_ids=const.slash_guild_ids, target=ContextMenuType.MESSAGE)
     async def add_reaction_role(self, ctx: MenuContext):
@@ -60,13 +60,14 @@ class Experimental(commands.Cog):
         #     await ctx.send(f"Target Components: {ctx.target_message.components}", hidden=ctx._deferred_hidden)
 
 
-    # @commands.Cog.listener()
-    # async def on_component(self, ctx:ComponentContext):
-    #     await self.client.wait_until_ready()
+    @commands.Cog.listener()
+    async def on_component(self, ctx:ComponentContext):
+        await self.client.wait_until_ready()
+        
+        if ctx.custom_id != "Restricted":
+            return
 
-    #     if ctx.custom_id == "giveaway_enter":
-    #         return
-    #     await ctx.send(f"You selected {ctx.selected_options}")
+        await ctx.send(f"You selected {ctx.selected_options}")
 
 
 def setup(client):
