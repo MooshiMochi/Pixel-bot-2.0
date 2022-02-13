@@ -128,15 +128,19 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
         await ctx.defer(hidden=True)
 
         if send_as_embed:
-            type = "embed"
+            _type = "embed"
             em = discord.Embed(title=title, description=description, color=self.client.failure)
             em.set_footer(text="TN | Reactions", icon_url=self.client.png)
         else:
             em = f"**{title}**\n\n{description}"
-            type = "content"
+            _type = "content"
 
         reactions = (reaction_1, reaction_2, reaction_3, reaction_4, reaction_5)
         reactions = [[x.strip() for x in r.split("|")] for r in reactions if r]
+
+        for r_li in reactions:
+            if len(r_li) <= 1:
+                return await ctx.send("Invalid `reaction_x` parameter provided. Please read the option description and try again.", hidden=True)
 
         if not reactions:
             return await ctx.send("Cannot create a select with less than 1 reactions.", hidden=True)
@@ -176,7 +180,7 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
 
         components = [create_actionrow(select)]
 
-        await ctx.channel.send(**{type: em}, components=components)
+        await ctx.channel.send(**{_type: em}, components=components)
 
         await ctx.send("Success!", hidden=True)
 
@@ -595,10 +599,6 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
                     await channel.send("Role not found!")
         except KeyError:
             pass
-
-    
-
-
 
 def setup(client):
     client.add_cog(ReactionRoles(client))

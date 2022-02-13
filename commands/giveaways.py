@@ -123,8 +123,9 @@ class Giveaways(commands.Cog):
         except (ValueError, TypeError):
             alt4 = ""
 
-        em = discord.Embed(title=f"🎁 {title}", color=self.client.failure, description="")
-        em.description += f"\n\n- {winners} winners"
+        em = discord.Embed(color=self.client.failure, description="")
+        em.set_author(name=title, icon_url="https://media.discordapp.net/attachments/884145972995825724/935929000449167460/MainGift.png")
+        em.description += f"\n\n- {winners} winner(s)"
         em.description += f"\n- Hosted by: {ctx.author.mention}"
         em.description += f"\n- Sponsored by: {sponsor.mention}" if sponsor else ""
         em.description += f"\n- Ends: <t:{int(datetime.utcnow().timestamp() + int_duration)}:R>"
@@ -185,19 +186,77 @@ class Giveaways(commands.Cog):
             if self.giveaways[key]["time"] < ts:
                 await self.wait_for_giveaway(key)
 
+    @tasks.loop(minutes=5)
+    async def clear_giveaway_cache(self):
+        ts = datetime.utcnow().timestamp()
+        for key in self.giveaways.copy().keys():
+            if ts - self.giveaways[key]["time"] >= 24*60*60:
+                self.giveaways.pop(key, None)
+        
     
     @resume_giveaways.before_loop
     @save_giveaways.before_loop
+    @clear_giveaway_cache.before_loop
     async def before_resuming_giveaways(self):
         await self.client.wait_until_ready()
 
+
+    @cog_slash(name="giveaway_reroll", description="Re-roll a giveaway", guild_ids=const.slash_guild_ids, options=[
+        create_option(name="message_id", description="The ID of the giveaway message", option_type=3, required=True)
+    ])
+    @commands.guild_only()
+    @commands.has_permissions(manage_roles=True, manage_messages=True)
+    async def giveaway_reroll(self, ctx:SlashContext, message_id:str=None):
+        await ctx.defer(hidden=True)
+    
+        data = self.giveaways.get(message_id, None)
+        if not data:
+            return await ctx.send("It looks like that giveaway no longer exists. Sorry, but you cannot re-roll this giveaway", hidden=True)
+        
+        if not data["finished"]:
+            return await ctx.send("This giveaway has not finished yet. You can only re-roll after a giveaway has ended.", hidden=True)
+
+        guild = self.client.get_guild(data['guild_id'])
+        channel = guild.get_channel(data['channel_id'])
+
+        if not data["members"]:
+            em = discord.Embed(color=self.client.warn, description=f"> Could not determine a new winner for this giveaway as there are no valid entrants")
+            em.set_author(name="Giveaway Issue", icon_url="https://media.discordapp.net/attachments/884145972995825724/936019499742789672/MainGift.png")
+            
+            return await ctx.send(embed=em)
+        
+        try:
+            winners = random.sample(data['members'], data['winners'])
+        except ValueError:
+            winners = data['members']
+
+        public_em = discord.Embed(color=self.client.warn, description=f"You have won a [giveaway]({data['jump_url']}) for **{data['prize']}**!")
+
+        try:
+            await channel.send(content=f"""{self.party} • {', '.join([f"<@!{w_id}>" for w_id in winners])}""", embed=public_em)
+        except discord.HTTPException:
+            pass
+        
+        total_coins_to_add = sum([x for x in data['all_prizes'] if isinstance(x, (int, float))])
+
+        for winner_id in winners:
+            if total_coins_to_add > 0:
+
+                await self.client.addcoins(winner_id, total_coins_to_add, "Won a giveaway")
+        
+        em = discord.Embed(color=self.client.failure, description=f"> I have rerolled the [giveaway]({data['jump_url']}).")
+        em.set_author(name="Giveaway Reroll", icon_url="https://media.discordapp.net/attachments/884145972995825724/933821589202559026/Revoked.png")
+        em.set_footer(text="TN | Giveaways", icon_url=self.client.png)
+        em.add_field(name="Giveaway", value=f"`Channel:` <#{data['channel_id']}>\n`ID:` {message_id}")
+        return await ctx.send(embed=em, hidden=True)
+    
 
     async def wait_for_giveaway(self, key:str):
         await self.client.wait_until_ready()
 
         data = self.giveaways[key]
 
-        if data['finished']:
+        if self.giveaways[key]['finished']:
             return
 
         if datetime.utcnow().timestamp() < data["time"]:
@@ -209,7 +268,7 @@ class Giveaways(commands.Cog):
 
         self.giveaways[key]['finished'] = True
 
-        if not data["members"]:
+        if not data["members"] or len(data["members"]) == 1 or len(data['members']) <= data["winners"]:
             em = discord.Embed(color=self.client.warn, description=f"[Your giveaway]({data['jump_url']}) ended without any winners.")
             try:
                 
@@ -223,7 +282,7 @@ class Giveaways(commands.Cog):
                     await msg.edit(content=f"{self.party}**GIVEAWAY ENDED**{self.party}", embed=edit_em, components=self.timeout_components)
             except discord.HTTPException:
                 pass
-            self.giveaways.pop(key, None)
+            # self.giveaways.pop(key, None)
 
             return
         
@@ -275,7 +334,7 @@ class Giveaways(commands.Cog):
                 await msg.edit(content=f"{self.party}**GIVEAWAY ENDED**{self.party}", embed=edit_em, components=self.timeout_components)
             except discord.HTTPException:
                 pass
-        self.giveaways.pop(key, None)
+        # self.giveaways.pop(key, None)
         return
 
     @commands.Cog.listener()

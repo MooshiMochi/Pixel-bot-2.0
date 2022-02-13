@@ -64,4 +64,3 @@ class url:
 
     def __str__(self):
         return str(self.link)
-
