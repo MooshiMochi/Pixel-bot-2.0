@@ -1,3 +1,5 @@
+from datetime import datetime
+from attr import field
 from discord import Embed, Member
 from discord.ext import commands
 
@@ -28,6 +30,67 @@ class Miscellaneous(commands.Cog):
         em.set_image(url=member.avatar_url_as(static_format="png", size=4096))
         await ctx.embed(embed=em, footer="Miscellaneous")
 
+    
+    @cog_slash(name="embed", description="Create an embed", guild_ids=const.slash_guild_ids, options=[
+        create_option("send_hidden", "Send the embed ephemerally or not", 5, False),
+        create_option("title", "The title field", 3, False),
+        create_option("desc", "The description field", 3, False),
+        create_option("color", "The embed color (must be in HEX: #ff00ff)", 3, False),
+        create_option("footer", "The footer of the embed", 3, False),
+        create_option("footer_icon_url", "The icon that appears at the footer", 3, False),
+        create_option("thumbnail_url", "The thumbnail for the embed (Must be an URL)", 3, False),
+        create_option("author", "The author field of the embed", 3, False),
+        create_option("author_url", "The url that users will be redirected to once they click the author field", 3, False),
+        create_option("author_icon_url", "The icon that will appear in the autor field", 3, False),
+        create_option("timestamp", "Whether to have an embed timestamp or not", 5, False),
+        create_option("image_url", "Whether to have an image in the emebd (max 1) (must be URL)", 3, False),
+        create_option("field_1", "Please specify the name and value separated by | . Eg: field name | field value", 3, False),
+        create_option("field_2", "Please specify the name and value separated by | . Eg: field name | field value", 3, False),
+        create_option("field_3", "Please specify the name and value separated by | . Eg: field name | field value", 3, False),
+        create_option("field_4", "Please specify the name and value separated by | . Eg: field name | field value", 3, False),
+        create_option("field_5", "Please specify the name and value separated by | . Eg: field name | field value", 3, False),
+        create_option("field_6", "Please specify the name and value separated by | . Eg: field name | field value", 3, False),
+        create_option("field_7", "Please specify the name and value separated by | . Eg: field name | field value", 3, False),
+        create_option("field_8", "Please specify the name and value separated by | . Eg: field name | field value", 3, False),
+        create_option("field_9", "Please specify the name and value separated by | . Eg: field name | field value", 3, False),
+        create_option("field_10", "Please specify the name and value separated by | . Eg: field name | field value", 3, False)
+    ])
+    async def embed(self, ctx:SlashContext, send_hidden:bool=True, title:str=None, desc:str=None, color:str=None, footer:str=None, footer_icon_url:str=None, thumbnail_url:str=None, author:str=None, author_url:str=None, author_icon_url:str=None, timestamp:bool=False, image_url:str=None, field_1:str=None, field_2:str=None, field_3:str=None, field_4:str=None, field_5:str=None, field_6:str=None, field_7:str=None, field_8:str=None, field_9:str=None, field_10:str=None):
+        await ctx.defer(hidden=send_hidden)
+
+        if color:
+            color = color.replace("#", "0x")
+            if not color.startswith("0x"):
+                color = "0x" + color
+
+            try:
+                color=int(color, 16)
+            except ValueError:
+                color = Embed.Empty
+        else:
+            color = Embed.Empty
+            
+        em = Embed(title=title if title else "", description=desc if desc else "\u200b", color=color)
+        em.set_footer(text=footer if footer else "", icon_url=footer_icon_url if footer_icon_url else "")
+        em.set_thumbnail(url=thumbnail_url) if thumbnail_url else None
+        em.set_author(name=author if author else "", url=author_url if author_url else "", icon_url=author_icon_url if author_icon_url else "")
+        em.set_image(url=image_url) if image_url else None
+        if timestamp:
+            em.timestamp = datetime.utcnow()
+        
+        for field_str in (field_1, field_2, field_3, field_4, field_5, field_6, field_7, field_8, field_9, field_10):
+            if field_str is None:
+                continue
+
+            temp = field_str.split("|")
+            if len(temp) <= 1:
+                em.add_field(name=temp[0], value="\u200b", inline=False)
+            else:
+                em.add_field(name=temp[0], value=temp[1], inline=False)
+        
+        return await ctx.send(embed=em, hidden=send_hidden)
+
+    
 
 def setup(client):
     client.add_cog(Miscellaneous(client))

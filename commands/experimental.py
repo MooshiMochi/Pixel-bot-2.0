@@ -16,7 +16,8 @@ class Experimental(commands.Cog):
     def __init__(self, client) -> None:
         self.client = client
 
-    @cog_slash(name="create_select", description="Create select", guild_ids=const.slash_guild_ids)
+    @cog_slash(name="create_select", description="[DEVELOPER] Create select", guild_ids=const.slash_guild_ids)
+    @commands.is_owner()
     async def create_select(self, ctx:SlashContext):
         await ctx.defer(hidden=False)
 
