@@ -1,6 +1,5 @@
 import asyncio
 import json
-from cv2 import add
 import discord
 
 from discord.ext import commands, tasks
