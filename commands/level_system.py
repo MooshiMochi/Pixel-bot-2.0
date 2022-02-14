@@ -34,6 +34,9 @@ class LevelSystem(commands.Cog):
         if not self.ready:
             await asyncio.sleep(2)
             self.ready = True
+        
+        if msg.author.bot:
+            return
 
         if msg.author.id == self.client.user.id:
             return

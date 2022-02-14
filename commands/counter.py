@@ -1,5 +1,6 @@
 import asyncio
 import json
+from cv2 import add
 import discord
 
 from discord.ext import commands, tasks
@@ -57,6 +58,8 @@ class Counter(commands.Cog):
     async def sleeping_func(self, guild:discord.Guild=None, key:str=None):
         while not self.counters[str(guild.id)][key]["finished"]:
             addon = 0
+            total_days = ((self.counters[str(guild.id)][key]["end"] + 600) - self.counters[str(guild.id)][key]["start"]) // (24 * 60 * 60)
+            days_passed = 0
             start = self.counters[str(guild.id)][key]["start"]
             if datetime.utcnow().timestamp() >= self.counters[str(guild.id)][key]["end"]:
                 self.counters[str(guild.id)][key]["finished"] = True
@@ -69,10 +72,13 @@ class Counter(commands.Cog):
                 return
 
             while True:
-                if datetime.utcnow().timestamp() > start + addon:
+                if datetime.utcnow().timestamp() < start + addon:
                     break
                 else:
                     addon += 24 * 60 * 60
+                
+                if addon > 24 * 60 * 60:
+                    days_passed += 1
 
             await discord.utils.sleep_until(datetime.fromtimestamp(start+addon))
 
@@ -80,9 +86,8 @@ class Counter(commands.Cog):
             if not ch:
                 return
             name = str(ch.name).split("|")[0].strip()
-            time_left = (self.counters[str(guild.id)][key]["end"] + (60 * 10)) - datetime.utcnow().timestamp()
-            time_left //= (24 * 60 * 60)
-            await ch.edit(name=f"{name} | {time_left}d")
+
+            await ch.edit(name=f"{name} | {int(total_days - days_passed)}d")
         
         self.counters[str(guild.id)].pop(key, None)
         return

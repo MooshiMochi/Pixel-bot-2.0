@@ -4,8 +4,8 @@
       "name": "Mooshi",
       "display_name": "Mooshi",
       "disc": "6669",
-      "xp": 679,
-      "total_xp": 5679,
+      "xp": 681,
+      "total_xp": 5681,
       "level": 5,
       "url": "https://cdn.discordapp.com/avatars/383287544336613385/df07ecd630f7d0f1b51403d4d34424e1.png?size=4096"
     },
@@ -45,15 +45,6 @@
       "level": 0,
       "url": "https://cdn.discordapp.com/avatars/932386561117552680/65bdecaf85cf488495ea7f9dd5d6ad75.png?size=4096"
     },
-    "582537632991543307": {
-      "name": "Santa Lunar",
-      "display_name": "Santa Lunar",
-      "disc": "8485",
-      "xp": 13,
-      "total_xp": 13,
-      "level": 0,
-      "url": "https://cdn.discordapp.com/avatars/582537632991543307/1b5fe771aa25a9c540514cb0fda83aff.png?size=4096"
-    },
     "275714283718049793": {
       "name": "xLeo",
       "display_name": "xLeo",
@@ -74,7 +65,7 @@
     "383287544336613385": 8
   },
   "msgs": {
-    "383287544336613385": 466,
+    "383287544336613385": 469,
     "230118817412415489": 178,
     "932386561117552680": 77,
     "582537632991543307": 21,
