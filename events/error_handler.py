@@ -253,8 +253,12 @@ class ErrorHandler(commands.Cog):
 
         # If the error is not recognized
         else:
-            self.client.slash.commands[ctx.command].reset_cooldown(ctx)
-            
+            try:
+                self.client.slash.commands[ctx.command].reset_cooldown(ctx)
+            except Exception as e:
+                print("\n\nNEW EXCEPTION\n\n")
+                print(e, "\n\n")
+
             embed = discord.Embed(title="Oops, something went wrong.",
                                   description=f"Something's gone terribly wrong. " +
                                               f"Please forward the following output to a server administrator." +

@@ -1,5 +1,5 @@
-from dis import dis
 import discord
+import asyncio
 import json
 import random
 
@@ -168,7 +168,7 @@ class Giveaways(commands.Cog):
 
         await ctx.send(f"Success!", hidden=True)
 
-        await self.wait_for_giveaway(str(msg.id))
+        await self.client.loop.create_task(self.wait_for_giveaway(str(msg.id)))
 
     @tasks.loop(seconds=15.0)
     async def save_giveaways(self):
@@ -182,9 +182,12 @@ class Giveaways(commands.Cog):
 
         ts = datetime.utcnow().timestamp()
 
+        tasks = []
         for key in self.giveaways.keys():
             if self.giveaways[key]["time"] < ts:
-                await self.wait_for_giveaway(key)
+                tasks.append(self.wait_for_giveaway(key))
+        if tasks:
+            await asyncio.gather(*tasks)
 
     @tasks.loop(minutes=5)
     async def clear_giveaway_cache(self):

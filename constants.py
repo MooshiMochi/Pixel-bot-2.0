@@ -21,6 +21,7 @@ class Constants:
 
         self.command_exts = (
             'commands.experimental',
+            'commands.counter',
             'commands.giveaways',
             'commands.reaction_roles',
             'commands.restricted',

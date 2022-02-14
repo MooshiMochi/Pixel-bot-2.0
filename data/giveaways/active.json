@@ -50,5 +50,32 @@
       null,
       null
     ]
+  },
+  "942841043970297967": {
+    "message_id": 942841043970297967,
+    "required_role": {
+      "id": null,
+      "name": null
+    },
+    "time": 1644861522.0,
+    "winners": 1,
+    "host": 275714283718049793,
+    "members": [
+      840417629721067520,
+      275714283718049793,
+      383287544336613385
+    ],
+    "guild_id": 932736074139185292,
+    "channel_id": 932736074139185295,
+    "jump_url": "https://discord.com/channels/932736074139185292/932736074139185295/942841043970297967",
+    "prize": "nothing",
+    "finished": true,
+    "all_prizes": [
+      "nothing",
+      null,
+      null,
+      null,
+      null
+    ]
   }
 }
