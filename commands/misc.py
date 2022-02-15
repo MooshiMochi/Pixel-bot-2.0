@@ -1,6 +1,5 @@
 from datetime import datetime
-from attr import field
-from discord import Embed, Member
+from discord import Embed, Member, Role, AllowedMentions
 from discord.ext import commands
 
 from discord_slash import SlashContext
@@ -53,9 +52,10 @@ class Miscellaneous(commands.Cog):
         create_option("field_7", "Please specify the name and value separated by | . Eg: field name | field value", 3, False),
         create_option("field_8", "Please specify the name and value separated by | . Eg: field name | field value", 3, False),
         create_option("field_9", "Please specify the name and value separated by | . Eg: field name | field value", 3, False),
-        create_option("field_10", "Please specify the name and value separated by | . Eg: field name | field value", 3, False)
+        create_option("field_10", "Please specify the name and value separated by | . Eg: field name | field value", 3, False),
+        create_option("optional_ping", "Ping a role when this embed is sent", 8, False)
     ])
-    async def embed(self, ctx:SlashContext, send_hidden:bool=True, title:str=None, desc:str=None, color:str=None, footer:str=None, footer_icon_url:str=None, thumbnail_url:str=None, author:str=None, author_url:str=None, author_icon_url:str=None, timestamp:bool=False, image_url:str=None, field_1:str=None, field_2:str=None, field_3:str=None, field_4:str=None, field_5:str=None, field_6:str=None, field_7:str=None, field_8:str=None, field_9:str=None, field_10:str=None):
+    async def embed(self, ctx:SlashContext, send_hidden:bool=True, title:str=None, desc:str=None, color:str=None, footer:str=None, footer_icon_url:str=None, thumbnail_url:str=None, author:str=None, author_url:str=None, author_icon_url:str=None, timestamp:bool=False, image_url:str=None, field_1:str=None, field_2:str=None, field_3:str=None, field_4:str=None, field_5:str=None, field_6:str=None, field_7:str=None, field_8:str=None, field_9:str=None, field_10:str=None, optional_ping:Role=None):
         await ctx.defer(hidden=send_hidden)
 
         if color:
@@ -87,8 +87,17 @@ class Miscellaneous(commands.Cog):
                 em.add_field(name=temp[0], value="\u200b", inline=False)
             else:
                 em.add_field(name=temp[0], value=temp[1], inline=False)
+
+        send_settings = {
+            "hidden": send_hidden,
+        }
+        if optional_ping:
+            role = ctx.guild.get_role(optional_ping.id if not isinstance(optional_ping, int) else optional_ping)
+            send_settings["content"] = role.mention if role else "@Role Not Found"
         
-        return await ctx.send(embed=em, hidden=send_hidden)
+        send_settings["embed"] = em
+
+        return await ctx.send(**send_settings, allowed_mentions=AllowedMentions(roles=True if ctx.author.guild_permissions.manage_roles else False))
 
     
 

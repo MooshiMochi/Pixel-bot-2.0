@@ -66,8 +66,8 @@ class Counter(commands.Cog):
                 if not ch:
                     self.counters[str(guild.id)].pop(key, None)
                     return
-                name = str(ch.name).split("|")[0].strip()
-                await ch.edit(name=f"{name} | Now!")
+                name = str(ch.name).split("in:")[0].strip()
+                await ch.edit(name=f"{name}: Now!")
                 return
 
             while True:
@@ -86,7 +86,7 @@ class Counter(commands.Cog):
                 return
             name = str(ch.name).split("|")[0].strip()
 
-            await ch.edit(name=f"{name} | {int(total_days - days_passed)}d")
+            await ch.edit(name=f"{name} in: {int(total_days - days_passed)}d")
         
         self.counters[str(guild.id)].pop(key, None)
         return
@@ -142,7 +142,7 @@ class Counter(commands.Cog):
         overwrites = {role: discord.PermissionOverwrite(connect=False) for role in ctx.guild.roles if all_roles.index(role) < bot_top_role}
         overwrites[ctx.guild.default_role] = discord.PermissionOverwrite(connect=False)
                 
-        channel = await ctx.guild.create_voice_channel(name=f"{name} | {int(days)}d", 
+        channel = await ctx.guild.create_voice_channel(name=f"{name} in: {int(days)}d", 
         overwrites=overwrites)
 
         self.counters[str(ctx.guild_id)][str(channel.id)] = {"end": datetime.utcnow().timestamp() + (days * 24 * 60 * 60), "start": datetime.utcnow().timestamp(), "finished": False}
@@ -187,8 +187,8 @@ class Counter(commands.Cog):
             return await ctx.send("It appears that the counter has been deleted. Please start a new one using `/counter_add`.", hidden=True)
 
         if new_name:
-            time = str(ch.name).split("|")[1].strip()
-            await ch.edit(name=f"{new_name} | {time}")
+            time = str(ch.name).split("in:")[1].strip()
+            await ch.edit(name=f"{new_name} in: {time}")
 
         elif new_days:
             if new_days <= 1:
@@ -197,8 +197,8 @@ class Counter(commands.Cog):
             if new_days >= 30:
                 return await ctx.send("Param `days` cannot be greater than 30 days.", hidden=True)
 
-            name = str(ch.name).split("|")[0].strip()
-            await ch.edit(name=f"{name} | {int(new_days)}d")
+            name = str(ch.name).split("in:")[0].strip()
+            await ch.edit(name=f"{name} in: {int(new_days)}d")
 
         with open("data/counters/counters.json", "w") as f:
             json.dump(self.counters, f, indent=2)

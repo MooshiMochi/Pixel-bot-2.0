@@ -168,7 +168,7 @@ class Giveaways(commands.Cog):
 
         await ctx.send(f"Success!", hidden=True)
 
-        await self.client.loop.create_task(self.wait_for_giveaway(str(msg.id)))
+        self.client.loop.create_task(self.wait_for_giveaway(str(msg.id)))
 
     @tasks.loop(seconds=15.0)
     async def save_giveaways(self):

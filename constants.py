@@ -21,6 +21,7 @@ class Constants:
 
         self.command_exts = (
             'commands.experimental',
+            'commands.events_and_updates',
             'commands.counter',
             'commands.giveaways',
             'commands.reaction_roles',
@@ -31,7 +32,7 @@ class Constants:
             'commands.misc',
             'commands.economy',
             'commands.suggestions',
-            'commands.games.whack_a_steve',
+            'commands.games.whack_a_brick',
             'commands.games.mc_madness',
             'commands.games.riddles')
 
