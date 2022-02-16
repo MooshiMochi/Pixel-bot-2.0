@@ -95,11 +95,11 @@ class LevelSystem(commands.Cog):
                     if level in self.level_roles[guild_id].keys():
                         await msg.author.add_roles(self.level_roles[guild_id][level])
 
-                em = discord.Embed(color=self.client.success, title="You leveld up!",
-                description=f"**Congratulations, you are now level `{self.client.lbs['chatlb'][author_id]['level']}`!")
+                em = discord.Embed(color=self.client.failure, title="You leveld up!",
+                description=f"**Congratulations, you are now level `{self.client.lbs['chatlb'][author_id]['level']}`!**")
                 em.set_footer(icon_url=self.client.png, text="Pixel | Level System")
                 try:
-                    await msg.channel.send(emebd=em)
+                    await msg.reply(embed=em)
                 except (discord.NotFound, TypeError, AttributeError):
                     # assuming discord is weird we ignore error (probably message arg not received properly)
                     pass
