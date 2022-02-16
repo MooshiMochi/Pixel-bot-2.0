@@ -1,3 +1,4 @@
+from distutils.ccompiler import new_compiler
 import uuid
 import discord
 import random
@@ -64,7 +65,15 @@ class WhackABrick(commands.Cog):
         brick = self.emojis["brick"]
         coords = []
         for _ in range((level // 5) + 1):
-            coords.append((random.randint(0, 4), random.randint(0, 3)))
+            new_coord = (random.randint(0, 4), random.randint(0, 3))
+            coords.append(new_coord)
+            while 1:
+                if coords.count(new_coord) > 1:
+                    coords.pop(-1)
+                    new_coord = (random.randint(0, 4), random.randint(0, 3))
+                    coords.append(new_coord)
+                else:
+                    break
 
         coords = coords[:6]
         
@@ -99,19 +108,19 @@ class WhackABrick(commands.Cog):
         return rows
 
     async def run_game(self, ctx:SlashContext):
-        components = await self.clean_bg()
+        components = await self.client.loop.create_task(self.clean_bg())
         level = 1
         clicked_coords = []
         msg = await ctx.send("__**Level 1**__", components=components)
         await asyncio.sleep(5)
         
-        components, coords = await self.random_moss(level)
+        components, coords = await self.client.loop.create_task(self.random_moss(level))
         await msg.edit(content=f"__**Level {level}**__", components=components)
         level_ts = datetime.utcnow().timestamp()
 
         while 1:
             try:
-                button_ctx: ComponentContext = await wait_for_component(self.client, components=components, timeout=5)
+                button_ctx: ComponentContext = await wait_for_component(self.client, components=components, timeout=10)
                 
                 if button_ctx.author_id != ctx.author_id:
                     await button_ctx.send("You cannot do that. Start your own game with `/whack_a_brick`.", hidden=True)
@@ -120,23 +129,24 @@ class WhackABrick(commands.Cog):
                 _id = str(button_ctx.custom_id)
                 if _id.startswith("wab_moss_"):
                     if datetime.utcnow().timestamp() - level_ts >= 5:
-                        raise asyncio.TimeoutError
+                        raise asyncio.TimeoutError("Out of time!")
 
                     clicked_coords.append((int(_id[-2]), int(_id[-1])))
-                    components = await self.brick_ingot(coords, clicked_coords)
+                    components = await self.client.loop.create_task(self.brick_ingot(coords, clicked_coords))
                     await button_ctx.edit_origin(content=f"__**Level {level}**__", components=components)
                     if len(clicked_coords) == len(coords):
                         level += 1
                         clicked_coords = []
-                        await asyncio.sleep(3)
-                        components, coords = await self.random_moss(level)
+                        await asyncio.sleep(1.5)
+                        components, coords = await self.client.loop.create_task(self.random_moss(level))
                         await msg.edit(content=f"__**Level {level}**__", components=components)
                         level_ts = datetime.utcnow().timestamp() + 2
                         continue
                 else:
-                    raise asyncio.TimeoutError
+                    raise asyncio.TimeoutError("Incorrect Brick!")
 
-            except asyncio.TimeoutError:
+            except asyncio.TimeoutError as error:
+                await ctx.send(error if error == "Incorrect Brick!" or error == "Out of time!" else "Out of time!", hidden=True)
                 em = discord.Embed(title="You lost!", description=f"**You got to level {level} 🎉**\n> You won: {int(1000*(1.05**(level-1)))}💸", color=self.client.failure)
                 em.set_thumbnail(url=ctx.author.avatar_url_as(static_format="png", size=4096))
                 em.set_footer(text="TN | Whack A Brick", icon_url=self.client.png)

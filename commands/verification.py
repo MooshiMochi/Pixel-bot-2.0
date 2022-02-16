@@ -1,5 +1,4 @@
 import asyncio
-from click import option
 import discord
 import json
 
@@ -44,7 +43,7 @@ class Verification(commands.Cog):
     async def before_get_verification_role(self):
         await self.client.wait_until_ready()
 
-    @cog_ext.cog_slash(name="set_verification_button", description="[STAFF] Add a verification button to a message", guild_ids=const.slash_guild_ids, options=[
+    @cog_ext.cog_slash(name="setup_verification_button", description="[STAFF] Add a verification button to a message", guild_ids=const.slash_guild_ids, options=[
         create_option(name="verification_role", description="The role to give users when the button is pressed", option_type=8, required=True),
         create_option(name="send_as_embed", description="Choose whether to send the message as an embed or not.", option_type=3,
         required=True, choices=[
@@ -55,7 +54,7 @@ class Verification(commands.Cog):
             ])
     @commands.guild_only()
     @commands.has_permissions(manage_roles=True)
-    async def verification_setup(self, ctx, verification_role:discord.Role=None, send_as_embed:str=None, title:str=None, content:str=None):
+    async def setup_verification_button(self, ctx, verification_role:discord.Role=None, send_as_embed:str=None, title:str=None, content:str=None):
         
         await ctx.defer(hidden=True)
 
@@ -191,7 +190,6 @@ class Verification(commands.Cog):
             em.set_footer(text="Pixel | Verification", icon_url=self.client.png)
 
             return await ctx.send(embed=em, hidden=True)
-            
 
 def setup(client):
     client.add_cog(Verification(client))
