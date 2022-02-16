@@ -47,6 +47,36 @@ class WhackABrick(commands.Cog):
     async def before_getting_ready(self):
         await self.client.wait_until_ready()
 
+    async def troll_screen(self):
+        brick = self.emojis["brick"]
+        moss = self.emojis["moss"]
+
+        rows = []
+        coords = []
+        for x in range(random.randint(5, 12)):
+            new_coord = (random.randint(0, 4), random.randint(0, 3))
+            coords.append(new_coord)
+            while 1:
+                if coords.count(new_coord) > 1:
+                    coords.pop(-1)
+                    new_coord = (random.randint(0, 4), random.randint(0, 3))
+                    coords.append(new_coord)
+                else:
+                    break
+
+        for y in range(4):
+            buttons = []
+            for x in range(5):
+                btn = create_button(
+                    custom_id=f"wab_troll_{uuid.uuid4()}",
+                    style=ButtonStyle.green if (x, y) in coords else ButtonStyle.grey,
+                    emoji=moss if (x, y) in coords else brick,
+                    disabled=True
+                )
+                buttons.append(btn)
+            rows.append(create_actionrow(*buttons))
+        return rows
+        
     async def clean_bg(self):
         emoji = self.emojis["brick"]
         rows = []
@@ -77,7 +107,7 @@ class WhackABrick(commands.Cog):
                 else:
                     break
 
-        coords = coords[:9]
+        coords = coords[:10]
         sus_coords = []
         sus_coords_num = int(0.5*len(coords)) if len(coords) >= 3 else 0
         if sus_coords_num >= 1:
@@ -180,8 +210,12 @@ class WhackABrick(commands.Cog):
         level = 1
         clicked_coords = []
         msg = await ctx.send("__**Level 1**__", components=components)
-        await asyncio.sleep(5)
-        
+        await asyncio.sleep(2)
+        await msg.edit(content="__**Level 1**__", components=await self.client.loop.create_task(self.troll_screen()))
+        await asyncio.sleep(1)
+        await msg.edit(content="__**Level 1**__", components=components)
+        await asyncio.sleep(2)
+
         components, coords, sus_coords = await self.client.loop.create_task(self.random_moss(level))
         await msg.edit(content=f"__**Level {level}**__", components=components)
         level_ts = datetime.utcnow().timestamp()
@@ -230,7 +264,7 @@ class WhackABrick(commands.Cog):
                 await ctx.send(str(error)[1:] if str(error).startswith("-") else "Out of time!", hidden=True)
                 win = 0
                 if level > 1:
-                    win = 1000*(1.05**level)
+                    win = 1000*(1.15**level)
                 em = discord.Embed(title="You lost!", description=f"**You got to level {level} 🎉**\n> You won: {int(win)}💸", color=self.client.failure)
                 em.set_thumbnail(url=ctx.author.avatar_url_as(static_format="png", size=4096))
                 em.set_footer(text="TN | Whack A Brick", icon_url=self.client.png)
@@ -245,7 +279,7 @@ class WhackABrick(commands.Cog):
                 return
 
     @cog_slash(name="whack_a_brick", description="Start a 'whack a brick' game", guild_ids=const.slash_guild_ids)
-    @commands.cooldown(10, 300, commands.BucketType.user)
+    @commands.cooldown(10, 60*60, commands.BucketType.user)
     async def whack_a_brick(self, ctx:SlashContext):
         await self.client.wait_until_ready()
         em = discord.Embed(title="How to play!", description=f"Welcome to **Whack a brick**!\n\nThis game is simple. After 5 seconds of the command running, a random\nmossy block will appear on one of the squares.\nYou have to click on it, but be quick as you only have 5 seconds.\nThe more levels you pass, the higher your overall reward in the end.\n\n**Good luck!**\n\n*Do not hit the sus bricks as they will make you lose!* {self.emojis['sus']}", color=self.client.success)
