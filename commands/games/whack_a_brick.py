@@ -1,9 +1,4 @@
-from distutils.ccompiler import new_compiler
-from faulthandler import disable
-from msilib.schema import Error
-from tkinter import Button
 import uuid
-from black import err
 import discord
 import random
 import asyncio
@@ -13,7 +8,6 @@ from discord.ext import commands, tasks
 from discord_slash import SlashContext, ComponentContext
 from discord_slash.cog_ext import cog_slash
 from discord_slash.model import ButtonStyle
-from discord_slash.utils.manage_commands import create_option
 from discord_slash.utils.manage_components import create_actionrow, create_button, wait_for_component
 
 from datetime import datetime
@@ -120,10 +114,6 @@ class WhackABrick(commands.Cog):
                     custom_id=custom_id,
                     style=style
                 )
-                # btn = create_button(emoji=moss if (x, y) in coords else brick,
-                # custom_id=f"wab_moss_{uuid.uuid4()}_{x}{y}" if (x, y) in coords else f"wab_clean_{uuid.uuid4()}",
-                # style=ButtonStyle.green if (x, y) in coords else ButtonStyle.grey,
-                # )
                 buttons.append(btn)
             rows.append(create_actionrow(*buttons))
         return (rows, coords, sus_coords)
@@ -177,12 +167,7 @@ class WhackABrick(commands.Cog):
                     style=style,
                     disabled=disabled
                 )
-                # btn = create_button(
-                #     emoji=stone if (x, y) in clicked_coords else brick if (x, y) not in coords else moss,
-                #     custom_id=f"wab_stone_{uuid.uuid4()}" if (x, y) in clicked_coords else f"wab_clean_{uuid.uuid4()}" if (x, y) not in coords else f"wab_moss_{uuid.uuid4()}_{x}{y}",
-                #     style=ButtonStyle.blue if (x, y) in clicked_coords else ButtonStyle.grey if (x, y) not in coords else ButtonStyle.green,
-                #     disabled=True if (x, y) in clicked_coords or len(coords) == len(clicked_coords) else False
-                # )
+
                 buttons.append(btn)
             rows.append(create_actionrow(*buttons))
         return rows
