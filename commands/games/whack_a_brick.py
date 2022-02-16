@@ -66,7 +66,7 @@ class WhackABrick(commands.Cog):
         for _ in range((level // 5) + 1):
             coords.append((random.randint(0, 4), random.randint(0, 3)))
 
-        coords = coords[:10]
+        coords = coords[:6]
         
         rows = []
         for y in range(4):
