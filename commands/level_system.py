@@ -98,8 +98,11 @@ class LevelSystem(commands.Cog):
                 em = discord.Embed(color=self.client.success, title="You leveld up!",
                 description=f"**Congratulations, you are now level `{self.client.lbs['chatlb'][author_id]['level']}`!")
                 em.set_footer(icon_url=self.client.png, text="Pixel | Level System")
-
-                await msg.reply(emebd=em)
+                try:
+                    await msg.channel.send(emebd=em)
+                except (discord.NotFound, TypeError, AttributeError):
+                    # assuming discord is weird we ignore error (probably message arg not received properly)
+                    pass
                 return
         else:
             self.client.lbs["chatlb"][author_id]["xp"] += xp_per_msg
@@ -313,7 +316,7 @@ class LevelSystem(commands.Cog):
             return await ctx.send("Failed. Amount must be >= 0", hidden=True)
 
         if str(user.id) not in self.client.lbs["chatlb"].keys():
-            level = amount % self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"]
+            level = amount // self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"]
             self.client.lbs["chatlb"][str(user.id)] = {
                     "name": user.name,
                     "display_name": "N/A",
@@ -349,14 +352,15 @@ class LevelSystem(commands.Cog):
             return await ctx.send("That person isn't on the leaderboard therefore you cannot remove any xp from them.", hidden=True)
 
 
-        level = (self.client.lbs["chatlb"][str(user.id)]["total_xp"] - amount  // self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"])
+        level = ((self.client.lbs["chatlb"][str(user.id)]["total_xp"] - amount)  // self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"])
 
         if level >= 0:
             self.client.lbs["chatlb"][str(user.id)]["total_xp"] -= amount
         else:
             self.client.lbs["chatlb"][str(user.id)]["total_xp"] = 0
+            self.client.lbs["chatlb"][str(user.id)]["xp"] = 0
 
-        self.client.lbs["chatlb"][str(user.id)]["level"] = level if level >= self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"] else 0
+        self.client.lbs["chatlb"][str(user.id)]["level"] = level if level >= 0 and level <= self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"] else 0 if level <= 0 else self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"]
 
         return await ctx.send(f"Success! {user.mention}'s xp was decreased by {amount}.", hidden=True)
 
