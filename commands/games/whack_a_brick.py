@@ -66,7 +66,7 @@ class WhackABrick(commands.Cog):
         brick = self.emojis["brick"]
         sus = self.emojis["sus"]
         coords = []
-        for _ in range((level // 5) + 1):
+        for _ in range((level // (random.choice((3, 8)))) + 1):
             new_coord = (random.randint(0, 4), random.randint(0, 3))
             coords.append(new_coord)
             while 1:
@@ -77,9 +77,12 @@ class WhackABrick(commands.Cog):
                 else:
                     break
 
-        coords = coords[:6]
+        coords = coords[:9]
         sus_coords = []
-        sus_coords_num = (level // 5) - 1
+        sus_coords_num = int(0.5*len(coords)) if len(coords) >= 3 else 0
+        if sus_coords_num >= 1:
+            coords = coords[:-sus_coords_num]
+
         if sus_coords_num >= 1:
             while 1:
                 sus_coord = (random.randint(0, 4), random.randint(0, 3))
@@ -200,17 +203,24 @@ class WhackABrick(commands.Cog):
                     clicked_coords.append((int(_id[-2]), int(_id[-1])))
                     components = await self.client.loop.create_task(self.brick_ingot(coords, sus_coords, clicked_coords))
                     
-                    await button_ctx.edit_origin(content=f"__**Level {level}**__", components=components)
+                    try:
+                        await button_ctx.edit_origin(content=f"__**Level {level}**__", components=components)
+                    except discord.NotFound:
+                        raise asyncio.TimeoutError("-Game message was deleted 'w'")
 
                     if _id.startswith("wab_moss_sus_"):
-                        raise asyncio.TimeoutError("-You hit a sus brick. IDIOT!")
+                        raise asyncio.TimeoutError(random.choice(['-How sus! You hit a susbrick and lost all of your winnings on this round.', '-Oh no! You hit a susbrick by mistake and it cost you the game. ', '-Sus! You hit a susbrick and lost the game.']))
 
                     if len(clicked_coords) == len(coords):
                         level += 1
                         clicked_coords = []
                         await asyncio.sleep(1.5)
                         components, coords, sus_coords = await self.client.loop.create_task(self.random_moss(level))
-                        await msg.edit(content=f"__**Level {level}**__", components=components)
+                        try:
+                            await msg.edit(content=f"__**Level {level}**__", components=components)
+                        except discord.NotFound:
+                            raise asyncio.TimeoutError("-Game message was deleted 'w'")
+
                         level_ts = datetime.utcnow().timestamp() + 2
                         continue
                 else:
@@ -228,14 +238,17 @@ class WhackABrick(commands.Cog):
                 if level > 1:
                     await self.client.addcoins(ctx.author_id, win, f"Got to level {level} in whack_a_brick.")
                 await asyncio.sleep(3) if "sus" in str(error) else None 
-                await msg.edit(embed=em, components=[])
+                try:
+                    await msg.edit(embed=em, components=[])
+                except discord.NotFound:
+                    return
                 return
 
     @cog_slash(name="whack_a_brick", description="Start a 'whack a brick' game", guild_ids=const.slash_guild_ids)
     @commands.cooldown(10, 300, commands.BucketType.user)
     async def whack_a_brick(self, ctx:SlashContext):
         await self.client.wait_until_ready()
-        em = discord.Embed(title="How to play!", description="Welcome to **Whack a brick**!\n\nThis game is simple. After 5 seconds of the command running, a random\nmossy block will appear on one of the squares.\nYou have to click on it, but be quick as you only have 5 seconds.\nThe more levels you pass, the higher your overall reward in the end.\n\n**Good luck!**", color=self.client.success)
+        em = discord.Embed(title="How to play!", description=f"Welcome to **Whack a brick**!\n\nThis game is simple. After 5 seconds of the command running, a random\nmossy block will appear on one of the squares.\nYou have to click on it, but be quick as you only have 5 seconds.\nThe more levels you pass, the higher your overall reward in the end.\n\n**Good luck!**\n\n*Do not hit the sus bricks as they will make you lose!* {self.emojis['sus']}", color=self.client.success)
         em.set_footer(text="TN | Whack A Brick", icon_url=self.client.png)
         await ctx.send(embed=em, hidden=True)
 
