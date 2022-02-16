@@ -4,8 +4,8 @@
       "name": "Mooshi",
       "display_name": "Mooshi",
       "disc": "6669",
-      "xp": 727,
-      "total_xp": 5727,
+      "xp": 857,
+      "total_xp": 5857,
       "level": 5,
       "url": "https://cdn.discordapp.com/avatars/383287544336613385/df07ecd630f7d0f1b51403d4d34424e1.png?size=4096"
     },
@@ -22,8 +22,8 @@
       "name": "unsolvedpsycho",
       "display_name": "unsolvedpsycho",
       "disc": "0941",
-      "xp": 15,
-      "total_xp": 15,
+      "xp": 21,
+      "total_xp": 21,
       "level": 0,
       "url": "https://cdn.discordapp.com/avatars/840417629721067520/4f0db85a38b893f4d073cb67358d77b9.png?size=4096"
     },
@@ -31,8 +31,8 @@
       "name": "PixeI",
       "display_name": "PixeI",
       "disc": "4553",
-      "xp": 136,
-      "total_xp": 136,
+      "xp": 242,
+      "total_xp": 242,
       "level": 0,
       "url": "https://cdn.discordapp.com/avatars/230118817412415489/e4d49ab9a97fbaede609bb37d8a4f167.png?size=4096"
     },
@@ -49,8 +49,8 @@
       "name": "xLeo",
       "display_name": "xLeo",
       "disc": "2330",
-      "xp": 44,
-      "total_xp": 44,
+      "xp": 65,
+      "total_xp": 65,
       "level": 0,
       "url": "https://cdn.discordapp.com/avatars/275714283718049793/1ce64dd2af92b0c3c2e3c64bec58297a.png?size=4096"
     }
@@ -65,11 +65,11 @@
     "383287544336613385": 8
   },
   "msgs": {
-    "383287544336613385": 546,
-    "230118817412415489": 203,
+    "383287544336613385": 739,
+    "230118817412415489": 365,
     "932386561117552680": 77,
     "582537632991543307": 21,
-    "840417629721067520": 2,
-    "275714283718049793": 8
+    "840417629721067520": 9,
+    "275714283718049793": 32
   }
 }

@@ -23,3 +23,6 @@ class NotBotSetOwner(commands.CheckFailure):
 
 class InvalidURLError(commands.CheckFailure):
     pass
+
+class RequiredEmojiNotFound(PixelError):
+    pass

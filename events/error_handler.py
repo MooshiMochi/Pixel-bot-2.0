@@ -5,7 +5,6 @@ from utils.exceptions import *
 from datetime import datetime
 from discord_slash import SlashContext
 from discord_slash import error as Error
-import sys
 
 
 class ErrorHandler(commands.Cog):
@@ -20,9 +19,6 @@ class ErrorHandler(commands.Cog):
                 await ctx.defer(hidden=True)
             except Error.AlreadyResponded:
                 pass
-        # # This prevents any commands with local handlers being handled here in on_command_error.
-        # if hasattr(self.client.slash.commands[ctx.command], 'on_error'):
-        #     return
 
         # This prevents any cogs with an overwritten cog_command_error being handled here.
         cog = ctx.cog
@@ -250,7 +246,15 @@ class ErrorHandler(commands.Cog):
                     return await ctx.embed(embed)
                 except discord.HTTPException:
                     return
-
+        
+        elif isinstance(error, RequiredEmojiNotFound):
+            embed = discord.Embed(title="That's not right.",
+                                  description=error,
+                                  color=self.client.failure)
+            try:
+                return await ctx.embed(embed)
+            except discord.HTTPException:
+                return
         # If the error is not recognized
         else:
             try:
@@ -546,6 +550,14 @@ class ErrorHandler(commands.Cog):
                 except discord.HTTPException:
                     return
 
+        elif isinstance(error, RequiredEmojiNotFound):
+            embed = discord.Embed(title="That's not right.",
+                                  description=error,
+                                  color=self.client.failure)
+            try:
+                return await ctx.embed(embed)
+            except discord.HTTPException:
+                return
         # If the error is not recognized
         else:
             ctx.command.reset_cooldown(ctx)
