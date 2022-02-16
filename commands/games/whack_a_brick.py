@@ -74,9 +74,7 @@ class WhackABrick(commands.Cog):
                     coords.append(new_coord)
                 else:
                     break
-
         coords = coords[:6]
-        
         rows = []
         for y in range(4):
             buttons = []

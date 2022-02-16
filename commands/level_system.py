@@ -56,19 +56,24 @@ class LevelSystem(commands.Cog):
 
         await self.client.check_user(msg)
 
-        if str(msg.guild.id) not in self.client.lvlsys_config.keys():
-            self.client.lvlsys_config[str(msg.guild.id)] = {"xp_required": 1000, "max_lvl": 100, "disabled_channels": []}
-        
-        if "disabled_channels" not in self.client.lvlsys_config[str(msg.guild.id)].keys():
-            self.client.lvlsys_config[str(msg.guild.id)]["disabled_channels"] = []
-
-        if msg.channel.id in self.client.lvlsys_config[str(msg.guild.id)]["disabled_channels"]:
+        try:
+            guild_id = str(msg.guild.id)
+        except AttributeError:
             return
 
-        xp_threshold = self.client.lvlsys_config[str(msg.guild.id)].get("xp_required", 1000)
-        max_lvl = self.client.lvlsys_config[str(msg.guild.id)].get("max_lvl", 100)
+        if guild_id not in self.client.lvlsys_config.keys():
+            self.client.lvlsys_config[guild_id] = {"xp_required": 1000, "max_lvl": 100, "disabled_channels": []}
+        
+        if "disabled_channels" not in self.client.lvlsys_config[guild_id].keys():
+            self.client.lvlsys_config[guild_id]["disabled_channels"] = []
 
-        xp_per_msg = self.xp_per_msg.get(str(msg.guild.id), 1)
+        if msg.channel.id in self.client.lvlsys_config[guild_id]["disabled_channels"]:
+            return
+
+        xp_threshold = self.client.lvlsys_config[guild_id].get("xp_required", 1000)
+        max_lvl = self.client.lvlsys_config[guild_id].get("max_lvl", 100)
+
+        xp_per_msg = self.xp_per_msg.get(guild_id, 1)
 
         self.client.lbs["chatlb"][author_id]["total_xp"] += xp_per_msg
         self.client.lbs["chatlb"][author_id]["url"] = str(msg.author.avatar_url_as(static_format="png", size=4096))
@@ -80,15 +85,15 @@ class LevelSystem(commands.Cog):
             if self.client.lbs["chatlb"][author_id]["level"] < max_lvl:
                 self.client.lbs["chatlb"][author_id]["level"] += 1
                 
-                if str(msg.guild.id) in self.level_roles.keys():
+                if guild_id in self.level_roles.keys():
                     
-                    for role in self.level_roles[str(msg.guild.id)].values():
+                    for role in self.level_roles[guild_id].values():
                         await msg.author.remove_roles(role)
 
                     level = str(self.client.lbs["chatlb"][author_id]["level"])
 
-                    if level in self.level_roles[str(msg.guild.id)].keys():
-                        await msg.author.add_roles(self.level_roles[str(msg.guild.id)][level])
+                    if level in self.level_roles[guild_id].keys():
+                        await msg.author.add_roles(self.level_roles[guild_id][level])
 
                 em = discord.Embed(color=self.client.success, title="You leveld up!",
                 description=f"**Congratulations, you are now level `{self.client.lbs['chatlb'][author_id]['level']}`!")

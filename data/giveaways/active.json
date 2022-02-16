@@ -77,5 +77,31 @@
       null,
       null
     ]
+  },
+  "943371966981746728": {
+    "message_id": 943371966981746728,
+    "required_role": {
+      "id": null,
+      "name": null
+    },
+    "time": 1645074205.0,
+    "winners": 1,
+    "host": 230118817412415489,
+    "members": [
+      230118817412415489,
+      830504673769029692
+    ],
+    "guild_id": 932736074139185292,
+    "channel_id": 932736074139185295,
+    "jump_url": "https://discord.com/channels/932736074139185292/932736074139185295/943371966981746728",
+    "prize": "bricks",
+    "finished": false,
+    "all_prizes": [
+      "bricks",
+      null,
+      null,
+      null,
+      null
+    ]
   }
 }
