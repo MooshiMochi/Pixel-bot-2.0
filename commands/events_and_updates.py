@@ -299,7 +299,11 @@ class GuildEvents(commands.Cog):
             role_id = int(str(ctx.custom_id).replace("updates_", "").replace("events_", ""))
             role = ctx.guild.get_role(role_id)
             if role not in ctx.author.roles:
-                await ctx.author.add_roles(role)
+                try:
+                    await ctx.author.add_roles(role)
+                except AttributeError:
+                    # button was probably clicked very late so we will ignore
+                    return
                 if str(ctx.custom_id).startswith("updates_"):
                     _type = "update"
                 else:

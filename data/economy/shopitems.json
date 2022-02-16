@@ -12,20 +12,6 @@
     "min_balance": 1000000,
     "reply_msg": "You will be noticed by Mooshi from now on. Rejoice!"
   },
-  "yes": {
-    "name": "yes",
-    "desc": "\u201d\u201d",
-    "price": 9,
-    "stock": null,
-    "category": "perks",
-    "show_in_inv": false,
-    "best_before": null,
-    "role_to_receive": null,
-    "role_to_remove": null,
-    "min_balance": 0,
-    "reply_msg": null,
-    "role_req": null
-  },
   "\ud83d\udc8e 500 Gems": {
     "name": "\ud83d\udc8e 500 Gems",
     "desc": "**INSTANT DELIVERY** Get 500 gems delivered right to your account balance on Titan Network. Open a ticket to redeem.",
