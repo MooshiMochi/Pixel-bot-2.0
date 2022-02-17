@@ -4,9 +4,9 @@
       "name": "Mooshi",
       "display_name": "Mooshi",
       "disc": "6669",
-      "xp": 5,
-      "total_xp": 71,
-      "level": 8,
+      "xp": 11,
+      "total_xp": 88,
+      "level": 4,
       "url": "https://cdn.discordapp.com/avatars/383287544336613385/df07ecd630f7d0f1b51403d4d34424e1.png?size=4096"
     },
     "186896273742233600": {
@@ -15,7 +15,7 @@
       "disc": "4372",
       "xp": 22,
       "total_xp": 22,
-      "level": 0,
+      "level": 1,
       "url": "https://cdn.discordapp.com/avatars/186896273742233600/2914f51029226c350751f977c90d3545.png?size=4096"
     },
     "840417629721067520": {
@@ -24,7 +24,7 @@
       "disc": "0941",
       "xp": 21,
       "total_xp": 21,
-      "level": 0,
+      "level": 1,
       "url": "https://cdn.discordapp.com/avatars/840417629721067520/4f0db85a38b893f4d073cb67358d77b9.png?size=4096"
     },
     "230118817412415489": {
@@ -33,7 +33,7 @@
       "disc": "4553",
       "xp": 4,
       "total_xp": 379,
-      "level": 2,
+      "level": 18,
       "url": "https://cdn.discordapp.com/avatars/230118817412415489/e4d49ab9a97fbaede609bb37d8a4f167.png?size=4096"
     },
     "932386561117552680": {
@@ -42,16 +42,16 @@
       "disc": "0001",
       "xp": 45,
       "total_xp": 45,
-      "level": 0,
+      "level": 2,
       "url": "https://cdn.discordapp.com/avatars/932386561117552680/65bdecaf85cf488495ea7f9dd5d6ad75.png?size=4096"
     },
     "275714283718049793": {
       "name": "xLeo",
       "display_name": "xLeo",
       "disc": "2330",
-      "xp": 4,
-      "total_xp": 95,
-      "level": 1,
+      "xp": 3,
+      "total_xp": 105,
+      "level": 5,
       "url": "https://cdn.discordapp.com/avatars/275714283718049793/1ce64dd2af92b0c3c2e3c64bec58297a.png?size=4096"
     },
     "830504673769029692": {
@@ -74,12 +74,12 @@
     "383287544336613385": 8
   },
   "msgs": {
-    "383287544336613385": 1074,
+    "383287544336613385": 1104,
     "230118817412415489": 578,
     "932386561117552680": 77,
     "582537632991543307": 21,
     "840417629721067520": 9,
-    "275714283718049793": 73,
+    "275714283718049793": 86,
     "830504673769029692": 24
   }
 }

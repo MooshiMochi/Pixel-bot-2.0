@@ -146,6 +146,11 @@ class LevelSystem(commands.Cog):
         else:
             self.client.lvlsys_config[str(ctx.guild_id)] = {"xp_required": new_xp, "max_lvl": 100, "level_roles": {}}
 
+        for _id in self.client.lbs["chatlb"].keys():
+            self.client.lbs["chatlb"][_id]["level"] = self.client.lbs["chatlb"][_id]["total_xp"] // new_xp
+            if self.client.lbs["chatlb"][_id]["level"] > self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"]:
+                self.client.lbs["chatlb"][_id]["level"] = self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"]
+
         with open("data/level_system/config.json", "w") as f:
                 json.dump(self.client.lvlsys_config, f, indent=2)
 
@@ -169,6 +174,14 @@ class LevelSystem(commands.Cog):
             self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"] = new_level_cap
         else:
             self.client.lvlsys_config[str(ctx.guild_id)] = {"xp_required": 1000, "max_lvl": new_level_cap, "level_roles": {}}
+
+        for _id in self.client.lbs["chatlb"].keys():
+            
+            xp_req = self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"]
+            self.client.lbs["chatlb"][_id]["level"] = self.client.lbs["chatlb"][_id]["total_xp"] // xp_req
+            
+            if self.client.lbs["chatlb"][_id]["level"] > new_level_cap:
+                self.client.lbs["chatlb"][_id]["level"] = self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"]
 
         with open("data/level_system/config.json", "w") as f:
             json.dump(self.client.lvlsys_config, f, indent=2) 
