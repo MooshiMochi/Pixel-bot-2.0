@@ -95,8 +95,8 @@ class LevelSystem(commands.Cog):
                     if level in self.level_roles[guild_id].keys():
                         await msg.author.add_roles(self.level_roles[guild_id][level])
 
-                em = discord.Embed(color=self.client.failure, title="You leveld up!",
-                description=f"**Congratulations, you are now level `{self.client.lbs['chatlb'][author_id]['level']}`!**")
+                em = discord.Embed(color=self.client.failure, title="You leveled up!",
+                description=f"**Congratulations {msg.author.mention}, you are now level `{self.client.lbs['chatlb'][author_id]['level']}`!**")
                 em.set_footer(icon_url=self.client.png, text="TN | Level System")
                 try:
                     await msg.reply(embed=em)

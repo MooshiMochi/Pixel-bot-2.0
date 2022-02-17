@@ -36,7 +36,6 @@ class Checks:
             raise NotGuildOwner(str(ctx.author))
         return commands.check(predicate)
 
-
 class Other:
     @staticmethod
     def roleIsManaged(role):

@@ -1,9 +1,9 @@
 from discord.ext import commands
 
-class PixelError(Exception):
+class TNError(Exception):
     pass
 
-class Forbidden(PixelError):
+class Forbidden(TNError):
     pass
 
 class BadPlayerArgument(commands.BadArgument):
@@ -24,5 +24,11 @@ class NotBotSetOwner(commands.CheckFailure):
 class InvalidURLError(commands.CheckFailure):
     pass
 
-class RequiredEmojiNotFound(PixelError):
+class RequiredEmojiNotFound(TNError):
+    pass
+
+class NotVerified(commands.CheckFailure):
+    pass
+
+class Verified(commands.CheckFailure):
     pass

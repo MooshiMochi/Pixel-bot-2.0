@@ -16,6 +16,7 @@ from discord_slash.utils.manage_components import create_button, create_actionro
 from asyncio import TimeoutError
 
 from constants import const
+from utils.exceptions import NotVerified
 
 from utils.paginator import Paginator
 
@@ -37,6 +38,7 @@ class EconomyCommands(commands.Cog):
         self.cash_logs_channel = self.client.eco_config.get("cash_logs_channel_id", 0)
         self.income_logs_channel = self.client.eco_config.get("income_logs_channel_id", 0)
         self.pay_logs_channel = self.client.eco_config.get("pay_logs_channel_id", 0)
+        self.gems_logs_channel = self.client.eco_config.get("gems_logs_channel_id", 0)
 
         with open("data/economy/shopitems.json", "r") as f:
             self.shopdata = json.load(f)
@@ -54,6 +56,7 @@ class EconomyCommands(commands.Cog):
         self.cash_logs_channel = self.guild.get_channel(self.cash_logs_channel)
         self.income_logs_channel = self.guild.get_channel(self.income_logs_channel)
         self.pay_logs_channel = self.guild.get_channel(self.pay_logs_channel)
+        self.gems_logs_channel = self.guild.get_channel(self.gems_logs_channel)
         self.update_loop.start()
         self.isready = True
 
@@ -98,7 +101,10 @@ class EconomyCommands(commands.Cog):
 
             if _type == "pay_logs":
                 channel = self.pay_logs_channel
-            
+
+            elif _type == "gems_logs":
+                channel = self.gems_logs_channel
+
             id1 = str(member).replace("<@", "").replace("!", "").replace(">", "")
             try:
                 await self.check_user(id1)
@@ -111,7 +117,11 @@ class EconomyCommands(commands.Cog):
                                   color=self.client.failure)
 
             embed.set_footer(text="TN | Economy", icon_url=self.client.png)
-            await channel.send(embed=embed)
+            if _type != "gems_logs":
+                msg = await channel.send(embed=embed)
+            else:
+                msg = await channel.send(content="Please react with ✅ once you give their 💎.", embed=embed)
+                await msg.add_reaction("✅")
 
         log_to_add = {"money_before": e['wallet'] + e['bank'] - amount,
                     "money_after": e['wallet'] + e['bank'],
@@ -191,13 +201,15 @@ class EconomyCommands(commands.Cog):
         create_option(name="cash_logs", description="Log users using their money", option_type=5, required=True),
         create_option(name="income_logs", description="Log users getting money from games, etc", option_type=5, required=True),
         create_option(name="pay_logs", description="Log staff using /add_money and /remove_money", option_type=5, required=True),
+        create_option(name="gems_logs", description="Log users buying titan gems", option_type=5, required=True),
         create_option(name="cash_logs_channel", description="The channel to send the 'cash logs' in", option_type=7, required=False),
         create_option(name="income_logs_channel", description="The channel to send the 'income logs' in", option_type=7, required=False),
-        create_option(name="pay_logs_channel", description="The channel to send the 'pay logs' in", option_type=7, required=False)
+        create_option(name="pay_logs_channel", description="The channel to send the 'pay logs' in", option_type=7, required=False),
+        create_option(name="gems_logs_channel", description="The channel to send logs of users buying titan gems in", option_type=7, required=False)
     ])
     @commands.has_permissions(administrator=True)
     @commands.guild_only()
-    async def economy_config(self, ctx:SlashContext, cash_logs:bool=False, income_logs:bool=False, pay_logs:bool=False, cash_logs_channel:discord.TextChannel=None, income_logs_channel:discord.TextChannel=None, pay_logs_channel:discord.TextChannel=None):
+    async def economy_config(self, ctx:SlashContext, cash_logs:bool=False, income_logs:bool=False, pay_logs:bool=False, gems_logs:bool=False, cash_logs_channel:discord.TextChannel=None, income_logs_channel:discord.TextChannel=None, pay_logs_channel:discord.TextChannel=None, gems_logs_channel:discord.TextChannel=None):
         await ctx.defer(hidden=True)
 
         em = discord.Embed(color=self.client.failure, title="Economy Config Finished", description="")
@@ -242,6 +254,20 @@ class EconomyCommands(commands.Cog):
             em.description += f"**Income Logs:**\n> Activated: `True`\n> Channel: <#{pay_logs_channel.id}>\n\n"
         else:
             em.description += f"**Income Logs:**\n> Activated `{self.client.eco_config['pay_logs']}` (unchanged)\n> Channel: <#{self.client.eco_config['pay_logs_channel_id']}>\n\n"
+
+        if gems_logs:
+            if not gems_logs_channel:
+                return await ctx.send("Param `gems_logs_channel` must be specified if `gems_logs` param is set to **`True`**", hidden=True)
+            elif not isinstance(gems_logs_channel, discord.TextChannel):
+                return await ctx.send("Channel for `gems_logs_channel` MUST be a TEXT CHANNEL", hidden=True)
+            
+            self.client.eco_config["gems_logs"] = gems_logs
+            self.client.eco_config["gems_logs_channel_id"] = gems_logs_channel.id
+            self.gems_logs_channel = gems_logs_channel
+
+            em.description += f"**Gem Logs:**\n> Activated: `True`\n> Channel: <#{gems_logs_channel.id}>\n\n"
+        else:
+            em.description += f"**Gem Logs:**\n> Activated `{self.client.eco_config['gems_logs']}` (unchanged)\n> Channel: <#{self.client.eco_config['gems_logs_channel_id']}>\n\n"
 
         with open("data/economy/config.json", "w") as f:
             json.dump(self.client.eco_config, f, indent=2)
@@ -828,6 +854,10 @@ class EconomyCommands(commands.Cog):
 
         userdata = await self.check_user(ctx.author.id)
 
+        if itemdata.get("category", None) == "gems":
+            if not self.client.players.get(str(ctx.author_id), None):
+                raise NotVerified
+
         if itemdata.get('role_req', None):
             if int(itemdata['role_req']) not in [i.id for i in ctx.author.roles]:
                 embed = discord.Embed(
@@ -865,6 +895,8 @@ class EconomyCommands(commands.Cog):
             if itemdata["price"] < 0:
                 self.client.economydata[str(ctx.author.id)]["wallet"] += abs(itemdata["price"])
 
+
+            await self.economy_log("gems_logs", ctx.author.mention, -itemdata["price"], f"Purchased {itemdata['name']}")
             await self.economy_log("cash_logs", ctx.author.mention, -itemdata["price"], f"Purchased {itemdata['name']}")
 
             if itemdata.get("stock", 0):
@@ -908,6 +940,10 @@ class EconomyCommands(commands.Cog):
                 self.shopdata[key]["stock"] -= 1
 
             self.client.economydata[str(ctx.author.id)]["inventory"].append(itemdata)
+
+            await self.economy_log("gems_logs", ctx.author.mention, -itemdata["price"], f"Purchased {itemdata['name']}")
+            await self.economy_log("cash_logs", ctx.author.mention, -itemdata["price"], f"Purchased {itemdata['name']}")
+
             await ctx.send(
                 f"Added {itemdata['name']} to your inventory. Use /use to use the item or /inventory to see your inventory.", hidden=True)
             return

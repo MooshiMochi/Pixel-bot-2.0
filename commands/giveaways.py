@@ -125,10 +125,10 @@ class Giveaways(commands.Cog):
 
         em = discord.Embed(color=self.client.failure, description="")
         em.set_author(name=title, icon_url="https://media.discordapp.net/attachments/884145972995825724/935929000449167460/MainGift.png")
-        em.description += f"\n\n- {winners} winner(s)"
-        em.description += f"\n- Hosted by: {ctx.author.mention}"
-        em.description += f"\n- Sponsored by: {sponsor.mention}" if sponsor else ""
-        em.description += f"\n- Ends: <t:{int(datetime.utcnow().timestamp() + int_duration)}:R>"
+        em.description += f"\n\n<:lunar_dot:943374901748846602> {winners} winner(s)"
+        em.description += f"\n<:lunar_dot:943374901748846602> Hosted by: {ctx.author.mention}"
+        em.description += f"\n<:lunar_dot:943374901748846602> Sponsored by: {sponsor.mention}" if sponsor else ""
+        em.description += f"\n<:lunar_dot:943374901748846602> Ends: <t:{int(datetime.utcnow().timestamp() + int_duration)}:R>"
         em.description += f"\n\n**Prize**: __{main}{prize}__"
         em.description += f"\nSecond Prize: {alt1}{alt_prize_1}" if alt_prize_1 else ""
         em.description += f"\nThird Prize: {alt2}{alt_prize_2}" if alt_prize_2 else ""
@@ -196,7 +196,6 @@ class Giveaways(commands.Cog):
             if ts - self.giveaways[key]["time"] >= 24*60*60:
                 self.giveaways.pop(key, None)
         
-    
     @resume_giveaways.before_loop
     @save_giveaways.before_loop
     @clear_giveaway_cache.before_loop

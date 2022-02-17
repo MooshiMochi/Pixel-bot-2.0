@@ -7,7 +7,7 @@ from discord.ext import commands, tasks
 
 from discord_slash import SlashContext, ComponentContext
 from discord_slash.cog_ext import cog_slash
-from discord_slash.model import ButtonStyle
+from discord_slash.model import ButtonStyle, BucketType
 from discord_slash.utils.manage_components import create_actionrow, create_button, wait_for_component
 
 from datetime import datetime
@@ -442,7 +442,7 @@ class WhackABrick(commands.Cog):
                 return
 
     @cog_slash(name="whack_a_brick", description="Start a 'whack a brick' game", guild_ids=const.slash_guild_ids)
-    @commands.cooldown(10, 60*60, commands.BucketType.user)
+    @commands.cooldown(10, 60*60, BucketType.member)
     async def whack_a_brick(self, ctx:SlashContext):
         await self.client.wait_until_ready()
         em = discord.Embed(title="How to play!", description=f"Welcome to **Whack a brick**!\n\nThis game is simple. After 5 seconds of the command running, a random\nmossy block will appear on one of the squares.\nYou have to click on it, but be quick as you only have 5 seconds.\nThe more levels you pass, the higher your overall reward in the end.\n\n**Good luck!**\n\n*Do not hit the sus bricks as they will make you lose!* {self.emojis['sus']}", color=self.client.success)

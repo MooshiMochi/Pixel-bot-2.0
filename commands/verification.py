@@ -6,11 +6,15 @@ from constants import const
 
 from discord.ext import commands, tasks
 from utils.dpy import Converters
+from utils.exceptions import NotVerified, Verified
 
-from discord_slash import cog_ext, ComponentContext, SlashContext
+from discord_slash import ComponentContext, SlashContext
+from discord_slash.cog_ext import cog_slash
 from discord_slash.utils.manage_commands import create_option, create_choice
 from discord_slash.utils.manage_components import create_actionrow, create_button
 from discord_slash.model import ButtonStyle
+from discord_slash.error import RequestFailure
+from discord_slash.model import BucketType
 
 
 bool_converter = Converters.Boolean
@@ -38,12 +42,14 @@ class Verification(commands.Cog):
     async def get_verification_role(self):
         if isinstance(self.verification_role, int):
             self.verification_role = self.client.get_guild(const.guild_id).get_role(self.verification_role)
+        
 
     @get_verification_role.before_loop
     async def before_get_verification_role(self):
         await self.client.wait_until_ready()
 
-    @cog_ext.cog_slash(name="setup_verification_button", description="[STAFF] Add a verification button to a message", guild_ids=const.slash_guild_ids, options=[
+
+    @cog_slash(name="setup_verification_button", description="[STAFF] Add a verification button to a message", guild_ids=const.slash_guild_ids, options=[
         create_option(name="verification_role", description="The role to give users when the button is pressed", option_type=8, required=True),
         create_option(name="send_as_embed", description="Choose whether to send the message as an embed or not.", option_type=3,
         required=True, choices=[
@@ -96,7 +102,7 @@ class Verification(commands.Cog):
             json.dump(self.v_role_data, f, indent=2)
 
 
-    @cog_ext.cog_slash(name="set_verification_role", description="[STAFF] The role that will be given to users whenver they get verified", guild_ids=const.slash_guild_ids, options=[create_option(name="role", description="The verification role to be given", option_type=8, required=True)])
+    @cog_slash(name="set_verification_role", description="[STAFF] The role that will be given to users whenver they get verified", guild_ids=const.slash_guild_ids, options=[create_option(name="role", description="The verification role to be given", option_type=8, required=True)])
     @commands.has_permissions(manage_roles=True)
     @commands.guild_only()
     async def set_verification_role(self, ctx:SlashContext, role:discord.Role=None):
@@ -110,13 +116,13 @@ class Verification(commands.Cog):
         await ctx.send("Success!", hidden=True)
     
 
-    @cog_ext.cog_slash(name="verify", description="[STAFF] Forcefully verify a memebr or all unverified members", guild_ids=const.slash_guild_ids, options=[   
+    @cog_slash(name="force_verify", description="[STAFF] Forcefully verify a memebr or all unverified members", guild_ids=const.slash_guild_ids, options=[   
         create_option(name="member", description="The member to verify forcefully", option_type=6, required=False),
         create_option(name="otherwise", description="Forcefully verify everyone that isn't verified", option_type=3, required=False, choices=[create_choice(value="otherwise", name="All unverified members")]) | {"focused": True}
         ])
     @commands.has_permissions(manage_roles=True)
     @commands.guild_only()
-    async def verify(self, ctx:SlashContext, member:discord.Member=None, otherwise:str=None):
+    async def force_verify(self, ctx:SlashContext, member:discord.Member=None, otherwise:str=None):
 
         await self.client.wait_until_ready()
 
@@ -171,7 +177,125 @@ class Verification(commands.Cog):
             description=f"**Attempted to forcefully verify {len(unverified_members)} members.**\n\n{self.client.yes} **|** Successfull verifications: `{success}`\n{self.client.no} **|** Failed verifications: `{fail}`")
             em.set_footer(text="TN | Verification", icon_url=self.client.png)
             await ctx.send(embed=em, hidden=True)
+
+    
+    @cog_slash(name="link", description="Link your discord account with a minecraft account.", guild_ids=const.slash_guild_ids, options=[
+        create_option(name="player_name", description="Your account's username in Minecraft", option_type=3, required=True)
+    ])
+    @commands.cooldown(1, 5, BucketType.member)
+    async def link(self, ctx:SlashContext, player_name:str=None):
+        await ctx.defer(hidden=True)
+
+        if self.client.players.get(str(ctx.author_id), None):
+            raise Verified
+
+        async with self.client.session.get(f"https://api.mojang.com/users/profiles/minecraft/{player_name}") as res:
+            if res.status != 200:
+                raise RequestFailure(res.status, (await res.json())["errorMessage"])
             
+            resp = await res.json()
+        
+        if resp["name"] in self.client.players.values() and self.client.players.get(str(ctx.author_id), None) != resp["name"]:
+            return await ctx.send("It seems someone has already verified with that username. If you believe this is wrong, please contact one of the staff members.", hidden=True)
+        
+        self.client.players[str(ctx.author_id)] = resp["name"]
+        
+        em = discord.Embed(title="Verification Successfull!", description=f"Your account has been linked to `{resp['name']}`.")
+        em.set_author(name=ctx.author, icon_url=ctx.author.avatar_url_as(static_format="png", size=4096))
+        em.set_thumbnail(url=f"http://cravatar.eu/helmhead/{resp['name']}/256.png")
+        em.set_footer(text="TN | Verification", icon_url=self.client.png)
+        em.color = self.client.success
+
+        try:
+            return await ctx.send(embed=em, hidden=True)
+        except (discord.HTTPException, discord.Forbidden):
+            return
+
+    @cog_slash(name="unlink", description="Unlick a minecraft account from your discord account", guild_ids=const.slash_guild_ids)
+    async def unlink(self, ctx:SlashContext):
+        await ctx.defer(hidden=True)
+
+        user = self.client.players.get(str(ctx.author_id), None)
+        if not user:
+            raise NotVerified
+        
+        self.client.players.pop(str(ctx.author_id), None)
+
+        em = discord.Embed(title="Unlinked Successfully!", description=f"Your account has been unlinked from `{user}`.")
+        em.set_author(name=ctx.author, icon_url=ctx.author.avatar_url_as(static_format="png", size=4096))
+        em.set_thumbnail(url=f"http://cravatar.eu/helmhead/{user}/256.png")
+        em.set_footer(text="TN | Verification", icon_url=self.client.png)
+        em.color = self.client.success
+        try:
+            return await ctx.send(embed=em)
+        except (discord.HTTPException, discord.Forbidden):
+            return
+
+    @cog_slash(name="force_link", description="[STAFF] Forcefully link a minecraft username to someone's discord account", guild_ids=const.slash_guild_ids, options=[
+        create_option(name="member", description="The memebr to forcefully link to a minecraft account.", option_type=6, required=True),
+        create_option(name="player_name", description="The minecraft username that they will be linked to", option_type=3, required=True)
+    ])
+    @commands.cooldown(1, 5, BucketType.guild)
+    @commands.has_permissions(manage_nicknames=True)
+    async def force_link(self, ctx:SlashContext, member:discord.Member=None, player_name:str=None):
+        await ctx.defer(hidden=True)
+
+        async with self.client.session.get(f"https://api.mojang.com/users/profiles/minecraft/{player_name}") as res:
+            if res.status != 200:
+                raise RequestFailure(res.status, (await res.json())["errorMessage"])
+            
+            resp = await res.json()
+        
+        cont = ""
+        if resp["name"] in self.client.players.values() and self.client.players.get(str(member.id), None) != resp["name"]:
+            cont = "It seems someone has already verified with that username. They were unlinked"
+        
+        for key, val in self.client.players.items():
+            if val.lower() == player_name.lower():
+                self.client.players.pop(key, None)
+                break
+
+        self.client.players[str(member.id)] = resp["name"]
+        
+        em = discord.Embed(title="Verification Successfull!", description=f"{member.mention} has been linked to `{resp['name']}`.")
+        em.set_author(name=member, icon_url=member.avatar_url_as(static_format="png", size=4096))
+        em.set_thumbnail(url=f"http://cravatar.eu/helmhead/{resp['name']}/256.png")
+        em.set_footer(text="TN | Verification", icon_url=self.client.png)
+        em.color = self.client.success
+
+        opts = {"embed": em}
+        if cont:
+            opts["content"] = cont
+
+        try:
+            return await ctx.send(**opts, hidden=True)
+        except (discord.HTTPException, discord.Forbidden):
+            return
+
+
+    @cog_slash(name="force_unlink", description="[STAFF] Forcefully unlink a minecraft username from someone's discord account", guild_ids=const.slash_guild_ids, options=[
+        create_option(name="member", description="The memebr to forcefully unlink", option_type=6, required=True)
+    ])
+    @commands.has_permissions(manage_nicknames=True)
+    async def force_unlink(self, ctx:SlashContext, member:discord.Member=None, player_name:str=None):
+        await ctx.defer(hidden=True)
+
+        user = self.client.players.get(str(member.id), None)
+        if not user:
+            raise NotVerified
+        
+        self.client.players.pop(str(member.id), None)
+
+        em = discord.Embed(title="Unlinked Successfully!", description=f"{member.mention} account has been unlinked from `{user}`.")
+        em.set_author(name=member, icon_url=member.avatar_url_as(static_format="png", size=4096))
+        em.set_thumbnail(url=f"http://cravatar.eu/helmhead/{user}/256.png")
+        em.set_footer(text="TN | Verification", icon_url=self.client.png)
+        em.color = self.client.success
+        try:
+            return await ctx.send(embed=em)
+        except (discord.HTTPException, discord.Forbidden):
+            return
+
     
     @commands.Cog.listener()
     async def on_component(self, ctx: ComponentContext):

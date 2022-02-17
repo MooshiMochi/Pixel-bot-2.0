@@ -5,5 +5,7 @@
   "income_logs": true,
   "income_logs_channel_id": 940876218083967037,
   "pay_logs": true,
-  "pay_logs_channel_id": 941104610674880553
+  "pay_logs_channel_id": 941104610674880553,
+  "gems_logs": true,
+  "gems_logs_channel_id": 943996940880867329
 }

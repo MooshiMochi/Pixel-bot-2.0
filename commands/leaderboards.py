@@ -36,6 +36,9 @@ class LeaderboardCommands(commands.Cog):
 
         with open("data/leaderboards.json", "w") as f:
             json.dump(self.client.lbs, f, indent=2)
+
+        with open("data/verified_players.json", "w") as f:
+            json.dump(self.client.players, f, indent=2)
     
     @update_leaderboards.before_loop
     async def before_update_leaderboards(self):

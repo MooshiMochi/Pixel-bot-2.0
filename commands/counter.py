@@ -7,6 +7,7 @@ from discord.ext import commands, tasks
 from discord_slash import SlashContext
 from discord_slash.cog_ext import cog_slash
 from discord_slash.utils.manage_commands import create_option
+from discord_slash.model import BucketType
 
 from datetime import datetime
 
@@ -121,7 +122,7 @@ class Counter(commands.Cog):
     ])        
     @commands.guild_only()
     @commands.has_permissions(manage_channels=True)
-    @commands.cooldown(1, 600, commands.BucketType.guild)
+    @commands.cooldown(1, 600, BucketType.guild)
     async def counter_add(self, ctx:SlashContext, name:str=None, days:int=None):
         await ctx.defer(hidden=True)
 
@@ -162,7 +163,7 @@ class Counter(commands.Cog):
     ])
     @commands.guild_only()
     @commands.has_permissions(manage_channels=True)
-    @commands.cooldown(1, 600, commands.BucketType.guild)
+    @commands.cooldown(1, 600, BucketType.guild)
     async def counter_change(self, ctx:SlashContext, vc_id:str=None, new_name:str=None, new_days:str=None):
         await ctx.defer(hidden=True)
 
@@ -211,7 +212,7 @@ class Counter(commands.Cog):
     ])
     @commands.guild_only()
     @commands.has_permissions(manage_channels=True)
-    @commands.cooldown(1, 600, commands.BucketType.guild)
+    @commands.cooldown(1, 600, BucketType.guild)
     async def counter_remove(self, ctx:SlashContext, vc_id:str=None):
         await ctx.defer(hidden=True)
 

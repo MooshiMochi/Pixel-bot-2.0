@@ -321,6 +321,16 @@ with open("data/economy/config.json", "r") as f:
     if "pay_logs_channel_id" not in client.eco_config.keys():
         client.eco_config["pay_logs_channel_id"] = None
 
+    if "gems_logs" not in client.eco_config.keys():
+        client.eco_config["gems_logs"] = False
+    
+    if "gems_logs_channel_id" not in client.eco_config.keys():
+        client.eco_config["gems_logs_channel_id"] = None
+
+
+with open("data/verified_players.json", "r") as f:
+    client.players = json.load(f)
+
 
 client.load_extension('utils.logger')
 client.logger = client.get_cog('Logger')
