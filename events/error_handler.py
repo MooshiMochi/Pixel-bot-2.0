@@ -334,7 +334,7 @@ class ErrorHandler(commands.Cog):
         if isinstance(error, commands.CommandNotFound):
             return  # we dont need to reset the cooldown, it doesnt exist
 
-        elif isinstance(error, discord.NotFound) or isinstance(error, discord.Forbidden):
+        elif isinstance(error, (discord.NotFound, discord.errors.NotFound)) or isinstance(error, (discord.Forbidden, discord.errors.Forbidden)):
             # probably because a message got deleted, so we'll ignore it.
             return ctx.command.reset_cooldown(ctx)
 
