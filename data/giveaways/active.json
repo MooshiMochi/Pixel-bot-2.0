@@ -95,7 +95,7 @@
     "channel_id": 932736074139185295,
     "jump_url": "https://discord.com/channels/932736074139185292/932736074139185295/943371966981746728",
     "prize": "bricks",
-    "finished": false,
+    "finished": true,
     "all_prizes": [
       "bricks",
       null,

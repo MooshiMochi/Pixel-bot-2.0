@@ -106,13 +106,13 @@ class LeaderboardCommands(commands.Cog):
         em.set_footer(text=f"TN | {footer}", icon_url=self.client.png)
 
         if leaderboard == "mm_casual":
-            ad = f"The leaderboard for the biggest 'Minecraft Madness' (casual) winners in Pixels Minecraft Lounge.\n\n"
+            ad = f"The leaderboard for the biggest 'Minecraft Madness' (casual) winners in Titan Network Lounge.\n\n"
 
         elif leaderboard == "mm_tournament":
-            ad = f"The leaderboard for the biggest 'Minecraft Madness' (tournaments) winners in Pixels Minecraft Lounge for month #{self.client.payouts['mm']['month']}. The top 10 biggest winners win cash prizes every month!\n\n*Wins only count for Minecraft Madness Tournaments\n\n1st of every month at 00:01/12 AM EST and all monthly tournament winners are reset*\n\n"
+            ad = f"The leaderboard for the biggest 'Minecraft Madness' (tournaments) winners in Titan Network Lounge for month #{self.client.payouts['mm']['month']}. The top 10 biggest winners win cash prizes every month!\n\n*Wins only count for Minecraft Madness Tournaments\n\n1st of every month at 00:01/12 AM EST and all monthly tournament winners are reset*\n\n"
 
         elif leaderboard == "msgs":
-            ad = f"The leaderboard for the biggest chatters in Pixels Minecraft Lounge for week #{self.client.payouts['msgs']['month']}.\nThe top 10 chatters win cash prizes in the games rooms every week!\n*Messages only count in lounge channels*\n\n*Weeks end Monday 00:01/12 AM EST and all weekly messages are reset*\n\n"
+            ad = f"The leaderboard for the biggest chatters in Titan Network Lounge for week #{self.client.payouts['msgs']['month']}.\nThe top 10 chatters win cash prizes in the games rooms every week!\n*Messages only count in lounge channels*\n\n*Weeks end Monday 00:01/12 AM EST and all weekly messages are reset*\n\n"
 
         else:
             ad = ""

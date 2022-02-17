@@ -72,7 +72,7 @@ class Verification(commands.Cog):
 
         if send_as_embed:
             em = discord.Embed(color=self.client.success)
-            em.set_footer(text="Pixel | Verification", icon_url=self.client.png)
+            em.set_footer(text="TN | Verification", icon_url=self.client.png)
             em.description = content
 
             if title:
@@ -187,7 +187,7 @@ class Verification(commands.Cog):
                 em = discord.Embed(color=self.client.success, description="You are now verified!")
                 await ctx.author.add_roles(self.verification_role)
 
-            em.set_footer(text="Pixel | Verification", icon_url=self.client.png)
+            em.set_footer(text="TN | Verification", icon_url=self.client.png)
 
             return await ctx.send(embed=em, hidden=True)
 

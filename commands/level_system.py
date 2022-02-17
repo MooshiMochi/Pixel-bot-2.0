@@ -97,7 +97,7 @@ class LevelSystem(commands.Cog):
 
                 em = discord.Embed(color=self.client.failure, title="You leveld up!",
                 description=f"**Congratulations, you are now level `{self.client.lbs['chatlb'][author_id]['level']}`!**")
-                em.set_footer(icon_url=self.client.png, text="Pixel | Level System")
+                em.set_footer(icon_url=self.client.png, text="TN | Level System")
                 try:
                     await msg.reply(embed=em)
                 except (discord.NotFound, TypeError, AttributeError):

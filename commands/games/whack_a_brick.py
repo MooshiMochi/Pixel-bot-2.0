@@ -117,8 +117,8 @@ class WhackABrick(commands.Cog):
         extra_coord = ()
         extra_emot = None
 
-        _choice = random.randint(1, 50)
-        if _choice == 35:
+        _choice = random.randint(1, 5)
+        if _choice == 3:
             extra_emot = random.choice(("cash", "bomb", "hide", "moyai"))
 
         coords = []
