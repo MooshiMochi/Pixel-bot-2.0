@@ -3,6 +3,7 @@ import asyncio
 import json
 import random
 
+from discord import AllowedMentions
 from discord.ext import commands, tasks
 
 from discord_slash import SlashContext, ComponentContext
@@ -130,10 +131,10 @@ class Giveaways(commands.Cog):
         em.description += f"\n<:lunar_dot:943374901748846602> Sponsored by: {sponsor.mention}" if sponsor else ""
         em.description += f"\n<:lunar_dot:943374901748846602> Ends: <t:{int(datetime.utcnow().timestamp() + int_duration)}:R>"
         em.description += f"\n\n**Prize**: __{main}{prize}__"
-        em.description += f"\nSecond Prize: {alt1}{alt_prize_1}" if alt_prize_1 else ""
-        em.description += f"\nThird Prize: {alt2}{alt_prize_2}" if alt_prize_2 else ""
-        em.description += f"\nFourth Prize: {alt3}{alt_prize_3}" if alt_prize_3 else ""
-        em.description += f"\nFifth Prize: {alt4}{alt_prize_4}" if alt_prize_4 else ""
+        em.description += f"\n**Second Prize**: __{alt1}{alt_prize_1}__" if alt_prize_1 else ""
+        em.description += f"\n**Third Prize**: __{alt2}{alt_prize_2}__" if alt_prize_2 else ""
+        em.description += f"\n**Fourth Prize**: __{alt3}{alt_prize_3}__" if alt_prize_3 else ""
+        em.description += f"\n**Fifth Prize**: __{alt4}{alt_prize_4}__" if alt_prize_4 else ""
         em.description += f"\nThe winner(s) of this giveaway will win all listed prizes" if any((alt_prize_1, alt_prize_2, alt_prize_3, alt_prize_4)) else ""
         em.description += f"\n\nClick the button below to enter the giveaway!"
 
@@ -142,7 +143,7 @@ class Giveaways(commands.Cog):
 
         try:
             
-            msg = await channel.send(content=f"{self.party} **GIVEAWAY** {self.party} {pings}", embed=em, components=[action_row])
+            msg = await channel.send(content=f"{self.party} **GIVEAWAY** {self.party} {pings}", embed=em, components=[action_row], allowed_mentions=AllowedMentions(roles=True))
         except discord.HTTPException:
             return await ctx.send("I do not have enough permissions to create a giveaway in that channel.", hidden=True)
 
@@ -269,16 +270,23 @@ class Giveaways(commands.Cog):
         host = guild.get_member(data['host'])
 
         self.giveaways[key]['finished'] = True
-
-        if not data["members"] or len(data["members"]) == 1 or len(data['members']) <= data["winners"]:
+        #if not data["members"] or len(data["members"]) == 1 or len(data['members']) <= data["winners"]    
+        if not data["members"]:
             em = discord.Embed(color=self.client.warn, description=f"[Your giveaway]({data['jump_url']}) ended without any winners.")
             try:
                 
                 await host.send(embed=em)
                 msg = await channel.fetch_message(int(key))
+
+                fill = ""
+                if len(data["all_prizes"]) > 1:
+                    for prize in data["all_prizes"]:
+                        if (prize != data["prize"]) and prize:
+                            fill += f", {prize}"
+
                 if msg:
                     edit_em = discord.Embed(color=self.client.warn, description=f"😔 No winners")
-                    edit_em.set_author(name=data['prize'], icon_url="https://media.discordapp.net/attachments/884145972995825724/934498580885041222/PRESENT.png")
+                    edit_em.set_author(name=str(data['prize']) + fill, icon_url="https://media.discordapp.net/attachments/884145972995825724/934498580885041222/PRESENT.png")
                     edit_em.set_footer(text="TN | Giveaways", icon_url=self.client.png)
 
                     await msg.edit(content=f"{self.party}**GIVEAWAY ENDED**{self.party}", embed=edit_em, components=self.timeout_components)
@@ -296,8 +304,8 @@ class Giveaways(commands.Cog):
         fill = ""
         if len(data["all_prizes"]) > 1:
             for prize in data["all_prizes"]:
-                if prize != data["prize"]:
-                    fill += f" {prize}"
+                if (prize != data["prize"]) and prize:
+                    fill += f", {prize}"
 
         public_em = discord.Embed(color=self.client.warn, description=f"You have won a [giveaway]({data['jump_url']}) for **{data['prize']}{fill}**!")
 
@@ -306,9 +314,17 @@ class Giveaways(commands.Cog):
         except discord.HTTPException:
             pass
         
-        host_em = discord.Embed(color=self.client.success, description=f""">>> **Winners:** {', '.join([f"<@!{w_id}>" for w_id in winners])} `({', '.join([str(w_id) for w_id in winners])})`""")
+        host_em = discord.Embed(color=self.client.success, description=f""">>> **Winner(s):** {', '.join([f"<@!{w_id}>" for w_id in winners])} `({', '.join([str(w_id) for w_id in winners])})`""")
         host_em.set_author(icon_url="https://media.discordapp.net/attachments/884145972995825724/933859630185082920/Stars.png", name="Giveaway Ended", url=data['jump_url'])
         host_em.set_footer(text="TN | Giveaways", icon_url=self.client.png)
+
+        fill = f""
+        if len(data["all_prizes"]) > 1:
+            for prize in data["all_prizes"]:
+                if prize:
+                    fill += f"\n<:lunar_dot:943374901748846602> `{prize}`"
+
+        host_em.description += f"\nPrize(s):" + fill
 
         try:
             await host.send(embed=host_em)
@@ -325,8 +341,8 @@ class Giveaways(commands.Cog):
             fill = ""
             if len(data["all_prizes"]) > 1:
                 for prize in data["all_prizes"]:
-                    if prize != data["prize"]:
-                        fill += f" `{prize}`"
+                    if (prize != data["prize"]) and prize:
+                        fill += f", `{prize}`"
 
             em = discord.Embed(color=self.client.warn, description=f"""You have just won a [giveaway]({data['jump_url']}) for `{data['prize']}`{fill} in **{guild.name}**.""")
             em.set_author(name="Giveaway Winner", url=data['jump_url'], icon_url="https://images-ext-2.discordapp.net/external/ZusSn-X4k7HaGEyw0r5Vn1AsLHIMulaePr_mBZvzK0I/%3Fsize%3D128%26quality%3Dlossless/https/cdn.discordapp.com/emojis/894171015888920576.webp")
@@ -360,11 +376,12 @@ class Giveaways(commands.Cog):
             data = self.giveaways.get(str(ctx.origin_message_id), None)
             if not data or datetime.utcnow().timestamp() >= data['time']:
                 
-                edit_em = discord.Embed(color=self.client.warn, description=f"😔 No winners")
+                edit_em = discord.Embed(color=self.client.warn, description=f"An error occured.\n\nThis giveaway is cancelled.")
                 edit_em.set_author(name=data['prize'] if data else "Unknown", icon_url="https://media.discordapp.net/attachments/884145972995825724/934498580885041222/PRESENT.png")
                 edit_em.set_footer(text="TN | Giveaways", icon_url=self.client.png)
 
                 await ctx.edit_origin(content=f"{self.party}**GIVEAWAY ENDED**{self.party}", embed=edit_em, components=self.timeout_components)
+                return
 
             if data["required_role"]['id']:
                 if data["required_role"]['id'] in (r.id for r in ctx.author.roles):
@@ -398,7 +415,7 @@ class Giveaways(commands.Cog):
                 self.giveaways[str(ctx.origin_message_id)]["members"] = list(set(data['members']))
 
             participants = [create_button(
-                label=f"{len(data['members'])} Participants",
+                label=f"{len(data['members'])} Participant(s)",
                 style=ButtonStyle.grey,
                 disabled=True
             )]

@@ -103,5 +103,107 @@
       null,
       null
     ]
+  },
+  "944307949378105364": {
+    "message_id": 944307949378105364,
+    "required_role": {
+      "id": null,
+      "name": null
+    },
+    "time": 1645211259.0,
+    "winners": 3,
+    "host": 383287544336613385,
+    "members": [
+      383287544336613385
+    ],
+    "guild_id": 932736074139185292,
+    "channel_id": 932736074139185295,
+    "jump_url": "https://discord.com/channels/932736074139185292/932736074139185295/944307949378105364",
+    "prize": "Prize 1",
+    "finished": true,
+    "all_prizes": [
+      "Prize 1",
+      "Prize 2",
+      "Prize 3",
+      "Prize 4",
+      "Prize 5"
+    ]
+  },
+  "944310181892866150": {
+    "message_id": 944310181892866150,
+    "required_role": {
+      "id": null,
+      "name": null
+    },
+    "time": 1645211792.0,
+    "winners": 3,
+    "host": 383287544336613385,
+    "members": [
+      383287544336613385
+    ],
+    "guild_id": 932736074139185292,
+    "channel_id": 932736074139185295,
+    "jump_url": "https://discord.com/channels/932736074139185292/932736074139185295/944310181892866150",
+    "prize": "First Prize",
+    "finished": true,
+    "all_prizes": [
+      "First Prize",
+      "Second Prize",
+      "Third Prize",
+      "Fourth Prize",
+      "Fifth Prize"
+    ]
+  },
+  "944314159636578367": {
+    "message_id": 944314159636578367,
+    "required_role": {
+      "id": null,
+      "name": null
+    },
+    "time": 1645212740.0,
+    "winners": 1,
+    "host": 383287544336613385,
+    "members": [
+      840417629721067520,
+      383287544336613385
+    ],
+    "guild_id": 932736074139185292,
+    "channel_id": 932736074139185295,
+    "jump_url": "https://discord.com/channels/932736074139185292/932736074139185295/944314159636578367",
+    "prize": "main prize",
+    "finished": true,
+    "all_prizes": [
+      "main prize",
+      1000,
+      3000000,
+      "Yes, it's a prize",
+      null
+    ]
+  },
+  "944316167529570435": {
+    "message_id": 944316167529570435,
+    "required_role": {
+      "id": null,
+      "name": null
+    },
+    "time": 1645213219.0,
+    "winners": 3,
+    "host": 383287544336613385,
+    "members": [
+      840417629721067520,
+      383287544336613385
+    ],
+    "guild_id": 932736074139185292,
+    "channel_id": 932736074139185295,
+    "jump_url": "https://discord.com/channels/932736074139185292/932736074139185295/944316167529570435",
+    "prize": "aafwafawf",
+    "finished": true,
+    "all_prizes": [
+      "aafwafawf",
+      "aegaegaegae",
+      "aeoighaogjegh",
+      null,
+      null
+    ]
   }
 }
