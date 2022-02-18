@@ -71,10 +71,10 @@ class PayoutTasks(commands.Cog):
                 
                 mem = await self.get_user(int(data[index][0]))
 
-                em = discord.Embed(colro=0x78BB67, description=f"<:Checkmark:886699674277396490> Added 💸**{payouts[0]:,}** to {mem}'s bank balance.")
-                em.set_author(name="Top 10 Monthly Minecraft Maddness Winner Payout", icon_url=self.client.png)
+                # em = discord.Embed(colro=0x78BB67, description=f"<:Checkmark:886699674277396490> Added 💸**{payouts[0]:,}** to {mem}'s bank balance.")
+                # em.set_author(name="Top 10 Monthly Minecraft Maddness Winner Payout", icon_url=self.client.png)
                 
-                await ch.send(embed=em)
+                # await ch.send(embed=em)
 
                 print(f"Added {payouts[0]} coins to {mem} - {data[index][0]} | {self.client.lbs['mm_tournament'][data[index][0]]}")
                 payouts.pop(0)
@@ -115,10 +115,10 @@ class PayoutTasks(commands.Cog):
                 
                 mem = self.get_user(int(data[index][0]))
 
-                em = discord.Embed(colro=0x78BB67, description=f"<:Checkmark:886699674277396490> Added 💸**{payouts[0]:,}** to {mem}'s bank balance.")
-                em.set_author(name="Top 10 Weekly Messagesrs Payout", icon_url=self.client.png)
+                # em = discord.Embed(colro=0x78BB67, description=f"<:Checkmark:886699674277396490> Added 💸**{payouts[0]:,}** to {mem}'s bank balance.")
+                # em.set_author(name="Top 10 Weekly Messagesrs Payout", icon_url=self.client.png)
                 
-                await ch.send(embed=em)
+                # await ch.send(embed=em)
 
                 print(f"Added {payouts[0]} coins to {mem} | {data[index][1]}")
                 payouts.pop(0)
