@@ -23,7 +23,7 @@ class Giveaways(commands.Cog):
     def __init__(self, client):
         self.client = client
         
-        self.party = "🎉"
+        self.party = "🎁"
 
         with open("data/giveaways/active.json", "r") as f:
             self.giveaways = json.load(f)
@@ -124,7 +124,7 @@ class Giveaways(commands.Cog):
         except (ValueError, TypeError):
             alt4 = ""
 
-        em = discord.Embed(color=self.client.failure, description="")
+        em = discord.Embed(color=self.client.success, description="")
         em.set_author(name=title, icon_url="https://media.discordapp.net/attachments/884145972995825724/935929000449167460/MainGift.png")
         em.description += f"\n\n<:lunar_dot:943374901748846602> {winners} winner(s)"
         em.description += f"\n<:lunar_dot:943374901748846602> Hosted by: {ctx.author.mention}"
@@ -285,7 +285,7 @@ class Giveaways(commands.Cog):
                             fill += f", {prize}"
 
                 if msg:
-                    edit_em = discord.Embed(color=self.client.warn, description=f"😔 No winners")
+                    edit_em = discord.Embed(color=self.client.failure, description=f"😔 No winners")
                     edit_em.set_author(name=str(data['prize']) + fill, icon_url="https://media.discordapp.net/attachments/884145972995825724/934498580885041222/PRESENT.png")
                     edit_em.set_footer(text="TN | Giveaways", icon_url=self.client.png)
 
@@ -354,7 +354,7 @@ class Giveaways(commands.Cog):
             except discord.HTTPException:
                 pass
 
-        edit_em = discord.Embed(color=self.client.warn, description=f"""> **Winners:** {', '.join([f"<@!{w_id}>" for w_id in winners])}""")
+        edit_em = discord.Embed(color=self.client.failure, description=f"""> **Winners:** {', '.join([f"<@!{w_id}>" for w_id in winners])}""")
         edit_em.set_author(name=data['prize'], icon_url="https://media.discordapp.net/attachments/884145972995825724/934498580885041222/PRESENT.png")
         edit_em.set_footer(text="TN | Giveaways", icon_url=self.client.png)
         

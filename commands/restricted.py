@@ -51,7 +51,7 @@ class Restricted(commands.Cog):
         if ctx.invoked_subcommand is None:
             embed=discord.Embed(title="Hmmm...", 
                                 description=f"You seem lost. Try to use / for more commands.",
-                                color=self.client.success)
+                                color=self.client.failure)
             await ctx.embed(embed=embed)
 
     @developer.command(
