@@ -282,7 +282,12 @@ class Verification(commands.Cog):
 
         user = self.client.players.get(str(member.id), None)
         if not user:
-            raise NotVerified
+            embed = discord.Embed(title="Oh no...",
+                                  description=f"It looks like {member.mention} is not linked to any minecraft accounts.", color=self.client.failure)
+            try:
+                return await ctx.embed(embed)
+            except discord.HTTPException:
+                return
         
         self.client.players.pop(str(member.id), None)
 
@@ -296,7 +301,34 @@ class Verification(commands.Cog):
         except (discord.HTTPException, discord.Forbidden):
             return
 
-    
+    @cog_slash(name="account", description="[STAFF] View a member's linked minecraft username", guild_ids=const.slash_guild_ids, options=[
+        create_option(name="member", description="The member's linked account to view", option_type=6, required=True)
+    ])
+    @commands.has_permissions(manage_nicknames=True)
+    async def account(self, ctx:SlashContext, member:discord.Member=None):
+        await ctx.defer(hidden=True)
+
+        user = self.client.players.get(str(member.id), None)
+        if not user:
+            embed = discord.Embed(title="Oh no...",
+                                  description=f"It looks like {member.mention} is not linked to any minecraft accounts.", color=self.client.failure)
+            try:
+                return await ctx.embed(embed)
+            except discord.HTTPException:
+                return
+        
+        self.client.players.pop(str(member.id), None)
+
+        em = discord.Embed(title="Account Info", description=f"{member.mention} is linked to `{user}`.")
+        em.set_author(name=member, icon_url=member.avatar_url_as(static_format="png", size=4096))
+        em.set_thumbnail(url=f"http://cravatar.eu/helmhead/{user}/256.png")
+        em.set_footer(text="TN | Verification", icon_url=self.client.png)
+        em.color = self.client.success
+        try:
+            return await ctx.send(embed=em, hidden=True)
+        except (discord.HTTPException, discord.Forbidden):
+            return
+
     @commands.Cog.listener()
     async def on_component(self, ctx: ComponentContext):
         if ctx.custom_id == "verification_button":

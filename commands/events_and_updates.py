@@ -194,9 +194,19 @@ class GuildEvents(commands.Cog):
             self.events[guild_id]= {str(ts + time): new_event}
         else:
             self.events[guild_id][str(ts + time)] = new_event
+
+        addon = ""
+        if new_event["place_2_prize"]:
+            addon += f"\n> **2nd place:** `{new_event['place_2_prize']}`"
+        if new_event["place_3_prize"]:
+            addon += f"\n> **3rd place:** `{new_event['place_3_prize']}`"
         
-        em = discord.Embed(title="New Update!", description=f"A new event has been scheduled <t:{int(ts+time)}:R>", color=self.client.warn)
-        em.set_footer(text="TN | Events", icon_url=self.client.png)
+        if new_event['max_players']:
+            addon += f"\n\n*Max players for this event are: `{new_event['max_players']}`*"
+
+        em = discord.Embed(title=f'{new_event["event_name"]} event', description=f'This event will be hosted in {new_event["event_location"]} <t:{int(ts + time)}:R> with the following prize(s)\n> **1st place:** `{new_event["prize"]}`{addon}', color=self.client.failure)
+        em.set_footer(text=f"TN | Events", icon_url=self.client.png)
+        em.set_author(name=f"New Event!", icon_url=self.client.png)
 
         buttons = [create_button(
             label="Remind me",
@@ -275,9 +285,10 @@ class GuildEvents(commands.Cog):
             self.updates[guild_id]= {str(ts + time): new_update}
         else:
             self.updates[guild_id][str(ts + time)] = new_update
-        
-        em = discord.Embed(title="New Update!", description=f"A new update has been scheduled <t:{int(ts+time)}:R>", color=self.client.warn)
-        em.set_footer(text="TN | Updates", icon_url=self.client.png)
+
+        em = discord.Embed(title=new_update["title"], description=str(new_update["desc"]) + f"\n\nThis update will take place <t:{int(ts + time)}:R>", color=self.client.failure)
+        em.set_footer(text=f"TN | Updates", icon_url=self.client.png)
+        em.set_author(name=f"New Update!", icon_url=self.client.png)
 
         buttons = [create_button(
             label="Remind me",
@@ -309,9 +320,9 @@ class GuildEvents(commands.Cog):
                 else:
                     _type = "event"
 
-                await ctx.send(f"You will get pinged 5 mins before this {_type}!", hidden=True)
+                await ctx.send(f"You will get pinged 10 mins before this {_type}!", hidden=True)
             else:
-                await ctx.send(f"Already got you on the list of users to ping 5 mins before the {_type}!", hidden=True)
+                await ctx.send(f"Already got you on the list of users to ping 10 mins before the {_type}!", hidden=True)
 
 
 def setup(client):

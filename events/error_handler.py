@@ -45,7 +45,7 @@ class ErrorHandler(commands.Cog):
             except AttributeError:
                 pass
             embed = discord.Embed(title="That's not right.",
-                                  description="You must be verified to use this command.", color=self.client.failure)
+                                  description="You must be verified to use this command.\nUse `/link` to verify.", color=self.client.failure)
             try:
                 return await ctx.embed(embed)
             except discord.HTTPException:
@@ -58,7 +58,7 @@ class ErrorHandler(commands.Cog):
                 pass
 
             embed = discord.Embed(title="That's not right.",
-                                  description="You must be un-verified to use this command.", color=self.client.failure)
+                                  description="You must be un-verified to use this command.\nUse `/unlink` to unverify.", color=self.client.failure)
             try:
                 return await ctx.embed(embed)
             except discord.HTTPException:

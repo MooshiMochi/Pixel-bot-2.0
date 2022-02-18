@@ -282,7 +282,7 @@ class McMadness(commands.Cog):
 
                 await self.clear_variables()
                 await self.event_channel.send(embed=win_em)
-                await self.event_channel.send("Check the win leaderboard with /mm_lb")
+                await self.event_channel.send("Check the win leaderboard with `/lb`")
                 return
 
             elif len(self.participants) == 1:
@@ -308,7 +308,7 @@ class McMadness(commands.Cog):
 
                 await self.clear_variables()
                 await self.event_channel.send(embed=win_em)
-                await self.event_channel.send("Check the win leaderboard with /mm_lb")
+                await self.event_channel.send("Check the win leaderboard with `/lb`")
                 return
 
             self.users_guessed = []; self.eliminated = []

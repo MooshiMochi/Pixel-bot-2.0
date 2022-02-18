@@ -1,4 +1,3 @@
-from turtle import st
 from typing import Iterable, Union
 from asyncio import TimeoutError
 from datetime import datetime
@@ -54,9 +53,7 @@ class Paginator:
         self.button_left_id = btnLeftID; self.button_right_id = btnRightID
         return my_action_row
 
-
     async def run(self):
-
         timeout_buttons = [manage_components.create_button(
             style=ButtonStyle.danger,
             label="Menu timed out.",

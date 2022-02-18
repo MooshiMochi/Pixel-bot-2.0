@@ -1,4 +1,5 @@
 import uuid
+import json
 import discord
 import random
 import asyncio
@@ -8,6 +9,7 @@ from discord.ext import commands, tasks
 from discord_slash import SlashContext, ComponentContext
 from discord_slash.cog_ext import cog_slash
 from discord_slash.model import ButtonStyle, BucketType
+from discord_slash.utils.manage_commands import create_option
 from discord_slash.utils.manage_components import create_actionrow, create_button, wait_for_component
 
 from datetime import datetime
@@ -21,7 +23,19 @@ class WhackABrick(commands.Cog):
 
         self.emojis = {}
 
+        self.free_attempts = {}
+        with open("data/wab.json", "r") as f:
+            self.wab_data = json.load(f)
+        
+        
+        if not "fee" in self.wab_data.keys():
+            self.wab_data["fee"] = 150000
+
+        self.play_price = self.wab_data["fee"]
+
+
         self.getting_ready.start()
+        self.save_wab_data.start()
         "<:stone_brick:943230164362485760>"
         "<:mossy_brick:943230816505454612>"
         "<:stone:943230601232793680>"
@@ -43,6 +57,13 @@ class WhackABrick(commands.Cog):
             self.client.logger.error("Extension whack_a_brick.py was unloaded because the required emoji were not found.")
             self.client.unload_extension("commands.games.whack_a_brick")
 
+    @tasks.loop(minutes=1.5)
+    async def save_wab_data(self):
+        with open("data/wab.json", "w") as f:
+            json.dump(self.wab_data, f, indent=2)
+            
+
+    @save_wab_data.before_loop
     @getting_ready.before_loop
     async def before_getting_ready(self):
         await self.client.wait_until_ready()
@@ -117,9 +138,17 @@ class WhackABrick(commands.Cog):
         extra_coord = ()
         extra_emot = None
 
-        _choice = random.randint(1, 5)
+        _choice = random.randint(1, 3)
         if _choice == 3:
-            extra_emot = random.choice(("cash", "bomb", "hide", "moyai"))
+            probability_choice = random.randint(1, 100)
+            if probability_choice <= 5:
+                extra_emot = "cash"
+            elif 5 < probability_choice <= 30:
+                extra_emot = "hide"
+            elif 30 < probability_choice <= 40:
+                extra_emot = "moyai"
+            elif 40 < probability_choice <= 46:
+                extra_emot = "bomb"
 
         coords = []
         for _ in range((level // (random.choice((3, 8)))) + 1):
@@ -207,7 +236,7 @@ class WhackABrick(commands.Cog):
 
         return (rows, coords, sus_coords, (extra_coord, extra_emot))
 
-    async def brick_ingot(self, coords:list, sus_coords:list, clicked_coords:list, extra_coord:tuple, _id:str):
+    async def brick_ingot(self, coords:list, sus_coords:list, clicked_coords:list, extra_coord:tuple):
         brick = self.emojis["brick"]
         stone = self.emojis["stone"]
         moss = self.emojis["moss"]
@@ -296,7 +325,7 @@ class WhackABrick(commands.Cog):
                         style = ButtonStyle.red
 
                     elif extra_coord[1] == "hide":
-                        emoji = "🕳️"
+                        emoji = str(random.choice(("🕳️", "🏴‍☠️", "🎭", "🎃", "🎱", "🪄", "🔮", "🔐", "🧱", "🔪", "🗑️", "🚧", "🧭", "🚽", "🌫️", "🔥", "❄️", "⚡", "💢", "💥", "⛔", "⭕", "📛", "‼️", "☢️", "☣️", "⚫")))
                         custom_id = f"wab_moss_hide"
                         style = ButtonStyle.red
 
@@ -383,7 +412,7 @@ class WhackABrick(commands.Cog):
                             raise asyncio.TimeoutError("-You are extremely unlucky. It was 1 in 500 chance to lose and you took it head on.")
 
 
-                    components = await self.client.loop.create_task(self.brick_ingot(coords, sus_coords, clicked_coords, extra_coord, _id))
+                    components = await self.client.loop.create_task(self.brick_ingot(coords, sus_coords, clicked_coords, extra_coord))
                     
                     try:
                         await button_ctx.edit_origin(content=f"__**Level {level}**__", components=components)
@@ -432,7 +461,7 @@ class WhackABrick(commands.Cog):
                 em.set_thumbnail(url=ctx.author.avatar_url_as(static_format="png", size=4096))
                 em.set_footer(text="TN | Whack A Brick", icon_url=self.client.png)
 
-                if level > 1:
+                if win != 0:
                     await self.client.addcoins(ctx.author_id, win, f"Got to level {level} in whack_a_brick.")
                 await asyncio.sleep(3) if "sus" in str(error) else None 
                 try:
@@ -441,10 +470,101 @@ class WhackABrick(commands.Cog):
                     return
                 return
 
+    @cog_slash(name="set_brick_price", description="Set the play fee for Whac A Brick", guild_ids=const.slash_guild_ids, options=[create_option(name="price", description="The fee to pay when playing the game", option_type=4, required=True)])
+    @commands.has_permissions(administrator=True)
+    @commands.guild_only()
+    async def set_brick_price(self, ctx:SlashContext, price:int=None):
+        await ctx.defer(hidden=True)
+
+        if price < 0:
+            return await ctx.send("Price cannot be negative", hidden=True)
+        
+        self.play_price = price
+        self.wab_data["fee"] = price
+
+        return await ctx.send(f"Play fee has been set to `{price}`", hidden=True)
+
+
     @cog_slash(name="whack_a_brick", description="Start a 'whack a brick' game", guild_ids=const.slash_guild_ids)
-    @commands.cooldown(10, 60*60, BucketType.member)
+    @commands.cooldown(10, 24*60*60, BucketType.member)
+    @commands.guild_only()
     async def whack_a_brick(self, ctx:SlashContext):
         await self.client.wait_until_ready()
+
+        data = self.wab_data.get(str(ctx.author_id), None)
+        if not data:
+            data = {
+                "ts": datetime.utcnow().timestamp(),
+                "attempts": 3}
+            self.wab_data[str(ctx.author_id)] = data
+        
+        if datetime.utcnow().timestamp() - data["ts"] >= 24 * 60 * 60:
+            self.wab_data[str(ctx.author_id)]["attempts"] = 3
+
+        if data["attempts"] == 0:
+            em = discord.Embed(color=self.client.failure, title=f"Free attempts exhausted.", descrtiption=f"You have exhausted your daily 3 free attempts.\nIf you wish to play the game, it will cost you 150k💸. \n\n**Do you wish to proceed?**")
+            em.set_footer(text=f"TN | Whack A Brick", icon_url=self.client.png)
+
+            buttons = [
+                create_button(style=ButtonStyle.green, label="Continue", custom_id="yes"),
+                create_button(style=ButtonStyle.red, label="Cancel", custom_id="no")
+            ]
+            ar = [create_actionrow(*buttons)]
+
+            msg = await ctx.send(embed=em, components=ar)
+
+            while 1:
+                try:
+                    button_ctx: ComponentContext = await wait_for_component(self.client, msg, ar, timeout=10)
+
+                    if ctx.author_id != button_ctx.author_id:
+                        await button_ctx.send("You are not the author of this command therefore, you cannot use these interactions.", hidden=True)
+                        continue
+
+                    elif button_ctx.custom_id == "yes":
+                        
+                        try:
+                            e = self.client.economydata[str(ctx.author_id)]
+                        except KeyError:
+                            self.economydata[str(ctx.author_id)] = {
+                                "wallet": 0,
+                                "bank": 10000,
+                                "inventory": [],
+                            }
+                            e = self.economydata[str(ctx.author_id)]
+
+                        if e["bank"] < 150000:
+                            await ctx.send("You are too poor to afford this. Deposit some more money into your bank and try again.", hidden=True)
+                            raise asyncio.TimeoutError
+                        else:
+                            await self.client.addcoins(ctx.author_id, -self.play_price, "Purchased 1 play ticket for 'Whack A Brick'")
+                        
+                        await button_ctx.send(f"You have been charged **__{self.play_price}💸__**", hidden=True)
+                        try:
+                            await msg.delete()
+                        except (discord.HTTPException, discord.NotFound, discord.Forbidden):
+                            pass
+                        break
+
+                    elif button_ctx.custom_id == "no":
+                        raise asyncio.TimeoutError
+
+                except asyncio.TimeoutError:
+                    try:
+                        self.client.slash.commands[ctx.command].reset_cooldown(ctx)
+                    except AttributeError:
+                        pass
+
+                    try:
+                        await msg.delete()
+                    except (discord.HTTPException, discord.NotFound):
+                        return
+        else:
+            if data["attempts"] == 3:
+                self.wab_data[str(ctx.author_id)]["ts"] = datetime.utcnow().timestamp()
+            
+            self.wab_data[str(ctx.author_id)]["attempts"] -= 1
+
         em = discord.Embed(title="How to play!", description=f"Welcome to **Whack a brick**!\n\nThis game is simple. After 5 seconds of the command running, a random\nmossy block will appear on one of the squares.\nYou have to click on it, but be quick as you only have 5 seconds.\nThe more levels you pass, the higher your overall reward in the end.\n\n**Good luck!**\n\n*Do not hit the sus bricks as they will make you lose!* {self.emojis['sus']}", color=self.client.success)
         em.set_footer(text="TN | Whack A Brick", icon_url=self.client.png)
         await ctx.send(embed=em, hidden=True)

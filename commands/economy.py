@@ -113,7 +113,7 @@ class EconomyCommands(commands.Cog):
             e = self.client.economydata[str(id1)]
 
             embed = discord.Embed(title="💸 Change",
-                                  description=f"Username: {member}\nAmount: {await self.client.round_int(amount)}\nBefore: {int(e['wallet'] + e['bank'] - amount)}\nNow: {int(e['wallet'] + e['bank'])}\nReason: {reason}",
+                                  description=f"Username: {member}\nAmount: {await self.client.round_int(amount)}\nBefore: {int(e['wallet'] + e['bank'] - amount)}\nNow: {int(e['wallet'] + e['bank'])}\nReason: {reason}\nLinked Account: {self.client.players.get(str(id1), 'Not Verified')}",
                                   color=self.client.failure)
 
             embed.set_footer(text="TN | Economy", icon_url=self.client.png)
