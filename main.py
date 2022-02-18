@@ -142,8 +142,9 @@ class MyClient(commands.Bot):
         if self.eco_config.get("income_logs", False):
             channel_id = self.eco_config.get("income_logs_channel_id", 0)
             if channel_id:
-                guild = self.get_guild(const.guild_id)
-                ch = guild.get_channel(channel_id)
+                # guild = self.get_guild(const.guild_id)
+                # ch = guild.get_channel(channel_id)
+                ch = self.get_channel(channel_id)
                 embed = discord.Embed(title="💸 Income Log",
                                   description=f"Username: <@!{userid}>\nAmount: {await self.round_int(amount)}\nBefore: {int(e['wallet'] + e['bank'] - amount)}\nNow: {int(e['wallet'] + e['bank'])}\nReason: {reason}",
                                   color=self.failure)

@@ -94,10 +94,10 @@ class McMadness(commands.Cog):
 
     @tasks.loop(count=1)
     async def get_ready(self):
-        guild = self.client.get_guild(const.guild_id)
-        self.event_channel = guild.get_channel(self.mm_channel_id)
-        self.mm_channel = guild.get_channel(self.mm_channel_id)
-        self.tournament_channel = guild.get_channel(self.tournament_id)
+        
+        self.event_channel = self.client.get_channel(self.mm_channel_id)
+        self.mm_channel = self.client.get_channel(self.mm_channel_id)
+        self.tournament_channel = self.client.get_channel(self.tournament_id)
         self.game_explanation = (discord.Embed(color=self.client.failure, title="Welcome to 'Minecraft Madness'!",
         description="This is a 'Minecraft Trivia Quiz' where people compete against\neach other to win the top prize (if there is one).\n\n"
         "You will be asked a series of multiple choice questions with increasing difficulty. You have to answer them by pressing the correct button.\n"

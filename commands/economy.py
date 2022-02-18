@@ -27,8 +27,6 @@ class EconomyCommands(commands.Cog):
         self.client = client
         self.isready = False
 
-        self.guild = const.guild_id
-
         with open("data/economy/config.json", "r") as f:
             self.client.eco_config = json.load(f)
 
@@ -52,11 +50,10 @@ class EconomyCommands(commands.Cog):
     @tasks.loop(count=1)
     async def on_ready_replacement(self):
         
-        self.guild = self.client.get_guild(self.guild)
-        self.cash_logs_channel = self.guild.get_channel(self.cash_logs_channel)
-        self.income_logs_channel = self.guild.get_channel(self.income_logs_channel)
-        self.pay_logs_channel = self.guild.get_channel(self.pay_logs_channel)
-        self.gems_logs_channel = self.guild.get_channel(self.gems_logs_channel)
+        self.cash_logs_channel = self.client.get_channel(self.cash_logs_channel)
+        self.income_logs_channel = self.client.get_channel(self.income_logs_channel)
+        self.pay_logs_channel = self.client.get_channel(self.pay_logs_channel)
+        self.gems_logs_channel = self.client.get_channel(self.gems_logs_channel)
         self.update_loop.start()
         self.isready = True
 

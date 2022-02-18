@@ -42,7 +42,7 @@ class WhackABrick(commands.Cog):
 
     @tasks.loop(count=1)
     async def getting_ready(self):
-        guild = self.client.get_guild(const.guild_id)
+        guild = self.client.get_guild(const.emotes_guild_id)
         for emoji in guild.emojis:
             if emoji.name == "stone_brick" and emoji.id == 943230164362485760:
                 self.emojis["brick"] = emoji

@@ -41,9 +41,9 @@ class Suggestions(commands.Cog):
 
     @tasks.loop(count=1)
     async def get_ready(self):
-        guild = self.client.get_guild(const.guild_id)
-        self.suggestions_channel = guild.get_channel(self.suggestions_channel) if self.suggestions_channel else None
-        self.staff_vote_channel = guild.get_channel(self.staff_vote_channel) if self.staff_vote_channel else None
+        # guild = self.client.get_guild(const.guild_id)
+        self.suggestions_channel = self.client.get_channel(self.suggestions_channel) if self.suggestions_channel else None
+        self.staff_vote_channel = self.client.get_channel(self.staff_vote_channel) if self.staff_vote_channel else None
 
     @get_ready.before_loop
     async def before_getting_ready(self):
