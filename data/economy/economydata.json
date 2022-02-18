@@ -1,7 +1,7 @@
 {
   "383287544336613385": {
-    "wallet": 9874043192,
-    "bank": 6606666.173491049,
+    "wallet": 9873543192,
+    "bank": 6406666.173491049,
     "inventory": [
       {
         "name": "yes",
@@ -24,6 +24,20 @@
         "price": 9,
         "stock": null,
         "category": "perks",
+        "show_in_inv": true,
+        "best_before": null,
+        "role_to_receive": null,
+        "role_to_remove": null,
+        "min_balance": 0,
+        "reply_msg": null,
+        "role_req": null
+      },
+      {
+        "name": "\ud83d\udc8e 500 Gems",
+        "desc": "**INSTANT DELIVERY** Get 500 gems delivered right to your account balance on Titan Network. Open a ticket to redeem.",
+        "price": 500000,
+        "stock": null,
+        "category": "gems",
         "show_in_inv": true,
         "best_before": null,
         "role_to_receive": null,
@@ -77,7 +91,7 @@
     ]
   },
   "230118817412415489": {
-    "wallet": 9996,
+    "wallet": 499509996,
     "bank": 358923.12014720036,
     "inventory": [
       {
@@ -94,6 +108,20 @@
         "reply_msg": null,
         "role_req": null,
         "count": 1
+      },
+      {
+        "name": "\ud83d\udc8e 500 Gems",
+        "desc": "**INSTANT DELIVERY** Get 500 gems delivered right to your account balance on Titan Network. Open a ticket to redeem.",
+        "price": 500000,
+        "stock": null,
+        "category": "gems",
+        "show_in_inv": true,
+        "best_before": null,
+        "role_to_receive": null,
+        "role_to_remove": null,
+        "min_balance": 0,
+        "reply_msg": null,
+        "role_req": null
       }
     ]
   },

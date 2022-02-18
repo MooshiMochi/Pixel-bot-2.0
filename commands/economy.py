@@ -77,6 +77,9 @@ class EconomyCommands(commands.Cog):
         with open("data/economy/shopitems.json", "w") as f:
             json.dump(self.shopdata, f, indent=2)
 
+        with open("data/economy/user_logs.json", "w") as f:
+            json.dump(self.eco_user_logs, f, indent=2)
+
 
     async def check_user(self, authorid):
         if int(self.client.user.id) == int(authorid):
@@ -131,7 +134,8 @@ class EconomyCommands(commands.Cog):
             self.eco_user_logs[str(id1)] = {
                 "pay_logs": [],
                 "income_logs": [],
-                "cash_logs": []
+                "cash_logs": [],
+                "gems_logs": []
                 }
             self.eco_user_logs[str(id1)][_type] = [log_to_add]
         else:
@@ -151,7 +155,8 @@ class EconomyCommands(commands.Cog):
         create_option(name="log_type", description="Type of logs to check", choices=[
             create_choice(value="cash_logs", name="Logs of money used"),
             create_choice(value="pay_logs", name="Logs when staff used /add_money or /remove_money on user"),
-            create_choice(value="income_logs", name="Logs when winning money from games")
+            create_choice(value="income_logs", name="Logs when winning money from games"),
+            create_choice(value="gems_logs", name="Logs when buying Titan Gems 💎")
         ], option_type=3, required=True),
         create_option(name="member", description="The person's logs to check", option_type=6, required=True)
     ])
@@ -167,7 +172,7 @@ class EconomyCommands(commands.Cog):
         if not all_logs:
             return await ctx.send(f"<@!{member_id}> has no economy logs.", hidden=True)
         
-        my_log_type = log_type.replace("cash_logs", "logs of money used").replace("pay_logs", "logs when staff used /add_money or /remove_money on user").replace("income_logs", "logs when winning money from games")
+        my_log_type = log_type.replace("cash_logs", "logs of money used").replace("pay_logs", "logs when staff used /add_money or /remove_money on user").replace("income_logs", "logs when winning money from games").replace("gems_logs", "logs when buying titan gems")
         logs = all_logs.get(log_type, False)
         if not logs:
             return await ctx.send(f"<@!{member_id}> has no {my_log_type}.", hidden=True)
@@ -180,7 +185,7 @@ class EconomyCommands(commands.Cog):
         
             for index, dic in enumerate(logs):
                 if (index + 1) % 10 == 0 or (index+1) == len(logs): 
-                    em.description += f"**Log #{index+1}:**\n\n> Money Before: `{dic['money_before']}`\n> Money After:`{dic['money_after']}`\n> Reason: `{dic['reason']}`"
+                    em.description += f"**Log #{index+1}:**\n\n> Money Before: `{int(dic['money_before'])}`\n> Money After:`{int(dic['money_after'])}`\n> Reason: `{dic['reason']}`"
                 
                     embeds.append(em)
 

@@ -293,7 +293,13 @@ class Giveaways(commands.Cog):
         except ValueError:
             winners = data['members']
 
-        public_em = discord.Embed(color=self.client.warn, description=f"You have won a [giveaway]({data['jump_url']}) for **{data['prize']}**!")
+        fill = ""
+        if len(data["all_prizes"]) > 1:
+            for prize in data["all_prizes"]:
+                if prize != data["prize"]:
+                    fill += f" {prize}"
+
+        public_em = discord.Embed(color=self.client.warn, description=f"You have won a [giveaway]({data['jump_url']}) for **{data['prize']}{fill}**!")
 
         try:
             await channel.send(content=f"""{self.party} • {', '.join([f"<@!{w_id}>" for w_id in winners])}""", embed=public_em)
@@ -316,7 +322,13 @@ class Giveaways(commands.Cog):
 
                 await self.client.addcoins(winner_id, total_coins_to_add, "Won a giveaway")
 
-            em = discord.Embed(color=self.client.warn, description=f"""You have just won a [giveaway]({data['jump_url']}) for `{data['prize']}` in **{guild.name}**.""")
+            fill = ""
+            if len(data["all_prizes"]) > 1:
+                for prize in data["all_prizes"]:
+                    if prize != data["prize"]:
+                        fill += f" `{prize}`"
+
+            em = discord.Embed(color=self.client.warn, description=f"""You have just won a [giveaway]({data['jump_url']}) for `{data['prize']}`{fill} in **{guild.name}**.""")
             em.set_author(name="Giveaway Winner", url=data['jump_url'], icon_url="https://images-ext-2.discordapp.net/external/ZusSn-X4k7HaGEyw0r5Vn1AsLHIMulaePr_mBZvzK0I/%3Fsize%3D128%26quality%3Dlossless/https/cdn.discordapp.com/emojis/894171015888920576.webp")
             em.add_field(name="Information", value=f"> Hosted by: {host.mention} `({data['host']})`")
             em.set_footer(text="TN | Giveaways", icon_url=self.client.png)
