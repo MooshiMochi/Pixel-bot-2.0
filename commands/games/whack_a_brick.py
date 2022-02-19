@@ -526,12 +526,12 @@ class WhackABrick(commands.Cog):
                         try:
                             e = self.client.economydata[str(ctx.author_id)]
                         except KeyError:
-                            self.economydata[str(ctx.author_id)] = {
+                            self.client.economydata[str(ctx.author_id)] = {
                                 "wallet": 0,
                                 "bank": 10000,
                                 "inventory": [],
                             }
-                            e = self.economydata[str(ctx.author_id)]
+                            e = self.client.economydata[str(ctx.author_id)]
 
                         if e["bank"] < 150000:
                             await ctx.send("You are too poor to afford this. Deposit some more money into your bank and try again.", hidden=True)

@@ -100,7 +100,7 @@ class LevelSystem(commands.Cog):
                 em.set_footer(icon_url=self.client.png, text="TN | Level System")
                 try:
                     await msg.reply(embed=em)
-                except (discord.NotFound, TypeError, AttributeError):
+                except (discord.NotFound, TypeError, AttributeError, discord.HTTPException):
                     # assuming discord is weird we ignore error (probably message arg not received properly)
                     pass
                 return
