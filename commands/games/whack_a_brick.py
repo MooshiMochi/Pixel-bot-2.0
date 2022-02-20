@@ -68,35 +68,6 @@ class WhackABrick(commands.Cog):
     async def before_getting_ready(self):
         await self.client.wait_until_ready()
 
-    async def troll_screen(self):
-        brick = self.emojis["brick"]
-        moss = self.emojis["moss"]
-
-        rows = []
-        coords = []
-        for x in range(random.randint(5, 12)):
-            new_coord = (random.randint(0, 4), random.randint(0, 3))
-            coords.append(new_coord)
-            while 1:
-                if coords.count(new_coord) > 1:
-                    coords.pop(-1)
-                    new_coord = (random.randint(0, 4), random.randint(0, 3))
-                    coords.append(new_coord)
-                else:
-                    break
-
-        for y in range(4):
-            buttons = []
-            for x in range(5):
-                btn = create_button(
-                    custom_id=f"wab_troll_{uuid.uuid4()}",
-                    style=ButtonStyle.green if (x, y) in coords else ButtonStyle.grey,
-                    emoji=moss if (x, y) in coords else brick,
-                    disabled=True
-                )
-                buttons.append(btn)
-            rows.append(create_actionrow(*buttons))
-        return rows
         
     async def clean_bg(self):
         emoji = self.emojis["brick"]
@@ -362,11 +333,7 @@ class WhackABrick(commands.Cog):
         clicked_coords = []
         sus_brick_hit = False
         msg = await ctx.send("__**Level 1**__", components=components)
-        await asyncio.sleep(2)
-        await msg.edit(content="__**Level 1**__", components=await self.client.loop.create_task(self.troll_screen()))
-        await asyncio.sleep(1)
-        await msg.edit(content="__**Level 1**__", components=components)
-        await asyncio.sleep(2)
+        await asyncio.sleep(5)
 
         components, coords, sus_coords, extra_coord = await self.client.loop.create_task(self.random_moss(level))
         await msg.edit(content=f"__**Level {level}**__", components=components)
