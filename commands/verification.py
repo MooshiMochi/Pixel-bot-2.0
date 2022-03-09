@@ -1,4 +1,5 @@
 import asyncio
+from tempfile import _TemporaryFileWrapper
 import discord
 import json
 
@@ -41,8 +42,10 @@ class Verification(commands.Cog):
     @tasks.loop(count=1)
     async def get_verification_role(self):
         if isinstance(self.verification_role, int):
-            self.verification_role = self.client.get_guild(const.guild_id).get_role(self.verification_role)
-        
+            try:
+                self.verification_role = self.client.get_guild(const.guild_id).get_role(self.verification_role)
+            except (TypeError, AttributeError):
+                print("Unable to access guild object. Verification will not work!")
 
     @get_verification_role.before_loop
     async def before_get_verification_role(self):

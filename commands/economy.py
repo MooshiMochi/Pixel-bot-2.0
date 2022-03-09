@@ -463,6 +463,8 @@ class EconomyCommands(commands.Cog):
             return await ctx.embed(embed=em, footer="Economy")
 
         if not amount:
+            amount = data["bank"]
+            
             data["wallet"], data["bank"] = data["bank"], 0
 
             with_amount = amount

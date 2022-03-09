@@ -1,7 +1,7 @@
 class Constants:
     def __init__(self):
         self.prefix = "?"
-        self.token = "OTMyNzM1NzQ0MTczMzAxODYx.YeXT2g.5ldJ5PxhZ0w-r0DEiUrOWjW31P8"
+        self.token = "OTMyNzM1NzQ0MTczMzAxODYx.YeXT2g.w9_bJ5QvWokhARpnSGg_fnxQG6M"
         self.unbelievaboattoken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBfaWQiOiI4OTYxMDM2Nzg1ODU0NzMzMDYiLCJpYXQiOjE2MzM3MTg0MzB9.X4awbXMBOgUJW31WC5tq5wwMmPZviEe3hjDawuDknuM"
         
         self.guild_id = 932413718397083678
@@ -34,6 +34,7 @@ class Constants:
             'commands.suggestions',
             'commands.games.whack_a_brick',
             'commands.games.mc_madness',
-            'commands.games.riddles')
+            'commands.games.riddles',
+            'commands.games.coin_flip')
 
 const = Constants()

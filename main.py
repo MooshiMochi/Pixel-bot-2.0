@@ -17,6 +17,12 @@ from discord_slash.error import AlreadyResponded
 
 from constants import const
 
+TEST_MODE = True
+if TEST_MODE:
+    const.guild_id = 932736074139185292
+    const.token = "OTUxMjIwMjU3MTkwNzE1NDIy.YikS5g.Gh5AlktOeDWBb53HuFUEmEoRwzs"
+    const.slash_guild_ids = [const.guild_id]
+
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
 
@@ -272,6 +278,28 @@ class MyClient(commands.Bot):
         msg = f"{h} hours " + msg if h and h != 1 else f"{h} hour " + msg if h else msg
 
         return msg
+
+    @staticmethod
+    async def parse_int(string_amount:str):
+        
+        clean_content = string_amount.replace(" ", "").replace(",", "").lower()
+
+        if clean_content.endswith("k"):
+            rv = float(clean_content.replace("k", "")) * 1e3
+
+        elif clean_content.endswith("m"):
+            rv = float(clean_content.replace("m", "")) * 1e6
+
+        elif clean_content.endswith("b"):
+            rv = float(clean_content.replace("b", "")) * 1e9
+
+        elif clean_content.endswith("t"):
+            rv = float(clean_content.replace("t", "")) * 1e12
+
+        else:
+            rv = float(clean_content)
+
+        return rv
 
 
 client = MyClient(command_prefix=commands.when_mentioned_or(const.prefix), case_insensitive=True,

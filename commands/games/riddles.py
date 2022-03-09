@@ -58,8 +58,10 @@ class Riddles(commands.Cog):
     @tasks.loop(count=1)
     async def get_ready(self):
         guild = self.client.get_guild(const.guild_id)
-        self.main_ch = guild.get_channel(self.main_ch)
-
+        try:
+            self.main_ch = guild.get_channel(self.main_ch)
+        except (TypeError, AttributeError):
+            print("Unable to get guild. Riddles will not work.")
     
     @tasks.loop(minutes=5.0)
     async def run_riddles(self):
