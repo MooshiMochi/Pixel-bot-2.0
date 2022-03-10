@@ -6,6 +6,7 @@ from random import randint
 
 from asyncio import TimeoutError, sleep
 
+from discord import AllowedMentions
 from discord.ext import commands
 
 from discord_slash import SlashContext, ComponentContext
@@ -98,7 +99,7 @@ class CoinFlip(commands.Cog):
 
         prefix_int = await self.client.round_int(p1_bet)
 
-        inv = discord.Embed(color=self.client.failure, description=f"**⚔️ <@!{ctx.author_id}> has invited you to a coin-flip duel!** ⚔️\n\n*{ctx.author.name} bet {prefix_int} 💸*\n\n`You have 30 seconds to reply decide!`")
+        inv = discord.Embed(color=self.client.failure, description=f"**⚔️ <@!{ctx.author_id}> has invited you to a coin-flip duel!** ⚔️\n\n*{ctx.author.name} bet {prefix_int} 💸*\n\n`{member}, you have 30 seconds to decide!`")
         inv.set_footer(text="TN | Coin-Flip", icon_url=self.client.png)
         
         msg_duel = await ctx.send(content=member.mention, embed=inv, components=[self.btns_accept_n_deny])
@@ -134,7 +135,12 @@ class CoinFlip(commands.Cog):
 
             except TimeoutError:
                 self.client.economydata[str(ctx.author_id)]["wallet"] += p1_bet
-                return await ctx.send(f"{member.mention} did not respond to the duel request.")
+                await ctx.send(f"{member.mention} did not respond to the duel request.", allowed_mentions=AllowedMentions(users=False))
+                try:
+                    await msg_duel.delete()
+                except (discord.HTTPException, discord.Forbidden, discord.NotFound):
+                    return
+                return
 
         p2_bet = 0
         while 1:
@@ -146,13 +152,18 @@ class CoinFlip(commands.Cog):
 
                 self.client.economydata[str(ctx.author_id)]["wallet"] += p1_bet
 
+                await sleep(5)
+                try:
+                    await msg_duel.delete()
+                except (discord.HTTPException, discord.Forbidden, discord.NotFound):
+                    return
                 return
 
             elif p2_bet < p1_bet:
-                await duelCtx.send(f"Minimum 💸 you can bet is {p1_bet:,}.")
+                await duelCtx.send(f"Minimum 💸 you can bet is {p1_bet:,}.", delete_after=5)
                 continue
             elif p2_wallet - p2_bet < 0:
-                await duelCtx.send(f"You do not have that much 💸 to bet.")
+                await duelCtx.send(f"You do not have that much 💸 to bet.", delete_after=5)
                 continue
             else:
                 await bet_entry_msg.add_reaction("✅")

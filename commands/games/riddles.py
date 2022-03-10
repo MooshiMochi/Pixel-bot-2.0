@@ -61,8 +61,10 @@ class Riddles(commands.Cog):
         try:
             self.main_ch = guild.get_channel(self.main_ch)
         except (TypeError, AttributeError):
-            print("Unable to get guild. Riddles will not work.")
-    
+            self.client.logger.error("Unloading 'commands.games.riddles'. Failed to get guild object.\nRiddles will not work.")
+            self.client.remove_cog("commands.games.riddles")
+
+
     @tasks.loop(minutes=5.0)
     async def run_riddles(self):
 
