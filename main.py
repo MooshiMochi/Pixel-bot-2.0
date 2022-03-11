@@ -17,7 +17,7 @@ from discord_slash.error import AlreadyResponded
 
 from constants import const
 
-TEST_MODE = True
+TEST_MODE = False
 if TEST_MODE:
     const.guild_id = 932736074139185292
     const.token = "OTUxMjIwMjU3MTkwNzE1NDIy.YikS5g.Gh5AlktOeDWBb53HuFUEmEoRwzs"
