@@ -1,3 +1,4 @@
+from ast import alias
 import subprocess
 import asyncio
 from discord.ext import commands
@@ -18,6 +19,23 @@ class Restricted(commands.Cog):
     def __init__(self, client) -> None:
         self.client = client
         self._last_result = None
+
+    @staticmethod
+    def _url(_id, *, animated: bool = False):
+        """Convert an emote ID to the image URL for that emote."""
+        return str(discord.PartialEmoji(animated=animated, name='', id=_id).url)
+
+    async def grab_emoji(self, url:str):
+        async with self.client.session.get(url) as r:
+            empty_bytes = b''
+            result = empty_bytes
+
+            while True:
+                chunk = await r.content.read(100)
+                if chunk == empty_bytes:
+                    break
+                result += chunk
+        return result
 
     async def run_process(self, command):
         try:
@@ -106,6 +124,36 @@ class Restricted(commands.Cog):
 
         pages = TextPageSource(text).getPages()
         await paginator(pages, ctx).run()
+
+
+    @developer.command(
+        name="get_emoji",
+        help="Re-posess an emoji from a different server.",
+        brief="Re-posess an emoji from a different server.",
+        aliases=["gib", "get"]
+    )
+    @commands.is_owner()
+    @commands.guild_only()
+    async def gib(self, ctx, emoji: discord.PartialEmoji, emoji2=None):
+
+        url = self._url(_id=emoji.id, animated=emoji.animated)
+        result = await self.grab_emoji(url)
+
+        new_emoji = await ctx.guild.create_custom_emoji(name=f"{emoji.name}", image=result)
+        
+        if emoji2:
+
+            url2 = self._url(_id=emoji2.id, animated=emoji2.animated)
+            result2 = await self.grab_emoji(url2)
+
+            new_emoji2 = await ctx.guild.create_custom_emoji(name=f"{emoji2.name}", image=result2)
+
+            return await ctx.send(content=f"{new_emoji} | {new_emoji2}")
+            
+        else:
+            await ctx.send(new_emoji)
+            return
+
 
     @developer.command(
         name='eval',

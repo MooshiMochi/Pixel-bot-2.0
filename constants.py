@@ -36,6 +36,7 @@ class Constants:
             'commands.games.mc_madness',
             'commands.games.riddles',
             'commands.games.coin_flip',
-            'commands.games.burried_treasure')
+            'commands.games.burried_treasure',
+            'commands.games.hidden_cups')
 
 const = Constants()

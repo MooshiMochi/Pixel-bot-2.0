@@ -111,14 +111,14 @@ class BurriedTreasure(commands.Cog):
         em = (
             discord.Embed(
                 color=self.client.failure,
-                description=f"💸 Your bet: **{await self.client.round_int(bet)}**\n\n📜 Game Rules 📜\n\n- You can click on 3 spots in the sand using the buttons below.\n- 3 of these spots contain treasure.\n- If you find one of the spots with treasure, your bet is multiplied by 4!\n- Good luck and have fun!")
+                description=f"💸 Your bet: **{int(bet):,} 💸**\n\n📜 Game Rules 📜\n\n- You can click on 3 spots in the sand using the buttons below.\n- 3 of these spots contain treasure.\n- If you find one of the spots with treasure, your bet is multiplied by 4!\n- Good luck and have fun!")
             .set_footer(text="TN | Burried Treasure", icon_url=self.client.png)
             .set_author(name="🏝️ Burried Treasure")
         )
 
         components = await self.rebuildComponents(buttonStatuses, gameId)
 
-        await msg.edit(embed=em, components=components)
+        await msg.edit(embed=em, components=components, content=None)
 
         while 1:
             try:
@@ -170,8 +170,12 @@ class BurriedTreasure(commands.Cog):
                     await btnCtx.send(embed=new_em, hidden=True)
 
             except asyncio.TimeoutError:
-                return
+                em.title = "⏲️ Game ended due to inactivity"
+                gameEnded = True
+                await self.client.addcoins(ctx.author_id, bet, "`/burried_treasure` was cancelled")
 
+                await msg.edit(embed=em, components=[], content=None)
+                return
 
 def setup(client):
     client.add_cog(BurriedTreasure(client))
