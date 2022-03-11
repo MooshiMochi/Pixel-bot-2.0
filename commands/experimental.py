@@ -68,6 +68,8 @@ class Experimental(commands.Cog):
         if ctx.custom_id != "Restricted":
             return
 
+        print(ctx.component)
+
         await ctx.send(f"You selected {ctx.selected_options}")
 
 

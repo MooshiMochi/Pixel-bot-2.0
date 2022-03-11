@@ -119,9 +119,9 @@ class EconomyCommands(commands.Cog):
             embed.set_footer(text="TN | Economy", icon_url=self.client.png)
             if _type != "gems_logs":
                 msg = await channel.send(embed=embed)
-            else:
-                msg = await channel.send(content="Please react with ✅ once you give their 💎.", embed=embed)
-                await msg.add_reaction("✅")
+            # else:
+            #     msg = await channel.send(content="Please react with ✅ once you give their 💎.", embed=embed)
+            #     await msg.add_reaction("✅")
 
         log_to_add = {"money_before": e['wallet'] + e['bank'] - amount,
                     "money_after": e['wallet'] + e['bank'],
@@ -770,7 +770,7 @@ class EconomyCommands(commands.Cog):
         
         found = False
         for key in self.shopdata.keys():
-            if item_name.lower() in key.lower():
+            if item_name.lower().strip() in key.lower().strip():
                 itemdata = self.shopdata[key]
                 found = True
                 break
@@ -849,7 +849,7 @@ class EconomyCommands(commands.Cog):
 
         found = False
         for key in self.shopdata.keys():
-            if item_name.lower() in key.lower():
+            if item_name.lower().strip() in key.lower().strip():
                 itemdata = self.shopdata[key].copy()
                 found = True
                 break
@@ -898,9 +898,34 @@ class EconomyCommands(commands.Cog):
 
             if itemdata["price"] < 0:
                 self.client.economydata[str(ctx.author.id)]["wallet"] += abs(itemdata["price"])
+        
+            # await self.economy_log("gems_logs", ctx.author.mention, -itemdata["price"], f"Purchased {itemdata['name']}")
+
+            if itemdata["category"] == "gems":
+                
+                if self.client.eco_config["gems_logs"]:
+                    channel = self.gems_logs_channel
+                    
+                    await self.check_user(str(ctx.author_id))
+
+                    member = ctx.author.mention
+
+                    e = self.client.economydata[str(ctx.author_id)]
+
+                    amount = -itemdata['price']
+
+                    reason = f"Purchased {itemdata['name']}"
+
+                    embed = discord.Embed(title="💸 Change",
+                                  description=f"Username: {member}\nAmount: {await self.client.round_int(amount)}\nBefore: {int(e['wallet'] + e['bank'] - amount)}\nNow: {int(e['wallet'] + e['bank'])}\nReason: {reason}\nLinked Account: {self.client.players.get(str(ctx.author_id), 'Not Verified')}",
+                                  color=self.client.failure)
+
+                    embed.set_footer(text="TN | Economy", icon_url=self.client.png)
+
+                    msg = await channel.send(content="Please react with ✅ once you give their 💎.", embed=embed)
+                    await msg.add_reaction("✅")
 
 
-            await self.economy_log("gems_logs", ctx.author.mention, -itemdata["price"], f"Purchased {itemdata['name']}")
             await self.economy_log("cash_logs", ctx.author.mention, -itemdata["price"], f"Purchased {itemdata['name']}")
 
             if itemdata.get("stock", 0):
@@ -948,9 +973,9 @@ class EconomyCommands(commands.Cog):
             await self.economy_log("gems_logs", ctx.author.mention, -itemdata["price"], f"Purchased {itemdata['name']}")
             await self.economy_log("cash_logs", ctx.author.mention, -itemdata["price"], f"Purchased {itemdata['name']}")
 
-            await ctx.send(
+            return await ctx.send(
                 f"Added {itemdata['name']} to your inventory. Use /use to use the item or /inventory to see your inventory.", hidden=True)
-            return
+
 
     @cog_slash(name="delete_item", description="[ADMIN] Delete an item from /shop", guild_ids=const.slash_guild_ids, options=[
         create_option(name="item_name", description="The name of the item to delete", option_type=3, required=True) | {"focused": True}
@@ -1000,7 +1025,7 @@ class EconomyCommands(commands.Cog):
         for itemdata in inventory:
             found = False
             for itemdata1 in gotenbefore:
-                if itemdata["name"] == itemdata1["name"]:
+                if itemdata["name"].strip() == itemdata1["name"].strip():
                     itemdata1["count"] += 1
                     found = True
             if found is False:
@@ -1025,12 +1050,12 @@ class EconomyCommands(commands.Cog):
         found = False
         userdata = await self.check_user(ctx.author.id)
         for item in userdata["inventory"]:
-            if item_name.lower() in item["name"].lower():
+            if item_name.lower().strip() in item["name"].lower().strip():
 
                 if item["min_balance"] is not None:
                     if userdata["wallet"] + userdata["bank"] < item["min_balance"]:
                         return await ctx.send(
-                            f"You need atleast **__{await self.client.round_int(item['min_balance'])}💸__** to use this item.", hidden=True)
+                            f"You need at least **__{await self.client.round_int(item['min_balance'])}💸__** to use this item.", hidden=True)
 
                 itemdata = self.client.economydata[str(ctx.author.id)]["inventory"].pop(userdata["inventory"].index(item))
                 found = True
@@ -1050,6 +1075,22 @@ class EconomyCommands(commands.Cog):
         if itemdata.get("reply_msg", None):
             await ctx.send(itemdata["reply_msg"], hidden=True)
 
+        if itemdata["category"] == "gems":
+                
+            if self.client.eco_config["gems_logs"]:
+                channel = self.gems_logs_channel
+                await self.check_user(str(ctx.author_id))
+                member = ctx.author.mention
+
+                embed = discord.Embed(title="💎 Used",
+                                description=f"Username: {member}\nAmount: {itemdata['name']}\nLinked Account: {self.client.players.get(str(ctx.author_id), 'Not Verified')}",
+                                color=self.client.failure)
+
+                embed.set_footer(text="TN | Economy", icon_url=self.client.png)
+
+                msg = await channel.send(content="Please react with ✅ once you give their 💎.", embed=embed)
+                await msg.add_reaction("✅")
+
         return await ctx.send(f"Used {itemdata['name']} 🥳", hidden=True)
 
 
@@ -1067,7 +1108,7 @@ class EconomyCommands(commands.Cog):
 
         found = False
         for item in userdata["inventory"]:
-            if item_name.lower() in item["name"].lower():
+            if item_name.lower().strip() in item["name"].lower().strip():
                 itemdata = self.client.economydata[str(ctx.author.id)]["inventory"].pop(userdata["inventory"].index(item))
                 self.client.economydata[str(member.id if not isinstance(member, int) else member)]["inventory"].append(itemdata)
                 found = True
@@ -1096,7 +1137,7 @@ class EconomyCommands(commands.Cog):
 
         found = False
         for key in self.shopdata.keys():
-            if item_name.lower() in key.lower():
+            if item_name.lower().strip() in key.lower().strip():
                 itemdata = self.shopdata[key].copy()
                 found = True
                 break
@@ -1124,7 +1165,7 @@ class EconomyCommands(commands.Cog):
 
         found = False
         for key in self.shopdata.keys():
-            if item_name.lower() in key.lower():
+            if item_name.lower().strip() in key.lower().strip():
                 result = self.shopdata.pop(key, False)
                 if result:
                     em = discord.Embed(color=self.client.failure, title="Item deleted", description="This item will no longer appear in stores")

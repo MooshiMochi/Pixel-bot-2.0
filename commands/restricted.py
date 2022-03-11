@@ -1,4 +1,3 @@
-from sre_constants import OP_IGNORE
 import subprocess
 import asyncio
 from discord.ext import commands

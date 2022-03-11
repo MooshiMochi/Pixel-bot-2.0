@@ -1,189 +1,177 @@
-import { CommandInteraction, MessageActionRow, MessageButton, MessageButtonStyleResolvable, MessageEmbed, Snowflake } from "discord.js";
-import { generateId, shuffleArray } from "../util";
-import chunk from 'chunk';
-import UnbelievaboatClient from '../unbelievaboat-api';
+import discord
+import asyncio
 
-/**
- * There are 25 squares on a map and you get 2 tries to click 3 out of the 25.
- * If you find the treasure, then whatever you "bet" on the game example !bt 1000 you would get 4x back.
- * This game is completely random but the stakes are great.
- */
+from random import shuffle
 
-const SQUARES = 25;
-const SUCCESS = 3;
+from uuid import uuid4
 
-/**
- * @param interaction The Discord interaction which triggered the command
- */
-export default async function run (interaction: CommandInteraction, currentPlayers: Set<Snowflake>) {
+from discord.ext import commands
 
-    const member = await interaction.guild?.members.fetch(interaction.user.id)!;
-    if (!member.roles.cache.has(process.env.DISCORD_CASINO_PREMIUM_ROLE_ID)) {
-        interaction.followUp({
-            embeds: [new MessageEmbed().setColor(process.env.EMBED_COLOR).setDescription(`To play this game you must have Casino Premium! Buy Casino Premium in the shop using !shop and !buy premium`)]
-        });
-        return;
-    }
+from discord_slash import SlashContext, ComponentContext
+from discord_slash.cog_ext import cog_slash
+from discord_slash.utils.manage_commands import create_option
+from discord_slash.utils.manage_components import create_button, create_actionrow, wait_for_component
+from discord_slash.model import ButtonStyle
 
-    const bet = interaction.options.getInteger('bet')!;
+from constants import const
 
-    if (bet < 100) {
-        interaction.followUp({
-            embeds: [new MessageEmbed().setColor(process.env.EMBED_COLOR).setDescription('You need to bet at least $100!')]
-        });
-        return;
-    }
 
-    const currentBalance = await UnbelievaboatClient.getUserBalance(process.env.DISCORD_GUILD_ID, interaction.user.id);
-    if (currentBalance.cash < bet) {
-        return void interaction.followUp({
-            embeds: [new MessageEmbed().setColor(process.env.EMBED_COLOR).setTitle(`You need at least **$${bet}** cash to execute this game!`)]
-        });
-    }
+class BurriedTreasure(commands.Cog):
+    def __init__(self, client):
+        self.client = client
 
-    await UnbelievaboatClient.editUserBalance(process.env.DISCORD_GUILD_ID, interaction.user.id, {
-        cash: -bet
-    });
-
-    currentPlayers.add(interaction.user.id);
-
-    let attempts = 0;
-    let gameEnded = false;
-    let gameId = generateId();
-
-    // 0 is hidden AND false
-    // 1 is hidden AND true
-    // 2 is discovered AND true
-    // 3 is discovered AND false
-    let buttonStatuses: number[] = [];
-    for (let i = 0; i < SQUARES; i++) {
-        // add the beginning everything is 0 or 1, with 2 of the 15 buttons true
-        buttonStatuses.push(i < SUCCESS ? 1 : 0);
-    }
-    buttonStatuses = shuffleArray(buttonStatuses);
-
-    const embed = new MessageEmbed()
-        .setAuthor(`🏝️ Buried Treasure`)
-        .setDescription(`💵 Your bet: **$${bet}**\n\n📜 Game Rules 📜\n\n- You can click on 3 spots in the sand using the buttons below.\n- 3 of these spots contain treasure.\n- If you find one of the spots with treasure, your bet is multiplied by 4!\n- Good luck and have fun!`)
-        .setColor(process.env.EMBED_COLOR)
-        .setFooter(process.env.EMBED_FOOTER);
     
-    const rebuildComponents = () => {
-        const components: MessageActionRow[] = [];
-        const buttons: MessageButton[] = [];
-
-        buttonStatuses.forEach((status, index) => {
-            let label = (status === 0 || status === 1) ? '🏝️' : status === 2 ? '💰' : '🏝️';
-            let style: MessageButtonStyleResolvable = (status === 0 || status === 1) ? 'SECONDARY' : status === 2 ? 'SUCCESS' : 'DANGER'
-            buttons.push(
-                new MessageButton()
-                    .setEmoji(label)
-                    .setCustomId(`btn_${gameId}_${status}_${index}`)
-                    .setStyle(style)
-            );
-        });
-
-        const actions = chunk(buttons, 5);
-        actions.forEach((action) => {
-            components.push(
-                new MessageActionRow()
-                    .addComponents(action)
-            )
-        });
-
-        return void interaction.editReply({
-            content: null,
-            embeds: [embed],
-            components
-        });
-    }
-
-    await interaction.followUp({
-        content: '⌛ Your game is loading...'
-    });
-
-    const collector = interaction.channel?.createMessageComponentCollector({
-        filter: (collectedInteraction) => collectedInteraction.customId.startsWith(`btn_${gameId}`),
-        time: 60*60_000
-    });
-
-    collector?.on('collect', async (collectedInteraction) => {
-
-        if (collectedInteraction.user.id !== interaction.user.id) {
-            return void collectedInteraction.reply({
-                ephemeral: true,
-                content: 'You can not interact with this game. Please start your own to do so!'
-            });
-        }
-
-        const [_btn, _gameId, _status, _index] = collectedInteraction.customId.split('_');
-        const status = parseInt(_status);
-        const index = parseInt(_index);
-
-        if (gameEnded) {
-            return void collectedInteraction.reply({
-                ephemeral: true,
-                content: 'This game has been ended. Please start a new one!'
-            });
-        }
-
-        if (status === 2 || status === 3) {
-            return void collectedInteraction.reply({
-                ephemeral: true,
-                content: 'You have already discovered this part of the island!'
-            });
-        }
-
-        if (status === 0) {
-            attempts++;
-            buttonStatuses[index] = 3;
-            if (attempts === SUCCESS) {
-                embed.setTitle('😢 Game lost...');
-                gameEnded = true;
-                currentPlayers.delete(interaction.user.id);
+    async def check_user(self, authorid):
+        if int(self.client.user.id) == int(authorid):
+            return {
+                "wallet": 0,
+                "bank": 0,
+                "inventory": [],
             }
-            rebuildComponents();
-            setTimeout(() => {
-                collector.stop();
-            }, 10 * 60_000);
-            return void collectedInteraction.reply({
-                embeds: [new MessageEmbed().setColor(process.env.EMBED_COLOR).setDescription('🏝️ Unfortunately this part of this island did not include a treasure!' + (gameEnded ? '\n🤞 The game is over. Good luck next time!' : `\nYou have **${SUCCESS - attempts}** more attempts to find the treasure!`))]
-            });
-        }
+        try:
+            return self.client.economydata[str(authorid)]
+        except KeyError:
+            self.client.economydata[str(authorid)] = {
+                "wallet": 0,
+                "bank": 10000,
+                "inventory": [],
+            }
+            return self.client.economydata[str(authorid)]
+    
+    @staticmethod
+    async def rebuildComponents(buttonStatuses:list=[], gameId:str=None):
+        buttons = []
+        chunk = []
 
-        if (status === 1) {
-            buttonStatuses[index] = 2;
-            embed.setTitle('💰 Game won!');
-            gameEnded = true;
-            currentPlayers.delete(interaction.user.id);
-            rebuildComponents();
-            setTimeout(() => {
-                collector.stop();
-            }, 10 * 60_000);
-            await UnbelievaboatClient.editUserBalance(process.env.DISCORD_GUILD_ID, interaction.user.id, {
-                cash: bet*3
-            });
-            return void collectedInteraction.reply({
-                embeds: [new MessageEmbed().setColor(process.env.EMBED_COLOR).setDescription(`💰 Congrats! This part of the island included a treasure! You won **$${bet*4}**!`)]
-            });
-        }
+        for index, status in enumerate(buttonStatuses):
 
-    });
+            emoji = "🏝️" if (status == 0 or status == 1) else "💰" if status == 2 else "🏝️"
 
-    collector?.on('end', async (_collected, reason) => {
-        if (reason === 'time') {
-            embed.setTitle('⏲️ Game ended due to inactivity');
-            gameEnded = true;
-            currentPlayers.delete(interaction.user.id);
-            rebuildComponents();
-            await UnbelievaboatClient.editUserBalance(process.env.DISCORD_GUILD_ID, interaction.user.id, {
-                cash: bet
-            });
-        }
-    });
+            style = ButtonStyle.grey if (status == 0 or status == 1) else ButtonStyle.green if status == 2 else ButtonStyle.red
 
-    setTimeout(() => {
-        rebuildComponents();
-    }, 500);
+            chunk.append(
+                create_button(
+                    style=style,
+                    emoji=emoji,
+                    custom_id=f"BurriedTreasureBtn_{gameId}_{status}_{index}"
+                )
+            )
 
-}
+            if (index+1) % 5 == 0:
+                buttons.append(chunk)
+                chunk = []
+
+        actions = [create_actionrow(*x) for x in buttons] 
+
+        return actions
+
+
+    @cog_slash(name="burried_treasure", description="Bet some 💸 for a chance to gain 4x back", guild_ids=const.slash_guild_ids, options=[
+        create_option(name="bet", description="The amount of 💸 you would like to bet", option_type=3, required=True)
+    ])
+    async def burried_treasure(self, ctx:SlashContext, bet:str=None):
+        
+        SQUARES = 25
+        SUCCESS = 3
+
+        changes = 2    
+
+        bet = await self.client.parse_int(bet)
+
+        failure_em = (
+            discord.Embed(color=self.client.failure, description="")
+            .set_footer(
+                text="TN | Burried Treasure", 
+                icon_url=self.client.png))
+
+        if bet < 100:
+            failure_em.description = "You need at least 100 💸"
+            return await ctx.send(embed=failure_em, hidden=True)
+
+        await self.check_user(ctx.author_id)
+        
+        auth_data = self.client.economydata[str(ctx.author_id)]
+
+        if auth_data["wallet"] < bet:
+            failure_em.description = "**You don't have enough 💸 in your wallet.\nWithdraw some from the bank using `/withdraw`.**"
+            return await ctx.send(embed=failure_em, hidden=True)
+        
+        msg = await ctx.send("⌛ Your game is loading...")
+        
+        await self.client.addcoins(ctx.author_id, -bet, "Bet in `/burried_treasure")
+
+        attempts = 0
+        gameEnded = False
+        gameId = uuid4()
+
+        buttonStatuses = list(map(lambda f: 1 if f < SUCCESS else 0, range(SQUARES)))
+
+        shuffle(buttonStatuses)
+
+        em = (
+            discord.Embed(
+                color=self.client.failure,
+                description=f"💸 Your bet: **{await self.client.round_int(bet)}**\n\n📜 Game Rules 📜\n\n- You can click on 3 spots in the sand using the buttons below.\n- 3 of these spots contain treasure.\n- If you find one of the spots with treasure, your bet is multiplied by 4!\n- Good luck and have fun!")
+            .set_footer(text="TN | Burried Treasure", icon_url=self.client.png)
+            .set_author(name="🏝️ Burried Treasure")
+        )
+
+        components = await self.rebuildComponents(buttonStatuses, gameId)
+
+        await msg.edit(embed=em, components=components)
+
+        while 1:
+            try:
+                btnCtx: ComponentContext = await wait_for_component(self.client, msg, timeout=60*60_000)
+
+                if btnCtx.author_id != ctx.author_id:
+                    await btnCtx.send("You can not interact with this game. Please start your own to do so!")
+                    continue
+
+                _btn, _gameId, _status, _index = btnCtx.custom_id.split("_")
+                status = int(_status)
+                index = int(_index)
+
+                if gameEnded:
+                    await btnCtx.send("This game has ended. Please start a new one!", hidden=True)
+                    continue
+
+                if status in (2, 3):
+                    await btnCtx.send("You have already discovered this part of the island!", hidden=True)
+
+                if status == 0:
+                    attempts += 1
+                    buttonStatuses[index] = 3
+                    if attempts == SUCCESS:
+                        em.title="😢 Game lost..."
+                        gameEnded = True
+            
+                    new_comp = await self.rebuildComponents(buttonStatuses, gameId)
+                    await btnCtx.edit_origin(embed=em, components=new_comp)
+
+                    _em = discord.Embed(color=self.client.failure, description=f"🏝️ Unfortunately this part of this island did not include a treasure!")
+
+                    _em.description += "\n🤞 The game is over. Good luck next time!" if gameEnded else f"\nYou have **{SUCCESS - attempts}** more attempts to find the treasure!"
+
+                    await btnCtx.reply(embed=_em, hidden=True)
+
+                if status == 1:
+                    buttonStatuses[index] = 2
+                    em.title = "💰 Game won!"
+                    gameEnded = True
+
+                    await self.client.addcoins(ctx.author_id, bet*4, "Won 4x bet in /burried_treasure")
+
+                    new_comp = await self.rebuildComponents(buttonStatuses, gameId)
+                    await btnCtx.edit_origin(embed=em, components=new_comp)
+
+                    new_em = discord.Embed(color=self.client.failure, description=f"💰 Congrats! This part of the island included a treasre!\nYou won **{bet*4}** 💸!")
+
+                    await btnCtx.send(embed=new_em, hidden=True)
+
+            except asyncio.TimeoutError:
+                return
+
+
+def setup(client):
+    client.add_cog(BurriedTreasure(client))

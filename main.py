@@ -22,6 +22,7 @@ if TEST_MODE:
     const.guild_id = 932736074139185292
     const.token = "OTUxMjIwMjU3MTkwNzE1NDIy.YikS5g.Gh5AlktOeDWBb53HuFUEmEoRwzs"
     const.slash_guild_ids = [const.guild_id]
+    const.prefix = "."
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)

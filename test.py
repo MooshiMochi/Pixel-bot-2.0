@@ -41,3 +41,21 @@ import random
 
 st = "abcdefghijklmnopqrstuvwxyz"
 print("".join(sorted(random.sample(st, len(st)))) == st)
+
+
+import requests
+
+headers = {"Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBfaWQiOiI4OTYxMDM2Nzg1ODU0NzMzMDYiLCJpYXQiOjE2MzM3MTg0MzB9.X4awbXMBOgUJW31WC5tq5wwMmPZviEe3hjDawuDknuM",
+                   'Accept': 'application/json'}
+
+data = requests.patch(f"https://unbelievaboat.com/api/v1/guilds/865870663038271489/users/383287544336613385",
+                                        headers=headers,
+                                        json={"bank": 50000, "reason": "Testing funds"})
+
+
+# data = requests.patch(f"https://unbelievaboat.com/api/v1/guilds/865870663038271489/users/695182217692839966",
+#                                         headers=headers,
+#                                         json={"bank": -7_999_998_960_265, "reason": "Robbed testing funds"})
+
+resp = data.json()
+print(resp)

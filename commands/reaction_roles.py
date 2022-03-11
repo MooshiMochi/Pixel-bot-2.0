@@ -1,5 +1,4 @@
 import json
-from multiprocessing.sharedctypes import Value
 import re
 from datetime import datetime
 
@@ -13,7 +12,8 @@ from discord.ext.commands import EmojiConverter
 from discord_slash import SlashContext, ComponentContext
 from discord_slash.cog_ext import cog_slash
 from discord_slash.utils import manage_commands
-from discord_slash.utils.manage_components import create_select, create_select_option, create_actionrow
+from discord_slash.model import ButtonStyle
+from discord_slash.utils.manage_components import create_select, create_select_option, create_actionrow, create_button
 
 from constants import const
 
@@ -178,7 +178,15 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
             create_select_option(label=y[0], value=str(y[1]), description="Select me to receive the role") for y in reactions
         ], custom_id="reaction_roles", placeholder=title, max_values=max_role_selections)
 
-        components = [create_actionrow(select)]
+        remove_roles_btn = [
+            create_button(
+                style=ButtonStyle.red,
+                label="Remove roles",
+                custom_id="rr_remove_roles_" + "-".join(list(map(lambda f: str(f[1]), reactions)))
+                )
+        ]
+
+        components = [create_actionrow(select), create_actionrow(*remove_roles_btn)]
 
         await ctx.channel.send(**{_type: em}, components=components)
 
@@ -205,7 +213,25 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
             if roles_to_give:
                 await ctx.author.add_roles(*roles_to_give)
             await ctx.send(f'''You received {', '.join(x.mention for x in roles_to_give)}''', hidden=True)
-            
+
+        elif ctx.custom_id.startswith("rr_remove_roles"):
+
+            roles_str = ctx.custom_id.replace("rr_remove_roles_", "")
+            roles_list = [int(_id) for _id in roles_str.split("-")]
+
+            roles_to_remove = []
+
+            for _id in roles_list:
+                role = ctx.guild.get_role(_id)
+                if role:
+                    roles_to_remove.append(role)
+
+            if roles_to_remove:
+                await ctx.author.remove_roles(*roles_to_remove)
+
+            return await ctx.send("Removed all of the roles from this reaction menu from you.", hidden=True)
+
+
 
     @cog_slash(name="delete_msg", guild_ids=const.slash_guild_ids, description="[STAFF] Delete a reaction roles message",
     options=[
