@@ -83,6 +83,12 @@ class CoinFlip(commands.Cog):
         if member.id == ctx.author.id:
             return await ctx.send("You cannot challenge yourself.", hidden=True)
 
+        if member.id == self.client.user.id:
+            return await ctx.send("I am yet to be rich enough to afford this...", hidden=True)
+        
+        if member.bot:
+            return await ctx.send("Bots are the most broke out of all server members. They own NOTHING!", hidden=True)
+
         p1_bet = int(await self.client.parse_int(bet_amount))
 
         if p1_bet <= 0:
