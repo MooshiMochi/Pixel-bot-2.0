@@ -9499,3 +9499,30 @@ In components.0.components.2.emoji.name: Invalid emoji - More details can be fou
 [INFO: 21:42] 22 extensions loaded, 6 skipped.
 [INFO: 21:42] Logging in...
 [INFO: 21:42] Logged in as Titan Games Test#4763: 951220257190715422
+[DEBUG: 21:48] 
+[DEBUG: 21:48] ===== (REBOOT) =====
+[DEBUG: 21:48] 
+[INFO: 21:48] Client class has been initialized.
+[INFO: 21:48] Loading Extensions...
+[DEBUG: 21:48] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 21:48] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 21:48] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 21:48] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 21:48] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 21:48] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 21:48] 22 extensions loaded, 6 skipped.
+[INFO: 21:48] Logging in...
+[DEBUG: 21:49] 
+[DEBUG: 21:49] ===== (REBOOT) =====
+[DEBUG: 21:49] 
+[INFO: 21:49] Client class has been initialized.
+[INFO: 21:49] Loading Extensions...
+[DEBUG: 21:49] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 21:49] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 21:49] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 21:49] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 21:49] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 21:49] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 21:49] 22 extensions loaded, 6 skipped.
+[INFO: 21:49] Logging in...
+[INFO: 21:49] Logged in as Titan Games Test#4763: 951220257190715422
