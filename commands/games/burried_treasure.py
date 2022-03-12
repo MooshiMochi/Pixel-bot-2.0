@@ -98,7 +98,7 @@ class BurriedTreasure(commands.Cog):
         
         msg = await ctx.send("⌛ Your game is loading...")
         
-        await self.client.addcoins(ctx.author_id, -bet, "Bet in `/burried_treasure")
+        await self.client.addcoins(ctx.author_id, -bet, "Bet in `/burried_treasure`")
 
         attempts = 0
         gameEnded = False
