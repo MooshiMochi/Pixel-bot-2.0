@@ -1,4 +1,3 @@
-from socket import IP_HDRINCL
 import discord
 import asyncio
 

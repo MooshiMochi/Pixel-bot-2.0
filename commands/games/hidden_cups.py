@@ -83,7 +83,7 @@ class HiddenCups(commands.Cog):
         failure_em = (
             discord.Embed(color=self.client.failure, description="")
             .set_footer(
-                text="TN | Burried Treasure", 
+                text="TN | Hidden Cups", 
                 icon_url=self.client.png))
 
         if bet < 100:

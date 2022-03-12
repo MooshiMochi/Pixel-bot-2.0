@@ -38,6 +38,7 @@ class Constants:
             'commands.games.coin_flip',
             'commands.games.burried_treasure',
             'commands.games.hidden_cups',
-            'commands.games.tic_tac_toe')
+            'commands.games.tic_tac_toe',
+            'commands.games.four_corners')
 
 const = Constants()
