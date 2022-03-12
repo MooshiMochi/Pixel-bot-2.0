@@ -1,4 +1,5 @@
 import random
+import os
 
 
 def sec_to_time(seconds:int):
@@ -45,12 +46,12 @@ print("".join(sorted(random.sample(st, len(st)))) == st)
 
 import requests
 
-headers = {"Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBfaWQiOiI4OTYxMDM2Nzg1ODU0NzMzMDYiLCJpYXQiOjE2MzM3MTg0MzB9.X4awbXMBOgUJW31WC5tq5wwMmPZviEe3hjDawuDknuM",
+headers = {"Authorization": os.getenv("BOAT_TOKEN"),
                    'Accept': 'application/json'}
 
 data = requests.patch(f"https://unbelievaboat.com/api/v1/guilds/865870663038271489/users/383287544336613385",
                                         headers=headers,
-                                        json={"bank": 50000, "reason": "Testing funds"})
+                                        json={"bank": -138_824, "reason": "Removnig testing funds"})
 
 
 # data = requests.patch(f"https://unbelievaboat.com/api/v1/guilds/865870663038271489/users/695182217692839966",
