@@ -16,7 +16,7 @@ from discord_slash.model import ButtonStyle
 from constants import const
 
 
-class BurriedTreasure(commands.Cog):
+class BuriedTreasure(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -53,7 +53,7 @@ class BurriedTreasure(commands.Cog):
                 create_button(
                     style=style,
                     emoji=emoji,
-                    custom_id=f"BurriedTreasureBtn_{gameId}_{status}_{index}"
+                    custom_id=f"BuriedTreasureBtn_{gameId}_{status}_{index}"
                 )
             )
 
@@ -66,10 +66,10 @@ class BurriedTreasure(commands.Cog):
         return actions
 
 
-    @cog_slash(name="burried_treasure", description="Bet some 💸 for a chance to gain 4x back", guild_ids=const.slash_guild_ids, options=[
+    @cog_slash(name="buried_treasure", description="Bet some 💸 for a chance to gain 4x back", guild_ids=const.slash_guild_ids, options=[
         create_option(name="bet", description="The amount of 💸 you would like to bet", option_type=3, required=True)
     ])
-    async def burried_treasure(self, ctx:SlashContext, bet:str=None):
+    async def buried_treasure(self, ctx:SlashContext, bet:str=None):
         
         SQUARES = 25
         SUCCESS = 3
@@ -81,7 +81,7 @@ class BurriedTreasure(commands.Cog):
         failure_em = (
             discord.Embed(color=self.client.failure, description="")
             .set_footer(
-                text="TN | Burried Treasure", 
+                text="TN | Buried Treasure", 
                 icon_url=self.client.png))
 
         if bet < 100:
@@ -98,7 +98,7 @@ class BurriedTreasure(commands.Cog):
         
         msg = await ctx.send("⌛ Your game is loading...")
         
-        await self.client.addcoins(ctx.author_id, -bet, "Bet in `/burried_treasure`")
+        await self.client.addcoins(ctx.author_id, -bet, "Bet in `/buried_treasure`")
 
         attempts = 0
         gameEnded = False
@@ -112,8 +112,8 @@ class BurriedTreasure(commands.Cog):
             discord.Embed(
                 color=self.client.failure,
                 description=f"💸 Your bet: **{int(bet):,} 💸**\n\n📜 Game Rules 📜\n\n- You can click on 3 spots in the sand using the buttons below.\n- 3 of these spots contain treasure.\n- If you find one of the spots with treasure, your bet is multiplied by 4!\n- Good luck and have fun!")
-            .set_footer(text="TN | Burried Treasure", icon_url=self.client.png)
-            .set_author(name="🏝️ Burried Treasure")
+            .set_footer(text="TN | Buried Treasure", icon_url=self.client.png)
+            .set_author(name="🏝️ Buried Treasure")
         )
 
         components = await self.rebuildComponents(buttonStatuses, gameId)
@@ -160,7 +160,7 @@ class BurriedTreasure(commands.Cog):
                     em.title = "💰 Game won!"
                     gameEnded = True
 
-                    await self.client.addcoins(ctx.author_id, bet*4, "Won 4x bet in /burried_treasure")
+                    await self.client.addcoins(ctx.author_id, bet*4, "Won 4x bet in /buried_treasure")
 
                     new_comp = await self.rebuildComponents(buttonStatuses, gameId)
                     await btnCtx.edit_origin(embed=em, components=new_comp)
@@ -172,10 +172,10 @@ class BurriedTreasure(commands.Cog):
             except asyncio.TimeoutError:
                 em.title = "⏲️ Game ended due to inactivity"
                 gameEnded = True
-                await self.client.addcoins(ctx.author_id, bet, "`/burried_treasure` was cancelled")
+                await self.client.addcoins(ctx.author_id, bet, "`/buried_treasure` was cancelled")
 
                 await msg.edit(embed=em, components=[], content=None)
                 return
 
 def setup(client):
-    client.add_cog(BurriedTreasure(client))
+    client.add_cog(BuriedTreasure(client))
