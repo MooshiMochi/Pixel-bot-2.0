@@ -14,13 +14,18 @@ from discord_slash import SlashCommand, SlashContext
 from discord_slash.utils.manage_commands import create_option, create_choice
 from discord_slash.error import AlreadyResponded
 
+from dotenv import load_dotenv
 
 from constants import const
 
+load_dotenv()
+
+TOKEN = os.getenv("TOKEN")
 TEST_MODE = False
 if TEST_MODE:
     const.guild_id = 932736074139185292
-    const.token = "OTUxMjIwMjU3MTkwNzE1NDIy.YikS5g.Gh5AlktOeDWBb53HuFUEmEoRwzs"
+
+    TOKEN = os.getenv("TEST_TOKEN")
     const.slash_guild_ids = [const.guild_id]
     const.prefix = "."
 
@@ -453,5 +458,5 @@ async def unload(ctx, filename):
 client.logger.info("Logging in...")
 loop = asyncio.get_event_loop()
 loop.set_debug(True)
-loop.create_task(client.run(const.token))
+loop.create_task(client.run(TOKEN))
 loop.run_forever()
