@@ -1,9 +1,12 @@
+import json
 import discord
 import asyncio
 
 from random import shuffle
 
 from uuid import uuid4
+
+from datetime import datetime
 
 from discord.ext import commands, tasks
 
@@ -12,7 +15,6 @@ from discord_slash.cog_ext import cog_slash
 from discord_slash.utils.manage_commands import create_option
 from discord_slash.utils.manage_components import create_button, create_actionrow, wait_for_component
 from discord_slash.model import ButtonStyle
-from matplotlib.pyplot import text
 
 from constants import const
 
@@ -22,7 +24,8 @@ class HiddenCups(commands.Cog):
         self.client = client
         self.getting_ready.start()
         self.cup_emoji = None
-    
+
+        self.winnings = {}
 
     @tasks.loop(count=1)
     async def getting_ready(self):
@@ -98,6 +101,91 @@ class HiddenCups(commands.Cog):
             failure_em.description = "**You don't have enough 💸 in your wallet.\nWithdraw some from the bank using `/withdraw`.**"
             return await ctx.send(embed=failure_em, hidden=True)
         
+        data = self.client.wab_data.get(str(ctx.author_id), None)
+        if not data:
+            data = {
+                "ts": datetime.utcnow().timestamp(),
+                "attempts": 5}
+            self.client.wab_data[str(ctx.author_id)] = data
+        
+        if datetime.utcnow().timestamp() - data["ts"] >= 24 * 60 * 60:
+            self.client.wab_data[str(ctx.author_id)]["attempts"] = 5
+
+        if data["attempts"] == 0:
+            __em = discord.Embed(color=self.client.failure, title=f"Free attempts exhausted.", descrtiption=f"You have exhausted your daily 5 free attempts.\nIf you wish to play the game, it will cost you {await self.client.round_int(self.client.play_price)}💸. \n\n**Do you wish to proceed?**")
+            __em.set_footer(text=f"TN | Hidden Cups", icon_url=self.client.png)
+
+            buttons = [
+                create_button(style=ButtonStyle.green, label="Continue", custom_id="yes"),
+                create_button(style=ButtonStyle.red, label="Cancel", custom_id="no")
+            ]
+            ar = [create_actionrow(*buttons)]
+
+            __msg = await ctx.send(embed=__em, components=ar)
+
+            while 1:
+                try:
+                    button_ctx: ComponentContext = await wait_for_component(self.client, __msg, ar, timeout=10)
+
+                    if ctx.author_id != button_ctx.author_id:
+                        await button_ctx.send("You are not the author of this command therefore, you cannot use these interactions.", hidden=True)
+                        continue
+
+                    elif button_ctx.custom_id == "yes":
+                        
+                        try:
+                            e = self.client.economydata[str(ctx.author_id)]
+                        except KeyError:
+                            self.client.economydata[str(ctx.author_id)] = {
+                                "wallet": 0,
+                                "bank": 10000,
+                                "inventory": [],
+                            }
+                            e = self.client.economydata[str(ctx.author_id)]
+
+                        if e["bank"] < self.client.play_price:
+                            await ctx.send("You are too poor to afford this. Deposit some more money into your bank and try again.", hidden=True)
+                            raise asyncio.TimeoutError
+                        else:
+                            await self.client.addcoins(ctx.author_id, -self.client.play_price, "Purchased 1 play ticket for 'Hidden Cups'")
+                        
+                        await button_ctx.send(f"You have been charged **__{self.client.play_price}💸__**", hidden=True)
+                        try:
+                            await __msg.delete()
+                        except (discord.HTTPException, discord.NotFound, discord.Forbidden):
+                            pass
+                        break
+
+                    elif button_ctx.custom_id == "no":
+                        raise asyncio.TimeoutError
+
+                except asyncio.TimeoutError:
+                    try:
+                        self.client.slash.commands[ctx.command].reset_cooldown(ctx)
+                    except AttributeError:
+                        pass
+
+                    try:
+                        await __msg.delete()
+                    except (discord.HTTPException, discord.NotFound):
+                        return
+        else:
+            if data["attempts"] == 5:
+                self.client.wab_data[str(ctx.author_id)]["ts"] = datetime.utcnow().timestamp()
+            
+            self.client.wab_data[str(ctx.author_id)]["attempts"] -= 1
+
+        user = self.winnings.get(ctx.author_id, None)
+        if not user:
+            self.winnings[ctx.author_id] = {
+                "ts": datetime.utcnow().timestamp(),
+                "total": 0
+            }
+        
+        elif datetime.utcnow().timestamp() - user["ts"] >= 24*60*60:
+            self.winnings[ctx.author_id]["total"] = 0
+            self.winnings[ctx.author_id]["ts"] = datetime.utcnow().timestamp()
+
         msg = await ctx.send("⌛ Your game is loading...")
         
         await self.client.addcoins(ctx.author_id, -bet, "Bet in `/hidden_cups`")
@@ -157,7 +245,19 @@ class HiddenCups(commands.Cog):
                     new_comp = await self.rebuildComponents(cups, gameId)
                     await btnCtx.edit_origin(embed=em, components=new_comp)
 
-                    await self.client.addcoins(ctx.author_id, bet*2, "Won 2x bet in `/hidden_cups`")
+                    if self.winnings[ctx.author_id]["total"] >= 1_000_000:
+                        bet = bet
+                    else:
+                        self.winnings[ctx.author_id]["total"] += bet*2
+                        if self.winnings[ctx.author_id]["total"] > 1_000_000:
+                            difference = self.winnings[ctx.author_id]["total"] - 1_000_000
+                            bet *= 2
+                            bet -= difference
+                        else:
+
+                            bet *= 2
+
+                    await self.client.addcoins(ctx.author_id, bet, "Won 2x bet in `/hidden_cups`")
 
                     _em = discord.Embed(color=self.client.failure, description=message)
                     _em.set_footer(text="TN | Hidden Cups", icon_url=self.client.png)

@@ -44,7 +44,28 @@ class EconomyCommands(commands.Cog):
         with open("data/economy/economydata.json", "r") as f:
             self.client.economydata = json.load(f)
 
+        self.money_spent = {}
+
         self.on_ready_replacement.start()
+
+    
+    async def get_allowence(self, user_id:int=0):
+        if not self.money_spent.get(user_id, False):
+            self.money_spent[user_id] = {
+                "total": 0,
+                "ts": datetime.utcnow().timestamp()
+            }
+            return 5_000_000
+
+        if datetime.utcnow().timestamp() - self.money_spent[user_id]["ts"] >= 7*24*60*60:
+            self.money_spent[user_id]["total"] = 0
+            self.money_spent[user_id]["ts"] = datetime.utcnow().timestamp()
+            return 5_000_000 - self.money_spent[user_id]["total"]
+
+        if self.money_spent[user_id]["total"] >= 5_000_000:
+            return 0
+        else:
+            return 5_000_000 - self.money_spent[user_id]["total"]
 
 
     @tasks.loop(count=1)
@@ -381,17 +402,17 @@ class EconomyCommands(commands.Cog):
             data = await self.check_user(member.id)
             if data["wallet"] - amount < 0:
                 if (data["wallet"] + data["bank"]) - amount < 0:
-                    embed = discord.Embed(
-                        description=f"That person only has **__{await self.client.round_int(data['wallet'] + data['bank'])} 💸__**",
-                        color=self.client.failure)
-                    embed.set_footer(text="TN | Economy",
-                                    icon_url=str(self.client.user.avatar_url_as(static_format='png', size=2048)))
-                    return await ctx.send(embed=embed, hidden=True)
-                    
-                else:
-                    pocketmoneyamount = data["wallet"]
-                    self.client.economydata[str(member.id)]["wallet"] -= pocketmoneyamount
-                    self.client.economydata[str(member.id)]["bank"] -= (amount - pocketmoneyamount)
+                    amount = data["wallet"] + data["bank"]
+                    # embed = discord.Embed(
+                    #     description=f"That person only has **__{await self.client.round_int(data['wallet'] + data['bank'])} 💸__**",
+                    #     color=self.client.failure)
+                    # embed.set_footer(text="TN | Economy",
+                    #                 icon_url=str(self.client.user.avatar_url_as(static_format='png', size=2048)))
+                    # return await ctx.send(embed=embed, hidden=True)
+                
+                pocketmoneyamount = data["wallet"]
+                self.client.economydata[str(member.id)]["wallet"] -= pocketmoneyamount
+                self.client.economydata[str(member.id)]["bank"] -= (amount - pocketmoneyamount)
 
             else:
                 self.client.economydata[str(member.id)]["wallet"] -= amount
@@ -473,10 +494,13 @@ class EconomyCommands(commands.Cog):
             if amount > data["bank"]:
                 with_amount = data["bank"]
                 data["wallet"], data["bank"] = data["bank"], 0 
-            else:
+            elif amount <= data["bank"]:
                 with_amount = amount
                 data["bank"] -= amount
                 data["wallet"] += amount
+            else:
+                em = discord.Embed(color=self.client.failure, description="You cannot withdraw negative amounts.")
+                return await ctx.embed(embed=em, footer="Economy")
         
 
         em = discord.Embed(
@@ -889,12 +913,43 @@ class EconomyCommands(commands.Cog):
                         return await ctx.embed(embed=embed, footer="Economy")
 
                     else:
+                        allowence = await self.get_allowence(ctx.author_id)
+                        if allowence != 0:
+                            if price > allowence:
+                                em = discord.Embed(color=self.client.failure, description=f"Sorry, you can only spend {allowence:,} 💸 for the rest of the week.")
+                                em.set_footer(text="TN | Economy", icon_url=self.client.png)
+                                
+                                return await ctx.send(embed=em, hidden=True)
+
+                        else:
+                            em = discord.Embed(color=self.client.failure, description=f"Sorry, you cannot spend any more 💸 for the rest of the week.")
+                            em.set_footer(text="TN | Economy", icon_url=self.client.png)
+                            
+                            return await ctx.send(embed=em, hidden=True)
+
                         pocketmoneyamount = userdata["wallet"]
                         self.client.economydata[str(ctx.author.id)]["wallet"] -= pocketmoneyamount
                         self.client.economydata[str(ctx.author.id)]["bank"] -= (price - pocketmoneyamount)
+                        self.money_spent[ctx.author_id]["total"] += price
 
                 else:
+
+                    allowence = await self.get_allowence(ctx.author_id)
+                    if allowence != 0:
+                        if price > allowence:
+                            em = discord.Embed(color=self.client.failure, description=f"Sorry, you can only spend {allowence:,} 💸 for the rest of the week.")
+                            em.set_footer(text="TN | Economy", icon_url=self.client.png)
+                            
+                            return await ctx.send(embed=em, hidden=True)
+
+                    else:
+                        em = discord.Embed(color=self.client.failure, description=f"Sorry, you cannot spend any more 💸 for the rest of the week.")
+                        em.set_footer(text="TN | Economy", icon_url=self.client.png)
+                        
+                        return await ctx.send(embed=em, hidden=True)
+
                     self.client.economydata[str(ctx.author.id)]["wallet"] -= price
+                    self.money_spent[ctx.author_id]["total"] += price
 
             if itemdata["price"] < 0:
                 self.client.economydata[str(ctx.author.id)]["wallet"] += abs(itemdata["price"])
@@ -955,12 +1010,44 @@ class EconomyCommands(commands.Cog):
                         return await ctx.embed(embed=embed, footer="Economy")
 
                     else:
+
+                        allowence = await self.get_allowence(ctx.author_id)
+                        if allowence != 0:
+                            if price > allowence:
+                                em = discord.Embed(color=self.client.failure, description=f"Sorry, you can only spend {allowence:,} 💸 for the rest of the week.")
+                                em.set_footer(text="TN | Economy", icon_url=self.client.png)
+                                
+                                return await ctx.send(embed=em, hidden=True)
+
+                        else:
+                            em = discord.Embed(color=self.client.failure, description=f"Sorry, you cannot spend any more 💸 for the rest of the week.")
+                            em.set_footer(text="TN | Economy", icon_url=self.client.png)
+                            
+                            return await ctx.send(embed=em, hidden=True)
+
                         pocketmoneyamount = userdata["wallet"]
                         self.client.economydata[str(ctx.author.id)]["wallet"] -= pocketmoneyamount
                         self.client.economydata[str(ctx.author.id)]["bank"] -= (price - pocketmoneyamount)
+                        self.money_spent[ctx.author_id]["total"] += price
 
                 else:
+
+                    allowence = await self.get_allowence(ctx.author_id)
+                    if allowence != 0:
+                        if price > allowence:
+                            em = discord.Embed(color=self.client.failure, description=f"Sorry, you can only spend {allowence:,} 💸 for the rest of the week.")
+                            em.set_footer(text="TN | Economy", icon_url=self.client.png)
+                            
+                            return await ctx.send(embed=em, hidden=True)
+
+                    else:
+                        em = discord.Embed(color=self.client.failure, description=f"Sorry, you cannot spend any more 💸 for the rest of the week.")
+                        em.set_footer(text="TN | Economy", icon_url=self.client.png)
+                        
+                        return await ctx.send(embed=em, hidden=True)
+
                     self.client.economydata[str(ctx.author.id)]["wallet"] -= price
+                    self.money_spent[ctx.author_id]["total"] += price
 
             if itemdata["price"] < 0:
                 self.client.economydata[str(ctx.author.id)]["wallet"] += abs(itemdata["price"])

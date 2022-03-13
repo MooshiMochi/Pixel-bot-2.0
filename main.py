@@ -366,6 +366,14 @@ with open("data/economy/config.json", "r") as f:
 with open("data/verified_players.json", "r") as f:
     client.players = json.load(f)
 
+with open("data/wab.json", "r") as f:
+    client.wab_data = json.load(f)
+        
+    if not "fee" in client.wab_data.keys():
+        client.wab_data["fee"] = 150_000
+
+    client.play_price = client.wab_data["fee"]
+
 
 client.load_extension('utils.logger')
 client.logger = client.get_cog('Logger')

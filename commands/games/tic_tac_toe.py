@@ -118,7 +118,7 @@ class TicTacToe(commands.Cog):
                 btnCtx: ComponentContext = await wait_for_component(self.client, msg, timeout=300)
 
                 if btnCtx.author_id != ctx.author_id and btnCtx.author_id != member.id:
-                    await btnCtx.send("You can not interact with this game. Please start your own to do so!")
+                    await btnCtx.send("You can not interact with this game. Please start your own to do so!", hidden=True)
                     continue
 
                 if gameEnded:
