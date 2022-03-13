@@ -412,7 +412,9 @@ class WhackABrick(commands.Cog):
                 await ctx.send(str(error)[1:] if str(error).startswith("-") else "Out of time!", hidden=True)
                 win = 0
                 if level > 1:
-                    win = 1000*(1.15**level) * prize_multiplier
+                    win = 1000*(1.05**level) * prize_multiplier
+                    if win > 1_000_000:
+                        win = 1_000_000
                 if sus_brick_hit:
                     win = 0
                 em = discord.Embed(title="You lost!", description=f"**You got to level {level} 🎉**\n> You won: {int(win)}💸\n> Prize Multiplier: {int(prize_multiplier)}", color=self.client.failure)
@@ -452,14 +454,14 @@ class WhackABrick(commands.Cog):
         if not data:
             data = {
                 "ts": datetime.utcnow().timestamp(),
-                "attempts": 3}
+                "attempts": 5}
             self.client.wab_data[str(ctx.author_id)] = data
         
         if datetime.utcnow().timestamp() - data["ts"] >= 24 * 60 * 60:
-            self.client.wab_data[str(ctx.author_id)]["attempts"] = 3
+            self.client.wab_data[str(ctx.author_id)]["attempts"] = 5
 
         if data["attempts"] == 0:
-            __em = discord.Embed(color=self.client.failure, title=f"Free attempts exhausted.", descrtiption=f"You have exhausted your daily 3 free attempts.\nIf you wish to play the game, it will cost you {await self.client.round_int(self.client.play_price)}💸. \n\n**Do you wish to proceed?**")
+            __em = discord.Embed(color=self.client.failure, title=f"Free attempts exhausted.", description=f"You have exhausted your daily 5 free attempts.\nIf you wish to play the game, it will cost you {await self.client.round_int(self.client.play_price)}💸. \n\n**Do you wish to proceed?**")
             __em.set_footer(text=f"TN | Whack A Brick", icon_url=self.client.png)
 
             buttons = [
@@ -491,7 +493,9 @@ class WhackABrick(commands.Cog):
                             e = self.client.economydata[str(ctx.author_id)]
 
                         if e["bank"] < self.client.play_price:
-                            await ctx.send("You are too poor to afford this. Deposit some more money into your bank and try again.", hidden=True)
+                            err = discord.Embed(color=self.client.failure, description="You are too poor to afford this.\nDeposit some more money into your bank and try again.")
+                            err.set_footer(text="TN | Whack A Brick", icon_url=self.client.png)
+                            await ctx.send(embed=err, hidden=True)
                             raise asyncio.TimeoutError
                         else:
                             await self.client.addcoins(ctx.author_id, -self.client.play_price, "Purchased 1 play ticket for 'Whack A Brick'")
@@ -517,12 +521,12 @@ class WhackABrick(commands.Cog):
                     except (discord.HTTPException, discord.NotFound):
                         return
         else:
-            if data["attempts"] == 3:
+            if data["attempts"] == 5:
                 self.client.wab_data[str(ctx.author_id)]["ts"] = datetime.utcnow().timestamp()
             
             self.client.wab_data[str(ctx.author_id)]["attempts"] -= 1
 
-        em = discord.Embed(title="How to play!", description=f"Welcome to **Whack a brick**!\n\nThis game is simple. After 5 seconds of the command running, a random\nmossy block will appear on one of the squares.\nYou have to click on it, but be quick as you only have 5 seconds.\nThe more levels you pass, the higher your overall reward in the end.\n\n**Good luck!**\n\n*Do not hit the sus bricks as they will make you lose!* {self.emojis['sus']}", color=self.client.success)
+        em = discord.Embed(title="How to play!", description=f"Welcome to **Whack a brick**!\n\nThis game is simple. After 5 seconds of the command running, a random\nmossy block will appear on one of the squares.\nYou have to click on it, but be quick as you only have 5 seconds.\nThe more levels you pass, the higher your overall reward in the end.\n\n**Good luck!**\n\n*Do not hit the sus bricks as they will make you lose!* {self.emojis['sus']}\n\nSometimes there are hidden rewards or hinderances under the bricks, so beware of what you click as you may unveil one of the things listed below:\n> 1. You can double your earnings\n\n> 2. All current bricks will be hidden so you need to guess from memory\n\n> 3. You have a 1 in 500 chance of losing everything, otherwise you get to skip the level\n\n> 4. If you hit the bomb, you're in luck. You skip the level as all bricks are destroyed.", color=self.client.success)
         em.set_footer(text="TN | Whack A Brick", icon_url=self.client.png)
         await ctx.send(embed=em, hidden=True)
 

@@ -97,8 +97,8 @@ class HiddenCups(commands.Cog):
         
         auth_data = self.client.economydata[str(ctx.author_id)]
 
-        if auth_data["wallet"] < bet:
-            failure_em.description = "**You don't have enough 💸 in your wallet.\nWithdraw some from the bank using `/withdraw`.**"
+        if auth_data["bank"] < bet:
+            failure_em.description = "**You don't have enough 💸 in your bank.\nDeposit some from the bank using `/deposit`.**"
             return await ctx.send(embed=failure_em, hidden=True)
         
         data = self.client.wab_data.get(str(ctx.author_id), None)
@@ -112,7 +112,7 @@ class HiddenCups(commands.Cog):
             self.client.wab_data[str(ctx.author_id)]["attempts"] = 5
 
         if data["attempts"] == 0:
-            __em = discord.Embed(color=self.client.failure, title=f"Free attempts exhausted.", descrtiption=f"You have exhausted your daily 5 free attempts.\nIf you wish to play the game, it will cost you {await self.client.round_int(self.client.play_price)}💸. \n\n**Do you wish to proceed?**")
+            __em = discord.Embed(color=self.client.failure, title=f"Free attempts exhausted.", description=f"You have exhausted your daily 5 free attempts.\nIf you wish to play the game, it will cost you {await self.client.round_int(self.client.play_price)}💸. \n\n**Do you wish to proceed?**")
             __em.set_footer(text=f"TN | Hidden Cups", icon_url=self.client.png)
 
             buttons = [
@@ -143,8 +143,10 @@ class HiddenCups(commands.Cog):
                             }
                             e = self.client.economydata[str(ctx.author_id)]
 
-                        if e["bank"] < self.client.play_price:
-                            await ctx.send("You are too poor to afford this. Deposit some more money into your bank and try again.", hidden=True)
+                        if e["bank"] < self.client.play_price + bet:
+                            err = discord.Embed(color=self.client.failure, description="You are too poor to afford this.\nDeposit some more money into your bank and try again.")
+                            err.set_footer(text="TN | Hidden Cups", icon_url=self.client.png)
+                            await ctx.send(embed=err, hidden=True)
                             raise asyncio.TimeoutError
                         else:
                             await self.client.addcoins(ctx.author_id, -self.client.play_price, "Purchased 1 play ticket for 'Hidden Cups'")

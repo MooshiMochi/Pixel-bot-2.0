@@ -339,7 +339,9 @@ class Verification(commands.Cog):
             await ctx.defer(hidden=True)
 
             if not self.verification_role:
-                return await ctx.embed(embed=(discord.Embed(color=self.client.failure, description="The verification role was not set up!")), footer="Verification")
+                embed = discord.Embed(color=self.client.failure, description="The verification role was not set up!")
+                embed.set_footer(text="TN | Verification", icon_url=self.client.png)
+                return await ctx.send(embed=embed, hidden=True)
 
             if self.verification_role in ctx.author.roles:
                 em = discord.Embed(color=self.client.failure, description="You are already verified!")

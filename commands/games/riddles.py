@@ -1,6 +1,7 @@
 
 import json
 import discord
+import asyncio
 
 from random import sample
 from random import choice, randint
@@ -44,7 +45,9 @@ class Riddles(commands.Cog):
         self.is_riddle_guessed = False
 
         self.get_ready.start()
-        self.run_riddles.start()
+
+        if self.config['active']:
+            self.run_riddles.start()
 
     
     async def scramblestring(self, string: str):
@@ -60,6 +63,8 @@ class Riddles(commands.Cog):
         guild = self.client.get_guild(const.guild_id)
         try:
             self.main_ch = guild.get_channel(self.main_ch)
+            if not self.main_ch:
+                self.config["active"] = False
         except (TypeError, AttributeError):
             self.client.logger.error("Unloading 'commands.games.riddles'. Failed to get guild object.\nRiddles will not work.")
             self.client.remove_cog("commands.games.riddles")
@@ -67,6 +72,7 @@ class Riddles(commands.Cog):
 
     @tasks.loop(minutes=5.0)
     async def run_riddles(self):
+        await asyncio.sleep(5)
 
         if not self.config['active']: return
 
@@ -110,11 +116,8 @@ class Riddles(commands.Cog):
 
 
     @run_riddles.before_loop
-    async def before_run_riddles(self):
-        await self.client.wait_until_ready()
-
     @get_ready.before_loop
-    async def before_get_ready(self):
+    async def before_run_riddles(self):
         await self.client.wait_until_ready()
 
     @commands.Cog.listener()
@@ -216,7 +219,7 @@ class Riddles(commands.Cog):
         }
 
         em = discord.Embed(color=self.client.failure, title="New riddle added", 
-        description=f"**Type: __{type.capitalize()}__**\n\n`#{len(self.riddles[type])+1}. {question}`\n> {answer}")
+        description=f"**Type: __{type.capitalize()}__**\n\n`#{len(self.riddles[type])}. {question}`\n> {answer}")
         
         with open("data/games/riddles.json", "w") as f:
             json.dump(self.riddles, f, indent=2)
@@ -242,14 +245,20 @@ class Riddles(commands.Cog):
         if not str(riddle_number) in self.riddles[type].keys():
             return await ctx.send(f"That riddle doesn't exist in the {type.capitalize()} category.", hidden=True)
 
-        question = self.riddles[type][int(riddle_number)]["question"]
-        answer = self.riddles[type][int(riddle_number)]["answer"]
+        question = self.riddles[type][str(riddle_number)]["question"]
+        answer = self.riddles[type][str(riddle_number)]["answer"]
         
         if not self.riddles[type].pop(str(riddle_number), False):
             return await ctx.send(f"That riddle doesn't exist in the {type.capitalize()} category.", hidden=True)
 
+        copied_dict = self.riddles[type].copy()
+        self.riddles[type] = {}
+
+        for index, qna in enumerate(copied_dict.values()):
+            self.riddles[type][str(index+1)] = qna
+
         em = discord.Embed(color=self.client.failure, title="Riddle deleted", 
-        description=f"**Type: __{type.capitalize()}__**\n\n`#{len(self.riddles[type])+1}. {question}`\n> {answer}")
+        description=f"**Type: __{type.capitalize()}__**\n\n`#{riddle_number}. {question}`\n> {answer}")
         
         with open("data/games/riddles.json", "w") as f:
             json.dump(self.riddles, f, indent=2)
@@ -289,11 +298,15 @@ class Riddles(commands.Cog):
             em.description += f"> {answer}\n\n"
 
             if x in add_on:
-                em.set_footer(text=f"TN | Riddles | Page {add_on.index(x)+1}/{len(add_on)}",
+                em.set_footer(text=f"TN | Riddles | Page {add_on.index(x)+1}/{len(add_on)-1}",
                 icon_url=self.client.png)
                 embeds.append(em)
 
                 em = discord.Embed(color=self.client.failure, title=f"Riddles Q & A's ({type.capitalize()})", description="")
+
+        for index, embed in enumerate(embeds):
+            embed: discord.Embed
+            embed.set_footer(text=f"TN | Riddles | Page {index+1}/{len(embeds)}", icon_url=self.client.png)
 
         return await Paginator(embeds, ctx).run()
         

@@ -312,11 +312,11 @@ class EconomyCommands(commands.Cog):
         embed = discord.Embed(title=f"{member.name}'s Balance \💰", color=self.client.failure)
 
         embed.add_field(name="👛 **Wallet:**",
-                        value=f"{await self.client.round_int(int(data['wallet']))}💸",
+                        value=f"{int(data['wallet']):,}💸",
                         inline=True)
 
         embed.add_field(name="🏦 **Bank:**",
-                        value=f"{await self.client.round_int(int(data['bank']))}💸",
+                        value=f"{int(data['bank']):,}💸",
                         inline=True)
 
         embed.set_footer(text="TN | Economy",

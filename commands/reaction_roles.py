@@ -124,6 +124,7 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
         manage_commands.create_option(name="reaction_4", description="The description and role separated by | . Eg: Ping for giveaways | @giveawayping.", option_type=3, required=False),
         manage_commands.create_option(name="reaction_5", description="The description and role separated by | . Eg: Ping for giveaways | @giveawayping.", option_type=3, required=False)
     ])
+    @commands.has_permissions(manage_roles=True)
     async def rr_select(self, ctx:SlashContext, title:str=None, description:str=None, send_as_embed:bool=False, max_role_selections:int=1, reaction_1:str=None, reaction_2:str=None, reaction_3:str=None, reaction_4:str=None, reaction_5:str=None):
         await ctx.defer(hidden=True)
 

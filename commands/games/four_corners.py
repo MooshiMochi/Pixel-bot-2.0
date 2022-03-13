@@ -110,10 +110,8 @@ class FourCorners(commands.Cog):
         
         auth_data = self.client.economydata[str(ctx.author_id)]
 
-        total_worth = auth_data["wallet"] + auth_data["bank"]
-
-        if auth_data["wallet"] < bet:
-            failure_em.description = "**You don't have enough 💸 in your wallet.\nWithdraw some from the bank using `/withdraw`.**"
+        if auth_data["bank"] < bet:
+            failure_em.description = "**You don't have enough 💸 in your bank.\nDeposit some from the bank using `/deposit`.**"
             return await ctx.send(embed=failure_em, hidden=True)
 
         self.cooldowns[ctx.author_id] = datetime.utcnow().timestamp()
@@ -132,12 +130,15 @@ class FourCorners(commands.Cog):
         
         await msg.edit(embed=em, components=components, content=None)
 
+        # multiplier = -0.00004*bet + 3.2
+        multiplier = 1.9 * 0.99999 ** bet
+
         while 1:
             try:
                 btnCtx: ComponentContext = await wait_for_component(self.client, msg, timeout=300)
 
                 if btnCtx.author_id != ctx.author_id:
-                    await btnCtx.send("You can not interact with this game. Please start your own to do so!")
+                    await btnCtx.send("You can not interact with this game. Please start your own to do so!", hidden=True)
                     continue
 
                 _btn, _status, _index = btnCtx.custom_id.split("_")
@@ -146,10 +147,13 @@ class FourCorners(commands.Cog):
                 if status == 1:
                     em.title = "❌ Pressed incorrect button"
 
+                    total_worth = self.client.economydata[str(ctx.author_id)]["wallet"] + self.client.economydata[str(ctx.author_id)]["bank"]
+                    
                     embed = discord.Embed(color=self.client.failure, description=f"**❌ You pressed the incorrect button.\nYou lost __{int(total_worth/2):,}__ 💸**")
                     embed.set_footer(text="TN | Four Corners", icon_url=self.client.png)
 
                     self.client.economydata[str(ctx.author_id)]["bank"] += self.client.economydata[str(ctx.author_id)]["wallet"]
+                    self.client.economydata[str(ctx.author_id)]["walet"] = 0
 
                     await self.client.addcoins(ctx.author_id, -total_worth/2, "Clicked incorrect button in `/four_corners`.\nLost half net worth.")
 
@@ -158,7 +162,7 @@ class FourCorners(commands.Cog):
                     return
                 
                 elif status == 0:
-                    bet_copy *= 2
+                    bet_copy *= multiplier
                     if bet_copy >= 1_000_000:
                         bet_copy = 1_000_000
 
@@ -167,12 +171,12 @@ class FourCorners(commands.Cog):
                         _em = discord.Embed(color=self.client.failure, description=f"You reached the maximum winnings amount for this game.\nYou received **1,000,000 💸**")
                         _em.set_footer(text="TN | Four Corners", icon_url=self.client.png)
 
-                        await self.client.addcoins(ctx.author_id, bet_copy, "Max winnings reached in `/four_corners`")
+                        await self.client.addcoins(ctx.author_id, int(bet_copy), "Max winnings reached in `/four_corners`")
 
                         await btnCtx.edit_origin(embed=em, components=[])
                         return await ctx.send(embed=_em, hidden=True)
 
-                    await ctx.send(f"You doubled your money again!\nYou have **{bet_copy:,} 💸** in winnings so far.", hidden=True)
+                    await ctx.send(f"Your money got multiplied by {multiplier:.2f} again!\nYou have **{int(bet_copy):,} 💸** in winnings so far.", hidden=True)
                     allowCashOut = True
 
                 elif status == 2:
@@ -183,7 +187,7 @@ class FourCorners(commands.Cog):
 
                     em.title = "💵 Cashed out!"
 
-                    await ctx.send(f"You won a total of **{bet_copy:,} 💸**", hidden=True)
+                    await ctx.send(f"You won a total of **{int(bet_copy):,} 💸**", hidden=True)
                     await btnCtx.edit_origin(embed=em, components=[])
 
                     await self.client.addcoins(ctx.author_id, bet_copy, "Cashed out in `/four_corners`")

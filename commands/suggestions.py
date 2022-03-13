@@ -92,7 +92,7 @@ class Suggestions(commands.Cog):
         return await ctx.send("Suggestion has been sent!", hidden=True)
 
     
-    @cog_slash(name="accept_suggestion", description="Mark a suggestion as 'Accepted'", guild_ids=const.slash_guild_ids, options=[
+    @cog_slash(name="accept_suggestion", description="[STAFF] Mark a suggestion as 'Accepted'", guild_ids=const.slash_guild_ids, options=[
         create_option(name="message_id", description="The message ID of the suggestion", option_type=3, required=True),
         create_option(name="response_message", description="The response that will appear in the suggestion", option_type=3, required=False)
     ])
@@ -130,7 +130,7 @@ class Suggestions(commands.Cog):
         return await ctx.send("Suggestion Accepted!", hidden=True)
 
     
-    @cog_slash(name="deny_suggestion", description="Mark a suggestion as 'Denied'", guild_ids=const.slash_guild_ids, options=[
+    @cog_slash(name="deny_suggestion", description="[STAFF] Mark a suggestion as 'Denied'", guild_ids=const.slash_guild_ids, options=[
         create_option(name="message_id", description="The message ID of the suggestion", option_type=3, required=True),
         create_option(name="response_message", description="The response that will appear in the suggestion", option_type=3, required=False)
     ])
@@ -168,7 +168,7 @@ class Suggestions(commands.Cog):
         return await ctx.send("Suggestion Denied!", hidden=True)
 
 
-    @cog_slash(name="config_suggestions", description="Configure suggestions for this guild", guild_ids=const.slash_guild_ids, options=[
+    @cog_slash(name="config_suggestions", description="[ADMIN] Configure suggestions for this guild", guild_ids=const.slash_guild_ids, options=[
         create_option(name="enabled", description="Just as the name suggests", required=True, option_type=5),
         create_option(name="suggestions_channel", description="The channel where user suggestions will be sent to", option_type=7, required=False),
         create_option(name="staff_vote_channel", description="The channel where the suggestions will be sent after x upvotes", option_type=7, required=False),
@@ -273,6 +273,6 @@ class Suggestions(commands.Cog):
                     await msg.edit(embed=em)
             
 
-
 def setup(client):
     client.add_cog(Suggestions(client))
+    
