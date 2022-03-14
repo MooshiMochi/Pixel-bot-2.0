@@ -2,6 +2,8 @@ import json
 import time
 import discord
 
+from main import MyClient
+
 from datetime import datetime
 
 from discord import NotFound
@@ -16,38 +18,38 @@ from discord_slash.utils.manage_components import create_button, create_actionro
 from asyncio import TimeoutError
 
 from constants import const
+
 from utils.exceptions import NotVerified
-
 from utils.paginator import Paginator
-
+from utils.dpy import Checks
 
 class EconomyCommands(commands.Cog):
 
     def __init__(self, client):
-        self.client = client
+        self.client: MyClient = client
         self.isready = False
 
-        with open("data/economy/config.json", "r") as f:
-            self.client.eco_config = json.load(f)
+        # with open("data/economy/config.json", "r") as f:
+        #     self.client.eco_config = json.load(f)
 
         with open("data/economy/user_logs.json", "r") as f:
             self.eco_user_logs = json.load(f)
+        
+        with open("data/economy/shopitems.json", "r") as f:
+            self.shopdata = json.load(f)
+
+        with open("data/economy/economydata.json", "r") as f:
+            self.client.economydata = json.load(f)
         
         self.cash_logs_channel = self.client.eco_config.get("cash_logs_channel_id", 0)
         self.income_logs_channel = self.client.eco_config.get("income_logs_channel_id", 0)
         self.pay_logs_channel = self.client.eco_config.get("pay_logs_channel_id", 0)
         self.gems_logs_channel = self.client.eco_config.get("gems_logs_channel_id", 0)
 
-        with open("data/economy/shopitems.json", "r") as f:
-            self.shopdata = json.load(f)
-
-        with open("data/economy/economydata.json", "r") as f:
-            self.client.economydata = json.load(f)
-
         self.money_spent = {}
 
         self.on_ready_replacement.start()
-
+        self.give_interest.start()
     
     async def get_allowence(self, user_id:int=0):
         if not self.money_spent.get(user_id, False):
@@ -67,6 +69,22 @@ class EconomyCommands(commands.Cog):
         else:
             return 5_000_000 - self.money_spent[user_id]["total"]
 
+
+    @tasks.loop(hours=24.0)
+    async def give_interest(self):
+        for _id, data in self.client.economydata.copy().items():
+            if data["bank"] <= 10_000:
+                self.client.economydata[_id]["bank"] *= 1.1
+            elif 10_000 < data["bank"] <= 50_000:
+                self.client.economydata[_id]["bank"] *= 1.05
+            elif 50_000 < data["bank"] <= 100_000:
+                self.client.economydata[_id]["bank"] *= 1.01
+            elif 100_000 < data["bank"] <= 250_000:
+                self.client.economydata[_id]["bank"] *= 1.005
+            elif 250_000 < data["bank"] <= 500_000:
+                self.client.economydata[_id]["bank"] *= 1.0025
+            else:
+                self.client.economydata[_id]["bank"] *= 1.001
 
     @tasks.loop(count=1)
     async def on_ready_replacement(self):
@@ -1262,112 +1280,110 @@ class EconomyCommands(commands.Cog):
             return await ctx.send("Was not able to find that item.", hidden=True)
 
     # @commands.command(aliases=["banklb", "bankleaderboard", "moneyleaderboard", "coinleaderboard", "coinlb", "moneylb", "economylb", "rich"])
-    # async def baltop(self, ctx):
-    #     playerslist = []
-    #     totalcoins = 0
-    #     for discordid, memberdata in self.client.economydata.copy().items():
-    #         if discordid == "last_daily_pay_out":
-    #             continue
-    #         totalcoins += memberdata["wallet"] + memberdata["bank"]
-    #         playerslist.append([discordid, memberdata["wallet"] + memberdata["bank"]])
+    @cog_slash(name="cash_leaderboard", description="View the leaderboard for people with most 💸", guild_ids=const.slash_guild_ids)
+    async def cash_leaderboard(self, ctx: SlashContext):
+        playerslist = []
+        totalcoins = 0
+        for discordid, memberdata in self.client.economydata.copy().items():
 
-    #     playerslist = sorted(playerslist, key=lambda x: x[1], reverse=True)
+            totalcoins += memberdata["wallet"] + memberdata["bank"]
+            playerslist.append([discordid, memberdata["wallet"] + memberdata["bank"]])
 
-    #     embeds = []
+        playerslist = sorted(playerslist, key=lambda x: x[1], reverse=True)
 
-    #     ranking = 1
-    #     fieldcount = 0
-    #     description1 = ""
-    #     for player in playerslist:
-    #         try:
-    #             guild = ctx.guild
-    #             discordid = player[0].replace("<@!", "").replace(">", "").replace("<@", "")
-    #             discorduser = guild.get_member(int(discordid))
-    #         except:
-    #             continue
-    #         if discorduser is None:
-    #             continue
-    #         # print(discorduser)
+        embeds = []
 
-    #         if player[1] <= 10000:
-    #             break
-    #         tempranking = ranking
-    #         if ranking == 1:
-    #             tempranking = "🥇"
-    #         elif ranking == 2:
-    #             tempranking = "🥈"
-    #         elif ranking == 3:
-    #             tempranking = "🥉"
-    #         else:
-    #             tempranking = f"{ranking}."
+        ranking = 1
+        fieldcount = 0
+        description1 = ""
+        for player in playerslist:
+            try:
+                guild = ctx.guild
+                discordid = player[0].replace("<@!", "").replace(">", "").replace("<@", "")
+                discorduser = guild.get_member(int(discordid))
+            except:
+                continue
+            if discorduser is None:
+                continue
 
-    #         description1 += f"**{tempranking} {discorduser.mention}** <:waveydash:896680122076250143> **__{await self.client.formatint(int(player[1]))} <a:miasmacoin:902351657361371188>__**\n"
+            if player[1] <= 10000:
+                break
+            tempranking = ranking
+            if ranking == 1:
+                tempranking = "🥇"
+            elif ranking == 2:
+                tempranking = "🥈"
+            elif ranking == 3:
+                tempranking = "🥉"
+            else:
+                tempranking = f"{ranking}."
 
-    #         ranking += 1
-    #         fieldcount += 1
-    #         if fieldcount >= 10:
-    #             embed = discord.Embed(title=f"{ctx.guild.name}'s Net Leaderboard \💲",
-    #                                   description=f"Total Titan Gems in the economy **__{await self.client.formatint(int(totalcoins))}__**\n\n{description1}",
-    #                                   color=0x8b46d3)
-    #             embed.set_footer(text="TN | Economy",
-    #                              icon_url=str(self.client.user.avatar_url_as(static_format='png', size=2048)))
-    #             embeds.append(embed)
-    #             description1 = ""
-    #             fieldcount = 0
-    #         if ranking >= 50:
-    #             break
+            description1 += f"**{tempranking} {discorduser.mention}** <:waveydash:952711493659529246> **__{await self.client.round_int(int(player[1]))} 💸__**\n"
 
-    #     embed = discord.Embed(title=f"{ctx.guild.name}'s Net Leaderboard \💲",
-    #                           description=f"Total Titan Gems in the economy **__{await self.client.formatint(int(totalcoins))}__**\n\n{description1}",
-    #                           color=0x8b46d3)
-    #     embed.set_footer(text="TN | Economy",
-    #                      icon_url=str(self.client.user.avatar_url_as(static_format='png', size=2048)))
-    #     embeds.append(embed)
+            ranking += 1
+            fieldcount += 1
+            if fieldcount >= 10:
+                embed = discord.Embed(title=f"{ctx.guild.name}'s Net Leaderboard \💲",
+                                      description=f"Total 💸 in the economy **__{await self.client.round_int(int(totalcoins))}__**\n\n{description1}",
+                                      color=self.client.failure)
+                embed.set_footer(text="TN | Economy",
+                                 icon_url=self.client.png)
+                embeds.append(embed)
+                description1 = ""
+                fieldcount = 0
+            if ranking >= 50:
+                break
 
-    #     msg = await ctx.send(embed=embeds[0])
+        embed = discord.Embed(title=f"{ctx.guild.name}'s Net Leaderboard \💲",
+                              description=f"Total 💸 in the economy **__{await self.client.round_int(int(totalcoins))}__**\n\n{description1}",
+                              color=self.client.failure)
+        embed.set_footer(text="TN | Economy",
+                         icon_url=self.client.png)
+        embeds.append(embed)
 
-    #     pages = 0
-    #     left = "◀"
-    #     stop = "⏹"
-    #     right = "▶"
+        await Paginator(embeds, ctx).run()
+        
+    
+    @cog_slash(name="econonmy_reset", description="[OWNER] Reset the entire economy", guild_ids=const.slash_guild_ids)
+    @Checks.is_guild_owner()
+    async def economy_reset(self, ctx:SlashContext):
+        await ctx.defer(hidden=True)
 
-    #     await msg.add_reaction("◀")
-    #     await msg.add_reaction("⏹")
-    #     await msg.add_reaction("▶")
+        self.eco_user_logs = {}
+        self.shopdata = {}
+        self.client.economydata = {}
 
-    #     def check(reaction, user):
-    #         return user == ctx.author and str(reaction.emoji) in [left, right, stop]
+        with open("data/economy/user_logs.json", "w") as f:
+            json.dump(self.eco_user_logs, f, indent=2)        
 
-    #     while True:
-    #         try:
-    #             reaction, user = await self.client.wait_for("reaction_add", timeout=120, check=check)
-    #             await msg.remove_reaction(reaction, user)
+        with open("data/economy/shopitems.json", "w") as f:
+            json.dump(self.shopdata, f, indent=2)
 
-    #             if str(reaction.emoji) == left:
-    #                 pages -= 1
-    #                 if pages <= 0:
-    #                     pages = 0
+        with open("data/economy/economydata.json", "w") as f:
+            json.dump(self.client.economydata, f, indent=2)
 
-    #             if str(reaction.emoji) == right:
-    #                 pages += 1
-    #                 if pages >= len(embeds) - 1:
-    #                     pages = len(embeds) - 1
+        self.client.eco_config = {
+            "cash_logs": False,
+            "cash_logs_channel_id": None,
+            "income_logs": False,
+            "income_logs_channel_id": None,
+            "pay_logs": False,
+            "pay_logs_channel_id": None,
+            "gems_logs": False,
+            "gems_logs_channel_id": None}
 
-    #             if str(reaction.emoji) == stop:
-    #                 raise Exception("Stopped")
+        with open("data/economy/config.json", "w") as f:
+            json.dump(self.client.eco_config, f, indent=2)
 
-    #             await msg.edit(embed=embeds[pages])
+        em = discord.Embed(description="**Economy reset successfully!**", color=self.client.failure)
+        em.set_footer(text="TN | Economy", icon_url=self.client.png)
+        return await ctx.send(embed=em, hidden=True)
 
-    #         except:
-    #             embed = discord.Embed(title="Timed out", color=0x8b46d3)
-    #             embed.set_footer(text="TN | Economy",
-    #                              icon_url=str(self.client.user.avatar_url_as(static_format='png', size=2048)))
-    #             await msg.edit(embed=embed)
-    #             break
 
     @on_ready_replacement.before_loop
     @update_loop.before_loop
     @on_ready_replacement.before_loop
+    @give_interest.before_loop
     async def before_task_loop(self):
         await self.client.wait_until_ready()
 

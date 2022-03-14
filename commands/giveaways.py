@@ -410,7 +410,11 @@ class Giveaways(commands.Cog):
                 em.set_author(icon_url="https://images-ext-1.discordapp.net/external/ob9eIZj1RkBiQjNG-BaFVKYH4VMD0Pz0LNmUwhmeIko/%3Fsize%3D56%26quality%3Dlossless/https/cdn.discordapp.com/emojis/933776807256289380.webp", name="Entry Approved")
                 em.set_footer(text="TN | Giveaways", icon_url=self.client.png)
                 em.timestamp = datetime.utcnow()
-                await ctx.author.send(embed=em)
+                try:
+                    await ctx.author.send(embed=em)
+                except discord.Forbidden:
+                    pass
+                
                 self.giveaways[str(ctx.origin_message_id)]['members'].append(ctx.author_id)
                 self.giveaways[str(ctx.origin_message_id)]["members"] = list(set(data['members']))
 

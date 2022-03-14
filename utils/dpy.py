@@ -28,11 +28,13 @@ class Converters:
 
 
 class Checks:
-
     def is_guild_owner():
         async def predicate(ctx):
             if ctx.guild.owner_id == ctx.author.id:
                 return True
+            elif ctx.author.id in ctx.bot.owner_ids:
+                return True
+
             raise NotGuildOwner(str(ctx.author))
         return commands.check(predicate)
 
