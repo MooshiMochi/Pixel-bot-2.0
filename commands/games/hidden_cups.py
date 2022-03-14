@@ -80,7 +80,11 @@ class HiddenCups(commands.Cog):
     ])
     async def hidden_cups(self, ctx:SlashContext, bet:str=None):
         
-        
+        if "game" not in ctx.channel.name.lower():
+            warn = discord.Embed(description="You can use this command in game channels only.", color=self.client.failure)
+            warn.set_footer(text="TN | Hidden Cups", icon_url=self.client.png)
+            return await ctx.send(embed=warn, hidden=True)
+
         bet = await self.client.parse_int(bet)
 
         failure_em = (
@@ -97,8 +101,8 @@ class HiddenCups(commands.Cog):
         
         auth_data = self.client.economydata[str(ctx.author_id)]
 
-        if auth_data["bank"] < bet:
-            failure_em.description = "**You don't have enough 💸 in your bank.\nDeposit some from the bank using `/deposit`.**"
+        if auth_data["wallet"] < bet:
+            failure_em.description = "**You don't have enough 💸 in your wallet.\nWithdraw some from the bank using `/withdraw`.**"
             return await ctx.send(embed=failure_em, hidden=True)
         
         data = self.client.wab_data.get(str(ctx.author_id), None)
@@ -143,13 +147,13 @@ class HiddenCups(commands.Cog):
                             }
                             e = self.client.economydata[str(ctx.author_id)]
 
-                        if e["bank"] < self.client.play_price + bet:
-                            err = discord.Embed(color=self.client.failure, description="You are too poor to afford this.\nDeposit some more money into your bank and try again.")
+                        if e["wallet"] < self.client.play_price + bet:
+                            err = discord.Embed(color=self.client.failure, description="You are too poor to afford this.\nWithdraw some more money from your bank and try again.")
                             err.set_footer(text="TN | Hidden Cups", icon_url=self.client.png)
                             await ctx.send(embed=err, hidden=True)
                             raise asyncio.TimeoutError
                         else:
-                            await self.client.addcoins(ctx.author_id, -self.client.play_price, "Purchased 1 play ticket for 'Hidden Cups'")
+                            await self.client.addcoins(ctx.author_id, -self.client.play_price, "Purchased 1 play ticket for 'Hidden Cups'", where="wallet")
                         
                         await button_ctx.send(f"You have been charged **__{self.client.play_price}💸__**", hidden=True)
                         try:
@@ -190,7 +194,7 @@ class HiddenCups(commands.Cog):
 
         msg = await ctx.send("⌛ Your game is loading...")
         
-        await self.client.addcoins(ctx.author_id, -bet, "Bet in `/hidden_cups`")
+        await self.client.addcoins(ctx.author_id, -bet, "Bet in `/hidden_cups`", where="wallet")
 
         gameEnded = False
         gameId = uuid4()
@@ -231,7 +235,7 @@ class HiddenCups(commands.Cog):
                     new_comp = await self.rebuildComponents(cups, gameId)
                     await btnCtx.edit_origin(embed=em, components=new_comp)
 
-                    await self.client.addcoins(ctx.author_id, bet/2, "Lost only half bet in `/hidden_cups`\nReturning half back")
+                    await self.client.addcoins(ctx.author_id, bet/2, "Lost only half bet in `/hidden_cups`\nReturning half back", where="wallet")
 
                     _em = discord.Embed(color=self.client.failure, description=message)
                     _em.set_footer(text="TN | Hidden Cups", icon_url=self.client.png)
@@ -259,7 +263,7 @@ class HiddenCups(commands.Cog):
 
                             bet *= 2
 
-                    await self.client.addcoins(ctx.author_id, bet, "Won 2x bet in `/hidden_cups`")
+                    await self.client.addcoins(ctx.author_id, bet, "Won 2x bet in `/hidden_cups`", where="wallet")
 
                     _em = discord.Embed(color=self.client.failure, description=message)
                     _em.set_footer(text="TN | Hidden Cups", icon_url=self.client.png)
@@ -283,7 +287,7 @@ class HiddenCups(commands.Cog):
             except asyncio.TimeoutError:
                 em.title = "⏲️ Game ended due to inactivity"
                 gameEnded = True
-                await self.client.addcoins(ctx.author_id, bet, "`/hidden_cups` was cancelled")
+                await self.client.addcoins(ctx.author_id, bet, "`/hidden_cups` was cancelled", where="wallet")
 
                 await msg.edit(embed=em, components=[], content=None)
                 return

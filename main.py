@@ -145,11 +145,11 @@ class MyClient(commands.Bot):
         else:
             return False
 
-    async def addcoins(self, userid:int, amount:int, reason:str=None):
+    async def addcoins(self, userid:int, amount:int, reason:str=None, where:str="bank"):
         
         e = await self.__check_user(userid)
         
-        e['bank'] += amount
+        e[where] += amount
 
         if self.eco_config.get("income_logs", False):
             channel_id = self.eco_config.get("income_logs_channel_id", 0)
@@ -208,7 +208,7 @@ class MyClient(commands.Bot):
         print(f"\033[1;32m┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n" + "\033[1;32mBot is Online".center(78) + "\n\033[1;32m┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛")
         self.logger.info(f"Logged in as {self.user}: {self.user.id}")
 
-        await client.change_presence(status=discord.Status.online, activity=discord.Game(name="titan.network"))
+        await client.change_presence(status=discord.Status.online, activity=discord.Game(name="titanmc.gg"))
     
     @staticmethod
     async def format_duration(ts_duration: str):

@@ -1,3 +1,4 @@
+from turtle import hideturtle
 import discord
 import asyncio
 
@@ -84,10 +85,17 @@ class FourCorners(commands.Cog):
             embed = discord.Embed(title="Woah, calm down.",
                                   description=f"This command is on cooldown.\nYou may try again in **{await self.client.sec_to_time(int((self.cooldowns.get(ctx.author_id, 0) + 24*60*60) - datetime.utcnow().timestamp()))}**",
                                   color=self.client.failure)
+            embed.timestamp = datetime.utcnow()
+            embed.set_footer(text="TN | Titan Network")
             try:
-                return await ctx.embed(embed)
+                return await ctx.send(embed=embed, hidden=True)
             except discord.HTTPException:
                 return
+
+        if "game" not in ctx.channel.name.lower():
+            warn = discord.Embed(description="You can use this command in game channels only.", color=self.client.failure)
+            warn.set_footer(text="TN | Four Corners", icon_url=self.client.png)
+            return await ctx.send(embed=warn, hidden=True)
         
         bet = await self.client.parse_int(bet)
         bet_copy = bet
@@ -110,15 +118,15 @@ class FourCorners(commands.Cog):
         
         auth_data = self.client.economydata[str(ctx.author_id)]
 
-        if auth_data["bank"] < bet:
-            failure_em.description = "**You don't have enough 💸 in your bank.\nDeposit some from the bank using `/deposit`.**"
+        if auth_data["wallet"] < bet:
+            failure_em.description = "**You don't have enough 💸 in your wallet.\nWithdraw some from the bank using `/withdraw`.**"
             return await ctx.send(embed=failure_em, hidden=True)
 
         self.cooldowns[ctx.author_id] = datetime.utcnow().timestamp()
         
         msg = await ctx.send("⌛ Your game is loading...")
         
-        await self.client.addcoins(ctx.author_id, -bet, "Bet in `/four_corners`")
+        await self.client.addcoins(ctx.author_id, -bet, "Bet in `/four_corners`", where="wallet")
 
         allowCashOut = False
 
@@ -147,13 +155,16 @@ class FourCorners(commands.Cog):
                 if status == 1:
                     em.title = "❌ Pressed incorrect button"
 
-                    total_worth = self.client.economydata[str(ctx.author_id)]["wallet"] + self.client.economydata[str(ctx.author_id)]["bank"]
+                    total_worth = self.client.economydata[str(ctx.author_id)]["wallet"] + self.client.economydata[str(ctx.author_id)]["wallet"]
                     
-                    embed = discord.Embed(color=self.client.failure, description=f"**❌ You pressed the incorrect button.\nYou lost __{int(total_worth/2):,}__ 💸**")
+                    if total_worth != 0:
+                        embed = discord.Embed(color=self.client.failure, description=f"**❌ You pressed the incorrect button.\nYou lost __{int(total_worth/2):,}__ 💸**")
+                    else:
+                        embed = discord.Embed(color=self.client.failure, description=f"**❌ You pressed the incorrect button.\nYou lost __absolutely no__ 💸** because you're already broke.")
                     embed.set_footer(text="TN | Four Corners", icon_url=self.client.png)
 
                     self.client.economydata[str(ctx.author_id)]["bank"] += self.client.economydata[str(ctx.author_id)]["wallet"]
-                    self.client.economydata[str(ctx.author_id)]["walet"] = 0
+                    self.client.economydata[str(ctx.author_id)]["wallet"] = 0
 
                     await self.client.addcoins(ctx.author_id, -total_worth/2, "Clicked incorrect button in `/four_corners`.\nLost half net worth.")
 
@@ -171,7 +182,7 @@ class FourCorners(commands.Cog):
                         _em = discord.Embed(color=self.client.failure, description=f"You reached the maximum winnings amount for this game.\nYou received **1,000,000 💸**")
                         _em.set_footer(text="TN | Four Corners", icon_url=self.client.png)
 
-                        await self.client.addcoins(ctx.author_id, int(bet_copy), "Max winnings reached in `/four_corners`")
+                        await self.client.addcoins(ctx.author_id, int(bet_copy), "Max winnings reached in `/four_corners`", where="wallet")
 
                         await btnCtx.edit_origin(embed=em, components=[])
                         return await ctx.send(embed=_em, hidden=True)
@@ -190,7 +201,7 @@ class FourCorners(commands.Cog):
                     await ctx.send(f"You won a total of **{int(bet_copy):,} 💸**", hidden=True)
                     await btnCtx.edit_origin(embed=em, components=[])
 
-                    await self.client.addcoins(ctx.author_id, bet_copy, "Cashed out in `/four_corners`")
+                    await self.client.addcoins(ctx.author_id, bet_copy, "Cashed out in `/four_corners`", where="wallet")
                     return
 
                 new_rows = await self.rebuildComponents()
@@ -198,7 +209,7 @@ class FourCorners(commands.Cog):
 
             except asyncio.TimeoutError:
                 em.title = "⏲️ Game ended due to inactivity"
-                await self.client.addcoins(ctx.author_id, bet, "`/four_corners` was cancelled")
+                await self.client.addcoins(ctx.author_id, bet, "`/four_corners` was cancelled", where="wallet")
                 self.cooldowns.pop(ctx.author_id, None)
                 await msg.edit(embed=em, components=[], content=None)
                 return

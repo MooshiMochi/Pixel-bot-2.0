@@ -1279,7 +1279,6 @@ class EconomyCommands(commands.Cog):
         if found is False:
             return await ctx.send("Was not able to find that item.", hidden=True)
 
-    # @commands.command(aliases=["banklb", "bankleaderboard", "moneyleaderboard", "coinleaderboard", "coinlb", "moneylb", "economylb", "rich"])
     @cog_slash(name="cash_leaderboard", description="View the leaderboard for people with most 💸", guild_ids=const.slash_guild_ids)
     async def cash_leaderboard(self, ctx: SlashContext):
         playerslist = []

@@ -71,10 +71,15 @@ class BuriedTreasure(commands.Cog):
         return actions
 
 
-    @cog_slash(name="buried_treasure", description="Bet some 💸 for a chance to gain 4x back", guild_ids=const.slash_guild_ids, options=[
+    @cog_slash(name="buried_treasure", description="Bet some 💸 for a chance to gain 6x back", guild_ids=const.slash_guild_ids, options=[
         create_option(name="bet", description="The amount of 💸 you would like to bet", option_type=3, required=True)
     ])
     async def buried_treasure(self, ctx:SlashContext, bet:str=None):
+
+        if "game" not in ctx.channel.name.lower():
+            warn = discord.Embed(description="You can use this command in game channels only.", color=self.client.failure)
+            warn.set_footer(text="TN | Buried Treasure", icon_url=self.client.png)
+            return await ctx.send(embed=warn, hidden=True)
         
         SQUARES = 25
         SUCCESS = 3
@@ -97,8 +102,8 @@ class BuriedTreasure(commands.Cog):
         
         auth_data = self.client.economydata[str(ctx.author_id)]
 
-        if auth_data["bank"] < bet:
-            failure_em.description = "**You don't have enough 💸 in your bank.\nDeposit some from the bank using `/deposit`.**"
+        if auth_data["wallet"] < bet:
+            failure_em.description = "**You don't have enough 💸 in your wallet.\nWithdraw some from the bank using `/withdraw`.**"
             return await ctx.send(embed=failure_em, hidden=True)
 
         data = self.client.wab_data.get(str(ctx.author_id), None)
@@ -143,13 +148,13 @@ class BuriedTreasure(commands.Cog):
                             }
                             e = self.client.economydata[str(ctx.author_id)]
 
-                        if e["bank"] < self.client.play_price + bet:
-                            err = discord.Embed(color=self.client.failure, description="You are too poor to afford this.\nDeposit some more money into your bank and try again.")
+                        if e["wallet"] < self.client.play_price + bet:
+                            err = discord.Embed(color=self.client.failure, description="You are too poor to afford this.\nWithdraw some more money from your bank and try again.")
                             err.set_footer(text="TN | Buried Treasure", icon_url=self.client.png)
                             await ctx.send(embed=err, hidden=True)
                             raise asyncio.TimeoutError
                         else:
-                            await self.client.addcoins(ctx.author_id, -self.client.play_price, "Purchased 1 play ticket for 'Buried Treasure'")
+                            await self.client.addcoins(ctx.author_id, -self.client.play_price, "Purchased 1 play ticket for 'Buried Treasure'", where="wallet")
                         
                         await button_ctx.send(f"You have been charged **__{self.client.play_price}💸__**", hidden=True)
                         try:
@@ -190,7 +195,7 @@ class BuriedTreasure(commands.Cog):
 
         msg = await ctx.send("⌛ Your game is loading...")
         
-        await self.client.addcoins(ctx.author_id, -bet, "Bet in `/buried_treasure`")
+        await self.client.addcoins(ctx.author_id, -bet, "Bet in `/buried_treasure`", where="wallet")
 
         attempts = 0
         gameEnded = False
@@ -262,7 +267,7 @@ class BuriedTreasure(commands.Cog):
                             bet -= difference
                         
 
-                    await self.client.addcoins(ctx.author_id, bet, "Won 6x bet in /buried_treasure")
+                    await self.client.addcoins(ctx.author_id, bet, "Won 6x bet in /buried_treasure", where="wallet")
 
                     new_comp = await self.rebuildComponents(buttonStatuses, gameId)
                     await btnCtx.edit_origin(embed=em, components=new_comp)
@@ -276,7 +281,7 @@ class BuriedTreasure(commands.Cog):
             except asyncio.TimeoutError:
                 em.title = "⏲️ Game ended due to inactivity"
                 gameEnded = True
-                await self.client.addcoins(ctx.author_id, bet, "`/buried_treasure` was cancelled")
+                await self.client.addcoins(ctx.author_id, bet, "`/buried_treasure` was cancelled", where="wallet")
 
                 await msg.edit(embed=em, components=[], content=None)
                 return

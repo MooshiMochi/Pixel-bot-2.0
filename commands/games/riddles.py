@@ -22,6 +22,9 @@ class Riddles(commands.Cog):
     def __init__(self, client):
         self.client = client
 
+        self.is_last_msg_by_bot = False
+        self.last_riddle_msg_id = 0
+
         with open("data/games/riddles_config.json", "r") as f:
             self.config = json.load(f)
 
@@ -76,6 +79,9 @@ class Riddles(commands.Cog):
 
         if not self.config['active']: return
 
+        if self.is_last_msg_by_bot:
+            return
+
         cat_opts = [key for key in self.riddles.keys() if key not in self.used_categories]
 
         if not cat_opts:
@@ -112,8 +118,11 @@ class Riddles(commands.Cog):
 
         self.is_riddle_guessed = False
 
-        await self.main_ch.send(embed=em)
-
+        try:
+            msg = await self.main_ch.send(embed=em)
+            self.last_riddle_msg_id = msg.id
+        except (discord.HTTPException, discord.Forbidden):
+            pass
 
     @run_riddles.before_loop
     @get_ready.before_loop
@@ -121,8 +130,13 @@ class Riddles(commands.Cog):
         await self.client.wait_until_ready()
 
     @commands.Cog.listener()
-    async def on_message(self, msg):
+    async def on_message(self, msg: discord.Message):
         if msg.author.bot:
+            if msg.channel.id == self.main_ch.id:
+                if msg.author.id == self.client.user.id and self.last_riddle_msg_id == msg.id:
+                    self.is_last_msg_by_bot = True
+                else:
+                    self.is_last_msg_by_bot = False
             return
         
         elif self.is_riddle_guessed:

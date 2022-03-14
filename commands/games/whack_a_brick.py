@@ -450,6 +450,11 @@ class WhackABrick(commands.Cog):
     async def whack_a_brick(self, ctx:SlashContext):
         await self.client.wait_until_ready()
 
+        if "game" not in ctx.channel.name.lower():
+            warn = discord.Embed(description="You can use this command in game channels only.", color=self.client.failure)
+            warn.set_footer(text="TN | Whack A Brick", icon_url=self.client.png)
+            return await ctx.send(embed=warn, hidden=True)
+
         data = self.client.wab_data.get(str(ctx.author_id), None)
         if not data:
             data = {
@@ -492,13 +497,13 @@ class WhackABrick(commands.Cog):
                             }
                             e = self.client.economydata[str(ctx.author_id)]
 
-                        if e["bank"] < self.client.play_price:
-                            err = discord.Embed(color=self.client.failure, description="You are too poor to afford this.\nDeposit some more money into your bank and try again.")
+                        if e["wallet"] < self.client.play_price:
+                            err = discord.Embed(color=self.client.failure, description="You are too poor to afford this.\nWithdraw some more money from your bank and try again.")
                             err.set_footer(text="TN | Whack A Brick", icon_url=self.client.png)
                             await ctx.send(embed=err, hidden=True)
                             raise asyncio.TimeoutError
                         else:
-                            await self.client.addcoins(ctx.author_id, -self.client.play_price, "Purchased 1 play ticket for 'Whack A Brick'")
+                            await self.client.addcoins(ctx.author_id, -self.client.play_price, "Purchased 1 play ticket for 'Whack A Brick'", where="wallet")
                         
                         await button_ctx.send(f"You have been charged **__{self.client.play_price}💸__**", hidden=True)
                         try:

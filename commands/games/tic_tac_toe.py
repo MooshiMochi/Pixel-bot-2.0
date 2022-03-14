@@ -77,6 +77,11 @@ class TicTacToe(commands.Cog):
     ])
     async def tic_tac_toe(self, ctx:SlashContext, member:discord.Member=None):
 
+        if "game" not in ctx.channel.name.lower():
+            warn = discord.Embed(description="You can use this command in game channels only.", color=self.client.failure)
+            warn.set_footer(text="TN | Tic Tac Toe", icon_url=self.client.png)
+            return await ctx.send(embed=warn, hidden=True)
+
         if ctx.author_id == member.id:
             return await ctx.send("You cannot challenge yourself to a tic tac toe game.", hidden=True)
         
