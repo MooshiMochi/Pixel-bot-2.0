@@ -4,17 +4,17 @@
       "name": "Mooshi",
       "display_name": "Mooshi",
       "disc": "6669",
-      "xp": 19,
-      "total_xp": 180,
-      "level": 8,
+      "xp": 7,
+      "total_xp": 473,
+      "level": 15,
       "url": "https://cdn.discordapp.com/avatars/383287544336613385/df07ecd630f7d0f1b51403d4d34424e1.png?size=4096"
     },
     "186896273742233600": {
       "name": "timnoot",
       "display_name": "timnoot",
       "disc": "4372",
-      "xp": 0,
-      "total_xp": 44,
+      "xp": 16,
+      "total_xp": 60,
       "level": 3,
       "url": "https://cdn.discordapp.com/avatars/186896273742233600/2914f51029226c350751f977c90d3545.png?size=4096"
     },
@@ -22,26 +22,26 @@
       "name": "unsolvedpsycho",
       "display_name": "unsolvedpsycho",
       "disc": "0941",
-      "xp": 0,
-      "total_xp": 22,
-      "level": 2,
+      "xp": 7,
+      "total_xp": 50,
+      "level": 3,
       "url": "https://cdn.discordapp.com/avatars/840417629721067520/4f0db85a38b893f4d073cb67358d77b9.png?size=4096"
     },
     "230118817412415489": {
       "name": "PixeI",
       "display_name": "PixeI",
       "disc": "4553",
-      "xp": 2,
-      "total_xp": 398,
-      "level": 19,
+      "xp": 4,
+      "total_xp": 421,
+      "level": 20,
       "url": "https://cdn.discordapp.com/avatars/230118817412415489/e4d49ab9a97fbaede609bb37d8a4f167.png?size=4096"
     },
     "932386561117552680": {
       "name": "Titan Lord",
       "display_name": "Titan Lord",
       "disc": "0001",
-      "xp": 46,
-      "total_xp": 46,
+      "xp": 86,
+      "total_xp": 86,
       "level": 2,
       "url": "https://cdn.discordapp.com/avatars/932386561117552680/65bdecaf85cf488495ea7f9dd5d6ad75.png?size=4096"
     },
@@ -49,8 +49,8 @@
       "name": "xLeo",
       "display_name": "xLeo",
       "disc": "2330",
-      "xp": 6,
-      "total_xp": 108,
+      "xp": 9,
+      "total_xp": 111,
       "level": 5,
       "url": "https://cdn.discordapp.com/avatars/275714283718049793/1ce64dd2af92b0c3c2e3c64bec58297a.png?size=4096"
     },
@@ -62,6 +62,168 @@
       "total_xp": 22,
       "level": 1,
       "url": "https://cdn.discordapp.com/avatars/830504673769029692/52f2bc925cb6d6fe53e6c56411964fc6.png?size=4096"
+    },
+    "634805170370510908": {
+      "name": "Raknag",
+      "display_name": "Raknag",
+      "disc": "8916",
+      "xp": 4,
+      "total_xp": 4,
+      "level": 0,
+      "url": "https://cdn.discordapp.com/avatars/634805170370510908/039c42bb2f14d27913ed1f262cb37b8f.png?size=4096"
+    },
+    "285286564924227594": {
+      "name": "GConquerer",
+      "display_name": "GConquerer",
+      "disc": "9881",
+      "xp": 117,
+      "total_xp": 117,
+      "level": 0,
+      "url": "https://cdn.discordapp.com/avatars/285286564924227594/f564bcf6be9c5558df219608eac9b2ec.png?size=4096"
+    },
+    "675516790801039361": {
+      "name": "active",
+      "display_name": "active",
+      "disc": "5454",
+      "xp": 36,
+      "total_xp": 36,
+      "level": 0,
+      "url": "https://cdn.discordapp.com/avatars/675516790801039361/40c52da884cd8daea8bf87f1ae5121c5.png?size=4096"
+    },
+    "740785222542426225": {
+      "name": "NicoDaPico",
+      "display_name": "NicoDaPico",
+      "disc": "0001",
+      "xp": 10,
+      "total_xp": 10,
+      "level": 0,
+      "url": "https://cdn.discordapp.com/avatars/740785222542426225/a_50d9c2389bcebb459f61e010fd3e339c.gif?size=4096"
+    },
+    "717140545947959337": {
+      "name": "F346",
+      "display_name": "F346",
+      "disc": "5002",
+      "xp": 22,
+      "total_xp": 22,
+      "level": 0,
+      "url": "https://cdn.discordapp.com/avatars/717140545947959337/080071e1793effbf1bedcb9aa280f69f.png?size=4096"
+    },
+    "188740867253600257": {
+      "name": "Failures",
+      "display_name": "Failures",
+      "disc": "0001",
+      "xp": 19,
+      "total_xp": 19,
+      "level": 0,
+      "url": "https://cdn.discordapp.com/avatars/188740867253600257/7177383b16a31c78a00c4d92f3f08995.png?size=4096"
+    },
+    "547579451244937249": {
+      "name": "BetterThanYou6",
+      "display_name": "BetterThanYou6",
+      "disc": "5120",
+      "xp": 55,
+      "total_xp": 55,
+      "level": 0,
+      "url": "https://cdn.discordapp.com/avatars/547579451244937249/8b6726f88cc8417e79d9d8569ff60b22.png?size=4096"
+    },
+    "488055724086132736": {
+      "name": "Jertsu005",
+      "display_name": "Jertsu005",
+      "disc": "8008",
+      "xp": 114,
+      "total_xp": 114,
+      "level": 0,
+      "url": "https://cdn.discordapp.com/avatars/488055724086132736/8beb0d96ed8cb31f8c9adc9f531ea19b.png?size=4096"
+    },
+    "495073700626956288": {
+      "name": "Mettekes",
+      "display_name": "Mettekes",
+      "disc": "1084",
+      "xp": 51,
+      "total_xp": 51,
+      "level": 0,
+      "url": "https://cdn.discordapp.com/avatars/495073700626956288/a1f524a55aae2ba8be048054d115f9c1.png?size=4096"
+    },
+    "852703702988488704": {
+      "name": "zac",
+      "display_name": "zac",
+      "disc": "5686",
+      "xp": 7,
+      "total_xp": 7,
+      "level": 0,
+      "url": "https://cdn.discordapp.com/avatars/852703702988488704/70a4987c1a2a2bd0b1a0f24d1b8537f0.png?size=4096"
+    },
+    "634459711764168725": {
+      "name": "borszcz",
+      "display_name": "Rail",
+      "disc": "3169",
+      "xp": 63,
+      "total_xp": 63,
+      "level": 0,
+      "url": "https://cdn.discordapp.com/avatars/634459711764168725/c6ad59c7f3ce21dd4218132b76c0c6cc.png?size=4096"
+    },
+    "560493059045851147": {
+      "name": "MaybeDaniel",
+      "display_name": "Daniel",
+      "disc": "6966",
+      "xp": 24,
+      "total_xp": 24,
+      "level": 0,
+      "url": "https://cdn.discordapp.com/avatars/560493059045851147/a_b47a08eed3075cbda486ee33cf6da9b9.gif?size=4096"
+    },
+    "579683348579090435": {
+      "name": "Duiven",
+      "display_name": "Duiven server booster (real)",
+      "disc": "8820",
+      "xp": 8,
+      "total_xp": 8,
+      "level": 0,
+      "url": "https://cdn.discordapp.com/avatars/579683348579090435/096e3027d305bde210afc1a322198561.png?size=4096"
+    },
+    "951335399509344317": {
+      "name": "juztin",
+      "display_name": "juztin",
+      "disc": "2562",
+      "xp": 4,
+      "total_xp": 4,
+      "level": 0,
+      "url": "https://cdn.discordapp.com/avatars/951335399509344317/a_e033118e70137677955a61c6827f7914.gif?size=4096"
+    },
+    "786325839553888306": {
+      "name": "vel",
+      "display_name": "vel",
+      "disc": "6691",
+      "xp": 1,
+      "total_xp": 1,
+      "level": 0,
+      "url": "https://cdn.discordapp.com/avatars/786325839553888306/21d2bf71e074c58ab5ccf05ed08eae54.png?size=4096"
+    },
+    "814908061353246740": {
+      "name": "rainjams",
+      "display_name": "rainjams",
+      "disc": "6969",
+      "xp": 1,
+      "total_xp": 1,
+      "level": 0,
+      "url": "https://cdn.discordapp.com/avatars/814908061353246740/3223fc9fb3e1a0cceca9a239f8a6af28.png?size=4096"
+    },
+    "338245025877983232": {
+      "name": "ww | Leon",
+      "display_name": "ww | ItzPoe | Server booster fr",
+      "disc": "7332",
+      "xp": 1,
+      "total_xp": 1,
+      "level": 0,
+      "url": "https://cdn.discordapp.com/avatars/338245025877983232/1959dc1cfd4fa719f2fccc117be7761e.png?size=4096"
+    },
+    "217738905154224128": {
+      "name": "JustSplit",
+      "display_name": "JustSplit",
+      "disc": "0123",
+      "xp": 5,
+      "total_xp": 5,
+      "level": 0,
+      "url": "https://cdn.discordapp.com/avatars/217738905154224128/a_e5d206ee1ed62f3983dbdbaa25160005.gif?size=4096"
     }
   },
   "mm_tournament": {
@@ -71,16 +233,49 @@
     "383287544336613385": 3
   },
   "riddles": {
-    "383287544336613385": 8
+    "383287544336613385": 20,
+    "547579451244937249": 27,
+    "285286564924227594": 65,
+    "717140545947959337": 4,
+    "740785222542426225": 4,
+    "675516790801039361": 16,
+    "488055724086132736": 58,
+    "495073700626956288": 26,
+    "852703702988488704": 3,
+    "634459711764168725": 35,
+    "560493059045851147": 2,
+    "579683348579090435": 3,
+    "188740867253600257": 5,
+    "932386561117552680": 1,
+    "951335399509344317": 1,
+    "786325839553888306": 1
   },
   "msgs": {
-    "383287544336613385": 1251,
-    "230118817412415489": 606,
-    "932386561117552680": 78,
+    "383287544336613385": 1681,
+    "230118817412415489": 637,
+    "932386561117552680": 134,
     "582537632991543307": 21,
-    "840417629721067520": 10,
-    "275714283718049793": 90,
+    "840417629721067520": 45,
+    "275714283718049793": 93,
     "830504673769029692": 24,
-    "186896273742233600": 33
+    "186896273742233600": 53,
+    "634805170370510908": 6,
+    "285286564924227594": 134,
+    "675516790801039361": 55,
+    "740785222542426225": 13,
+    "717140545947959337": 26,
+    "188740867253600257": 25,
+    "547579451244937249": 66,
+    "488055724086132736": 159,
+    "495073700626956288": 70,
+    "852703702988488704": 7,
+    "634459711764168725": 78,
+    "560493059045851147": 30,
+    "579683348579090435": 13,
+    "951335399509344317": 6,
+    "786325839553888306": 1,
+    "814908061353246740": 2,
+    "338245025877983232": 1,
+    "217738905154224128": 7
   }
 }

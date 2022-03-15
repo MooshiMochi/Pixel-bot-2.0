@@ -6,6 +6,8 @@ from discord_slash import SlashContext
 from discord_slash.cog_ext import cog_slash
 from discord_slash.utils.manage_commands import create_option
 
+from random import randint
+
 from constants import const
 
 
@@ -99,6 +101,17 @@ class Miscellaneous(commands.Cog):
 
         return await ctx.send(**send_settings, allowed_mentions=AllowedMentions(roles=True if ctx.author.guild_permissions.manage_roles else False))
 
+    @cog_slash(name="roll", description="Roll a die that will land on a number between 1 and x", guild_ids=const.slash_guild_ids, options=[
+        create_option(name="max_num", description="Maximum number the die can roll", option_type=4, required=True) | {"focused": True}
+    ])
+    async def roll(self, ctx:SlashContext, max_num:int=2):
+
+        result = randint(1, max_num)
+
+        em = Embed(title=f"You rolled a {max_num} sided dice.", description=f"It landed on **{result}**.", color=self.client.failure)
+        em.set_footer(text="TN | Utility", icon_url=self.client.png)
+
+        return await ctx.send(embed=em, hidden=True)
     
 
 def setup(client):

@@ -1,153 +1,44 @@
 {
   "383287544336613385": {
-    "wallet": 9873543192,
-    "bank": 6406666.173491049,
-    "inventory": [
-      {
-        "name": "yes",
-        "desc": "\u201d\u201d",
-        "price": 9,
-        "stock": null,
-        "category": "perks",
-        "show_in_inv": true,
-        "best_before": null,
-        "role_to_receive": null,
-        "role_to_remove": null,
-        "min_balance": 0,
-        "reply_msg": null,
-        "role_req": null,
-        "count": 1
-      },
-      {
-        "name": "yes",
-        "desc": "\u201d\u201d",
-        "price": 9,
-        "stock": null,
-        "category": "perks",
-        "show_in_inv": true,
-        "best_before": null,
-        "role_to_receive": null,
-        "role_to_remove": null,
-        "min_balance": 0,
-        "reply_msg": null,
-        "role_req": null
-      },
-      {
-        "name": "\ud83d\udc8e 500 Gems",
-        "desc": "**INSTANT DELIVERY** Get 500 gems delivered right to your account balance on Titan Network. Open a ticket to redeem.",
-        "price": 500000,
-        "stock": null,
-        "category": "gems",
-        "show_in_inv": true,
-        "best_before": null,
-        "role_to_receive": null,
-        "role_to_remove": null,
-        "min_balance": 0,
-        "reply_msg": null,
-        "role_req": null
-      },
-      {
-        "name": "\ud83d\udc8e 500 Gems",
-        "desc": "**INSTANT DELIVERY** Get 500 gems delivered right to your account balance on Titan Network. Open a ticket to redeem.",
-        "price": 500000,
-        "stock": null,
-        "category": "gems",
-        "show_in_inv": true,
-        "best_before": null,
-        "role_to_receive": null,
-        "role_to_remove": null,
-        "min_balance": 0,
-        "reply_msg": null,
-        "role_req": null
-      },
-      {
-        "name": "\ud83d\udc8e 500 Gems",
-        "desc": "**INSTANT DELIVERY** Get 500 gems delivered right to your account balance on Titan Network. Open a ticket to redeem.",
-        "price": 500000,
-        "stock": null,
-        "category": "gems",
-        "show_in_inv": true,
-        "best_before": null,
-        "role_to_receive": null,
-        "role_to_remove": null,
-        "min_balance": 0,
-        "reply_msg": null,
-        "role_req": null
-      },
-      {
-        "name": "\ud83d\udc8e 500 Gems",
-        "desc": "**INSTANT DELIVERY** Get 500 gems delivered right to your account balance on Titan Network. Open a ticket to redeem.",
-        "price": 500000,
-        "stock": null,
-        "category": "gems",
-        "show_in_inv": true,
-        "best_before": null,
-        "role_to_receive": null,
-        "role_to_remove": null,
-        "min_balance": 0,
-        "reply_msg": null,
-        "role_req": null
-      }
-    ]
-  },
-  "230118817412415489": {
-    "wallet": 499509996,
-    "bank": 358923.12014720036,
-    "inventory": [
-      {
-        "name": "yes",
-        "desc": "\u201d\u201d",
-        "price": 9,
-        "stock": null,
-        "category": "perks",
-        "show_in_inv": true,
-        "best_before": null,
-        "role_to_receive": null,
-        "role_to_remove": null,
-        "min_balance": 0,
-        "reply_msg": null,
-        "role_req": null,
-        "count": 1
-      },
-      {
-        "name": "\ud83d\udc8e 500 Gems",
-        "desc": "**INSTANT DELIVERY** Get 500 gems delivered right to your account balance on Titan Network. Open a ticket to redeem.",
-        "price": 500000,
-        "stock": null,
-        "category": "gems",
-        "show_in_inv": true,
-        "best_before": null,
-        "role_to_receive": null,
-        "role_to_remove": null,
-        "min_balance": 0,
-        "reply_msg": null,
-        "role_req": null
-      }
-    ]
-  },
-  "932386561117552680": {
     "wallet": 0,
-    "bank": 10000,
+    "bank": 10874.743811412493,
+    "inventory": [],
+    "walet": 0
+  },
+  "488055724086132736": {
+    "wallet": 0,
+    "bank": 128268.3445952535,
+    "inventory": [],
+    "walet": 0
+  },
+  "285286564924227594": {
+    "wallet": 0,
+    "bank": 128362.85938734212,
     "inventory": []
   },
-  "840417629721067520": {
-    "wallet": 0,
-    "bank": 80000,
+  "675516790801039361": {
+    "wallet": 400.0,
+    "bank": 444.4130836182395,
     "inventory": []
   },
-  "275714283718049793": {
-    "wallet": 99998500000,
-    "bank": 2786356.2904988714,
+  "547579451244937249": {
+    "wallet": 0,
+    "bank": 57293.180473968394,
     "inventory": []
   },
-  "830504673769029692": {
+  "634459711764168725": {
     "wallet": 0,
-    "bank": 278459.0896071999,
+    "bank": 34495.52346458263,
     "inventory": []
   },
-  "186896273742233600": {
+  "495073700626956288": {
     "wallet": 0,
-    "bank": 130501.15785640548,
+    "bank": 34161.96002224496,
+    "inventory": []
+  },
+  "217738905154224128": {
+    "wallet": 0.0,
+    "bank": 0.0,
     "inventory": []
   }
 }

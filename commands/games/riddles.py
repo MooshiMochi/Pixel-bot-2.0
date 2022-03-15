@@ -22,8 +22,7 @@ class Riddles(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-        self.is_last_msg_by_bot = False
-        self.last_riddle_msg_id = 0
+        self.last_msg_by_bot = False
 
         with open("data/games/riddles_config.json", "r") as f:
             self.config = json.load(f)
@@ -79,7 +78,7 @@ class Riddles(commands.Cog):
 
         if not self.config['active']: return
 
-        if self.is_last_msg_by_bot:
+        if self.last_msg_by_bot:
             return
 
         cat_opts = [key for key in self.riddles.keys() if key not in self.used_categories]
@@ -119,8 +118,8 @@ class Riddles(commands.Cog):
         self.is_riddle_guessed = False
 
         try:
-            msg = await self.main_ch.send(embed=em)
-            self.last_riddle_msg_id = msg.id
+            await self.main_ch.send(embed=em)
+            self.last_msg_by_bot = True
         except (discord.HTTPException, discord.Forbidden):
             pass
 
@@ -131,15 +130,14 @@ class Riddles(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, msg: discord.Message):
+
         if msg.author.bot:
-            if msg.channel.id == self.main_ch.id:
-                if msg.author.id == self.client.user.id and self.last_riddle_msg_id == msg.id:
-                    self.is_last_msg_by_bot = True
-                else:
-                    self.is_last_msg_by_bot = False
             return
-        
-        elif self.is_riddle_guessed:
+        else:
+            if msg.channel.id == self.main_ch.id:
+                self.last_msg_by_bot = False
+
+        if self.is_riddle_guessed:
             return
         
         elif self.config["active"]:
@@ -160,6 +158,7 @@ class Riddles(commands.Cog):
                               icon_url=str(self.client.user.avatar_url_as(static_format="png", size=2048)))
 
                 await msg.channel.send(embed=em)
+
 
     @cog_slash(name="riddles_config", description="[ADMIN] Configure riddles", guild_ids=const.slash_guild_ids, options=[
         create_option(name="active", description="Activate or deactivate riddles", option_type=5, required=False),
@@ -202,8 +201,15 @@ class Riddles(commands.Cog):
             json.dump(self.config, f, indent=2)
 
         if self.config['active']:
-            self.run_riddles.start()
-        
+            try:
+                if self.run_riddles.is_running():
+                    self.run_riddles.cancel()
+                self.run_riddles.start()
+            except RuntimeError:
+                if self.run_riddles.is_running():
+                    self.run_riddles.cancel()
+                self.run_riddles.start()
+
         else:
             if self.run_riddles.is_running():
                 self.run_riddles.cancel()

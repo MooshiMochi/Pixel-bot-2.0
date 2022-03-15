@@ -20,6 +20,7 @@ class Constants:
         self.command_exts = (
             'commands.experimental',
             'commands.events_and_updates',
+            'commands.raffle',
             'commands.counter',
             'commands.giveaways',
             'commands.reaction_roles',

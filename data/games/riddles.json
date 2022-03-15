@@ -80,145 +80,141 @@
       "question": "What vehicle is Volkswagen best known for in the world?",
       "answer": "The Beetle"
     },
-    "22": {
+    "21": {
       "question": "Richard Branson owns what airline?",
       "answer": "Virgin Atlantic"
     },
-    "23": {
+    "22": {
       "question": "What is Hewlett Packard (HP) originally known for?",
       "answer": "Printers"
     },
-    "26": {
+    "23": {
       "question": "What sport is featured in the video game \"FIFA\" - American Term",
       "answer": "Soccer"
     },
-    "27": {
+    "24": {
       "question": "In which board game do you try to solve a murder?",
       "answer": "Clue"
     },
-    "28": {
+    "25": {
       "question": "How many cards are there in a deck of Uno?",
       "answer": "108"
     },
-    "29": {
+    "26": {
       "question": "If there are six apples and you take away four, how many do you have?",
       "answer": "4"
     },
-    "30": {
+    "27": {
       "question": "What goes up and down, but still remains in the same place?",
       "answer": "Stairs"
     },
-    "31": {
+    "28": {
       "question": "What gets wetter and wetter the more it dries?",
       "answer": "A towel"
     },
-    "32": {
+    "29": {
       "question": "What holiday is called \u201cturkey day\u201d?",
       "answer": "Thanksgiving"
     },
-    "33": {
+    "30": {
       "question": "In the US, what month is Labor Day in?",
       "answer": "September"
     },
-    "35": {
+    "31": {
       "question": "Mexico's Dia de los Muertos means what in English?",
       "answer": "Day of the Dead"
     },
-    "36": {
+    "32": {
       "question": "What country celebrates the Storming of the Bastille?",
       "answer": "France"
     },
-    "38": {
+    "33": {
       "question": "Independence Day in Cambodia is when?",
       "answer": "November 9th"
     },
-    "39": {
+    "34": {
       "question": "What is celebrated on the 2nd saturday in June in the UK?",
       "answer": "The Queens Birthday"
     },
-    "41": {
+    "35": {
       "question": "\"Cohen\" is Hebrew for what?",
       "answer": "Priest"
     },
-    "42": {
+    "36": {
       "question": "In what country was Buddha born?",
       "answer": "Nepal"
     },
-    "44": {
+    "37": {
       "question": "What is the most well-known book in Catholicism?",
       "answer": "The Bible"
     },
-    "45": {
+    "38": {
       "question": "T/F The Big Apple is a nickname given to Washington D.C in 1971.",
       "answer": "True"
     },
-    "46": {
+    "39": {
       "question": "T/F Peanuts are not nuts!",
       "answer": "True"
     },
-    "48": {
+    "40": {
       "question": "T/F Copyrights depreciate over time.",
       "answer": "True"
     },
-    "49": {
+    "41": {
       "question": "T/F Electrons move faster than the speed of light.",
       "answer": "False"
     },
-    "51": {
+    "42": {
       "question": "T/F Light travels in a straight line.",
       "answer": "True"
     },
-    "53": {
+    "43": {
       "question": "What is the name of this servers Housemaster?",
       "answer": "Pixel"
     },
-    "54": {
+    "44": {
       "question": "On Halloween Night, Anne bought 11 bags of candy. Anne ate 2 bags after she realized her life was a mess and gave our 4 bags to trick or treaters who toilet papered her house as ransom. Taking into account the candy distribution factors of the diluted trinsulvanity, what is the date?",
       "answer": "October 31st"
     },
-    "55": {
+    "45": {
       "question": "What does 2+2 equal after you multiply the answer by 1?",
       "answer": "4"
     },
-    "56": {
+    "46": {
       "question": "What does 2+2 equal after you multiply the answer by 0?",
       "answer": "0"
     },
-    "58": {
+    "47": {
       "question": "Larry Page is the founder of which company?",
       "answer": "Google"
     },
-    "59": {
+    "48": {
       "question": "How many stripes does Adidas have?",
       "answer": "3"
     },
-    "60": {
+    "49": {
       "question": "When is the orthodox Christmas?",
       "answer": "January 7th"
     },
-    "61": {
+    "50": {
       "question": "T/F The Mona Liza was stolen from the Louvre in 1911.",
       "answer": "True"
     },
-    "62": {
+    "51": {
       "question": "The 2022 Chinese New Year will be celebrated on what day and month?",
       "answer": "February 1st"
     },
-    "63": {
+    "52": {
       "question": "What happens if you don\u2019t do your Spanish?",
       "answer": "You vanish"
     },
-    "64": {
+    "53": {
       "question": "What does HTML stand for?",
       "answer": "Hypertext Markup Language"
     },
-    "65": {
+    "54": {
       "question": "What is Obama\u2019s favorite clay baked object which is shaped in a rectangular prism formation?",
       "answer": "brick"
-    },
-    "66": {
-      "question": "Have you voted?",
-      "answer": "I will right now <@!895811453116903496>!\n1. Upvote PML on https://discords.com/servers/pixel \n2. Upvote PML on https://topg.org/discord-servers/server-638404"
     }
   },
   "trivia": {
@@ -226,483 +222,475 @@
       "question": "What year was the very first model of the iPhone released?",
       "answer": "2007"
     },
-    "3": {
+    "2": {
       "question": "Google Chrome, Safari, Firefox, and Explorer are different types of what?",
       "answer": "Web Browsers"
     },
-    "4": {
+    "3": {
       "question": "What was Twitter originally called?",
       "answer": "Twttr"
     },
-    "5": {
+    "4": {
       "question": "What is the symbol for potassium?",
       "answer": "K"
     },
-    "6": {
+    "5": {
       "question": "Which natural disaster is measured with a Richter scale?",
       "answer": "Earthquake"
     },
-    "7": {
+    "6": {
       "question": "What part of the atom has no electric charge?",
       "answer": "Neutron"
     },
-    "8": {
+    "7": {
       "question": "What is meterology the study of?",
       "answer": "Weather"
     },
-    "9": {
+    "8": {
       "question": "Which planet has the most gravity?",
       "answer": "Jupiter"
     },
-    "10": {
+    "9": {
       "question": "What is the name of Batman\u2019s butler?",
       "answer": "Alfred"
     },
-    "11": {
+    "10": {
       "question": "What does DC stand for?",
       "answer": "Detective Comics"
     },
-    "12": {
+    "11": {
       "question": "Aquaman is from which city?",
       "answer": "Atlantis"
     },
-    "13": {
+    "12": {
       "question": "Which original avenger was not in the first few movies?",
       "answer": "The Wasp"
     },
-    "14": {
+    "13": {
       "question": "What is Hawkeye\u2019s real name?",
       "answer": "Clint Barton"
     },
-    "15": {
+    "14": {
       "question": "Which Avenger is the only one who could calm the Hulk down?",
       "answer": "Black Widow"
     },
-    "16": {
+    "15": {
       "question": "Which cartoon character lives in a pineapple under the sea?",
       "answer": "Spongebob"
     },
-    "17": {
+    "16": {
       "question": "When Michael Jordan played for the Chicago Bulls, how many NBA Championships did he win?",
       "answer": "6"
     },
-    "18": {
+    "17": {
       "question": "In which US city is Broadway located?",
       "answer": "New York City"
     },
-    "20": {
+    "18": {
       "question": "Which animal can be seen on the Porsche logo?",
       "answer": "Horse"
     },
-    "21": {
+    "19": {
       "question": "Who is often credited with creating the world\u2019s first car?",
       "answer": "Karl Benz"
     },
-    "22": {
+    "20": {
       "question": "Which Jamaican runner is an 11-time world champion and holds the record in the 100 and 200-meter race?",
       "answer": "Usain Bolt"
     },
-    "23": {
+    "21": {
       "question": "What sport was Jesse Owens involved in?",
       "answer": "Track and Field"
     },
-    "24": {
+    "22": {
       "question": "Which hockey team did Wayne Gretzky play for in the \u201880s?",
       "answer": "Oilers"
     },
-    "25": {
+    "23": {
       "question": "What is the common name for dried plums?",
       "answer": "Prunes"
     },
-    "26": {
+    "24": {
       "question": "What other name does \u201ccorn\u201d go by?",
       "answer": "Maize"
     },
-    "27": {
+    "25": {
       "question": "Which kind of alcohol is Russia notoriously known for?",
       "answer": "Vodka"
     },
-    "28": {
+    "26": {
       "question": "Which European nation was said to invent hot dogs?",
       "answer": "Germany"
     },
-    "29": {
+    "27": {
       "question": "What\u2019s the primary ingredient in hummus?",
       "answer": "Chickpeas"
     },
-    "30": {
+    "28": {
       "question": "Which organ has four chambers?",
       "answer": "The Heart"
     },
-    "31": {
+    "29": {
       "question": "In which body part can you find the femur?",
       "answer": "Leg"
     },
-    "32": {
+    "30": {
       "question": "What is the human body's largest organ?",
       "answer": "The Skin"
     },
-    "33": {
+    "31": {
       "question": "About how many times does the human heart beat per day?",
       "answer": "100,000"
     },
-    "34": {
+    "32": {
       "question": "What is the name of the thin and long country that spans more than half of the western coast of South America?",
       "answer": "Chile"
     },
-    "35": {
+    "33": {
       "question": "Which American state is the largest (by area)?",
       "answer": "Alaska"
     },
-    "36": {
+    "34": {
       "question": "Which continent is the largest?",
       "answer": "Asia"
     },
-    "37": {
+    "35": {
       "question": "Which two countries share the longest international border?",
       "answer": "Canada and USA"
     },
-    "38": {
+    "36": {
       "question": "What is the smallest country in the world?",
       "answer": "Vatican City"
     },
-    "40": {
+    "37": {
       "question": "Which of the Seven Wonders is located in Egypt?",
       "answer": "The Pyramids of Giza"
     },
-    "41": {
+    "38": {
       "question": "What is the name of the world\u2019s longest river?",
       "answer": "The Nile"
     },
-    "42": {
+    "39": {
       "question": "Which city in India would you find the Taj Mahal in?",
       "answer": "Agra"
     },
-    "43": {
+    "40": {
       "question": "By what name were the Egyptian kings/rulers known?",
       "answer": "Pharaohs"
     },
-    "44": {
+    "41": {
       "question": "How many Pyramids of Giza were made?",
       "answer": "3"
     },
-    "46": {
+    "42": {
       "question": "In which year World War I begin?",
       "answer": "1914"
     },
-    "48": {
+    "43": {
       "question": "John F. Kennedy was assassinated in which city?",
       "answer": "Dallas"
     },
-    "49": {
+    "44": {
       "question": "Which song by Luis Fonsi and Daddy Yankee has the most views (of all time) on YouTube?",
       "answer": "Despacito"
     },
-    "50": {
+    "45": {
       "question": "What is known as the home of the greek gods?",
       "answer": "Olympus"
     },
-    "51": {
+    "46": {
       "question": "Which greek warriors weakness was their heel?",
       "answer": "Achilles"
     },
-    "52": {
+    "47": {
       "question": "Who was the messenger of the gods?",
       "answer": "Hermes"
     },
-    "54": {
+    "48": {
       "question": "Thor was the son of which God?",
       "answer": "Odin"
     },
-    "55": {
+    "49": {
       "question": "The Roman God of War inspired the name of which planet?",
       "answer": "Mars"
     },
-    "56": {
+    "50": {
       "question": "What was the name of the Egyptian God of the Sun?",
       "answer": "Ra"
     },
-    "57": {
+    "51": {
       "question": "Who is the writer of \u201cMerchant of Venice\u201d?",
       "answer": "Shakespeare"
     },
-    "58": {
+    "52": {
       "question": "\u201cAdventure of Sherlock Holmes\u201d was written by which writer?",
       "answer": "Arthur Conan Doyle"
     },
-    "59": {
+    "53": {
       "question": "Which country is Aesop\u2019s Fables believed to originate in?",
       "answer": "Greece"
     },
-    "60": {
+    "54": {
       "question": "The Hunger Games series was written by which author?",
       "answer": "Suzanne Collins"
     },
-    "61": {
+    "55": {
       "question": "The American designer born in 1939 as Ralph Lifshitz is better known as what?",
       "answer": "Ralph Lauren"
     },
-    "62": {
+    "56": {
       "question": "The fashion designer, Gianni Versace, came from which country?",
       "answer": "Italy"
     },
-    "63": {
+    "57": {
       "question": "When was the company Nike founded?",
       "answer": "1971"
     },
-    "64": {
+    "58": {
       "question": "Which fashion brand made the \u201cGenius Jeans\u201d that became part of the Guinness World Records?",
       "answer": "Gucci"
     },
-    "65": {
+    "59": {
       "question": "What is the tallest building in the world?",
       "answer": "Burj Khalifa"
     },
-    "66": {
+    "60": {
       "question": "Between 1933 to 1947, the Hoover Dam was called what?",
       "answer": "Boulder Dam"
     },
-    "67": {
+    "61": {
       "question": "Where can you find the Petronas Towers?",
       "answer": "Kuala Lumpur"
     },
-    "68": {
+    "62": {
       "question": "What is the smallest size bed available in the United States?",
       "answer": "Twin"
     },
-    "69": {
+    "63": {
       "question": "What design style uses a lot of sea/ocean themed items?",
       "answer": "Nautical"
     },
-    "70": {
+    "64": {
       "question": "What's another name for a footrest?",
       "answer": "Ottoman"
     },
-    "71": {
+    "65": {
       "question": "Who has been the longest-serving monarch of the United Kingdom?",
       "answer": "Queen Elizabeth II"
     },
-    "72": {
+    "66": {
       "question": "World War I began with the death of Archduke Franz Ferdinand, of which country?",
       "answer": "Austria"
     },
-    "73": {
+    "67": {
       "question": "Donald Trump and which North Korean leader are known to trade threats over the internet?",
       "answer": "Kim Jong Un"
     },
-    "74": {
+    "68": {
       "question": "Leader and political icon Nelson Mandela was from which African country?",
       "answer": "South Africa"
     },
-    "75": {
+    "69": {
       "question": "What is the name of the classification of crime which is less serious than a felony?",
       "answer": "Misdemeanor"
     },
-    "76": {
+    "70": {
       "question": "What is evidence in court, where a person tells everything they saw or know?",
       "answer": "Testimony"
     },
-    "77": {
+    "71": {
       "question": "Who is the group of people sworn to make a decision/deliver a verdict in court?",
       "answer": "Jury"
     },
-    "79": {
+    "72": {
       "question": "How many homicides did Ted Bundy admit to?",
       "answer": "30"
     },
-    "80": {
+    "73": {
       "question": "Ted Kaczynski was a former graduate of which university?",
       "answer": "Harvard"
     },
-    "81": {
+    "74": {
       "question": "Gregory Lee Johnson was convicted in Texas for what in 1989?",
       "answer": "Burning the flag"
     },
-    "82": {
+    "75": {
       "question": "What kind of animals are cold-blooded, and have an aquatic larval stage?",
       "answer": "Amphibians"
     },
-    "83": {
+    "76": {
       "question": "What kind of fruit can be found at the top of the men\u2019s Wimbledon trophy?",
       "answer": "Pineapple"
     },
-    "84": {
+    "77": {
       "question": "What is the best way to kill a spider in Minecraft?",
       "answer": "with a sword"
     },
-    "85": {
+    "78": {
       "question": "How many dyes can be crafted in Minecraft?",
       "answer": "16"
     },
-    "86": {
+    "79": {
       "question": "What is the maximum amount of beacons you can place in a World (Minecraft)?",
       "answer": "no limit"
     },
-    "87": {
+    "80": {
       "question": "What does the Cat Vibe emote do?",
       "answer": "BRRR"
     },
-    "88": {
+    "81": {
       "question": "What quantity of paper is required to craft a book?",
       "answer": "3"
     },
-    "89": {
+    "82": {
       "question": "How many seconds does TNT take to explode?",
       "answer": "4"
     },
-    "90": {
+    "83": {
       "question": "What comes once in a minute, twice in a moment, but never in a thousand years?",
       "answer": "the letter M"
     },
-    "91": {
+    "84": {
       "question": "Which word in the dictionary is spelt incorrectly?",
       "answer": "incorrectly"
     },
-    "92": {
+    "85": {
       "question": "There are three stoves: a glass stove, a brick stove, and a wood stove. You only have one match. Which do you light up first?",
       "answer": "you light the match first"
     },
-    "93": {
+    "86": {
       "question": "Which word becomes shorter when 2 letters are added to it?",
       "answer": "The word short"
     },
-    "94": {
+    "87": {
       "question": "Mary has four daughters, and each of her daughters has a brother \u2014 how many children does Mary have?",
       "answer": "Five"
     },
-    "95": {
+    "88": {
       "question": "How many blocks do you need to build a fully powered beacon (4 layer pyramid)?",
       "answer": "164"
     },
-    "96": {
+    "89": {
       "question": "Which queen was Julius Caesar involved with?",
       "answer": "Cleopatra"
     },
-    "98": {
+    "90": {
       "question": "What is the name of the paradise greek warriors go to after death?",
       "answer": "Elysium"
     },
-    "99": {
+    "91": {
       "question": "Which desert is the largest in the world?",
       "answer": "The Antarctic Desert"
     },
-    "100": {
+    "92": {
       "question": "During which time of the year is the Nutcracker primarily performed?",
       "answer": "Christmas"
     },
-    "101": {
+    "93": {
       "question": "Which country produces the most coffee in the world?",
       "answer": "Brazil"
     },
-    "102": {
+    "94": {
       "question": "What country has the world\u2019s most ancient forest?",
       "answer": "Australia"
     },
-    "103": {
+    "95": {
       "question": "Who invented scissors?",
       "answer": "Leonardo Da Vinci"
     },
-    "104": {
+    "96": {
       "question": "Which country was the Caesar salad invented in?",
       "answer": "Mexico"
     },
-    "105": {
+    "97": {
       "question": "How many signs are there in the Zodiac?",
       "answer": "12"
     },
-    "106": {
+    "98": {
       "question": "What object is said to bring bad luck if it is broken?",
       "answer": "A mirror"
     },
-    "107": {
+    "99": {
       "question": "What is the first element on the Periodic Table?",
       "answer": "Hydrogen"
     },
-    "108": {
+    "100": {
       "question": "What is an ice hockey puck made from?",
       "answer": "Rubber"
     },
-    "109": {
+    "101": {
       "question": "Galileo was the citizen of which country?",
       "answer": "Italy"
     },
-    "110": {
+    "102": {
       "question": "What is the only fruit that has its seeds on the outside?",
       "answer": "Strawberry"
     },
-    "111": {
+    "103": {
       "question": "What color is a polar bear\u2019s skin?",
       "answer": "Black"
     },
-    "112": {
+    "104": {
       "question": "What is the largest lizard?",
       "answer": "Komodo Dragon"
     },
-    "113": {
+    "105": {
       "question": "What object does a male penguin often gift to a female penguin to win her over?",
       "answer": "A rock"
     },
-    "114": {
+    "106": {
       "question": "In the entire animal kingdom, what is the only male animal known to give birth?",
       "answer": "Seahorses"
     },
-    "115": {
+    "107": {
       "question": "What color is the blood of an octopus?",
       "answer": "Blue"
     },
-    "116": {
+    "108": {
       "question": "What is Scotland\u2019s national animal?",
       "answer": "Unicorn"
     },
-    "117": {
+    "109": {
       "question": "Which animal is known to take up to a month to digest food?",
       "answer": "A sloth"
     },
-    "118": {
+    "110": {
       "question": "Which flightless bird is known to be the emblem of New Zealand?",
       "answer": "Kiwi"
     },
-    "119": {
+    "111": {
       "question": "What is the proper name for a baby kangaroo?",
       "answer": "A joey"
     },
-    "120": {
+    "112": {
       "question": "What is the proper name for a group of crows?",
       "answer": "Murder"
     },
-    "121": {
-      "question": "What\u2019s the shortcut for the \u201ccopy\u201d function on Windows?",
-      "answer": "Ctrl C"
-    },
-    "122": {
+    "113": {
       "question": "Who was the first woman to win a Nobel Prize (in 1903)?",
       "answer": "Marie Curie"
     },
-    "123": {
+    "114": {
       "question": "What is the name of the paradise vikings go to after death?",
       "answer": "Valhalla"
     },
-    "124": {
+    "115": {
       "question": "What is Canada's first national sport?",
       "answer": "Lacrosse"
     },
-    "125": {
-      "question": "Using the MM/DD/YY format, when was Charlie_b123 banned?",
-      "answer": "10/17/21"
-    },
-    "126": {
+    "116": {
       "question": "Pixels Minecraft Lounge was originally named...",
       "answer": "Pixels Game House"
     },
-    "127": {
+    "117": {
       "question": "The slang term for \u2018Panda\u2019 in Pixels Minecraft Lounge is...",
       "answer": "Panga"
     },
-    "128": {
+    "118": {
       "question": "What company is responsible for the largest one-day value drop in stock market history?",
       "answer": "Meta"
     },
-    "129": {
+    "119": {
       "question": "What is the term for a minute area of illumination on a display screen, one of many from which an image is composed?",
       "answer": "pixel"
     }
@@ -983,7 +971,7 @@
       "answer": "bedrock"
     },
     "12": {
-      "question": " pkiadso teplgor",
+      "question": "istdpepr kao glo",
       "answer": "stripped oak log"
     },
     "13": {
@@ -1019,7 +1007,7 @@
       "answer": "vindicator"
     },
     "21": {
-      "question": "adr rpnleee",
+      "question": "drnee lepra",
       "answer": "ender pearl"
     },
     "22": {
@@ -1055,11 +1043,11 @@
       "answer": "dandelion"
     },
     "32": {
-      "question": "ederemitn",
+      "question": "redenmtie",
       "answer": "determine"
     },
     "33": {
-      "question": "rteietneh",
+      "question": "hntereiet",
       "answer": "netherite"
     },
     "34": {
@@ -1103,5 +1091,4 @@
       "answer": "words"
     }
   }
-  }
-  
+}

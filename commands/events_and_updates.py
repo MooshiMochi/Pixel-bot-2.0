@@ -157,6 +157,7 @@ class GuildEvents(commands.Cog):
         create_option(name="place_3_prize", description="The prize for 3rd place in the event", option_type=3, required=False),
         create_option(name="max_players", description="The max number of players that can participate", option_type=4, required=False)
     ])
+    @commands.has_permissions(administrator=True)
     async def event_create(self, ctx:SlashContext, channel:discord.TextChannel=None, event_name:str=None, event_location:str=None, prize:str=None, place_2_prize:str=None, place_3_prize:str=None, max_players:int=None, when:str=None, ping_role_name:str=None, role_color:int=None):
         await ctx.defer(hidden=True)
 
@@ -255,6 +256,7 @@ class GuildEvents(commands.Cog):
             create_choice(value=0x36393F, name="Invisible")
         ])
     ])
+    @commands.has_permissions(administrator=True)
     async def update_create(self, ctx:SlashContext, channel:discord.TextChannel=None, title:str=None, desc:str=None, when:str=None, ping_role_name:str=None, role_color:int=None):
         await ctx.defer(hidden=True)
 
@@ -309,16 +311,18 @@ class GuildEvents(commands.Cog):
         if str(ctx.custom_id).startswith("updates_") or str(ctx.custom_id).startswith("events_"):
             role_id = int(str(ctx.custom_id).replace("updates_", "").replace("events_", ""))
             role = ctx.guild.get_role(role_id)
+            if str(ctx.custom_id).startswith("updates_"):
+                    _type = "update"
+            else:
+                _type = "event"
+
             if role not in ctx.author.roles:
                 try:
                     await ctx.author.add_roles(role)
                 except AttributeError:
                     # button was probably clicked very late so we will ignore
                     return
-                if str(ctx.custom_id).startswith("updates_"):
-                    _type = "update"
-                else:
-                    _type = "event"
+                
 
                 await ctx.send(f"You will get pinged 10 mins before this {_type}!", hidden=True)
             else:

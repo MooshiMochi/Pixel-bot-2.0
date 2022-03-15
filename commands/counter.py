@@ -50,8 +50,12 @@ class Counter(commands.Cog):
                     continue
                 else:
                     for _key in val.keys():
-                        tasks.append(self.sleeping_func(guilds[key], _key))
-        if tasks:
+                        try:
+                            tasks.append(self.sleeping_func(guilds[key], _key))
+                        except KeyError:
+                            # There is probably an ongoing counter in a diff server and this is the test bot
+                            pass
+        if tasks:   
             await asyncio.gather(*tasks)
 
 
@@ -151,7 +155,7 @@ class Counter(commands.Cog):
         with open("data/counters/counters.json", "w") as f:
             json.dump(self.counters, f, indent=2)
 
-        await self.client.loop.create_task(self.sleeping_func(ctx.guild, str(channel.id)))
+        self.client.loop.create_task(self.sleeping_func(ctx.guild, str(channel.id)))
 
         return await ctx.send(f"New counter VC created: {channel.mention}")
 

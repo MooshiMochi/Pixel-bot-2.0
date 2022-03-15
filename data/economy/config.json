@@ -1,11 +1,10 @@
 {
-  "inv_usage_channel_id": 940876218083967037,
-  "cash_logs": true,
-  "cash_logs_channel_id": 939643261348348016,
-  "income_logs": true,
-  "income_logs_channel_id": 940876218083967037,
-  "pay_logs": true,
-  "pay_logs_channel_id": 941104610674880553,
-  "gems_logs": true,
-  "gems_logs_channel_id": 943996940880867329
+  "cash_logs": false,
+  "cash_logs_channel_id": null,
+  "income_logs": false,
+  "income_logs_channel_id": null,
+  "pay_logs": false,
+  "pay_logs_channel_id": null,
+  "gems_logs": false,
+  "gems_logs_channel_id": null
 }

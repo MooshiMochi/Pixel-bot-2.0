@@ -1,102 +1,42 @@
 {
-  "944307949378105364": {
-    "message_id": 944307949378105364,
+  "952737146760998972": {
+    "message_id": 952737146760998972,
     "required_role": {
       "id": null,
       "name": null
     },
-    "time": 1645211259.0,
-    "winners": 3,
-    "host": 383287544336613385,
-    "members": [
-      383287544336613385
-    ],
-    "guild_id": 932736074139185292,
-    "channel_id": 932736074139185295,
-    "jump_url": "https://discord.com/channels/932736074139185292/932736074139185295/944307949378105364",
-    "prize": "Prize 1",
-    "finished": true,
-    "all_prizes": [
-      "Prize 1",
-      "Prize 2",
-      "Prize 3",
-      "Prize 4",
-      "Prize 5"
-    ]
-  },
-  "944310181892866150": {
-    "message_id": 944310181892866150,
-    "required_role": {
-      "id": null,
-      "name": null
-    },
-    "time": 1645211792.0,
-    "winners": 3,
-    "host": 383287544336613385,
-    "members": [
-      383287544336613385
-    ],
-    "guild_id": 932736074139185292,
-    "channel_id": 932736074139185295,
-    "jump_url": "https://discord.com/channels/932736074139185292/932736074139185295/944310181892866150",
-    "prize": "First Prize",
-    "finished": true,
-    "all_prizes": [
-      "First Prize",
-      "Second Prize",
-      "Third Prize",
-      "Fourth Prize",
-      "Fifth Prize"
-    ]
-  },
-  "944314159636578367": {
-    "message_id": 944314159636578367,
-    "required_role": {
-      "id": null,
-      "name": null
-    },
-    "time": 1645212740.0,
+    "time": 1647652637.0,
     "winners": 1,
-    "host": 383287544336613385,
+    "host": 932386561117552680,
     "members": [
-      840417629721067520,
-      383287544336613385
+      852703702988488704,
+      275714283718049793,
+      217738905154224128,
+      495073700626956288,
+      488055724086132736,
+      338245025877983232,
+      579683348579090435,
+      675516790801039361,
+      932386561117552680,
+      717140545947959337,
+      285286564924227594,
+      560493059045851147,
+      492853161447391246,
+      740785222542426225,
+      814908061353246740,
+      634459711764168725,
+      585606106496237591,
+      951335399509344317
     ],
-    "guild_id": 932736074139185292,
-    "channel_id": 932736074139185295,
-    "jump_url": "https://discord.com/channels/932736074139185292/932736074139185295/944314159636578367",
-    "prize": "main prize",
-    "finished": true,
+    "guild_id": 932413718397083678,
+    "channel_id": 950907829202595881,
+    "jump_url": "https://discord.com/channels/932413718397083678/950907829202595881/952737146760998972",
+    "prize": "<@!488055724086132736>'s  Among Us Plushy",
+    "finished": false,
     "all_prizes": [
-      "main prize",
-      1000,
-      3000000,
-      "Yes, it's a prize",
-      null
-    ]
-  },
-  "944316167529570435": {
-    "message_id": 944316167529570435,
-    "required_role": {
-      "id": null,
-      "name": null
-    },
-    "time": 1645213219.0,
-    "winners": 3,
-    "host": 383287544336613385,
-    "members": [
-      840417629721067520,
-      383287544336613385
-    ],
-    "guild_id": 932736074139185292,
-    "channel_id": 932736074139185295,
-    "jump_url": "https://discord.com/channels/932736074139185292/932736074139185295/944316167529570435",
-    "prize": "aafwafawf",
-    "finished": true,
-    "all_prizes": [
-      "aafwafawf",
-      "aegaegaegae",
-      "aeoighaogjegh",
+      "<@!488055724086132736>'s  Among Us Plushy",
+      null,
+      null,
       null,
       null
     ]
