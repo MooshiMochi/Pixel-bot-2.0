@@ -183,7 +183,7 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
             create_button(
                 style=ButtonStyle.red,
                 label="Remove roles",
-                custom_id="rr_remove_roles_" + "-".join(list(map(lambda f: str(f[1]), reactions)))
+                custom_id="RR" + "-".join(list(map(lambda f: str(f[1]), reactions)))
                 )
         ]
 
@@ -215,9 +215,9 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
                 await ctx.author.add_roles(*roles_to_give)
             await ctx.send(f'''You received {', '.join(x.mention for x in roles_to_give)}''', hidden=True)
 
-        elif ctx.custom_id.startswith("rr_remove_roles"):
+        elif ctx.custom_id.startswith("RR"):
 
-            roles_str = ctx.custom_id.replace("rr_remove_roles_", "")
+            roles_str = ctx.custom_id.replace("RR", "")
             roles_list = [int(_id) for _id in roles_str.split("-")]
 
             roles_to_remove = []
