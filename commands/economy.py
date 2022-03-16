@@ -135,6 +135,15 @@ class EconomyCommands(commands.Cog):
             return self.client.economydata[str(authorid)]
 
     async def economy_log(self, _type, member, amount: int, reason: str):
+        
+        id1 = str(member).replace("<@", "").replace("!", "").replace(">", "")
+        try:
+            await self.check_user(id1)
+        except ValueError:  # This is for @everyone.
+            return
+
+        e = self.client.economydata[str(id1)]
+
         if self.client.eco_config[_type]:
             channel = self.cash_logs_channel
 
@@ -143,13 +152,6 @@ class EconomyCommands(commands.Cog):
 
             elif _type == "gems_logs":
                 channel = self.gems_logs_channel
-
-            id1 = str(member).replace("<@", "").replace("!", "").replace(">", "")
-            try:
-                await self.check_user(id1)
-            except ValueError:  # This is for @everyone.
-                return
-            e = self.client.economydata[str(id1)]
 
             embed = discord.Embed(title="💸 Change",
                                   description=f"Username: {member}\nAmount: {await self.client.round_int(amount)}\nBefore: {int(e['wallet'] + e['bank'] - amount)}\nNow: {int(e['wallet'] + e['bank'])}\nReason: {reason}\nLinked Account: {self.client.players.get(str(id1), 'Not Verified')}",
