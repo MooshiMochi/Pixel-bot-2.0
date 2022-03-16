@@ -109,7 +109,7 @@ class Miscellaneous(commands.Cog):
         result = randint(1, max_num)
 
         em = Embed(title=f"You rolled a {max_num} sided dice.", description=f"It landed on **{result}**.", color=self.client.failure)
-        em.set_footer(text="TN | Utility", icon_url=self.client.png)
+        em.set_footer(text="TitanMC | Utility", icon_url=self.client.png)
 
         return await ctx.send(embed=em)
     

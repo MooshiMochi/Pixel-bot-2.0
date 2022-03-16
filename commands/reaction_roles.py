@@ -131,7 +131,7 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
         if send_as_embed:
             _type = "embed"
             em = discord.Embed(title=title, description=description, color=self.client.failure)
-            em.set_footer(text="TN | Reactions", icon_url=self.client.png)
+            em.set_footer(text="TitanMC | Reactions", icon_url=self.client.png)
         else:
             em = f"**{title}**\n\n{description}"
             _type = "content"

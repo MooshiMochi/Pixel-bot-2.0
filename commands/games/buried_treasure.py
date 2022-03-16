@@ -78,7 +78,7 @@ class BuriedTreasure(commands.Cog):
 
         if "game" not in ctx.channel.name.lower():
             warn = discord.Embed(description="You can use this command in game channels only.", color=self.client.failure)
-            warn.set_footer(text="TN | Buried Treasure", icon_url=self.client.png)
+            warn.set_footer(text="TitanMC | Buried Treasure", icon_url=self.client.png)
             return await ctx.send(embed=warn, hidden=True)
         
         SQUARES = 25
@@ -91,7 +91,7 @@ class BuriedTreasure(commands.Cog):
         failure_em = (
             discord.Embed(color=self.client.failure, description="")
             .set_footer(
-                text="TN | Buried Treasure", 
+                text="TitanMC | Buried Treasure", 
                 icon_url=self.client.png))
 
         if bet < 100:
@@ -118,7 +118,7 @@ class BuriedTreasure(commands.Cog):
 
         if data["attempts"] == 0:
             __em = discord.Embed(color=self.client.failure, title=f"Free attempts exhausted.", description=f"You have exhausted your daily 5 free attempts.\nIf you wish to play the game, it will cost you {await self.client.round_int(self.client.play_price)}💸. \n\n**Do you wish to proceed?**")
-            __em.set_footer(text=f"TN | Buried Treasure", icon_url=self.client.png)
+            __em.set_footer(text=f"TitanMC | Buried Treasure", icon_url=self.client.png)
 
             buttons = [
                 create_button(style=ButtonStyle.green, label="Continue", custom_id="yes"),
@@ -150,7 +150,7 @@ class BuriedTreasure(commands.Cog):
 
                         if e["wallet"] < self.client.play_price + bet:
                             err = discord.Embed(color=self.client.failure, description="You are too poor to afford this.\nWithdraw some more money from your bank and try again.")
-                            err.set_footer(text="TN | Buried Treasure", icon_url=self.client.png)
+                            err.set_footer(text="TitanMC | Buried Treasure", icon_url=self.client.png)
                             await ctx.send(embed=err, hidden=True)
                             raise asyncio.TimeoutError
                         else:
@@ -209,7 +209,7 @@ class BuriedTreasure(commands.Cog):
             discord.Embed(
                 color=self.client.failure,
                 description=f"💸 Your bet: **{int(bet):,} 💸**\n\n📜 Game Rules 📜\n\n- You can click on 3 spots in the sand using the buttons below.\n- 3 of these spots contain treasure.\n- If you find one of the spots with treasure, your bet is multiplied by 6!\n- Good luck and have fun!\n\n*You only have 5 free attempts to play any of the games, after which you will be charged a fee.*")
-            .set_footer(text="TN | Buried Treasure", icon_url=self.client.png)
+            .set_footer(text="TitanMC | Buried Treasure", icon_url=self.client.png)
             .set_author(name="🏝️ Buried Treasure")
         )
 

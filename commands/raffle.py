@@ -75,7 +75,7 @@ class Raffle(commands.Cog):
                     boost_users.append(mem)
 
         em = discord.Embed(title="Boosters' Raffle Results!", description="", color=self.client.failure)
-        em.set_footer(text="TN | Raffle", icon_url=self.client.png)
+        em.set_footer(text="TitanMC | Raffle", icon_url=self.client.png)
         if not boost_users:
             em.description = "**No one has boosted the server. No winner was chosen 😿**"
             try:
@@ -134,7 +134,7 @@ class Raffle(commands.Cog):
             await channel.send("\u200b", delete_after=1)
         except (discord.HTTPException, discord.Forbidden):
             em = discord.Embed(description=f"I do not have enough permissions to\nsend messages in <#{channel.id}>", color=self.client.failure)
-            em.set_footer(text="TN | Raffle", icon_url=self.client.png)
+            em.set_footer(text="TitanMC | Raffle", icon_url=self.client.png)
             return await ctx.send(embed=em, hidden=True)
 
         time_copy = time.strip()
@@ -146,7 +146,7 @@ class Raffle(commands.Cog):
             scheduled_time = datetime.strptime(time, "%Y/%d/%m %H:%M")
         except ValueError:
             em = discord.Embed(description=f"Time data `{time_copy}` does not match the format specified in the command description.\nPlease check and try again.", color=self.client.failure)
-            em.set_footer(text="TN | Raffle", icon_url=self.client.png)
+            em.set_footer(text="TitanMC | Raffle", icon_url=self.client.png)
             return await ctx.send(embed=em, hidden=True)
 
         
@@ -159,7 +159,7 @@ class Raffle(commands.Cog):
             json.dump(self.raffles, f, indent=2)
         
         em = discord.Embed(title="New raffle has been scheduled", description=f"Time:\n> <t:{int(scheduled_time.timestamp())}:R>\n\nChannel:\n> <#{channel.id}>\n\nNumber of winners:\n> {winners}", color=self.client.failure)
-        em.set_footer(text="TN | Raffle", icon_url=self.client.png)
+        em.set_footer(text="TitanMC | Raffle", icon_url=self.client.png)
 
         self.client.loop.create_task(self.waiting_task(str(ctx.guild_id), str(channel.id)))
 

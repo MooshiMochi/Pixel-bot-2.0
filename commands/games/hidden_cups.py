@@ -82,7 +82,7 @@ class HiddenCups(commands.Cog):
         
         if "game" not in ctx.channel.name.lower():
             warn = discord.Embed(description="You can use this command in game channels only.", color=self.client.failure)
-            warn.set_footer(text="TN | Hidden Cups", icon_url=self.client.png)
+            warn.set_footer(text="TitanMC | Hidden Cups", icon_url=self.client.png)
             return await ctx.send(embed=warn, hidden=True)
 
         bet = await self.client.parse_int(bet)
@@ -90,7 +90,7 @@ class HiddenCups(commands.Cog):
         failure_em = (
             discord.Embed(color=self.client.failure, description="")
             .set_footer(
-                text="TN | Hidden Cups", 
+                text="TitanMC | Hidden Cups", 
                 icon_url=self.client.png))
 
         if bet < 100:
@@ -117,7 +117,7 @@ class HiddenCups(commands.Cog):
 
         if data["attempts"] == 0:
             __em = discord.Embed(color=self.client.failure, title=f"Free attempts exhausted.", description=f"You have exhausted your daily 5 free attempts.\nIf you wish to play the game, it will cost you {await self.client.round_int(self.client.play_price)}💸. \n\n**Do you wish to proceed?**")
-            __em.set_footer(text=f"TN | Hidden Cups", icon_url=self.client.png)
+            __em.set_footer(text=f"TitanMC | Hidden Cups", icon_url=self.client.png)
 
             buttons = [
                 create_button(style=ButtonStyle.green, label="Continue", custom_id="yes"),
@@ -149,7 +149,7 @@ class HiddenCups(commands.Cog):
 
                         if e["wallet"] < self.client.play_price + bet:
                             err = discord.Embed(color=self.client.failure, description="You are too poor to afford this.\nWithdraw some more money from your bank and try again.")
-                            err.set_footer(text="TN | Hidden Cups", icon_url=self.client.png)
+                            err.set_footer(text="TitanMC | Hidden Cups", icon_url=self.client.png)
                             await ctx.send(embed=err, hidden=True)
                             raise asyncio.TimeoutError
                         else:
@@ -202,7 +202,7 @@ class HiddenCups(commands.Cog):
         cups = [0, 1, 2]; shuffle(cups)
 
         em = discord.Embed(color=self.client.failure, description=f"💸 Your bet: **{int(bet):,}** 💸\n\n📜 Game Rules 📜\n\nHere are 3 cups. Each cup contains a prize, good, bad, and kinda bad! You can win:\n- **1/2 of your bet**\n- **2x your bet**\n- **nothing**.\nYou have one attempt. Good luck and have fun!")
-        em.set_footer(text="TN | Hidden Cups", icon_url=self.client.png)
+        em.set_footer(text="TitanMC | Hidden Cups", icon_url=self.client.png)
         em.set_author(name="🏆 Hidden Cups")
 
 
@@ -238,7 +238,7 @@ class HiddenCups(commands.Cog):
                     await self.client.addcoins(ctx.author_id, bet/2, "Lost only half bet in `/hidden_cups`\nReturning half back", where="wallet")
 
                     _em = discord.Embed(color=self.client.failure, description=message)
-                    _em.set_footer(text="TN | Hidden Cups", icon_url=self.client.png)
+                    _em.set_footer(text="TitanMC | Hidden Cups", icon_url=self.client.png)
 
                     await btnCtx.reply(embed=_em, hidden=True)
                     
@@ -266,7 +266,7 @@ class HiddenCups(commands.Cog):
                     await self.client.addcoins(ctx.author_id, bet, "Won 2x bet in `/hidden_cups`", where="wallet")
 
                     _em = discord.Embed(color=self.client.failure, description=message)
-                    _em.set_footer(text="TN | Hidden Cups", icon_url=self.client.png)
+                    _em.set_footer(text="TitanMC | Hidden Cups", icon_url=self.client.png)
 
                     await btnCtx.reply(embed=_em, hidden=True)
 
@@ -280,7 +280,7 @@ class HiddenCups(commands.Cog):
                     await btnCtx.edit_origin(embed=em, components=new_comp)
 
                     _em = discord.Embed(color=self.client.failure, description=message)
-                    _em.set_footer(text="TN | Hidden Cups", icon_url=self.client.png)
+                    _em.set_footer(text="TitanMC | Hidden Cups", icon_url=self.client.png)
 
                     await btnCtx.reply(embed=_em, hidden=True)
     

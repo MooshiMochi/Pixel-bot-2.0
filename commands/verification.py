@@ -82,7 +82,7 @@ class Verification(commands.Cog):
 
         if send_as_embed:
             em = discord.Embed(color=self.client.success)
-            em.set_footer(text="TN | Verification", icon_url=self.client.png)
+            em.set_footer(text="TitanMC | Verification", icon_url=self.client.png)
             em.description = content
 
             if title:
@@ -159,7 +159,7 @@ class Verification(commands.Cog):
                 return await ctx.send("All members are already verified!", hidden=True)
             
             em = discord.Embed(color=self.client.success, description=f"Attempting to verify {len(unverified_members)} members. ETA {await self.client.sec_to_time((len(unverified_members)//10)*6 + 5)}")
-            em.set_footer(text="TN | Verification", icon_url=self.client.png)
+            em.set_footer(text="TitanMC | Verification", icon_url=self.client.png)
 
             await ctx.send(embed=em, hidden=True)
 
@@ -179,7 +179,7 @@ class Verification(commands.Cog):
 
             em = discord.Embed(color=self.client.success if fail < success else self.client.failure, 
             description=f"**Attempted to forcefully verify {len(unverified_members)} members.**\n\n{self.client.yes} **|** Successfull verifications: `{success}`\n{self.client.no} **|** Failed verifications: `{fail}`")
-            em.set_footer(text="TN | Verification", icon_url=self.client.png)
+            em.set_footer(text="TitanMC | Verification", icon_url=self.client.png)
             await ctx.send(embed=em, hidden=True)
 
     
@@ -207,7 +207,7 @@ class Verification(commands.Cog):
         em = discord.Embed(title="Verification Successfull!", description=f"Your account has been linked to `{resp['name']}`.")
         em.set_author(name=ctx.author, icon_url=ctx.author.avatar_url_as(static_format="png", size=4096))
         em.set_thumbnail(url=f"http://cravatar.eu/helmhead/{resp['name']}/256.png")
-        em.set_footer(text="TN | Verification", icon_url=self.client.png)
+        em.set_footer(text="TitanMC | Verification", icon_url=self.client.png)
         em.color = self.client.success
 
         try:
@@ -228,7 +228,7 @@ class Verification(commands.Cog):
         em = discord.Embed(title="Unlinked Successfully!", description=f"Your account has been unlinked from `{user}`.")
         em.set_author(name=ctx.author, icon_url=ctx.author.avatar_url_as(static_format="png", size=4096))
         em.set_thumbnail(url=f"http://cravatar.eu/helmhead/{user}/256.png")
-        em.set_footer(text="TN | Verification", icon_url=self.client.png)
+        em.set_footer(text="TitanMC | Verification", icon_url=self.client.png)
         em.color = self.client.success
         try:
             return await ctx.send(embed=em)
@@ -264,7 +264,7 @@ class Verification(commands.Cog):
         em = discord.Embed(title="Verification Successfull!", description=f"{member.mention} has been linked to `{resp['name']}`.")
         em.set_author(name=member, icon_url=member.avatar_url_as(static_format="png", size=4096))
         em.set_thumbnail(url=f"http://cravatar.eu/helmhead/{resp['name']}/256.png")
-        em.set_footer(text="TN | Verification", icon_url=self.client.png)
+        em.set_footer(text="TitanMC | Verification", icon_url=self.client.png)
         em.color = self.client.success
 
         opts = {"embed": em}
@@ -298,7 +298,7 @@ class Verification(commands.Cog):
         em = discord.Embed(title="Unlinked Successfully!", description=f"{member.mention} account has been unlinked from `{user}`.")
         em.set_author(name=member, icon_url=member.avatar_url_as(static_format="png", size=4096))
         em.set_thumbnail(url=f"http://cravatar.eu/helmhead/{user}/256.png")
-        em.set_footer(text="TN | Verification", icon_url=self.client.png)
+        em.set_footer(text="TitanMC | Verification", icon_url=self.client.png)
         em.color = self.client.success
         try:
             return await ctx.send(embed=em)
@@ -326,7 +326,7 @@ class Verification(commands.Cog):
         em = discord.Embed(title="Account Info", description=f"{member.mention} is linked to `{user}`.")
         em.set_author(name=member, icon_url=member.avatar_url_as(static_format="png", size=4096))
         em.set_thumbnail(url=f"http://cravatar.eu/helmhead/{user}/256.png")
-        em.set_footer(text="TN | Verification", icon_url=self.client.png)
+        em.set_footer(text="TitanMC | Verification", icon_url=self.client.png)
         em.color = self.client.success
         try:
             return await ctx.send(embed=em, hidden=True)
@@ -340,7 +340,7 @@ class Verification(commands.Cog):
 
             if not self.verification_role:
                 embed = discord.Embed(color=self.client.failure, description="The verification role was not set up!")
-                embed.set_footer(text="TN | Verification", icon_url=self.client.png)
+                embed.set_footer(text="TitanMC | Verification", icon_url=self.client.png)
                 return await ctx.send(embed=embed, hidden=True)
 
             if self.verification_role in ctx.author.roles:
@@ -349,7 +349,7 @@ class Verification(commands.Cog):
                 em = discord.Embed(color=self.client.success, description="You are now verified!")
                 await ctx.author.add_roles(self.verification_role)
 
-            em.set_footer(text="TN | Verification", icon_url=self.client.png)
+            em.set_footer(text="TitanMC | Verification", icon_url=self.client.png)
 
             return await ctx.send(embed=em, hidden=True)
 

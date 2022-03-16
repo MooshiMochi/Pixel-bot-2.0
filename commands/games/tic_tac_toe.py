@@ -79,7 +79,7 @@ class TicTacToe(commands.Cog):
 
         if "game" not in ctx.channel.name.lower():
             warn = discord.Embed(description="You can use this command in game channels only.", color=self.client.failure)
-            warn.set_footer(text="TN | Tic Tac Toe", icon_url=self.client.png)
+            warn.set_footer(text="TitanMC | Tic Tac Toe", icon_url=self.client.png)
             return await ctx.send(embed=warn, hidden=True)
 
         if ctx.author_id == member.id:
@@ -111,7 +111,7 @@ class TicTacToe(commands.Cog):
 
         em = discord.Embed(color=self.client.failure, description=f"**{ctx.author}** challenged **{member.mention}** to a Tic Tac Toe game!\n\nIf either one of the players does not respond within 5 mins, the game will be cancelled!",
         title=f"X's turn." if Player == -1 else "O's turn")
-        em.set_footer(text="TN | Tic Tac Toe", icon_url=self.client.png)
+        em.set_footer(text="TitanMC | Tic Tac Toe", icon_url=self.client.png)
         em.set_author(name="❌⭕ Tic Tac Toe")
 
         em.description += f"\n\n**{ctx.author}** is X's\n**{member}** is O's"

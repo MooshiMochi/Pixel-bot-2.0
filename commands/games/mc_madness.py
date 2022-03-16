@@ -777,7 +777,7 @@ class McMadness(commands.Cog):
             em.description += options_txt + "\n"
 
             if x in add_on:
-                em.set_footer(text=f"TN | Minecraft Madness | Page {add_on.index(x)+1}/{len(add_on)}",
+                em.set_footer(text=f"TitanMC | Minecraft Madness | Page {add_on.index(x)+1}/{len(add_on)}",
                 icon_url=self.client.png)
                 embeds.append(em)
 

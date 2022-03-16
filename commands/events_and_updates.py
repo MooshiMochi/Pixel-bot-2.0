@@ -88,7 +88,7 @@ class GuildEvents(commands.Cog):
                 addon += f"\n\n*Max players for this event are: `{data['max_players']}`*"
 
             em = discord.Embed(title=f'{data["event_name"]} event', description=f'This event will be hosted in {data["event_location"]} <t:{int(end_ts)}:R> with the following prize(s)\n> **1st place:** `{data["prize"]}`{addon}', color=self.client.failure)
-        em.set_footer(text=f"TN | {_type.capitalize()}", icon_url=self.client.png)
+        em.set_footer(text=f"TitanMC | {_type.capitalize()}", icon_url=self.client.png)
         em.set_author(name=f"New {_type.capitalize()[:-1]}!", icon_url=self.client.png)
 
 
@@ -206,7 +206,7 @@ class GuildEvents(commands.Cog):
             addon += f"\n\n*Max players for this event are: `{new_event['max_players']}`*"
 
         em = discord.Embed(title=f'{new_event["event_name"]} event', description=f'This event will be hosted in {new_event["event_location"]} <t:{int(ts + time)}:R> with the following prize(s)\n> **1st place:** `{new_event["prize"]}`{addon}', color=self.client.failure)
-        em.set_footer(text=f"TN | Events", icon_url=self.client.png)
+        em.set_footer(text=f"TitanMC | Events", icon_url=self.client.png)
         em.set_author(name=f"New Event!", icon_url=self.client.png)
 
         buttons = [create_button(
@@ -289,7 +289,7 @@ class GuildEvents(commands.Cog):
             self.updates[guild_id][str(ts + time)] = new_update
 
         em = discord.Embed(title=new_update["title"], description=str(new_update["desc"]) + f"\n\nThis update will take place <t:{int(ts + time)}:R>", color=self.client.failure)
-        em.set_footer(text=f"TN | Updates", icon_url=self.client.png)
+        em.set_footer(text=f"TitanMC | Updates", icon_url=self.client.png)
         em.set_author(name=f"New Update!", icon_url=self.client.png)
 
         buttons = [create_button(

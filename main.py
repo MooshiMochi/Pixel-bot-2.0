@@ -47,7 +47,7 @@ class TNContext(commands.Context):
 
         if footer is None:
             footer = "Titan Network"
-        embed.set_footer(icon_url=self.bot.png, text=f"TN | {footer}")
+        embed.set_footer(icon_url=self.bot.png, text=f"TitanMC | {footer}")
         embed.timestamp = datetime.utcnow()
 
         try:
@@ -65,7 +65,7 @@ class TNSlashContext(SlashContext):
 
         if footer is None:
             footer = "Titan Network"
-        embed.set_footer(icon_url=self.bot.png, text=f"TN | {footer}")
+        embed.set_footer(icon_url=self.bot.png, text=f"TitanMC | {footer}")
         embed.timestamp = datetime.utcnow()
 
         try:
@@ -161,7 +161,7 @@ class MyClient(commands.Bot):
                                   description=f"Username: <@!{userid}>\nAmount: {await self.round_int(amount)}\nBefore: {int(e['wallet'] + e['bank'] - amount)}\nNow: {int(e['wallet'] + e['bank'])}\nReason: {reason}",
                                   color=self.failure)
 
-                embed.set_footer(text="TN | Economy", icon_url=self.png)
+                embed.set_footer(text="TitanMC | Economy", icon_url=self.png)
                 await ch.send(embed=embed)
 
         if not self.eco_user_logs.get(str(userid), False):

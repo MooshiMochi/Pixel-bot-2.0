@@ -113,7 +113,7 @@ class Riddles(commands.Cog):
         self.random_win = randint(500, 2500)
 
         em = discord.Embed(color=self.client.failure, title="New chat riddle", description=msg+f"\n\n*Answer the riddle correctly for {self.random_win} 💸!*")
-        em.set_footer(text="TN | Riddles", icon_url=self.client.png)
+        em.set_footer(text="TitanMC | Riddles", icon_url=self.client.png)
 
         self.is_riddle_guessed = False
 
@@ -154,7 +154,7 @@ class Riddles(commands.Cog):
                 em = discord.Embed(
                     description=f"Congratulations {msg.author.mention}!         You guessed the riddle! You got `{self.random_win}` 💸",
                     color=self.client.failure)
-                em.set_footer(text="TN | Riddles",
+                em.set_footer(text="TitanMC | Riddles",
                               icon_url=str(self.client.user.avatar_url_as(static_format="png", size=2048)))
 
                 await msg.channel.send(embed=em)
@@ -318,7 +318,7 @@ class Riddles(commands.Cog):
             em.description += f"> {answer}\n\n"
 
             if x in add_on:
-                em.set_footer(text=f"TN | Riddles | Page {add_on.index(x)+1}/{len(add_on)-1}",
+                em.set_footer(text=f"TitanMC | Riddles | Page {add_on.index(x)+1}/{len(add_on)-1}",
                 icon_url=self.client.png)
                 embeds.append(em)
 
@@ -326,7 +326,7 @@ class Riddles(commands.Cog):
 
         for index, embed in enumerate(embeds):
             embed: discord.Embed
-            embed.set_footer(text=f"TN | Riddles | Page {index+1}/{len(embeds)}", icon_url=self.client.png)
+            embed.set_footer(text=f"TitanMC | Riddles | Page {index+1}/{len(embeds)}", icon_url=self.client.png)
 
         return await Paginator(embeds, ctx).run()
         

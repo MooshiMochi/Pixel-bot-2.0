@@ -155,7 +155,7 @@ class EconomyCommands(commands.Cog):
                                   description=f"Username: {member}\nAmount: {await self.client.round_int(amount)}\nBefore: {int(e['wallet'] + e['bank'] - amount)}\nNow: {int(e['wallet'] + e['bank'])}\nReason: {reason}\nLinked Account: {self.client.players.get(str(id1), 'Not Verified')}",
                                   color=self.client.failure)
 
-            embed.set_footer(text="TN | Economy", icon_url=self.client.png)
+            embed.set_footer(text="TitanMC | Economy", icon_url=self.client.png)
             if _type != "gems_logs":
                 msg = await channel.send(embed=embed)
             # else:
@@ -215,7 +215,7 @@ class EconomyCommands(commands.Cog):
         
         else:
             em = discord.Embed(title=f"{log_type.replace('_', ' ').title()}: {member}", description="", color=self.client.failure)
-            em.set_footer(text="TN | Economy", icon_url=self.client.png)
+            em.set_footer(text="TitanMC | Economy", icon_url=self.client.png)
             
             embeds = []
         
@@ -226,7 +226,7 @@ class EconomyCommands(commands.Cog):
                     embeds.append(em)
 
                     em = discord.Embed(title=f"{log_type.replace('_', ' ').title()}: {member}", description="", color=self.client.failure)
-                    em.set_footer(text="TN | Economy", icon_url=self.client.png)
+                    em.set_footer(text="TitanMC | Economy", icon_url=self.client.png)
 
                 else:
                     em.description += f"**Log #{index+1}:**\n\n> Money Before: `{dic['money_before']}`\n> Money After:`{dic['money_after']}`\n> Reason: `{dic['reason']}`"
@@ -325,7 +325,21 @@ class EconomyCommands(commands.Cog):
         if member is None:
             member = ctx.author
         
+        
         data = await self.check_user(member.id)
+
+        if data["bank"] <= 10_000:
+            interest = 10
+        elif 10_000 < data["bank"] <= 50_000:
+            interest = 5
+        elif 50_000 < data["bank"] <= 100_000:
+            interest = 1
+        elif 100_000 < data["bank"] <= 250_000:
+            interest = 0.5
+        elif 250_000 < data["bank"] <= 500_000:
+            interest = 0.25
+        else:
+            interest = 0.01
 
         embed = discord.Embed(title=f"{member.name}'s Balance \💰", color=self.client.failure)
 
@@ -337,7 +351,9 @@ class EconomyCommands(commands.Cog):
                         value=f"{int(data['bank']):,}💸",
                         inline=True)
 
-        embed.set_footer(text="TN | Economy",
+        embed.add_field(name="Bank Interest", value=f"{interest}% every 24 hours.", inline=False)
+
+        embed.set_footer(text="TitanMC | Economy",
                          icon_url=self.client.png)
         await ctx.send(embed=embed, hidden=True)
 
@@ -380,7 +396,7 @@ class EconomyCommands(commands.Cog):
 
             description=f"Added **__{await self.client.round_int(int(amount))}__** 💸 to {resp_content}'s {where} 🤑 ",
             color=self.client.failure)
-        embed.set_footer(text="TN | Economy",
+        embed.set_footer(text="TitanMC | Economy",
                          icon_url=self.client.png)
         return await ctx.send(embed=embed, hidden=True)
 
@@ -424,7 +440,7 @@ class EconomyCommands(commands.Cog):
                     # embed = discord.Embed(
                     #     description=f"That person only has **__{await self.client.round_int(data['wallet'] + data['bank'])} 💸__**",
                     #     color=self.client.failure)
-                    # embed.set_footer(text="TN | Economy",
+                    # embed.set_footer(text="TitanMC | Economy",
                     #                 icon_url=str(self.client.user.avatar_url_as(static_format='png', size=2048)))
                     # return await ctx.send(embed=embed, hidden=True)
                 
@@ -441,7 +457,7 @@ class EconomyCommands(commands.Cog):
         embed = discord.Embed(
             description=f"Removed **__{await self.client.round_int(amount)}__** 💸 from {result} 😭",
             color=self.client.failure)
-        embed.set_footer(text="TN | Economy",
+        embed.set_footer(text="TitanMC | Economy",
                          icon_url=str(self.client.user.avatar_url_as(static_format='png', size=2048)))
         
         return await ctx.send(embed=embed, hidden=True)
@@ -482,7 +498,7 @@ class EconomyCommands(commands.Cog):
         em = discord.Embed(
                 description=f"Deposited **__{await self.client.round_int(int(dep_amount))}__** 💸",
                 color=self.client.failure)
-        em.set_footer(text="TN | Economy",
+        em.set_footer(text="TitanMC | Economy",
                          icon_url=self.client.png)
 
         return await ctx.send(embed=em, hidden=True)
@@ -748,7 +764,7 @@ class EconomyCommands(commands.Cog):
 
         if not shoplist:
             em = discord.Embed(title=f"Titan Network Store", description=main_desc + "\n\n`Store Empty`", color=self.client.failure)
-            em.set_footer(text="TN | Economy", icon_url=self.client.png)
+            em.set_footer(text="TitanMC | Economy", icon_url=self.client.png)
             return await ctx.send(embed=em, hidden=False)
 
         msg = await ctx.send(embed=em_li_in_use[0], components=[ar_in_use], hidden=False)
@@ -935,13 +951,13 @@ class EconomyCommands(commands.Cog):
                         if allowence != 0:
                             if price > allowence:
                                 em = discord.Embed(color=self.client.failure, description=f"Sorry, you can only spend {allowence:,} 💸 for the rest of the week.")
-                                em.set_footer(text="TN | Economy", icon_url=self.client.png)
+                                em.set_footer(text="TitanMC | Economy", icon_url=self.client.png)
                                 
                                 return await ctx.send(embed=em, hidden=True)
 
                         else:
                             em = discord.Embed(color=self.client.failure, description=f"Sorry, you cannot spend any more 💸 for the rest of the week.")
-                            em.set_footer(text="TN | Economy", icon_url=self.client.png)
+                            em.set_footer(text="TitanMC | Economy", icon_url=self.client.png)
                             
                             return await ctx.send(embed=em, hidden=True)
 
@@ -956,13 +972,13 @@ class EconomyCommands(commands.Cog):
                     if allowence != 0:
                         if price > allowence:
                             em = discord.Embed(color=self.client.failure, description=f"Sorry, you can only spend {allowence:,} 💸 for the rest of the week.")
-                            em.set_footer(text="TN | Economy", icon_url=self.client.png)
+                            em.set_footer(text="TitanMC | Economy", icon_url=self.client.png)
                             
                             return await ctx.send(embed=em, hidden=True)
 
                     else:
                         em = discord.Embed(color=self.client.failure, description=f"Sorry, you cannot spend any more 💸 for the rest of the week.")
-                        em.set_footer(text="TN | Economy", icon_url=self.client.png)
+                        em.set_footer(text="TitanMC | Economy", icon_url=self.client.png)
                         
                         return await ctx.send(embed=em, hidden=True)
 
@@ -993,7 +1009,7 @@ class EconomyCommands(commands.Cog):
                                   description=f"Username: {member}\nAmount: {await self.client.round_int(amount)}\nBefore: {int(e['wallet'] + e['bank'] - amount)}\nNow: {int(e['wallet'] + e['bank'])}\nReason: {reason}\nLinked Account: {self.client.players.get(str(ctx.author_id), 'Not Verified')}",
                                   color=self.client.failure)
 
-                    embed.set_footer(text="TN | Economy", icon_url=self.client.png)
+                    embed.set_footer(text="TitanMC | Economy", icon_url=self.client.png)
 
                     msg = await channel.send(content="Please react with ✅ once you give their 💎.", embed=embed)
                     await msg.add_reaction("✅")
@@ -1033,13 +1049,13 @@ class EconomyCommands(commands.Cog):
                         if allowence != 0:
                             if price > allowence:
                                 em = discord.Embed(color=self.client.failure, description=f"Sorry, you can only spend {allowence:,} 💸 for the rest of the week.")
-                                em.set_footer(text="TN | Economy", icon_url=self.client.png)
+                                em.set_footer(text="TitanMC | Economy", icon_url=self.client.png)
                                 
                                 return await ctx.send(embed=em, hidden=True)
 
                         else:
                             em = discord.Embed(color=self.client.failure, description=f"Sorry, you cannot spend any more 💸 for the rest of the week.")
-                            em.set_footer(text="TN | Economy", icon_url=self.client.png)
+                            em.set_footer(text="TitanMC | Economy", icon_url=self.client.png)
                             
                             return await ctx.send(embed=em, hidden=True)
 
@@ -1054,13 +1070,13 @@ class EconomyCommands(commands.Cog):
                     if allowence != 0:
                         if price > allowence:
                             em = discord.Embed(color=self.client.failure, description=f"Sorry, you can only spend {allowence:,} 💸 for the rest of the week.")
-                            em.set_footer(text="TN | Economy", icon_url=self.client.png)
+                            em.set_footer(text="TitanMC | Economy", icon_url=self.client.png)
                             
                             return await ctx.send(embed=em, hidden=True)
 
                     else:
                         em = discord.Embed(color=self.client.failure, description=f"Sorry, you cannot spend any more 💸 for the rest of the week.")
-                        em.set_footer(text="TN | Economy", icon_url=self.client.png)
+                        em.set_footer(text="TitanMC | Economy", icon_url=self.client.png)
                         
                         return await ctx.send(embed=em, hidden=True)
 
@@ -1121,7 +1137,7 @@ class EconomyCommands(commands.Cog):
                                           f"For more information on an item use the /item_info.",
                               color=self.client.failure)
 
-        embed.set_footer(text="TN | Economy",
+        embed.set_footer(text="TitanMC | Economy",
                          icon_url=self.client.png)
 
         inventory = sorted(userdata["inventory"], key=lambda x: x["price"], reverse=False)
@@ -1191,7 +1207,7 @@ class EconomyCommands(commands.Cog):
                                 description=f"Username: {member}\nAmount: {itemdata['name']}\nLinked Account: {self.client.players.get(str(ctx.author_id), 'Not Verified')}",
                                 color=self.client.failure)
 
-                embed.set_footer(text="TN | Economy", icon_url=self.client.png)
+                embed.set_footer(text="TitanMC | Economy", icon_url=self.client.png)
 
                 msg = await channel.send(content="Please react with ✅ once you give their 💎.", embed=embed)
                 await msg.add_reaction("✅")
@@ -1325,7 +1341,7 @@ class EconomyCommands(commands.Cog):
                 embed = discord.Embed(title=f"{ctx.guild.name}'s Net Leaderboard \💲",
                                       description=f"Total 💸 in the economy **__{await self.client.round_int(int(totalcoins))}__**\n\n{description1}",
                                       color=self.client.failure)
-                embed.set_footer(text="TN | Economy",
+                embed.set_footer(text="TitanMC | Economy",
                                  icon_url=self.client.png)
                 embeds.append(embed)
                 description1 = ""
@@ -1336,7 +1352,7 @@ class EconomyCommands(commands.Cog):
         embed = discord.Embed(title=f"{ctx.guild.name}'s Net Leaderboard \💲",
                               description=f"Total 💸 in the economy **__{await self.client.round_int(int(totalcoins))}__**\n\n{description1}",
                               color=self.client.failure)
-        embed.set_footer(text="TN | Economy",
+        embed.set_footer(text="TitanMC | Economy",
                          icon_url=self.client.png)
         embeds.append(embed)
 
@@ -1375,7 +1391,7 @@ class EconomyCommands(commands.Cog):
             json.dump(self.client.eco_config, f, indent=2)
 
         em = discord.Embed(description="**Economy reset successfully!**", color=self.client.failure)
-        em.set_footer(text="TN | Economy", icon_url=self.client.png)
+        em.set_footer(text="TitanMC | Economy", icon_url=self.client.png)
         return await ctx.send(embed=em, hidden=True)
 
 

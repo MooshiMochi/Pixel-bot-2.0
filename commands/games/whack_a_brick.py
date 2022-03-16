@@ -419,7 +419,7 @@ class WhackABrick(commands.Cog):
                     win = 0
                 em = discord.Embed(title="You lost!", description=f"**You got to level {level} 🎉**\n> You won: {int(win)}💸\n> Prize Multiplier: {int(prize_multiplier)}", color=self.client.failure)
                 em.set_thumbnail(url=ctx.author.avatar_url_as(static_format="png", size=4096))
-                em.set_footer(text="TN | Whack A Brick", icon_url=self.client.png)
+                em.set_footer(text="TitanMC | Whack A Brick", icon_url=self.client.png)
 
                 if win != 0:
                     await self.client.addcoins(ctx.author_id, win, f"Got to level {level} in whack_a_brick.")
@@ -452,7 +452,7 @@ class WhackABrick(commands.Cog):
 
         if "game" not in ctx.channel.name.lower():
             warn = discord.Embed(description="You can use this command in game channels only.", color=self.client.failure)
-            warn.set_footer(text="TN | Whack A Brick", icon_url=self.client.png)
+            warn.set_footer(text="TitanMC | Whack A Brick", icon_url=self.client.png)
             return await ctx.send(embed=warn, hidden=True)
 
         data = self.client.wab_data.get(str(ctx.author_id), None)
@@ -467,7 +467,7 @@ class WhackABrick(commands.Cog):
 
         if data["attempts"] == 0:
             __em = discord.Embed(color=self.client.failure, title=f"Free attempts exhausted.", description=f"You have exhausted your daily 5 free attempts.\nIf you wish to play the game, it will cost you {await self.client.round_int(self.client.play_price)}💸. \n\n**Do you wish to proceed?**")
-            __em.set_footer(text=f"TN | Whack A Brick", icon_url=self.client.png)
+            __em.set_footer(text=f"TitanMC | Whack A Brick", icon_url=self.client.png)
 
             buttons = [
                 create_button(style=ButtonStyle.green, label="Continue", custom_id="yes"),
@@ -499,7 +499,7 @@ class WhackABrick(commands.Cog):
 
                         if e["wallet"] < self.client.play_price:
                             err = discord.Embed(color=self.client.failure, description="You are too poor to afford this.\nWithdraw some more money from your bank and try again.")
-                            err.set_footer(text="TN | Whack A Brick", icon_url=self.client.png)
+                            err.set_footer(text="TitanMC | Whack A Brick", icon_url=self.client.png)
                             await ctx.send(embed=err, hidden=True)
                             raise asyncio.TimeoutError
                         else:
@@ -532,7 +532,7 @@ class WhackABrick(commands.Cog):
             self.client.wab_data[str(ctx.author_id)]["attempts"] -= 1
 
         em = discord.Embed(title="How to play!", description=f"Welcome to **Whack a brick**!\n\nThis game is simple. After 5 seconds of the command running, a random\nmossy block will appear on one of the squares.\nYou have to click on it, but be quick as you only have 5 seconds.\nThe more levels you pass, the higher your overall reward in the end.\n\n**Good luck!**\n\n*Do not hit the sus bricks as they will make you lose!* {self.emojis['sus']}\n\nSometimes there are hidden rewards or hinderances under the bricks, so beware of what you click as you may unveil one of the things listed below:\n> 1. You can double your earnings\n\n> 2. All current bricks will be hidden so you need to guess from memory\n\n> 3. You have a 1 in 500 chance of losing everything, otherwise you get to skip the level\n\n> 4. If you hit the bomb, you're in luck. You skip the level as all bricks are destroyed.", color=self.client.success)
-        em.set_footer(text="TN | Whack A Brick", icon_url=self.client.png)
+        em.set_footer(text="TitanMC | Whack A Brick", icon_url=self.client.png)
         await ctx.send(embed=em, hidden=True)
 
         self.client.loop.create_task(self.run_game(ctx))

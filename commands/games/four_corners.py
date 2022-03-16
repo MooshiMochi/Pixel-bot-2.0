@@ -86,7 +86,7 @@ class FourCorners(commands.Cog):
                                   description=f"This command is on cooldown.\nYou may try again in **{await self.client.sec_to_time(int((self.cooldowns.get(ctx.author_id, 0) + 24*60*60) - datetime.utcnow().timestamp()))}**",
                                   color=self.client.failure)
             embed.timestamp = datetime.utcnow()
-            embed.set_footer(text="TN | Titan Network")
+            embed.set_footer(text="TitanMC | Titan Network")
             try:
                 return await ctx.send(embed=embed, hidden=True)
             except discord.HTTPException:
@@ -94,7 +94,7 @@ class FourCorners(commands.Cog):
 
         if "game" not in ctx.channel.name.lower():
             warn = discord.Embed(description="You can use this command in game channels only.", color=self.client.failure)
-            warn.set_footer(text="TN | Four Corners", icon_url=self.client.png)
+            warn.set_footer(text="TitanMC | Four Corners", icon_url=self.client.png)
             return await ctx.send(embed=warn, hidden=True)
         
         bet = await self.client.parse_int(bet)
@@ -103,7 +103,7 @@ class FourCorners(commands.Cog):
         failure_em = (
             discord.Embed(color=self.client.failure, description="")
             .set_footer(
-                text="TN | Four Corners", 
+                text="TitanMC | Four Corners", 
                 icon_url=self.client.png))
 
         if bet < 100:
@@ -131,7 +131,7 @@ class FourCorners(commands.Cog):
         allowCashOut = False
 
         em = discord.Embed(color=self.client.failure, description=f"💸 Your bet: **{int(bet):,}** 💸\n\n📜 Game Rules 📜\n\nHere are 4 buttons. 3 of the 4 buttons are good, one is bad.\nEach time you press one of the 3 good buttons, your bet will be doubled.\nYou can choose to 'Cash Out' anytime.\n\n**However**, if you press the incorrect button, you will lose your bet + half your **__NET WORTH__**.\nYou have one attempt. Good luck and have fun!\n\n*You can only play this game once every 24 hours*")
-        em.set_footer(text="TN | Four Corners", icon_url=self.client.png)
+        em.set_footer(text="TitanMC | Four Corners", icon_url=self.client.png)
         em.set_author(name="🔳 Four Corners")
 
         components = await self.rebuildComponents()
@@ -161,7 +161,7 @@ class FourCorners(commands.Cog):
                         embed = discord.Embed(color=self.client.failure, description=f"**❌ You pressed the incorrect button.\nYou lost __{int(total_worth/2):,}__ 💸**")
                     else:
                         embed = discord.Embed(color=self.client.failure, description=f"**❌ You pressed the incorrect button.\nYou lost __absolutely no__ 💸** because you're already broke.")
-                    embed.set_footer(text="TN | Four Corners", icon_url=self.client.png)
+                    embed.set_footer(text="TitanMC | Four Corners", icon_url=self.client.png)
 
                     self.client.economydata[str(ctx.author_id)]["bank"] += self.client.economydata[str(ctx.author_id)]["wallet"]
                     self.client.economydata[str(ctx.author_id)]["wallet"] = 0
@@ -180,7 +180,7 @@ class FourCorners(commands.Cog):
                         em.title = "💵 Max Winnings Reached"
 
                         _em = discord.Embed(color=self.client.failure, description=f"You reached the maximum winnings amount for this game.\nYou received **1,000,000 💸**")
-                        _em.set_footer(text="TN | Four Corners", icon_url=self.client.png)
+                        _em.set_footer(text="TitanMC | Four Corners", icon_url=self.client.png)
 
                         await self.client.addcoins(ctx.author_id, int(bet_copy), "Max winnings reached in `/four_corners`", where="wallet")
 

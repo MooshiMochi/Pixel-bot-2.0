@@ -77,7 +77,7 @@ class Suggestions(commands.Cog):
 
         em.description = description
 
-        em.set_footer(text=f"TN | Suggestions | {datetime.utcnow().date()}", icon_url=self.client.png)
+        em.set_footer(text=f"TitanMC | Suggestions | {datetime.utcnow().date()}", icon_url=self.client.png)
 
         em.set_thumbnail(url=ctx.author.avatar_url_as(static_format="png", size=2048))
         

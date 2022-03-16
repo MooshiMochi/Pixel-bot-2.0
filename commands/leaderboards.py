@@ -106,7 +106,7 @@ class LeaderboardCommands(commands.Cog):
 
         em = discord.Embed(color=self.client.failure, title=f"{footer}{filler} Leaderboard")
         em.set_author(name="\u200b", icon_url=self.client.png)
-        em.set_footer(text=f"TN | {footer}", icon_url=self.client.png)
+        em.set_footer(text=f"TitanMC | {footer}", icon_url=self.client.png)
 
         if leaderboard == "mm_casual":
             ad = f"The leaderboard for the biggest 'Minecraft Madness' (casual) winners in Titan Network Lounge.\n\n"
@@ -230,13 +230,13 @@ class LeaderboardCommands(commands.Cog):
                     em.description += f"**{x+1}. - {name}** - ({brckt})\n"
 
             if x in add_on:
-                em.set_footer(text=f"TN | {footer} | Page {add_on.index(x)+1}/{len(add_on)}",
+                em.set_footer(text=f"TitanMC | {footer} | Page {add_on.index(x)+1}/{len(add_on)}",
                 icon_url=self.client.png)
                 embeds.append(em)
 
                 em = discord.Embed(color=self.client.failure, title=f"{footer}{filler} Leaderboard", description="")
                 em.set_author(name="\u200b", icon_url=self.client.user.avatar_url_as(static_format="png", size=2048))
-                em.set_footer(text=f"TN | {footer}", icon_url=self.client.png)
+                em.set_footer(text=f"TitanMC | {footer}", icon_url=self.client.png)
 
                 em.description = ad
         return [1, embeds]

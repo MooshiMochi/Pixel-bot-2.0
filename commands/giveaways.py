@@ -249,7 +249,7 @@ class Giveaways(commands.Cog):
         
         em = discord.Embed(color=self.client.failure, description=f"> I have rerolled the [giveaway]({data['jump_url']}).")
         em.set_author(name="Giveaway Reroll", icon_url="https://media.discordapp.net/attachments/884145972995825724/933821589202559026/Revoked.png")
-        em.set_footer(text="TN | Giveaways", icon_url=self.client.png)
+        em.set_footer(text="TitanMC | Giveaways", icon_url=self.client.png)
         em.add_field(name="Giveaway", value=f"`Channel:` <#{data['channel_id']}>\n`ID:` {message_id}")
         return await ctx.send(embed=em, hidden=True)
     
@@ -287,7 +287,7 @@ class Giveaways(commands.Cog):
                 if msg:
                     edit_em = discord.Embed(color=self.client.failure, description=f"😔 No winners")
                     edit_em.set_author(name=str(data['prize']) + fill, icon_url="https://media.discordapp.net/attachments/884145972995825724/934498580885041222/PRESENT.png")
-                    edit_em.set_footer(text="TN | Giveaways", icon_url=self.client.png)
+                    edit_em.set_footer(text="TitanMC | Giveaways", icon_url=self.client.png)
 
                     await msg.edit(content=f"{self.party}**GIVEAWAY ENDED**{self.party}", embed=edit_em, components=self.timeout_components)
             except discord.HTTPException:
@@ -316,7 +316,7 @@ class Giveaways(commands.Cog):
         
         host_em = discord.Embed(color=self.client.success, description=f""">>> **Winner(s):** {', '.join([f"<@!{w_id}>" for w_id in winners])} `({', '.join([str(w_id) for w_id in winners])})`""")
         host_em.set_author(icon_url="https://media.discordapp.net/attachments/884145972995825724/933859630185082920/Stars.png", name="Giveaway Ended", url=data['jump_url'])
-        host_em.set_footer(text="TN | Giveaways", icon_url=self.client.png)
+        host_em.set_footer(text="TitanMC | Giveaways", icon_url=self.client.png)
 
         fill = f""
         if len(data["all_prizes"]) > 1:
@@ -347,7 +347,7 @@ class Giveaways(commands.Cog):
             em = discord.Embed(color=self.client.warn, description=f"""You have just won a [giveaway]({data['jump_url']}) for `{data['prize']}`{fill} in **{guild.name}**.""")
             em.set_author(name="Giveaway Winner", url=data['jump_url'], icon_url="https://images-ext-2.discordapp.net/external/ZusSn-X4k7HaGEyw0r5Vn1AsLHIMulaePr_mBZvzK0I/%3Fsize%3D128%26quality%3Dlossless/https/cdn.discordapp.com/emojis/894171015888920576.webp")
             em.add_field(name="Information", value=f"> Hosted by: {host.mention} `({data['host']})`")
-            em.set_footer(text="TN | Giveaways", icon_url=self.client.png)
+            em.set_footer(text="TitanMC | Giveaways", icon_url=self.client.png)
             mem = guild.get_member(winner_id)
             try:
                 await mem.send(embed=em)
@@ -356,7 +356,7 @@ class Giveaways(commands.Cog):
 
         edit_em = discord.Embed(color=self.client.failure, description=f"""> **Winners:** {', '.join([f"<@!{w_id}>" for w_id in winners])}""")
         edit_em.set_author(name=data['prize'], icon_url="https://media.discordapp.net/attachments/884145972995825724/934498580885041222/PRESENT.png")
-        edit_em.set_footer(text="TN | Giveaways", icon_url=self.client.png)
+        edit_em.set_footer(text="TitanMC | Giveaways", icon_url=self.client.png)
         
         msg = await channel.fetch_message(key)
         if msg:
@@ -378,7 +378,7 @@ class Giveaways(commands.Cog):
                 
                 edit_em = discord.Embed(color=self.client.warn, description=f"An error occured.\n\nThis giveaway is cancelled.")
                 edit_em.set_author(name=data['prize'] if data else "Unknown", icon_url="https://media.discordapp.net/attachments/884145972995825724/934498580885041222/PRESENT.png")
-                edit_em.set_footer(text="TN | Giveaways", icon_url=self.client.png)
+                edit_em.set_footer(text="TitanMC | Giveaways", icon_url=self.client.png)
 
                 await ctx.edit_origin(content=f"{self.party}**GIVEAWAY ENDED**{self.party}", embed=edit_em, components=self.timeout_components)
                 return
@@ -389,7 +389,7 @@ class Giveaways(commands.Cog):
                         return await ctx.send("You are already in this giveaway.", hidden=True)
                     em = discord.Embed(color=self.client.success, description=f"Your entry into this [giveaway]({ctx.origin_message.jump_url}) has been approved.")
                     em.set_author(icon_url="https://images-ext-1.discordapp.net/external/ob9eIZj1RkBiQjNG-BaFVKYH4VMD0Pz0LNmUwhmeIko/%3Fsize%3D56%26quality%3Dlossless/https/cdn.discordapp.com/emojis/933776807256289380.webp", name="Entry Approved")
-                    em.set_footer(text="TN | Giveaways", icon_url=self.client.png)
+                    em.set_footer(text="TitanMC | Giveaways", icon_url=self.client.png)
                     em.timestamp = datetime.utcnow()
                     await ctx.author.send(embed=em)
                     self.giveaways[str(ctx.origin_message_id)]['members'].append(ctx.author_id)
@@ -399,7 +399,7 @@ class Giveaways(commands.Cog):
 
                     em = discord.Embed(color=self.client.failure, description=f"To enter this [giveaway]({ctx.origin_message.jump_url}) you need the following role:\n**{data['required_role']['name']}**")
                     em.set_author(icon_url="https://media.discordapp.net/attachments/884145972995825724/933799302491406377/Denied.png", name="Entry Denied")
-                    em.set_footer(text="TN | Giveaways", icon_url=self.client.png)
+                    em.set_footer(text="TitanMC | Giveaways", icon_url=self.client.png)
                     em.timestamp = datetime.utcnow()
                     await ctx.author.send(embed=em)
                     return
@@ -408,7 +408,7 @@ class Giveaways(commands.Cog):
                     return await ctx.send("You are already in this giveaway.", hidden=True)
                 em = discord.Embed(color=self.client.success, description=f"Your entry into this [giveaway]({ctx.origin_message.jump_url}) has been approved.")
                 em.set_author(icon_url="https://images-ext-1.discordapp.net/external/ob9eIZj1RkBiQjNG-BaFVKYH4VMD0Pz0LNmUwhmeIko/%3Fsize%3D56%26quality%3Dlossless/https/cdn.discordapp.com/emojis/933776807256289380.webp", name="Entry Approved")
-                em.set_footer(text="TN | Giveaways", icon_url=self.client.png)
+                em.set_footer(text="TitanMC | Giveaways", icon_url=self.client.png)
                 em.timestamp = datetime.utcnow()
                 try:
                     await ctx.author.send(embed=em)

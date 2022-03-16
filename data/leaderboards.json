@@ -4,8 +4,8 @@
       "name": "Mooshi",
       "display_name": "Mooshi",
       "disc": "6669",
-      "xp": 7,
-      "total_xp": 473,
+      "xp": 8,
+      "total_xp": 474,
       "level": 15,
       "url": "https://cdn.discordapp.com/avatars/383287544336613385/df07ecd630f7d0f1b51403d4d34424e1.png?size=4096"
     },
@@ -40,8 +40,8 @@
       "name": "Titan Lord",
       "display_name": "Titan Lord",
       "disc": "0001",
-      "xp": 86,
-      "total_xp": 86,
+      "xp": 87,
+      "total_xp": 87,
       "level": 2,
       "url": "https://cdn.discordapp.com/avatars/932386561117552680/65bdecaf85cf488495ea7f9dd5d6ad75.png?size=4096"
     },
@@ -251,9 +251,9 @@
     "786325839553888306": 1
   },
   "msgs": {
-    "383287544336613385": 1681,
+    "383287544336613385": 1682,
     "230118817412415489": 637,
-    "932386561117552680": 134,
+    "932386561117552680": 137,
     "582537632991543307": 21,
     "840417629721067520": 45,
     "275714283718049793": 93,

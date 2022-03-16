@@ -78,7 +78,7 @@ class CoinFlip(commands.Cog):
 
         if "game" not in ctx.channel.name.lower():
             warn = discord.Embed(description="You can use this command in game channels only.", color=self.client.failure)
-            warn.set_footer(text="TN | Coin Flip", icon_url=self.client.png)
+            warn.set_footer(text="TitanMC | Coin Flip", icon_url=self.client.png)
             return await ctx.send(embed=warn, hidden=True)
 
         if isinstance(member, int):
@@ -110,7 +110,7 @@ class CoinFlip(commands.Cog):
         prefix_int = await self.client.round_int(p1_bet)
 
         inv = discord.Embed(color=self.client.failure, description=f"**⚔️ <@!{ctx.author_id}> has invited you to a coin flip duel!** ⚔️\n\n*{ctx.author.name} bet {prefix_int} 💸*\n\n`{member}, you have 30 seconds to decide!`")
-        inv.set_footer(text="TN | Coin Flip", icon_url=self.client.png)
+        inv.set_footer(text="TitanMC | Coin Flip", icon_url=self.client.png)
         
         msg_duel = await ctx.send(content=member.mention, embed=inv, components=[self.btns_accept_n_deny])
 
@@ -157,7 +157,7 @@ class CoinFlip(commands.Cog):
             p2_bet, bet_entry_msg = await self.get_bet_amount(duelCtx, member)
             if p2_bet is False:
                 cancelled = discord.Embed(color=self.client.failure, description=f"**⚔️ | Duel Cancelled**")
-                cancelled.set_footer(text="TN | Coin Flip", icon_url=self.client.png)
+                cancelled.set_footer(text="TitanMC | Coin Flip", icon_url=self.client.png)
                 await msg_duel.edit(embed=cancelled, components=[])
 
                 self.client.economydata[str(ctx.author_id)]["wallet"] += p1_bet
@@ -184,7 +184,7 @@ class CoinFlip(commands.Cog):
         prefix_int2 = await self.client.round_int(p2_bet)
 
         confirm = discord.Embed(color=self.client.failure, description=f"**⚔️ Duel Starting** ⚔️\n\n*{ctx.author.name} bet {prefix_int} 💸*\n*{member.name} bet {prefix_int2}💸*")
-        confirm.set_footer(text="TN | Coin Flip", icon_url=self.client.png)
+        confirm.set_footer(text="TitanMC | Coin Flip", icon_url=self.client.png)
 
         try:
             
@@ -215,7 +215,7 @@ class CoinFlip(commands.Cog):
         ]
 
         choice = discord.Embed(description=f"**{member.mention}, pick a side!**", color=self.client.failure)
-        choice.set_footer(text="TN | Coin Flip", icon_url=self.client.png)
+        choice.set_footer(text="TitanMC | Coin Flip", icon_url=self.client.png)
         
         await sleep(3)
 
@@ -238,13 +238,13 @@ class CoinFlip(commands.Cog):
 
                 elif btnCtx.custom_id.startswith("heads"):
                     em = discord.Embed(color=self.client.failure, description=f"**{member.mention} chose __HEADS__.**\n\n*{ctx.author.mention} gets __TAILS__.*")
-                    em.set_footer(text="TN | Coin Flip", icon_url=self.client.png)
+                    em.set_footer(text="TitanMC | Coin Flip", icon_url=self.client.png)
                     await btnCtx.edit_origin(embed=em, components=[])
                     break
 
                 elif btnCtx.custom_id.startswith("tails"):
                     em = discord.Embed(color=self.client.failure, description=f"**{member.mention} chose __TAILS__.**\n\n*{ctx.author.mention} gets __HEADS__.*")
-                    em.set_footer(text="TN | Coin Flip", icon_url=self.client.png)
+                    em.set_footer(text="TitanMC | Coin Flip", icon_url=self.client.png)
                     await btnCtx.edit_origin(embed=em, components=[])
                     mem_choice = 2 # Tails
                     break
@@ -275,14 +275,14 @@ class CoinFlip(commands.Cog):
 
         spinning = discord.Embed(description="**Spinning the coin!**", color=self.client.failure)
         spinning.set_image(url="https://media1.giphy.com/media/6jqfXikz9yzhS/giphy.gif")
-        spinning.set_footer(text="TN | Coin Flip", icon_url=self.client.png)
+        spinning.set_footer(text="TitanMC | Coin Flip", icon_url=self.client.png)
         
         await choice_msg.edit(embed=spinning)
 
         await sleep(5)
 
         win_em = discord.Embed(color=self.client.failure, description=f"**🎉 Congratulations, {winner.mention}!\n\nYou won {await self.client.round_int(total_winnings)} 💸**")
-        win_em.set_footer(text="TN | Coin Flip", icon_url=self.client.png)
+        win_em.set_footer(text="TitanMC | Coin Flip", icon_url=self.client.png)
 
         await choice_msg.edit(embed=win_em)
 
