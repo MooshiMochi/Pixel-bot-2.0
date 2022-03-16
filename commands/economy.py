@@ -1319,10 +1319,10 @@ class EconomyCommands(commands.Cog):
                 discordid = player[0].replace("<@!", "").replace(">", "").replace("<@", "")
                 discorduser = guild.get_member(int(discordid))
             except:
-                print(player[0])
+                totalcoins -= player[1]
                 continue
             if discorduser is None:
-                print(player[0], "None")
+                totalcoins -= player[1]
                 continue
 
             if player[1] <= 10000:
