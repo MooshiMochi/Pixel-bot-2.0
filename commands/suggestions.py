@@ -7,6 +7,8 @@ from discord_slash import SlashContext
 from discord_slash.cog_ext import cog_slash
 from discord_slash.utils.manage_commands import create_option 
 
+from utils.exceptions import InvalidURLError
+
 from datetime import datetime
 
 from utils.dpy import url
@@ -73,7 +75,12 @@ class Suggestions(commands.Cog):
             description += "\n\u200b"
 
         if optional_image:
-            em.set_image(url=url(optional_image))
+            try:
+                em.set_image(url=url(optional_image))
+            except InvalidURLError as e:
+                _em = discord.Embed(description=f"**{e[:-1024]}**", color=self.client.failure)
+                _em.set_footer(text="TitanMC | Suggestions")
+                return await ctx.send(embed=_em, hidden=True)
 
         em.description = description
 
