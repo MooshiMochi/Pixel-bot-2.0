@@ -358,7 +358,11 @@ class Giveaways(commands.Cog):
         edit_em.set_author(name=data['prize'], icon_url="https://media.discordapp.net/attachments/884145972995825724/934498580885041222/PRESENT.png")
         edit_em.set_footer(text="TitanMC | Giveaways", icon_url=self.client.png)
         
-        msg = await channel.fetch_message(key)
+        try:
+            msg = await channel.fetch_message(key)
+        except discord.NotFound:
+            return
+
         if msg:
             try:
                 await msg.edit(content=f"{self.party}**GIVEAWAY ENDED**{self.party}", embed=edit_em, components=self.timeout_components)
