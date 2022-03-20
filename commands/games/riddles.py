@@ -134,8 +134,9 @@ class Riddles(commands.Cog):
         if msg.author.bot:
             return
         else:
-            if msg.channel.id == self.main_ch.id:
-                self.last_msg_by_bot = False
+            if not isinstance(self.main_ch, int):
+                if msg.channel.id == self.main_ch.id:
+                    self.last_msg_by_bot = False
 
         if self.is_riddle_guessed:
             return
