@@ -215,7 +215,7 @@ class HiddenCups(commands.Cog):
                 btnCtx: ComponentContext = await wait_for_component(self.client, msg, timeout=60*60_000)
 
                 if btnCtx.author_id != ctx.author_id:
-                    await btnCtx.send("You can not interact with this game. Please start your own to do so!")
+                    await btnCtx.send("You can not interact with this game. Please start your own to do so!", hidden=True)
                     continue
 
                 _btn, _gameId, _status, _index = btnCtx.custom_id.split("_")
