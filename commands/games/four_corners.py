@@ -155,7 +155,7 @@ class FourCorners(commands.Cog):
                 if status == 1:
                     em.title = "❌ Pressed incorrect button"
 
-                    total_worth = self.client.economydata[str(ctx.author_id)]["wallet"] + self.client.economydata[str(ctx.author_id)]["wallet"]
+                    total_worth = self.client.economydata[str(ctx.author_id)]["wallet"] + self.client.economydata[str(ctx.author_id)]["bank"]
                     
                     if total_worth != 0:
                         embed = discord.Embed(color=self.client.failure, description=f"**❌ You pressed the incorrect button.\nYou lost __{int(total_worth/2):,}__ 💸**")
