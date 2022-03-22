@@ -490,7 +490,7 @@ class EconomyCommands(commands.Cog):
         else:
             if amount > data["wallet"]:
                 dep_amount = data["wallet"]
-                data["bank"], data["wallet"] = data["wallet"], 0 
+                data["bank"], data["wallet"] = data["wallet"] + data["bank"], 0 
             else:
                 dep_amount = amount
                 data["wallet"] -= amount
@@ -522,14 +522,14 @@ class EconomyCommands(commands.Cog):
         if not amount:
             amount = data["bank"]
             
-            data["wallet"], data["bank"] = data["bank"], 0
+            data["wallet"], data["bank"] = data["bank"] + data["wallet"], 0
 
             with_amount = amount
 
         else:
             if amount > data["bank"]:
                 with_amount = data["bank"]
-                data["wallet"], data["bank"] = data["bank"], 0 
+                data["wallet"], data["bank"] = data["bank"] + data["wallet"], 0 
             elif amount <= data["bank"]:
                 with_amount = amount
                 data["bank"] -= amount
