@@ -259,11 +259,11 @@ class Suggestions(commands.Cog):
                 return
                 
             reactions = msg.reactions
-            total_reactions = {}
+            total_reactions = {"yes": 0, "no": 0}
             for reaction in reactions:
-                if reaction.emoji == "✅":
+                if str(reaction.emoji) == "✅":
                     total_reactions["yes"] = reaction.count
-                elif reaction.emoji == "❌":
+                elif str(reaction.emoji) == "❌":
                     total_reactions["no"] = reaction.count
 
             if total_reactions["yes"] > total_reactions["no"] and total_reactions["yes"] >= self.config["max_upvotes"]:
