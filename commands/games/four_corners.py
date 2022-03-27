@@ -45,7 +45,7 @@ class FourCorners(commands.Cog):
 
         btns = [
             create_button(
-                style=ButtonStyle.green,
+                style=ButtonStyle.gray,
                 label="\u200b",
                 custom_id=f"FourCornersBtn_{status[0]}_0"
             ),
@@ -55,12 +55,12 @@ class FourCorners(commands.Cog):
                 custom_id=f"FourCornersBtn_{status[1]}_1"
             ),
             create_button(
-                style=ButtonStyle.blue,
+                style=ButtonStyle.gray,
                 label="\u200b",
                 custom_id=f"FourCornersBtn_{status[2]}_2"
             ),
             create_button(
-                style=ButtonStyle.red,
+                style=ButtonStyle.gray,
                 label="\u200b",
                 custom_id=f"FourCornersBtn_{status[3]}_3"
             ),
