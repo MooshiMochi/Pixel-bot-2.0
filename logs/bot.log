@@ -9526,3 +9526,1061 @@ In components.0.components.2.emoji.name: Invalid emoji - More details can be fou
 [INFO: 21:49] 22 extensions loaded, 6 skipped.
 [INFO: 21:49] Logging in...
 [INFO: 21:49] Logged in as Titan Games Test#4763: 951220257190715422
+[DEBUG: 21:50] 
+[DEBUG: 21:50] ===== (REBOOT) =====
+[DEBUG: 21:50] 
+[INFO: 21:50] Client class has been initialized.
+[INFO: 21:50] Loading Extensions...
+[DEBUG: 21:50] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 21:50] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 21:50] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 21:50] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 21:50] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 21:50] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 21:50] 22 extensions loaded, 6 skipped.
+[INFO: 21:50] Logging in...
+[INFO: 21:50] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 22:25] 
+[DEBUG: 22:25] ===== (REBOOT) =====
+[DEBUG: 22:25] 
+[INFO: 22:25] Client class has been initialized.
+[INFO: 22:25] Loading Extensions...
+[DEBUG: 22:25] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 22:25] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 22:25] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 22:25] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 22:25] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 22:25] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 22:25] 22 extensions loaded, 6 skipped.
+[INFO: 22:25] Logging in...
+[INFO: 22:25] Logged in as Titan Games Test#4763: 951220257190715422
+[ERROR: 22:27] An unhandled error has occurred: 'MyClient' object has no attribute 'play_price' - More details can be found in logs/error.log
+[DEBUG: 22:27] 
+[DEBUG: 22:27] ===== (REBOOT) =====
+[DEBUG: 22:27] 
+[INFO: 22:27] Client class has been initialized.
+[INFO: 22:27] Loading Extensions...
+[DEBUG: 22:27] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 22:27] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 22:27] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 22:27] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 22:27] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 22:27] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 22:27] 22 extensions loaded, 6 skipped.
+[INFO: 22:27] Logging in...
+[INFO: 22:28] Logged in as Titan Games Test#4763: 951220257190715422
+[DEBUG: 23:45] 
+[DEBUG: 23:45] ===== (REBOOT) =====
+[DEBUG: 23:45] 
+[INFO: 23:45] Client class has been initialized.
+[INFO: 23:45] Loading Extensions...
+[DEBUG: 23:45] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 23:45] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 23:45] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 23:45] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 23:45] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 23:45] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 23:45] 22 extensions loaded, 6 skipped.
+[INFO: 23:45] Logging in...
+[INFO: 23:45] Logged in as Titan Games Test#4763: 951220257190715422
+[DEBUG: 23:58] 
+[DEBUG: 23:58] ===== (REBOOT) =====
+[DEBUG: 23:58] 
+[INFO: 23:58] Client class has been initialized.
+[INFO: 23:58] Loading Extensions...
+[DEBUG: 23:58] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 23:58] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 23:58] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 23:58] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 23:58] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 23:58] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 23:58] 22 extensions loaded, 6 skipped.
+[INFO: 23:58] Logging in...
+[INFO: 23:58] Logged in as Titan Games Test#4763: 951220257190715422
+[DEBUG: 00:01] 
+[DEBUG: 00:01] ===== (REBOOT) =====
+[DEBUG: 00:01] 
+[INFO: 00:01] Client class has been initialized.
+[INFO: 00:01] Loading Extensions...
+[DEBUG: 00:01] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 00:01] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 00:01] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 00:01] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 00:01] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 00:01] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 00:01] 22 extensions loaded, 6 skipped.
+[INFO: 00:01] Logging in...
+[INFO: 00:01] Logged in as Titan Games Test#4763: 951220257190715422
+[DEBUG: 01:36] 
+[DEBUG: 01:36] ===== (REBOOT) =====
+[DEBUG: 01:36] 
+[INFO: 01:36] Client class has been initialized.
+[INFO: 01:36] Loading Extensions...
+[DEBUG: 01:36] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 01:36] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 01:36] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 01:36] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 01:36] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 01:36] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 01:36] 22 extensions loaded, 6 skipped.
+[INFO: 01:36] Logging in...
+[INFO: 01:36] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 02:12] 
+[DEBUG: 02:12] ===== (REBOOT) =====
+[DEBUG: 02:12] 
+[INFO: 02:12] Client class has been initialized.
+[INFO: 02:12] Loading Extensions...
+[DEBUG: 02:12] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 02:12] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 02:12] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 02:12] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 02:12] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 02:12] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 02:12] 22 extensions loaded, 6 skipped.
+[INFO: 02:12] Logging in...
+[INFO: 02:12] Logged in as Titan Games#1189: 932735744173301861
+[ERROR: 02:27] An unhandled error has occurred: Task is already launched and is not completed. - More details can be found in logs/error.log
+[DEBUG: 02:37] 
+[DEBUG: 02:37] ===== (REBOOT) =====
+[DEBUG: 02:37] 
+[INFO: 02:37] Client class has been initialized.
+[INFO: 02:37] Loading Extensions...
+[DEBUG: 02:37] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 02:37] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 02:37] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 02:37] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 02:37] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 02:37] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 02:37] 22 extensions loaded, 6 skipped.
+[INFO: 02:37] Logging in...
+[INFO: 02:37] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 02:38] 
+[DEBUG: 02:38] ===== (REBOOT) =====
+[DEBUG: 02:38] 
+[INFO: 02:38] Client class has been initialized.
+[INFO: 02:38] Loading Extensions...
+[DEBUG: 02:38] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 02:38] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 02:38] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 02:38] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 02:38] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 02:38] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 02:38] 22 extensions loaded, 6 skipped.
+[INFO: 02:38] Logging in...
+[INFO: 02:39] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 02:39] 
+[DEBUG: 02:39] ===== (REBOOT) =====
+[DEBUG: 02:39] 
+[INFO: 02:39] Client class has been initialized.
+[INFO: 02:39] Loading Extensions...
+[DEBUG: 02:39] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 02:39] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 02:39] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 02:39] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 02:39] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 02:39] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 02:39] 22 extensions loaded, 6 skipped.
+[INFO: 02:39] Logging in...
+[INFO: 02:39] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 02:42] 
+[DEBUG: 02:42] ===== (REBOOT) =====
+[DEBUG: 02:42] 
+[INFO: 02:42] Client class has been initialized.
+[INFO: 02:42] Loading Extensions...
+[DEBUG: 02:42] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 02:42] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 02:42] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 02:42] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 02:42] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 02:42] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 02:42] 22 extensions loaded, 6 skipped.
+[INFO: 02:42] Logging in...
+[INFO: 02:42] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 02:47] 
+[DEBUG: 02:47] ===== (REBOOT) =====
+[DEBUG: 02:47] 
+[INFO: 02:47] Client class has been initialized.
+[INFO: 02:47] Loading Extensions...
+[DEBUG: 02:47] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 02:47] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 02:47] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 02:47] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 02:47] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 02:47] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 02:47] 22 extensions loaded, 6 skipped.
+[INFO: 02:47] Logging in...
+[INFO: 02:47] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 02:49] 
+[DEBUG: 02:49] ===== (REBOOT) =====
+[DEBUG: 02:49] 
+[INFO: 02:49] Client class has been initialized.
+[INFO: 02:49] Loading Extensions...
+[DEBUG: 02:49] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 02:49] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 02:49] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 02:49] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 02:49] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 02:49] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 02:49] 22 extensions loaded, 6 skipped.
+[INFO: 02:49] Logging in...
+[INFO: 02:49] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 02:52] 
+[DEBUG: 02:52] ===== (REBOOT) =====
+[DEBUG: 02:52] 
+[INFO: 02:52] Client class has been initialized.
+[INFO: 02:52] Loading Extensions...
+[DEBUG: 02:52] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 02:52] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 02:52] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 02:52] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 02:52] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 02:52] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 02:52] 22 extensions loaded, 6 skipped.
+[INFO: 02:52] Logging in...
+[INFO: 02:52] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 02:57] 
+[DEBUG: 02:57] ===== (REBOOT) =====
+[DEBUG: 02:57] 
+[INFO: 02:57] Client class has been initialized.
+[INFO: 02:57] Loading Extensions...
+[DEBUG: 02:57] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 02:57] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 02:57] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 02:57] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 02:57] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 02:57] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 02:57] 22 extensions loaded, 6 skipped.
+[INFO: 02:57] Logging in...
+[INFO: 02:57] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 03:45] 
+[DEBUG: 03:45] ===== (REBOOT) =====
+[DEBUG: 03:45] 
+[INFO: 03:45] Client class has been initialized.
+[INFO: 03:45] Loading Extensions...
+[DEBUG: 03:45] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 03:45] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 03:45] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 03:45] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 03:45] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 03:45] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 03:45] 22 extensions loaded, 6 skipped.
+[INFO: 03:45] Logging in...
+[INFO: 03:45] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 14:54] 
+[DEBUG: 14:54] ===== (REBOOT) =====
+[DEBUG: 14:54] 
+[INFO: 14:54] Client class has been initialized.
+[INFO: 14:54] Loading Extensions...
+[DEBUG: 14:54] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 14:54] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 14:54] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 14:54] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 14:54] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 14:54] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 14:54] 22 extensions loaded, 6 skipped.
+[INFO: 14:54] Logging in...
+[INFO: 14:54] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 15:24] 
+[DEBUG: 15:24] ===== (REBOOT) =====
+[DEBUG: 15:24] 
+[INFO: 15:24] Client class has been initialized.
+[INFO: 15:24] Loading Extensions...
+[DEBUG: 15:24] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 15:24] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 15:24] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 15:24] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 15:24] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 15:24] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 15:24] 22 extensions loaded, 6 skipped.
+[INFO: 15:24] Logging in...
+[INFO: 15:24] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 15:24] 
+[DEBUG: 15:24] ===== (REBOOT) =====
+[DEBUG: 15:24] 
+[INFO: 15:24] Client class has been initialized.
+[INFO: 15:24] Loading Extensions...
+[DEBUG: 15:24] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 15:24] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 15:24] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 15:24] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 15:24] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 15:24] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 15:24] 22 extensions loaded, 6 skipped.
+[INFO: 15:24] Logging in...
+[INFO: 15:24] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 15:26] 
+[DEBUG: 15:26] ===== (REBOOT) =====
+[DEBUG: 15:26] 
+[INFO: 15:26] Client class has been initialized.
+[INFO: 15:26] Loading Extensions...
+[DEBUG: 15:26] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 15:26] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 15:26] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 15:26] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 15:26] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 15:26] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 15:26] 22 extensions loaded, 6 skipped.
+[INFO: 15:26] Logging in...
+[INFO: 15:26] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 15:30] 
+[DEBUG: 15:30] ===== (REBOOT) =====
+[DEBUG: 15:30] 
+[INFO: 15:30] Client class has been initialized.
+[INFO: 15:30] Loading Extensions...
+[DEBUG: 15:30] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 15:30] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 15:30] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 15:30] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 15:30] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 15:30] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 15:30] 22 extensions loaded, 6 skipped.
+[INFO: 15:30] Logging in...
+[INFO: 15:31] Logged in as Titan Games#1189: 932735744173301861
+[INFO: 17:03] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 18:46] 
+[DEBUG: 18:46] ===== (REBOOT) =====
+[DEBUG: 18:46] 
+[INFO: 18:46] Client class has been initialized.
+[INFO: 18:46] Loading Extensions...
+[DEBUG: 18:46] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 18:46] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 18:46] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 18:46] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 18:46] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 18:46] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 18:46] 22 extensions loaded, 6 skipped.
+[INFO: 18:46] Logging in...
+[INFO: 18:46] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 18:57] 
+[DEBUG: 18:57] ===== (REBOOT) =====
+[DEBUG: 18:57] 
+[INFO: 18:57] Client class has been initialized.
+[INFO: 18:57] Loading Extensions...
+[DEBUG: 18:57] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 18:57] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 18:57] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 18:57] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 18:57] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 18:57] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 18:57] 22 extensions loaded, 6 skipped.
+[INFO: 18:57] Logging in...
+[INFO: 18:57] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 18:59] 
+[DEBUG: 18:59] ===== (REBOOT) =====
+[DEBUG: 18:59] 
+[INFO: 18:59] Client class has been initialized.
+[INFO: 18:59] Loading Extensions...
+[DEBUG: 18:59] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 18:59] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 18:59] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 18:59] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 18:59] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 18:59] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 18:59] 22 extensions loaded, 6 skipped.
+[INFO: 18:59] Logging in...
+[INFO: 18:59] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 19:05] 
+[DEBUG: 19:05] ===== (REBOOT) =====
+[DEBUG: 19:05] 
+[INFO: 19:05] Client class has been initialized.
+[INFO: 19:05] Loading Extensions...
+[DEBUG: 19:05] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 19:05] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 19:05] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 19:05] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 19:05] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 19:05] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 19:05] 22 extensions loaded, 6 skipped.
+[INFO: 19:05] Logging in...
+[INFO: 19:05] Logged in as Titan Games#1189: 932735744173301861
+[ERROR: 20:18] An unhandled error has occurred: 125 - More details can be found in logs/error.log
+[DEBUG: 21:09] 
+[DEBUG: 21:09] ===== (REBOOT) =====
+[DEBUG: 21:09] 
+[INFO: 21:09] Client class has been initialized.
+[INFO: 21:09] Loading Extensions...
+[DEBUG: 21:09] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 21:09] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 21:09] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 21:09] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 21:09] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 21:09] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 21:09] 22 extensions loaded, 6 skipped.
+[INFO: 21:09] Logging in...
+[INFO: 21:09] Logged in as Titan Games#1189: 932735744173301861
+[ERROR: 21:11] An unhandled error has occurred: dictionary changed size during iteration - More details can be found in logs/error.log
+[DEBUG: 21:12] 
+[DEBUG: 21:12] ===== (REBOOT) =====
+[DEBUG: 21:12] 
+[INFO: 21:12] Client class has been initialized.
+[INFO: 21:12] Loading Extensions...
+[DEBUG: 21:12] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 21:12] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 21:12] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 21:12] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 21:12] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 21:12] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 21:12] 22 extensions loaded, 6 skipped.
+[INFO: 21:12] Logging in...
+[INFO: 21:12] Logged in as Titan Games#1189: 932735744173301861
+[ERROR: 21:12] An unhandled error has occurred: 'dict_values' object has no attribute 'copy' - More details can be found in logs/error.log
+[DEBUG: 21:14] 
+[DEBUG: 21:14] ===== (REBOOT) =====
+[DEBUG: 21:14] 
+[INFO: 21:14] Client class has been initialized.
+[INFO: 21:14] Loading Extensions...
+[DEBUG: 21:14] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 21:14] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 21:14] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 21:14] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 21:14] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 21:14] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 21:14] 22 extensions loaded, 6 skipped.
+[INFO: 21:14] Logging in...
+[INFO: 21:14] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 21:31] 
+[DEBUG: 21:31] ===== (REBOOT) =====
+[DEBUG: 21:31] 
+[INFO: 21:31] Client class has been initialized.
+[INFO: 21:31] Loading Extensions...
+[DEBUG: 21:31] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 21:31] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 21:31] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 21:31] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 21:31] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 21:31] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 21:31] 22 extensions loaded, 6 skipped.
+[INFO: 21:31] Logging in...
+[INFO: 21:31] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 21:59] 
+[DEBUG: 21:59] ===== (REBOOT) =====
+[DEBUG: 21:59] 
+[INFO: 21:59] Client class has been initialized.
+[INFO: 21:59] Loading Extensions...
+[DEBUG: 21:59] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 21:59] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 21:59] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 21:59] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 21:59] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 21:59] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 21:59] 22 extensions loaded, 6 skipped.
+[INFO: 21:59] Logging in...
+[INFO: 21:59] Logged in as Titan Games#1189: 932735744173301861
+[ERROR: 22:33] An unhandled error has occurred: Invalid format specifier - More details can be found in logs/error.log
+[DEBUG: 23:38] 
+[DEBUG: 23:38] ===== (REBOOT) =====
+[DEBUG: 23:38] 
+[INFO: 23:38] Client class has been initialized.
+[INFO: 23:38] Loading Extensions...
+[DEBUG: 23:38] 
+[DEBUG: 23:38] ===== (REBOOT) =====
+[DEBUG: 23:38] 
+[INFO: 23:38] Client class has been initialized.
+[INFO: 23:38] Loading Extensions...
+[DEBUG: 23:38] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 23:38] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 23:38] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 23:38] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 23:38] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 23:38] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 23:38] 22 extensions loaded, 6 skipped.
+[INFO: 23:38] Logging in...
+[INFO: 23:38] Logged in as Titan Games#1189: 932735744173301861
+[ERROR: 23:38] An unhandled error has occurred: 'MyClient' object has no attribute 'formatint' - More details can be found in logs/error.log
+[DEBUG: 00:41] 
+[DEBUG: 00:41] ===== (REBOOT) =====
+[DEBUG: 00:41] 
+[INFO: 00:41] Client class has been initialized.
+[INFO: 00:41] Loading Extensions...
+[DEBUG: 00:41] 
+[DEBUG: 00:41] ===== (REBOOT) =====
+[DEBUG: 00:41] 
+[INFO: 00:41] Client class has been initialized.
+[INFO: 00:41] Loading Extensions...
+[DEBUG: 00:41] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 00:41] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 00:41] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 00:41] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 00:41] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 00:41] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 00:41] 22 extensions loaded, 6 skipped.
+[INFO: 00:41] Logging in...
+[INFO: 00:41] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 07:02] 
+[DEBUG: 07:02] ===== (REBOOT) =====
+[DEBUG: 07:02] 
+[INFO: 07:02] Client class has been initialized.
+[INFO: 07:02] Loading Extensions...
+[DEBUG: 07:02] 
+[DEBUG: 07:02] ===== (REBOOT) =====
+[DEBUG: 07:02] 
+[INFO: 07:02] Client class has been initialized.
+[INFO: 07:02] Loading Extensions...
+[DEBUG: 07:02] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 07:02] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 07:02] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 07:02] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 07:02] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 07:02] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 07:02] 22 extensions loaded, 6 skipped.
+[INFO: 07:02] Logging in...
+[INFO: 07:02] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 18:09] 
+[DEBUG: 18:09] ===== (REBOOT) =====
+[DEBUG: 18:09] 
+[INFO: 18:09] Client class has been initialized.
+[INFO: 18:09] Loading Extensions...
+[DEBUG: 18:09] 
+[DEBUG: 18:09] ===== (REBOOT) =====
+[DEBUG: 18:09] 
+[INFO: 18:09] Client class has been initialized.
+[INFO: 18:09] Loading Extensions...
+[DEBUG: 18:09] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 18:09] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 18:09] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 18:09] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 18:09] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 18:09] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 18:09] 22 extensions loaded, 6 skipped.
+[INFO: 18:09] Logging in...
+[INFO: 18:09] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 18:17] 
+[DEBUG: 18:17] ===== (REBOOT) =====
+[DEBUG: 18:17] 
+[INFO: 18:17] Client class has been initialized.
+[INFO: 18:17] Loading Extensions...
+[DEBUG: 18:17] 
+[DEBUG: 18:17] ===== (REBOOT) =====
+[DEBUG: 18:17] 
+[INFO: 18:17] Client class has been initialized.
+[INFO: 18:17] Loading Extensions...
+[DEBUG: 18:17] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 18:17] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 18:17] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 18:17] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 18:17] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 18:17] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 18:17] 22 extensions loaded, 6 skipped.
+[INFO: 18:17] Logging in...
+[INFO: 18:17] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 18:34] 
+[DEBUG: 18:34] ===== (REBOOT) =====
+[DEBUG: 18:34] 
+[INFO: 18:34] Client class has been initialized.
+[INFO: 18:34] Loading Extensions...
+[DEBUG: 18:34] 
+[DEBUG: 18:34] ===== (REBOOT) =====
+[DEBUG: 18:34] 
+[INFO: 18:34] Client class has been initialized.
+[INFO: 18:34] Loading Extensions...
+[DEBUG: 18:34] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 18:34] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 18:34] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 18:34] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 18:34] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 18:34] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 18:34] 22 extensions loaded, 6 skipped.
+[INFO: 18:34] Logging in...
+[INFO: 18:34] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 18:37] 
+[DEBUG: 18:37] ===== (REBOOT) =====
+[DEBUG: 18:37] 
+[INFO: 18:37] Client class has been initialized.
+[INFO: 18:37] Loading Extensions...
+[DEBUG: 18:37] 
+[DEBUG: 18:37] ===== (REBOOT) =====
+[DEBUG: 18:37] 
+[INFO: 18:37] Client class has been initialized.
+[INFO: 18:37] Loading Extensions...
+[DEBUG: 18:37] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 18:37] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 18:37] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 18:37] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 18:37] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 18:37] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 18:37] 22 extensions loaded, 6 skipped.
+[INFO: 18:37] Logging in...
+[INFO: 18:37] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 18:53] 
+[DEBUG: 18:53] ===== (REBOOT) =====
+[DEBUG: 18:53] 
+[INFO: 18:53] Client class has been initialized.
+[INFO: 18:53] Loading Extensions...
+[DEBUG: 18:53] 
+[DEBUG: 18:53] ===== (REBOOT) =====
+[DEBUG: 18:53] 
+[INFO: 18:53] Client class has been initialized.
+[INFO: 18:53] Loading Extensions...
+[DEBUG: 18:53] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 18:53] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 18:53] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 18:53] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 18:53] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 18:53] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 18:53] 22 extensions loaded, 6 skipped.
+[INFO: 18:53] Logging in...
+[INFO: 18:53] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 23:05] 
+[DEBUG: 23:05] ===== (REBOOT) =====
+[DEBUG: 23:05] 
+[INFO: 23:05] Client class has been initialized.
+[INFO: 23:05] Loading Extensions...
+[DEBUG: 23:05] 
+[DEBUG: 23:05] ===== (REBOOT) =====
+[DEBUG: 23:05] 
+[INFO: 23:05] Client class has been initialized.
+[INFO: 23:05] Loading Extensions...
+[DEBUG: 23:05] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 23:05] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 23:05] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 23:05] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 23:05] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 23:05] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 23:05] 22 extensions loaded, 6 skipped.
+[INFO: 23:05] Logging in...
+[INFO: 23:05] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 23:06] 
+[DEBUG: 23:06] ===== (REBOOT) =====
+[DEBUG: 23:06] 
+[INFO: 23:06] Client class has been initialized.
+[INFO: 23:06] Loading Extensions...
+[DEBUG: 23:06] 
+[DEBUG: 23:06] ===== (REBOOT) =====
+[DEBUG: 23:06] 
+[INFO: 23:06] Client class has been initialized.
+[INFO: 23:06] Loading Extensions...
+[DEBUG: 23:06] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 23:06] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 23:06] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 23:06] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 23:06] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 23:06] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 23:06] 22 extensions loaded, 6 skipped.
+[INFO: 23:06] Logging in...
+[INFO: 23:06] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 20:58] 
+[DEBUG: 20:58] ===== (REBOOT) =====
+[DEBUG: 20:58] 
+[INFO: 20:58] Client class has been initialized.
+[INFO: 20:58] Loading Extensions...
+[DEBUG: 20:58] 
+[DEBUG: 20:58] ===== (REBOOT) =====
+[DEBUG: 20:58] 
+[INFO: 20:58] Client class has been initialized.
+[INFO: 20:58] Loading Extensions...
+[DEBUG: 20:58] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 20:58] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 20:58] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 20:58] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 20:58] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 20:58] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 20:58] 22 extensions loaded, 6 skipped.
+[INFO: 20:58] Logging in...
+[INFO: 20:58] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 21:06] 
+[DEBUG: 21:06] ===== (REBOOT) =====
+[DEBUG: 21:06] 
+[INFO: 21:06] Client class has been initialized.
+[INFO: 21:06] Loading Extensions...
+[DEBUG: 21:06] 
+[DEBUG: 21:06] ===== (REBOOT) =====
+[DEBUG: 21:06] 
+[INFO: 21:06] Client class has been initialized.
+[INFO: 21:06] Loading Extensions...
+[DEBUG: 21:06] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 21:06] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 21:06] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 21:06] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 21:06] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 21:06] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 21:06] 22 extensions loaded, 6 skipped.
+[INFO: 21:06] Logging in...
+[INFO: 21:06] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 22:25] 
+[DEBUG: 22:25] ===== (REBOOT) =====
+[DEBUG: 22:25] 
+[INFO: 22:25] Client class has been initialized.
+[INFO: 22:25] Loading Extensions...
+[DEBUG: 22:25] 
+[DEBUG: 22:25] ===== (REBOOT) =====
+[DEBUG: 22:25] 
+[INFO: 22:25] Client class has been initialized.
+[INFO: 22:25] Loading Extensions...
+[DEBUG: 22:25] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 22:25] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 22:25] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 22:25] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 22:25] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 22:25] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 22:25] 22 extensions loaded, 6 skipped.
+[INFO: 22:25] Logging in...
+[INFO: 22:25] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 22:25] 
+[DEBUG: 22:25] ===== (REBOOT) =====
+[DEBUG: 22:25] 
+[INFO: 22:25] Client class has been initialized.
+[INFO: 22:25] Loading Extensions...
+[DEBUG: 22:25] 
+[DEBUG: 22:25] ===== (REBOOT) =====
+[DEBUG: 22:25] 
+[INFO: 22:25] Client class has been initialized.
+[INFO: 22:25] Loading Extensions...
+[DEBUG: 22:25] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 22:25] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 22:25] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 22:25] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 22:25] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 22:25] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 22:25] 23 extensions loaded, 6 skipped.
+[INFO: 22:25] Logging in...
+[INFO: 22:25] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 22:26] 
+[DEBUG: 22:26] ===== (REBOOT) =====
+[DEBUG: 22:26] 
+[INFO: 22:26] Client class has been initialized.
+[INFO: 22:26] Loading Extensions...
+[DEBUG: 22:26] 
+[DEBUG: 22:26] ===== (REBOOT) =====
+[DEBUG: 22:26] 
+[INFO: 22:26] Client class has been initialized.
+[INFO: 22:26] Loading Extensions...
+[DEBUG: 22:26] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 22:26] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 22:26] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 22:26] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 22:26] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 22:26] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 22:26] 23 extensions loaded, 6 skipped.
+[INFO: 22:26] Logging in...
+[INFO: 22:26] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 22:29] 
+[DEBUG: 22:29] ===== (REBOOT) =====
+[DEBUG: 22:29] 
+[INFO: 22:29] Client class has been initialized.
+[INFO: 22:29] Loading Extensions...
+[DEBUG: 22:29] 
+[DEBUG: 22:29] ===== (REBOOT) =====
+[DEBUG: 22:29] 
+[INFO: 22:29] Client class has been initialized.
+[INFO: 22:29] Loading Extensions...
+[DEBUG: 22:29] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 22:29] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 22:29] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 22:29] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 22:29] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 22:29] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 22:29] 23 extensions loaded, 6 skipped.
+[INFO: 22:29] Logging in...
+[INFO: 22:29] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 22:30] 
+[DEBUG: 22:30] ===== (REBOOT) =====
+[DEBUG: 22:30] 
+[INFO: 22:30] Client class has been initialized.
+[INFO: 22:30] Loading Extensions...
+[DEBUG: 22:30] 
+[DEBUG: 22:30] ===== (REBOOT) =====
+[DEBUG: 22:30] 
+[INFO: 22:30] Client class has been initialized.
+[INFO: 22:30] Loading Extensions...
+[DEBUG: 22:30] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 22:30] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 22:30] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 22:30] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 22:30] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 22:30] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 22:30] 23 extensions loaded, 6 skipped.
+[INFO: 22:30] Logging in...
+[INFO: 22:30] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 22:37] 
+[DEBUG: 22:37] ===== (REBOOT) =====
+[DEBUG: 22:37] 
+[INFO: 22:37] Client class has been initialized.
+[INFO: 22:37] Loading Extensions...
+[DEBUG: 22:37] 
+[DEBUG: 22:37] ===== (REBOOT) =====
+[DEBUG: 22:37] 
+[INFO: 22:37] Client class has been initialized.
+[INFO: 22:37] Loading Extensions...
+[DEBUG: 22:37] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 22:37] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 22:37] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 22:37] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 22:37] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 22:37] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 22:37] 23 extensions loaded, 6 skipped.
+[INFO: 22:37] Logging in...
+[INFO: 22:37] Logged in as Titan Games#1189: 932735744173301861
+[DEBUG: 22:39] 
+[DEBUG: 22:39] ===== (REBOOT) =====
+[DEBUG: 22:39] 
+[INFO: 22:39] Client class has been initialized.
+[INFO: 22:39] Loading Extensions...
+[DEBUG: 22:39] 
+[DEBUG: 22:39] ===== (REBOOT) =====
+[DEBUG: 22:39] 
+[INFO: 22:39] Client class has been initialized.
+[INFO: 22:39] Loading Extensions...
+[DEBUG: 22:39] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 22:39] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 22:39] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 22:39] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 22:39] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 22:39] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 22:39] 23 extensions loaded, 6 skipped.
+[INFO: 22:39] Logging in...
+[INFO: 22:39] Logged in as Titan Games Test#4763: 951220257190715422
+[DEBUG: 22:39] 
+[DEBUG: 22:39] ===== (REBOOT) =====
+[DEBUG: 22:39] 
+[INFO: 22:39] Client class has been initialized.
+[INFO: 22:39] Loading Extensions...
+[DEBUG: 22:39] 
+[DEBUG: 22:39] ===== (REBOOT) =====
+[DEBUG: 22:39] 
+[INFO: 22:39] Client class has been initialized.
+[INFO: 22:39] Loading Extensions...
+[DEBUG: 22:39] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 22:39] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 22:39] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 22:39] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 22:39] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 22:39] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 22:39] 23 extensions loaded, 6 skipped.
+[INFO: 22:39] Logging in...
+[INFO: 22:39] Logged in as Titan Games Test#4763: 951220257190715422
+[DEBUG: 22:42] 
+[DEBUG: 22:42] ===== (REBOOT) =====
+[DEBUG: 22:42] 
+[INFO: 22:42] Client class has been initialized.
+[INFO: 22:42] Loading Extensions...
+[DEBUG: 22:42] 
+[DEBUG: 22:42] ===== (REBOOT) =====
+[DEBUG: 22:42] 
+[INFO: 22:42] Client class has been initialized.
+[INFO: 22:42] Loading Extensions...
+[DEBUG: 22:42] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 22:42] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 22:42] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 22:42] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 22:42] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 22:42] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 22:42] 23 extensions loaded, 6 skipped.
+[INFO: 22:42] Logging in...
+[INFO: 22:42] Logged in as Titan Games Test#4763: 951220257190715422
+[ERROR: 22:42] An unhandled error has occurred: Task is already launched and is not completed. - More details can be found in logs/error.log
+[DEBUG: 23:08] 
+[DEBUG: 23:08] ===== (REBOOT) =====
+[DEBUG: 23:08] 
+[INFO: 23:08] Client class has been initialized.
+[INFO: 23:08] Loading Extensions...
+[DEBUG: 23:08] 
+[DEBUG: 23:08] ===== (REBOOT) =====
+[DEBUG: 23:08] 
+[INFO: 23:08] Client class has been initialized.
+[INFO: 23:08] Loading Extensions...
+[DEBUG: 23:08] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 23:08] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 23:08] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 23:08] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 23:08] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 23:08] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 23:08] 23 extensions loaded, 6 skipped.
+[INFO: 23:08] Logging in...
+[INFO: 23:08] Logged in as Titan Games Test#4763: 951220257190715422
+[DEBUG: 23:09] 
+[DEBUG: 23:09] ===== (REBOOT) =====
+[DEBUG: 23:09] 
+[INFO: 23:09] Client class has been initialized.
+[INFO: 23:09] Loading Extensions...
+[DEBUG: 23:09] 
+[DEBUG: 23:09] ===== (REBOOT) =====
+[DEBUG: 23:09] 
+[INFO: 23:09] Client class has been initialized.
+[INFO: 23:09] Loading Extensions...
+[DEBUG: 23:09] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 23:09] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 23:09] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 23:09] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 23:09] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 23:09] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 23:09] 23 extensions loaded, 6 skipped.
+[INFO: 23:09] Logging in...
+[INFO: 23:09] Logged in as Titan Games Test#4763: 951220257190715422
+[DEBUG: 23:10] 
+[DEBUG: 23:10] ===== (REBOOT) =====
+[DEBUG: 23:10] 
+[INFO: 23:10] Client class has been initialized.
+[INFO: 23:10] Loading Extensions...
+[DEBUG: 23:10] 
+[DEBUG: 23:10] ===== (REBOOT) =====
+[DEBUG: 23:10] 
+[INFO: 23:10] Client class has been initialized.
+[INFO: 23:10] Loading Extensions...
+[DEBUG: 23:10] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 23:10] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 23:10] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 23:10] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 23:10] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 23:10] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 23:10] 23 extensions loaded, 6 skipped.
+[INFO: 23:10] Logging in...
+[INFO: 23:10] Logged in as Titan Games Test#4763: 951220257190715422
+[DEBUG: 23:13] 
+[DEBUG: 23:13] ===== (REBOOT) =====
+[DEBUG: 23:13] 
+[INFO: 23:13] Client class has been initialized.
+[INFO: 23:13] Loading Extensions...
+[DEBUG: 23:13] 
+[DEBUG: 23:13] ===== (REBOOT) =====
+[DEBUG: 23:13] 
+[INFO: 23:13] Client class has been initialized.
+[INFO: 23:13] Loading Extensions...
+[DEBUG: 23:13] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 23:13] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 23:13] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 23:13] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 23:13] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 23:13] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 23:13] 23 extensions loaded, 6 skipped.
+[INFO: 23:13] Logging in...
+[INFO: 23:13] Logged in as Titan Games Test#4763: 951220257190715422
+[DEBUG: 23:30] 
+[DEBUG: 23:30] ===== (REBOOT) =====
+[DEBUG: 23:30] 
+[INFO: 23:30] Client class has been initialized.
+[INFO: 23:30] Loading Extensions...
+[DEBUG: 23:30] 
+[DEBUG: 23:30] ===== (REBOOT) =====
+[DEBUG: 23:30] 
+[INFO: 23:30] Client class has been initialized.
+[INFO: 23:30] Loading Extensions...
+[DEBUG: 23:30] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 23:30] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 23:30] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 23:30] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 23:30] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 23:30] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 23:30] 23 extensions loaded, 6 skipped.
+[INFO: 23:30] Logging in...
+[INFO: 23:30] Logged in as Titan Games Test#4763: 951220257190715422
+[DEBUG: 23:30] 
+[DEBUG: 23:30] ===== (REBOOT) =====
+[DEBUG: 23:30] 
+[INFO: 23:30] Client class has been initialized.
+[INFO: 23:30] Loading Extensions...
+[DEBUG: 23:30] 
+[DEBUG: 23:30] ===== (REBOOT) =====
+[DEBUG: 23:30] 
+[INFO: 23:30] Client class has been initialized.
+[INFO: 23:30] Loading Extensions...
+[DEBUG: 23:30] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 23:30] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 23:30] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 23:30] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 23:30] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 23:30] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 23:30] 23 extensions loaded, 6 skipped.
+[INFO: 23:30] Logging in...
+[INFO: 23:31] Logged in as Titan Games Test#4763: 951220257190715422
+[DEBUG: 23:48] 
+[DEBUG: 23:48] ===== (REBOOT) =====
+[DEBUG: 23:48] 
+[INFO: 23:48] Client class has been initialized.
+[INFO: 23:48] Loading Extensions...
+[DEBUG: 23:48] 
+[DEBUG: 23:48] ===== (REBOOT) =====
+[DEBUG: 23:48] 
+[INFO: 23:48] Client class has been initialized.
+[INFO: 23:48] Loading Extensions...
+[DEBUG: 23:48] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 23:48] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 23:48] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 23:48] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 23:48] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 23:48] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 23:48] 23 extensions loaded, 6 skipped.
+[INFO: 23:48] Logging in...
+[INFO: 23:48] Logged in as Titan Games#1189: 932735744173301861
+[ERROR: 23:48] An unhandled error has occurred: Task is already launched and is not completed. - More details can be found in logs/error.log
+[DEBUG: 23:49] 
+[DEBUG: 23:49] ===== (REBOOT) =====
+[DEBUG: 23:49] 
+[INFO: 23:49] Client class has been initialized.
+[INFO: 23:49] Loading Extensions...
+[DEBUG: 23:49] 
+[DEBUG: 23:49] ===== (REBOOT) =====
+[DEBUG: 23:49] 
+[INFO: 23:49] Client class has been initialized.
+[INFO: 23:49] Loading Extensions...
+[DEBUG: 23:49] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 23:49] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 23:49] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 23:49] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 23:49] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 23:49] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 23:49] 23 extensions loaded, 6 skipped.
+[INFO: 23:49] Logging in...
+[INFO: 23:49] Logged in as Titan Games#1189: 932735744173301861
+[ERROR: 23:49] An unhandled error has occurred: Task is already launched and is not completed. - More details can be found in logs/error.log
+[DEBUG: 23:49] 
+[DEBUG: 23:49] ===== (REBOOT) =====
+[DEBUG: 23:49] 
+[INFO: 23:49] Client class has been initialized.
+[INFO: 23:49] Loading Extensions...
+[DEBUG: 23:49] 
+[DEBUG: 23:49] ===== (REBOOT) =====
+[DEBUG: 23:49] 
+[INFO: 23:49] Client class has been initialized.
+[INFO: 23:49] Loading Extensions...
+[DEBUG: 23:49] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 23:49] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 23:49] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 23:49] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 23:49] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 23:49] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 23:49] 23 extensions loaded, 6 skipped.
+[INFO: 23:49] Logging in...
+[INFO: 23:50] Logged in as Titan Games#1189: 932735744173301861
+[ERROR: 23:50] An unhandled error has occurred: Task is already launched and is not completed. - More details can be found in logs/error.log
+[DEBUG: 00:15] 
+[DEBUG: 00:15] ===== (REBOOT) =====
+[DEBUG: 00:15] 
+[INFO: 00:15] Client class has been initialized.
+[INFO: 00:15] Loading Extensions...
+[DEBUG: 00:15] 
+[DEBUG: 00:15] ===== (REBOOT) =====
+[DEBUG: 00:15] 
+[INFO: 00:15] Client class has been initialized.
+[INFO: 00:15] Loading Extensions...
+[DEBUG: 00:15] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 00:15] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 00:15] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 00:15] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 00:15] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 00:15] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 00:15] 23 extensions loaded, 6 skipped.
+[INFO: 00:15] Logging in...
+[INFO: 00:15] Logged in as Titan Games#1189: 932735744173301861
+[ERROR: 00:31] An unhandled error has occurred: 400 Bad Request (error code: 50035): Invalid Form Body
+In components.1.components.0.custom_id: Must be 100 or fewer in length. - More details can be found in logs/error.log
+[ERROR: 00:32] An unhandled error has occurred: 400 Bad Request (error code: 50035): Invalid Form Body
+In components.1.components.0.custom_id: Must be 100 or fewer in length. - More details can be found in logs/error.log
+[DEBUG: 00:40] 
+[DEBUG: 00:40] ===== (REBOOT) =====
+[DEBUG: 00:40] 
+[INFO: 00:40] Client class has been initialized.
+[INFO: 00:40] Loading Extensions...
+[DEBUG: 00:40] 
+[DEBUG: 00:40] ===== (REBOOT) =====
+[DEBUG: 00:40] 
+[INFO: 00:40] Client class has been initialized.
+[INFO: 00:40] Loading Extensions...
+[DEBUG: 00:40] Extension utils.dpy not loaded: Extension 'utils.dpy' has no 'setup' function.
+[DEBUG: 00:40] Extension utils.exceptions not loaded: Extension 'utils.exceptions' has no 'setup' function.
+[DEBUG: 00:40] Extension utils.localUser not loaded: Extension 'utils.localUser' has no 'setup' function.
+[DEBUG: 00:40] Extension utils.logger not loaded: Extension 'utils.logger' is already loaded.
+[DEBUG: 00:40] Extension utils.paginator not loaded: Extension 'utils.paginator' has no 'setup' function.
+[DEBUG: 00:40] Extension utils.TextFormat not loaded: Extension 'utils.TextFormat' has no 'setup' function.
+[INFO: 00:40] 23 extensions loaded, 6 skipped.
+[INFO: 00:40] Logging in...
+[INFO: 00:40] Logged in as Titan Games#1189: 932735744173301861

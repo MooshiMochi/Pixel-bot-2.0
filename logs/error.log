@@ -1,0 +1,207 @@
+NEW ERROR
+
+Traceback (most recent call last):
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\events\error_handler.py", line 355, in on_slash_command_error
+    raise error
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\client.py", line 1353, in invoke_command
+    await func.invoke(ctx, **args)
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\model.py", line 209, in invoke
+    return await self.func(self.cog, *args, **kwargs)
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\commands\games\hidden_cups.py", line 116, in hidden_cups
+    em = discord.Embed(color=self.client.failure, title=f"Free attempts exhausted.", descrtiption=f"You have exhausted your daily 5 free attempts.\nIf you wish to play the game, it will cost you {await self.client.round_int(self.client.play_price)}💸. \n\n**Do you wish to proceed?**")
+AttributeError: 'MyClient' object has no attribute 'play_price'
+NEW ERROR
+
+Traceback (most recent call last):
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\events\error_handler.py", line 355, in on_slash_command_error
+    raise error
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\client.py", line 1353, in invoke_command
+    await func.invoke(ctx, **args)
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\model.py", line 209, in invoke
+    return await self.func(self.cog, *args, **kwargs)
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\commands\games\riddles.py", line 188, in riddles_config
+    self.run_riddles.start()
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in start
+    raise RuntimeError('Task is already launched and is not completed.')
+RuntimeError: Task is already launched and is not completed.
+NEW ERROR
+
+Traceback (most recent call last):
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\events\error_handler.py", line 355, in on_slash_command_error
+    raise error
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\client.py", line 1353, in invoke_command
+    await func.invoke(ctx, **args)
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\model.py", line 209, in invoke
+    return await self.func(self.cog, *args, **kwargs)
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\commands\games\riddles.py", line 248, in riddles_delete
+    question = self.riddles[type][int(riddle_number)]["question"]
+KeyError: 125
+NEW ERROR
+
+Traceback (most recent call last):
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\events\error_handler.py", line 355, in on_slash_command_error
+    raise error
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\client.py", line 1353, in invoke_command
+    await func.invoke(ctx, **args)
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\model.py", line 209, in invoke
+    return await self.func(self.cog, *args, **kwargs)
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\commands\games\riddles.py", line 254, in riddles_delete
+    for index, qna in enumerate(self.riddles[type].values()):
+RuntimeError: dictionary changed size during iteration
+NEW ERROR
+
+Traceback (most recent call last):
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\events\error_handler.py", line 355, in on_slash_command_error
+    raise error
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\client.py", line 1353, in invoke_command
+    await func.invoke(ctx, **args)
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\model.py", line 209, in invoke
+    return await self.func(self.cog, *args, **kwargs)
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\commands\games\riddles.py", line 254, in riddles_delete
+    for index, qna in enumerate(self.riddles[type].values().copy()):
+AttributeError: 'dict_values' object has no attribute 'copy'
+NEW ERROR
+
+Traceback (most recent call last):
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\events\error_handler.py", line 355, in on_slash_command_error
+    raise error
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\client.py", line 1353, in invoke_command
+    await func.invoke(ctx, **args)
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\model.py", line 209, in invoke
+    return await self.func(self.cog, *args, **kwargs)
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\commands\games\four_corners.py", line 179, in four_corners
+    await ctx.send(f"Your money got multiplied by {multiplier:,2f} again!\nYou have **{int(bet_copy):,} 💸** in winnings so far.", hidden=True)
+ValueError: Invalid format specifier
+NEW ERROR
+
+Traceback (most recent call last):
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\events\error_handler.py", line 355, in on_slash_command_error
+    raise error
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\client.py", line 1353, in invoke_command
+    await func.invoke(ctx, **args)
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\model.py", line 209, in invoke
+    return await self.func(self.cog, *args, **kwargs)
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\commands\economy.py", line 1306, in cash_leaderboard
+    description1 += f"**{tempranking} {discorduser.mention}** <:waveydash:952711493659529246> **__{await self.client.formatint(int(player[1]))} 💸__**\n"
+AttributeError: 'MyClient' object has no attribute 'formatint'
+NEW ERROR
+
+Traceback (most recent call last):
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\events\error_handler.py", line 355, in on_slash_command_error
+    raise error
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\client.py", line 1353, in invoke_command
+    await func.invoke(ctx, **args)
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\model.py", line 209, in invoke
+    return await self.func(self.cog, *args, **kwargs)
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\commands\games\riddles.py", line 210, in riddles_config
+    self.run_riddles.start()
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in start
+    raise RuntimeError('Task is already launched and is not completed.')
+RuntimeError: Task is already launched and is not completed.
+NEW ERROR
+
+Traceback (most recent call last):
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\commands\games\riddles.py", line 205, in riddles_config
+    self.run_riddles.start()
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in start
+    raise RuntimeError('Task is already launched and is not completed.')
+RuntimeError: Task is already launched and is not completed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\events\error_handler.py", line 355, in on_slash_command_error
+    raise error
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\client.py", line 1353, in invoke_command
+    await func.invoke(ctx, **args)
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\model.py", line 209, in invoke
+    return await self.func(self.cog, *args, **kwargs)
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\commands\games\riddles.py", line 209, in riddles_config
+    self.run_riddles.start()
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in start
+    raise RuntimeError('Task is already launched and is not completed.')
+RuntimeError: Task is already launched and is not completed.
+NEW ERROR
+
+Traceback (most recent call last):
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\commands\games\riddles.py", line 205, in riddles_config
+    self.run_riddles.start()
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in start
+    raise RuntimeError('Task is already launched and is not completed.')
+RuntimeError: Task is already launched and is not completed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\events\error_handler.py", line 355, in on_slash_command_error
+    raise error
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\client.py", line 1353, in invoke_command
+    await func.invoke(ctx, **args)
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\model.py", line 209, in invoke
+    return await self.func(self.cog, *args, **kwargs)
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\commands\games\riddles.py", line 208, in riddles_config
+    self.run_riddles.start()
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in start
+    raise RuntimeError('Task is already launched and is not completed.')
+RuntimeError: Task is already launched and is not completed.
+NEW ERROR
+
+Traceback (most recent call last):
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\commands\games\riddles.py", line 207, in riddles_config
+    self.run_riddles.start()
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in start
+    raise RuntimeError('Task is already launched and is not completed.')
+RuntimeError: Task is already launched and is not completed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\events\error_handler.py", line 355, in on_slash_command_error
+    raise error
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\client.py", line 1353, in invoke_command
+    await func.invoke(ctx, **args)
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\model.py", line 209, in invoke
+    return await self.func(self.cog, *args, **kwargs)
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\commands\games\riddles.py", line 210, in riddles_config
+    self.run_riddles.start()
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in start
+    raise RuntimeError('Task is already launched and is not completed.')
+RuntimeError: Task is already launched and is not completed.
+NEW ERROR
+
+Traceback (most recent call last):
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\events\error_handler.py", line 355, in on_slash_command_error
+    raise error
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\client.py", line 1353, in invoke_command
+    await func.invoke(ctx, **args)
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\model.py", line 209, in invoke
+    return await self.func(self.cog, *args, **kwargs)
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\commands\reaction_roles.py", line 192, in rr_select
+    await ctx.channel.send(**{_type: em}, components=components)
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\dpy_overrides.py", line 323, in send_override
+    return await send(channel, *args, **kwargs)
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\dpy_overrides.py", line 300, in send
+    data = await state.http.send_message(
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord\http.py", line 254, in request
+    raise HTTPException(r, data)
+discord.errors.HTTPException: 400 Bad Request (error code: 50035): Invalid Form Body
+In components.1.components.0.custom_id: Must be 100 or fewer in length.
+NEW ERROR
+
+Traceback (most recent call last):
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\events\error_handler.py", line 355, in on_slash_command_error
+    raise error
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\client.py", line 1353, in invoke_command
+    await func.invoke(ctx, **args)
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\model.py", line 209, in invoke
+    return await self.func(self.cog, *args, **kwargs)
+  File "C:\Users\rchir\OneDrive\Desktop\GitProjects\Pixel-bot-2.0\commands\reaction_roles.py", line 192, in rr_select
+    await ctx.channel.send(**{_type: em}, components=components)
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\dpy_overrides.py", line 323, in send_override
+    return await send(channel, *args, **kwargs)
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord_slash\dpy_overrides.py", line 300, in send
+    data = await state.http.send_message(
+  File "C:\Users\rchir\AppData\Local\Programs\Python\Python39\lib\site-packages\discord\http.py", line 254, in request
+    raise HTTPException(r, data)
+discord.errors.HTTPException: 400 Bad Request (error code: 50035): Invalid Form Body
+In components.1.components.0.custom_id: Must be 100 or fewer in length.
