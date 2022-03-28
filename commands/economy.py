@@ -2,8 +2,6 @@ import json
 import time
 import discord
 
-from main import MyClient
-
 from datetime import datetime
 
 from discord import NotFound
@@ -26,7 +24,7 @@ from utils.dpy import Checks
 class EconomyCommands(commands.Cog):
 
     def __init__(self, client):
-        self.client: MyClient = client
+        self.client = client
         self.isready = False
 
         # with open("data/economy/config.json", "r") as f:

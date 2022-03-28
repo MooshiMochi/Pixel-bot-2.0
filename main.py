@@ -208,7 +208,7 @@ class MyClient(commands.Bot):
         print(f"\033[1;32m┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n" + "\033[1;32mBot is Online".center(78) + "\n\033[1;32m┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛")
         self.logger.info(f"Logged in as {self.user}: {self.user.id}")
 
-        await client.change_presence(status=discord.Status.online, activity=discord.Game(name="titanmc.gg"))
+        await self.change_presence(status=discord.Status.online, activity=discord.Game(name="titanmc.gg"))
     
     @staticmethod
     async def format_duration(ts_duration: str):

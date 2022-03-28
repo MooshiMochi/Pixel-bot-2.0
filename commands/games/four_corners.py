@@ -1,4 +1,3 @@
-from turtle import hideturtle
 import discord
 import asyncio
 

@@ -1,4 +1,3 @@
-from platform import win32_edition
 import discord
 import asyncio
 

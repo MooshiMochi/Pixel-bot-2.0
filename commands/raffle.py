@@ -5,8 +5,6 @@ from datetime import datetime
 
 from random import sample
 
-from main import MyClient
-
 from discord.ext import commands, tasks
 from discord.utils import sleep_until
 
@@ -18,7 +16,7 @@ from constants import const
 
 class Raffle(commands.Cog):
     def __init__(self, client):
-        self.client:MyClient = client
+        self.client = client
     
         with open("data/raffle/raffles.json", "r") as f:
             self.raffles = json.load(f)
@@ -166,5 +164,5 @@ class Raffle(commands.Cog):
         return await ctx.send(embed=em, hidden=True)
 
 
-def setup(client:MyClient):
+def setup(client):
     client.add_cog(Raffle(client))

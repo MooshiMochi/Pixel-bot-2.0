@@ -113,7 +113,12 @@ class WhackABrick(commands.Cog):
                 extra_emot = "bomb"
 
         coords = []
-        for _ in range((level // (random.choice((3, 8)))) + 1):
+        if level < 30:
+            my_range = (level // (random.choice((3, 8)))) + 1
+        else:
+            my_range = 12
+
+        for _ in range(my_range):
             new_coord = (random.randint(0, 4), random.randint(0, 3))
             coords.append(new_coord)
             while 1:
