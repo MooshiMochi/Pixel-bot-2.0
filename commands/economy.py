@@ -380,7 +380,7 @@ class EconomyCommands(commands.Cog):
             for mem in ctx.guild.members:
                 if not mem.bot:
                     await self.check_user(mem.id)
-                    await self.add_coins(ctx, user=mem, amount=amount, were=where, all=True)
+                    await self.add_coins(ctx, user=mem, amount=amount, where=where, all=True)
             await self.economy_log("pay_logs", "@everyone", amount, f"{ctx.author.mention} used /add_money")
 
         else:

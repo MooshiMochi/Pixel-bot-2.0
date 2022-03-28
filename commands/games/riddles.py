@@ -22,7 +22,7 @@ class Riddles(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-        self.last_user_msgs_count = 0
+        self.last_user_ids = [0, 0, 0, 0]
 
         with open("data/games/riddles_config.json", "r") as f:
             self.config = json.load(f)
@@ -78,7 +78,7 @@ class Riddles(commands.Cog):
 
         if not self.config['active']: return
 
-        if self.last_user_msgs_count < 4:
+        if len(self.last_user_ids) < 4:
             return
 
         cat_opts = [key for key in self.riddles.keys() if key not in self.used_categories]
@@ -119,7 +119,7 @@ class Riddles(commands.Cog):
 
         try:
             await self.main_ch.send(embed=em)
-            self.last_user_msgs_count = 0
+            self.last_user_ids = []
         except (discord.HTTPException, discord.Forbidden):
             pass
 
@@ -135,8 +135,8 @@ class Riddles(commands.Cog):
             return
         else:
             if not isinstance(self.main_ch, int):
-                if msg.channel.id == self.main_ch.id:
-                    self.last_user_msgs_count += 1
+                if msg.channel.id == self.main_ch.id and msg.author.id not in self.last_user_ids:
+                    self.last_user_ids.append(msg.author.id)
 
         if self.is_riddle_guessed:
             return
