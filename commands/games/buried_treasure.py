@@ -258,6 +258,13 @@ class BuriedTreasure(commands.Cog):
 
                     if self.winnings[ctx.author_id]["total"] >= 1_000_000:
                         bet = bet
+                        m = discord.Embed(description="**You've already reached your max earnings for today.\nYou can play again tomorrow to earn more.**")
+                        m.set_footer(text="TitanMC | Buried Treasure", icon_url=self.client.png)
+                        try:
+                            await ctx.send(embed=em, hidden=True)
+                        except (discord.HTTPException, discord.Forbidden):
+                            pass
+                        
                     else:
                         bet *= 6
                         self.winnings[ctx.author_id]["total"] += bet
