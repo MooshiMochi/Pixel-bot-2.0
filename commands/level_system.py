@@ -99,7 +99,7 @@ class LevelSystem(commands.Cog):
                 description=f"**Congratulations {msg.author.mention}, you are now level `{self.client.lbs['chatlb'][author_id]['level']}`!**")
                 em.set_footer(icon_url=self.client.png, text="TitanMC | Level System")
                 try:
-                    await msg.reply(embed=em)
+                    await msg.reply(embed=em, delete_after=5)
                 except (discord.NotFound, TypeError, AttributeError, discord.HTTPException):
                     # assuming discord is weird we ignore error (probably message arg not received properly)
                     pass
