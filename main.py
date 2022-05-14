@@ -18,7 +18,7 @@ from dotenv import load_dotenv
 
 from constants import const
 
-load_dotenv()
+load_dotenv(".env")
 
 TOKEN = os.getenv("TOKEN")
 TEST_MODE = False
@@ -205,7 +205,11 @@ class MyClient(commands.Bot):
         await super().close()
 
     async def on_ready(self):
-        print(f"\033[1;32m┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n" + "\033[1;32mBot is Online".center(78) + "\n\033[1;32m┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛")
+        # print(
+            # f"\033[1;32m┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n".encode("utf-8"),
+            # "\033[1;32mBot is Online".center(78).encode("utf-8"), 
+            # "\n\033[1;32m┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛".encode("utf-8"), 
+            # sep="")
         self.logger.info(f"Logged in as {self.user}: {self.user.id}")
 
         await self.change_presence(status=discord.Status.online, activity=discord.Game(name="titanmc.gg"))

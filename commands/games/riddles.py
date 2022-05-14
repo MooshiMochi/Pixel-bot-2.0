@@ -62,14 +62,16 @@ class Riddles(commands.Cog):
     
     @tasks.loop(count=1)
     async def get_ready(self):
-        guild = self.client.get_guild(const.guild_id)
         try:
-            self.main_ch = guild.get_channel(self.main_ch)
-            if not self.main_ch:
-                self.config["active"] = False
-        except (TypeError, AttributeError):
+            for guild in self.client.guilds:
+                self.main_ch = guild.get_channel(self.main_ch)
+                if not isinstance(self.main_ch, discord.TextChannel):
+                    self.config["active"] = False
+                    break
+
+        except (TypeError, AttributeError) as e:
             self.client.logger.error("Unloading 'commands.games.riddles'. Failed to get guild object.\nRiddles will not work.")
-            self.client.remove_cog("commands.games.riddles")
+            # self.client.remove_cog("commands.games.riddles")
 
 
     @tasks.loop(minutes=5.0)
@@ -86,8 +88,10 @@ class Riddles(commands.Cog):
         if not cat_opts:
             cat_opts = [key for key in self.riddles.keys() if key != self.used_categories[-1]]
             self.used_categories = []
-
-        cat = choice(list(self.riddles.keys()))
+        allowed_categories = [x for x in self.riddles.keys() if x]
+        if not allowed_categories:
+            return
+        cat = choice(allowed_categories)
         self.used_categories.append(cat)
 
         if cat not in self.used_riddles.keys(): 
@@ -132,6 +136,8 @@ class Riddles(commands.Cog):
     async def on_message(self, msg: discord.Message):
 
         if msg.author.bot:
+            return
+        elif not msg.author:
             return
         else:
             if not isinstance(self.main_ch, int):

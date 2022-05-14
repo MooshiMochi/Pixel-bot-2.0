@@ -42,11 +42,17 @@ class Verification(commands.Cog):
     async def get_verification_role(self):
         if isinstance(self.verification_role, int):
             try:
+                guild = self.client.get_guild(const.guild_id)
+                if not guild:
+                    for g in self.client.guilds:
+                        if g.id == const.guild_id:
+                            guild = g
+                            break
                 self.verification_role = self.client.get_guild(const.guild_id).get_role(self.verification_role)
             except (TypeError, AttributeError):
-                self.client.logger.error("Unloading 'commands.verification'. Failed to get guild object.\nVerification will not work.")
-                self.client.remove_cog("commands.verification")
-
+                # self.client.logger.error("Unloading 'commands.verification'. Failed to get guild object.\nVerification will not work.")
+                # self.client.remove_cog("commands.verification")
+                pass
 
     @get_verification_role.before_loop
     async def before_get_verification_role(self):

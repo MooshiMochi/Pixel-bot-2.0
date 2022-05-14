@@ -28,10 +28,11 @@ class HiddenCups(commands.Cog):
 
     @tasks.loop(count=1)
     async def getting_ready(self):
-        guild = self.client.get_guild(const.emotes_guild_id)
-        for emoji in guild.emojis:
-            if emoji.name == "cup" and emoji.id == 951840373557297233:
-               self.cup_emoji = emoji
+        for guild in self.client.guilds:
+            guild: discord.Guild = guild
+            for emoji in await guild.fetch_emojis():
+                if emoji.name == "cup" and emoji.id == 951840373557297233:
+                    self.cup_emoji = emoji
         
         if self.cup_emoji is None:
             self.client.logger.error("Extension hidden_cups.py was unloaded because the required emoji was not found.")

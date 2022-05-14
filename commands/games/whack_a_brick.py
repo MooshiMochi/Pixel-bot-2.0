@@ -33,16 +33,18 @@ class WhackABrick(commands.Cog):
 
     @tasks.loop(count=1)
     async def getting_ready(self):
-        guild = self.client.get_guild(const.emotes_guild_id)
-        for emoji in guild.emojis:
-            if emoji.name == "stone_brick" and emoji.id == 943230164362485760:
-                self.emojis["brick"] = emoji
-            elif emoji.name == "mossy_brick" and emoji.id == 943230816505454612:
-                self.emojis["moss"] = emoji
-            elif emoji.name == "stone" and emoji.id == 943230601232793680:
-                self.emojis["stone"] = emoji
-            elif emoji.name == "sus_brick" and emoji.id == 943497488122392586:
-                self.emojis["sus"] = emoji
+        # guild = self.client.get_guild(const.emotes_guild_id)
+        for guild in self.client.guilds:
+            guild: discord.Guild = guild
+            for emoji in await guild.fetch_emojis():
+                if emoji.name == "stone_brick" and emoji.id == 943230164362485760:
+                    self.emojis["brick"] = emoji
+                elif emoji.name == "mossy_brick" and emoji.id == 943230816505454612:
+                    self.emojis["moss"] = emoji
+                elif emoji.name == "stone" and emoji.id == 943230601232793680:
+                    self.emojis["stone"] = emoji
+                elif emoji.name == "sus_brick" and emoji.id == 943497488122392586:
+                    self.emojis["sus"] = emoji
 
         if len(self.emojis) < 3:
             self.client.logger.error("Extension whack_a_brick.py was unloaded because the required emoji were not found.")
