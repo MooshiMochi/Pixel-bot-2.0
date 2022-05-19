@@ -140,7 +140,7 @@ class Riddles(commands.Cog):
         elif not msg.author:
             return
         else:
-            if not isinstance(self.main_ch, int):
+            if not isinstance(self.main_ch, (int)) and self.main_ch is not None:
                 if msg.channel.id == self.main_ch.id and msg.author.id not in self.last_user_ids:
                     self.last_user_ids.append(msg.author.id)
 
