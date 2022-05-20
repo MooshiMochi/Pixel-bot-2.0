@@ -78,7 +78,7 @@ class Suggestions(commands.Cog):
             try:
                 em.set_image(url=url(optional_image))
             except InvalidURLError as e:
-                _em = discord.Embed(description=f"**{e[:-1024]}**", color=self.client.failure)
+                _em = discord.Embed(description=f"**The url: '{str(optional_image)}' is not valid!**", color=self.client.failure)
                 _em.set_footer(text="TitanMC | Suggestions")
                 return await ctx.send(embed=_em, hidden=True)
 
