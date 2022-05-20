@@ -266,7 +266,7 @@ class Suggestions(commands.Cog):
                 elif str(reaction.emoji) == "❌":
                     total_reactions["no"] = reaction.count
 
-            if total_reactions["yes"] > total_reactions["no"] and total_reactions["yes"] >= self.config["max_upvotes"]:
+            if total_reactions["yes"] > total_reactions["no"] and total_reactions["yes"] == self.config["max_upvotes"]:
                 if len(msg.embeds) <= 0:
                     return
                 if (str(msg.embeds[0].color) == "#00ff00") or (str(msg.embeds[0].color) == "#ff0000"):
