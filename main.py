@@ -469,6 +469,6 @@ async def unload(ctx, filename):
 
 client.logger.info("Logging in...")
 loop = asyncio.get_event_loop()
-loop.set_debug(True)
+loop.set_debug(const.DEBUG)
 loop.create_task(client.run(TOKEN))
 loop.run_forever()

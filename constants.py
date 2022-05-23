@@ -3,6 +3,7 @@ import os
 class Constants:
     def __init__(self):
         self.prefix = "?"
+        self.DEBUG = False
         
         self.PIXEL_TEST = 932736074139185292
         self.TITAN_MC = 932413718397083678

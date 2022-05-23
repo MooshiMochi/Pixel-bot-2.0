@@ -948,13 +948,12 @@ class EconomyCommands(commands.Cog):
 
                     else:
                         allowence = await self.get_allowence(ctx.author_id)
-                        if allowence != 0:
+                        if allowence > 0:
                             if price > allowence:
                                 em = discord.Embed(color=self.client.failure, description=f"Sorry, you can only spend {allowence:,} 💸 for the rest of the week.")
                                 em.set_footer(text="TitanMC | Economy", icon_url=self.client.png)
                                 
                                 return await ctx.send(embed=em, hidden=True)
-
                         else:
                             em = discord.Embed(color=self.client.failure, description=f"Sorry, you cannot spend any more 💸 for the rest of the week.")
                             em.set_footer(text="TitanMC | Economy", icon_url=self.client.png)
