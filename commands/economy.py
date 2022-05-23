@@ -1335,7 +1335,7 @@ class EconomyCommands(commands.Cog):
             else:
                 tempranking = f"{ranking}."
 
-            description1 += f"**{tempranking} {discorduser.mention}** <:waveydash:952711493659529246> **__{await self.client.round_int(int(player[1]))} 💸__**\n"
+            description1 += f"**{tempranking} {discorduser.mention}** \u200b<:waveydash:952711493659529246> **__{await self.client.round_int(int(player[1]))} 💸__**\n"
 
             ranking += 1
             fieldcount += 1
