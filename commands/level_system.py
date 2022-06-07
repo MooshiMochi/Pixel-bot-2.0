@@ -35,10 +35,7 @@ class LevelSystem(commands.Cog):
             await asyncio.sleep(2)
             self.ready = True
         
-        if msg.author.bot:
-            return
-
-        if msg.author.id == self.client.user.id:
+        if msg.author.bot or msg.author.id == self.client.user.id:
             return
 
         if str(msg.author.id) not in self.client.lbs["msgs"].keys():
@@ -81,10 +78,15 @@ class LevelSystem(commands.Cog):
         if self.client.lbs["chatlb"][author_id]["xp"] >= xp_threshold:
             
             self.client.lbs["chatlb"][author_id]["xp"] = 0
+            
+            before_level = self.client.lbs["chatlb"][author_id]["level"]
+            self.client.lbs["chatlb"][author_id]["level"] = int(
+                self.client.lbs["chatlb"][author_id]["total_xp"] // xp_threshold)
 
-            if self.client.lbs["chatlb"][author_id]["level"] < max_lvl:
-                self.client.lbs["chatlb"][author_id]["level"] += 1
-                
+            if self.client.lbs["chatlb"][author_id]["level"] > max_lvl:
+                self.client.lbs["chatlb"][author_id]["level"] = max_lvl
+            
+            if before_level < self.client.lbs["chatlb"][author_id]["level"]:
                 if guild_id in self.level_roles.keys():
                     
                     for role in self.level_roles[guild_id].values():
@@ -106,7 +108,6 @@ class LevelSystem(commands.Cog):
                 return
         else:
             self.client.lbs["chatlb"][author_id]["xp"] += xp_per_msg
-
 
     @tasks.loop(count=1)
     async def load_level_roles(self):
