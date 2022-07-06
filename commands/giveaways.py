@@ -151,7 +151,7 @@ class Giveaways(commands.Cog):
             "message_id": msg.id,
             "required_role": {
                 'id': required_role.id if required_role else None,
-                'name': required_role.name if required_role else None},
+                'name': str(required_role.name).encode("utf-8") if required_role else None},
             "time": int(datetime.utcnow().timestamp()) + int_duration,
             "winners": winners,
             "host": ctx.author_id,

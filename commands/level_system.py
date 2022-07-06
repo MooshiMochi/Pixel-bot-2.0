@@ -73,7 +73,10 @@ class LevelSystem(commands.Cog):
         xp_per_msg = self.xp_per_msg.get(guild_id, 1)
 
         self.client.lbs["chatlb"][author_id]["total_xp"] += xp_per_msg
-        self.client.lbs["chatlb"][author_id]["url"] = str(msg.author.avatar_url_as(static_format="png", size=4096))
+        avatar_url = str(msg.author.avatar_url_as(static_format="png", size=4096))
+        if not isinstance(avatar_url, str):
+            avatar_url = "https://cdn.discordapp.com/embed/avatars/0.png"
+        self.client.lbs["chatlb"][author_id]["url"] = avatar_url
 
         if self.client.lbs["chatlb"][author_id]["xp"] >= xp_threshold:
             
@@ -331,14 +334,23 @@ class LevelSystem(commands.Cog):
 
         if str(user.id) not in self.client.lbs["chatlb"].keys():
             level = amount // self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"]
+
+            if not isinstance(user, int):
+                avatar_url = str(user.avatar_url_as(static_format="png", size=4096)) 
+                if not isinstance(avatar_url, str):
+                    avatar_url = "https://cdn.discordapp.com/embed/avatars/0.png"
+            else:
+                avatar_url = "https://cdn.discordapp.com/embed/avatars/0.png"
+
             self.client.lbs["chatlb"][str(user.id)] = {
-                    "name": user.name,
+                    "name": str(user.name).encode('utf-8'),
                     "display_name": "N/A",
-                    "disc": user.discriminator,
+                    "disc": str(user.discriminator).encode('utf-8'),
                     "xp": 0,
                     "total_xp": amount,
-                    "level":  level if level <= self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"] else self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"]
-                }
+                    "level":  level if level <= self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"] else self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"],
+                    "url": avatar_url
+                    }
 
         else:
             level = (amount  // self.client.lvlsys_config[str(ctx.guild_id)]["xp_required"]) + self.client.lbs["chatlb"][str(user.id)]["level"]

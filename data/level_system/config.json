@@ -15,5 +15,10 @@
     "xp_required": 1000,
     "max_lvl": 100,
     "disabled_channels": []
+  },
+  "932413718397083678": {
+    "xp_required": 50,
+    "max_lvl": 100,
+    "disabled_channels": []
   }
 }

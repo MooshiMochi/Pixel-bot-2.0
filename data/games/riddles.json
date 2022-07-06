@@ -1,1094 +1,321 @@
 {
-  "question": {
+  "unscramble": {
     "1": {
-      "question": "If seven people meet each other and each shakes hands only once with each of the others, how many handshakes will there have been?",
-      "answer": "21"
+      "question": "szue",
+      "answer": "zeus"
     },
     "2": {
-      "question": "What does \"HTTP\" stand for?",
-      "answer": "HyperText Transfer Protocol"
+      "question": "soodinpe",
+      "answer": "poseidon"
     },
     "3": {
-      "question": "What currency is used in the United Kingdom?",
-      "answer": "Pound sterling"
+      "question": "esar",
+      "answer": "ares"
     },
     "4": {
-      "question": "What superhero was played by actor Ezra Miller on the big screen, but Grant Gustin on the live-action television series?",
-      "answer": "The Flash"
+      "question": "oieatrdph",
+      "answer": "aphrodite"
     },
     "5": {
-      "question": "What is a group of lions known as?",
-      "answer": "Pride"
+      "question": "ehar",
+      "answer": "hera"
     },
     "6": {
-      "question": "What 1997 film won the Academy Award for Best Motion Picture, Best Director, Best Original Song, as well as eight other categories?",
-      "answer": "Titanic"
+      "question": "rtmdeee",
+      "answer": "demeter"
     },
     "7": {
-      "question": "Is Georgia a state or a country?",
-      "answer": "Both"
+      "question": "aahent",
+      "answer": "athena"
     },
     "8": {
-      "question": "A person who has insomnia has difficulty doing what?",
-      "answer": "Sleeping"
+      "question": "llooap",
+      "answer": "apollo"
     },
     "9": {
-      "question": "What French dish shares its name with an animated Disney film?",
-      "answer": "Ratatouille"
+      "question": "remtsai",
+      "answer": "artemis"
+    }
+  },
+  "question": {
+    "1": {
+      "question": "MCKnowledge: What year was Minecraft sold to Microsoft?",
+      "answer": "2014"
     },
-    "10": {
-      "question": "Which planet was demoted to a dwarf-planet in 2006?",
-      "answer": "Pluto"
+    "2": {
+      "question": "MCKnowledge: How many blocks are needed to fully power a beacon?",
+      "answer": "164"
     },
-    "11": {
-      "question": "What kind of malware disguises itself as legitimate software before its true intent is discovered?",
-      "answer": "Trojan Horse"
+    "3": {
+      "question": "MCKnowledge: What can you rename a nametag to turn a sheep rainbow?",
+      "answer": "jeb_"
     },
-    "12": {
-      "question": "How should gazpacho be served?",
-      "answer": "Cold"
+    "4": {
+      "question": "MCKnowledge: What do you feed a cat to tame it?",
+      "answer": "fish"
     },
-    "13": {
-      "question": "What is a female donkey called?",
-      "answer": "A Jenny"
+    "5": {
+      "question": "MCKnowledge: What can you wear to prevent endermen attacking you when you look at them?",
+      "answer": "pumpkin"
     },
-    "14": {
-      "question": "How many eyes does a bee have?",
-      "answer": "Five"
-    },
-    "15": {
-      "question": "What name is used to refer to a group of frogs?",
-      "answer": "An army"
-    },
-    "16": {
-      "question": "How many hearts does an octopus have?",
-      "answer": "Three"
-    },
-    "17": {
-      "question": "Who is the richest person in the world as of October 2021?",
-      "answer": "Elon Musk"
-    },
-    "18": {
-      "question": "Bill Gates is the founder of which company?",
-      "answer": "Microsoft"
-    },
-    "19": {
-      "question": "In what year did Steve Jobs die?",
+    "6": {
+      "question": "MCKnowledge: What year was Minecraft released?",
       "answer": "2011"
     },
+    "7": {
+      "question": "MCKnowledge: Apart from a spider, what mob drops string?",
+      "answer": "cat"
+    },
+    "8": {
+      "question": "gg/mole",
+      "answer": "@everyone"
+    },
+    "9": {
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
+    },
+    "10": {
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
+    },
+    "11": {
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
+    },
+    "12": {
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
+    },
+    "13": {
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
+    },
+    "14": {
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
+    },
+    "15": {
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
+    },
+    "16": {
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
+    },
+    "17": {
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
+    },
+    "18": {
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
+    },
+    "19": {
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
+    },
     "20": {
-      "question": "What vehicle is Volkswagen best known for in the world?",
-      "answer": "The Beetle"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "21": {
-      "question": "Richard Branson owns what airline?",
-      "answer": "Virgin Atlantic"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "22": {
-      "question": "What is Hewlett Packard (HP) originally known for?",
-      "answer": "Printers"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "23": {
-      "question": "What sport is featured in the video game \"FIFA\" - American Term",
-      "answer": "Soccer"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "24": {
-      "question": "In which board game do you try to solve a murder?",
-      "answer": "Clue"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "25": {
-      "question": "How many cards are there in a deck of Uno?",
-      "answer": "108"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "26": {
-      "question": "If there are six apples and you take away four, how many do you have?",
-      "answer": "4"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "27": {
-      "question": "What goes up and down, but still remains in the same place?",
-      "answer": "Stairs"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "28": {
-      "question": "What gets wetter and wetter the more it dries?",
-      "answer": "A towel"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "29": {
-      "question": "What holiday is called \u201cturkey day\u201d?",
-      "answer": "Thanksgiving"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "30": {
-      "question": "In the US, what month is Labor Day in?",
-      "answer": "September"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "31": {
-      "question": "Mexico's Dia de los Muertos means what in English?",
-      "answer": "Day of the Dead"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "32": {
-      "question": "What country celebrates the Storming of the Bastille?",
-      "answer": "France"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "33": {
-      "question": "Independence Day in Cambodia is when?",
-      "answer": "November 9th"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "34": {
-      "question": "What is celebrated on the 2nd saturday in June in the UK?",
-      "answer": "The Queens Birthday"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "35": {
-      "question": "\"Cohen\" is Hebrew for what?",
-      "answer": "Priest"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "36": {
-      "question": "In what country was Buddha born?",
-      "answer": "Nepal"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "37": {
-      "question": "What is the most well-known book in Catholicism?",
-      "answer": "The Bible"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "38": {
-      "question": "T/F The Big Apple is a nickname given to Washington D.C in 1971.",
-      "answer": "True"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "39": {
-      "question": "T/F Peanuts are not nuts!",
-      "answer": "True"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "40": {
-      "question": "T/F Copyrights depreciate over time.",
-      "answer": "True"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "41": {
-      "question": "T/F Electrons move faster than the speed of light.",
-      "answer": "False"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "42": {
-      "question": "T/F Light travels in a straight line.",
-      "answer": "True"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "43": {
-      "question": "What is the name of this servers Housemaster?",
-      "answer": "Pixel"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "44": {
-      "question": "On Halloween Night, Anne bought 11 bags of candy. Anne ate 2 bags after she realized her life was a mess and gave our 4 bags to trick or treaters who toilet papered her house as ransom. Taking into account the candy distribution factors of the diluted trinsulvanity, what is the date?",
-      "answer": "October 31st"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "45": {
-      "question": "What does 2+2 equal after you multiply the answer by 1?",
-      "answer": "4"
+      "question": "@everyone discord.gg/moles",
+      "answer": "@everyone discord.gg/moles"
     },
     "46": {
-      "question": "What does 2+2 equal after you multiply the answer by 0?",
-      "answer": "0"
-    },
-    "47": {
-      "question": "Larry Page is the founder of which company?",
-      "answer": "Google"
-    },
-    "48": {
-      "question": "How many stripes does Adidas have?",
-      "answer": "3"
-    },
-    "49": {
-      "question": "When is the orthodox Christmas?",
-      "answer": "January 7th"
-    },
-    "50": {
-      "question": "T/F The Mona Liza was stolen from the Louvre in 1911.",
-      "answer": "True"
-    },
-    "51": {
-      "question": "The 2022 Chinese New Year will be celebrated on what day and month?",
-      "answer": "February 1st"
-    },
-    "52": {
-      "question": "What happens if you don\u2019t do your Spanish?",
-      "answer": "You vanish"
-    },
-    "53": {
-      "question": "What does HTML stand for?",
-      "answer": "Hypertext Markup Language"
-    },
-    "54": {
-      "question": "What is Obama\u2019s favorite clay baked object which is shaped in a rectangular prism formation?",
-      "answer": "brick"
+      "question": "how can i join server?",
+      "answer": "@everyone discord.gg/moles"
     }
   },
   "trivia": {
     "1": {
-      "question": "What year was the very first model of the iPhone released?",
-      "answer": "2007"
+      "question": "Using a crafting table, the following materials are needed to craft what item? x1 sticks, x2 iron ingot.",
+      "answer": "iron sword"
     },
     "2": {
-      "question": "Google Chrome, Safari, Firefox, and Explorer are different types of what?",
-      "answer": "Web Browsers"
+      "question": "Using a crafting table, the following materials are needed to craft what item? x2 sticks, x1 cobblestone.",
+      "answer": "stone shovel"
     },
     "3": {
-      "question": "What was Twitter originally called?",
-      "answer": "Twttr"
+      "question": "Using inventory crafting, the following materials are needed to craft what item? x4 stone.",
+      "answer": "stone brick"
     },
     "4": {
-      "question": "What is the symbol for potassium?",
-      "answer": "K"
+      "question": "Using a crafting table, the following materials are needed to craft what item? x4 sand, x5 gunpowder.",
+      "answer": "tnt"
     },
     "5": {
-      "question": "Which natural disaster is measured with a Richter scale?",
-      "answer": "Earthquake"
+      "question": "Using a crafting table, the following materials are needed to craft what item? x1 blaze rod, x3 cobblestone.",
+      "answer": "brewing stand"
     },
     "6": {
-      "question": "What part of the atom has no electric charge?",
-      "answer": "Neutron"
+      "question": "Using a crafting table, the following materials are needed to craft what item? x8 sticks, x1 leather.",
+      "answer": "item frame"
     },
     "7": {
-      "question": "What is meterology the study of?",
-      "answer": "Weather"
+      "question": "Using a crafting table, the following materials are needed to craft what item? x8 obsidian, x1 eye of ender.",
+      "answer": "ender chest"
     },
     "8": {
-      "question": "Which planet has the most gravity?",
-      "answer": "Jupiter"
+      "question": "Using a crafting table, the following materials are needed to craft what item? x3 stone, x1 redstone dust, x2 redstone torches.",
+      "answer": "redstone repeater"
     },
     "9": {
-      "question": "What is the name of Batman\u2019s butler?",
-      "answer": "Alfred"
+      "question": "Using a crafting table, the following materials are needed to craft what item? x3 wheat, x3 milk buckets, x2 sugar, x1 egg.",
+      "answer": "cake"
     },
     "10": {
-      "question": "What does DC stand for?",
-      "answer": "Detective Comics"
+      "question": "Using a crafting table, the following materials are needed to craft what item? x3 sticks, x2 string.",
+      "answer": "fishing rod"
     },
     "11": {
-      "question": "Aquaman is from which city?",
-      "answer": "Atlantis"
+      "question": "Using a crafting table, the following materials are needed to craft what item?\n x4 iron ingot, x1 redstone.",
+      "answer": "compass"
     },
     "12": {
-      "question": "Which original avenger was not in the first few movies?",
-      "answer": "The Wasp"
+      "question": "Using a crafting table, the following materials are needed to craft what item? x8 chiseled stone bricks, x1 netherite ingot.",
+      "answer": "lodestone"
     },
     "13": {
-      "question": "What is Hawkeye\u2019s real name?",
-      "answer": "Clint Barton"
+      "question": "Using a crafting table, the following materials are needed to craft what item? x5 glass, x3 obsidian, x1 nether star.",
+      "answer": "beacon"
     },
     "14": {
-      "question": "Which Avenger is the only one who could calm the Hulk down?",
-      "answer": "Black Widow"
+      "question": "Using a crafting table, the following materials are needed to craft what item? x4 gold ingot, x1 redstone.",
+      "answer": "clock"
     },
     "15": {
-      "question": "Which cartoon character lives in a pineapple under the sea?",
-      "answer": "Spongebob"
+      "question": "Using a crafting table, the following materials are needed to craft what item? x4 obsidian, x2 diamond, x1 book.",
+      "answer": "enchantment table"
     },
     "16": {
-      "question": "When Michael Jordan played for the Chicago Bulls, how many NBA Championships did he win?",
-      "answer": "6"
+      "question": "Using a crafting table, the following materials are needed to craft what item? x4 prismarine shard, x4 prismarine crystal.",
+      "answer": "sea lantern"
     },
     "17": {
-      "question": "In which US city is Broadway located?",
-      "answer": "New York City"
+      "question": "Using a crafting table, the following materials are needed to craft what item? x1 blaze rod, x1 popped chorus fruit.",
+      "answer": "end rod"
     },
     "18": {
-      "question": "Which animal can be seen on the Porsche logo?",
-      "answer": "Horse"
+      "question": "Using a crafting table, the following materials are needed to craft what item? x8 gold ingots, x1 apple.",
+      "answer": "golden apple"
     },
     "19": {
-      "question": "Who is often credited with creating the world\u2019s first car?",
-      "answer": "Karl Benz"
+      "question": "Using a crafting table, the following materials are needed to craft what item? x3 glass, x3 nether quartz, x3 wooden slabs.",
+      "answer": "daylight sensor"
     },
     "20": {
-      "question": "Which Jamaican runner is an 11-time world champion and holds the record in the 100 and 200-meter race?",
-      "answer": "Usain Bolt"
+      "question": "Using a crafting table, the following materials are needed to craft what item? x1 pumpkin, x1 sugar, x1 egg.",
+      "answer": "pumpkin pie"
     },
     "21": {
-      "question": "What sport was Jesse Owens involved in?",
-      "answer": "Track and Field"
+      "question": "Using a crafting table, the following materials are needed to craft what item? x8 cobblestone, x1 bow, x1 redstone dust.",
+      "answer": "dispenser"
     },
     "22": {
-      "question": "Which hockey team did Wayne Gretzky play for in the \u201880s?",
-      "answer": "Oilers"
+      "question": "Using a crafting table, the following materials are needed to craft what item? x7 cobblestone, x1 redstone dust.",
+      "answer": "dropper"
     },
     "23": {
-      "question": "What is the common name for dried plums?",
-      "answer": "Prunes"
-    },
-    "24": {
-      "question": "What other name does \u201ccorn\u201d go by?",
-      "answer": "Maize"
-    },
-    "25": {
-      "question": "Which kind of alcohol is Russia notoriously known for?",
-      "answer": "Vodka"
-    },
-    "26": {
-      "question": "Which European nation was said to invent hot dogs?",
-      "answer": "Germany"
-    },
-    "27": {
-      "question": "What\u2019s the primary ingredient in hummus?",
-      "answer": "Chickpeas"
-    },
-    "28": {
-      "question": "Which organ has four chambers?",
-      "answer": "The Heart"
-    },
-    "29": {
-      "question": "In which body part can you find the femur?",
-      "answer": "Leg"
-    },
-    "30": {
-      "question": "What is the human body's largest organ?",
-      "answer": "The Skin"
-    },
-    "31": {
-      "question": "About how many times does the human heart beat per day?",
-      "answer": "100,000"
-    },
-    "32": {
-      "question": "What is the name of the thin and long country that spans more than half of the western coast of South America?",
-      "answer": "Chile"
-    },
-    "33": {
-      "question": "Which American state is the largest (by area)?",
-      "answer": "Alaska"
-    },
-    "34": {
-      "question": "Which continent is the largest?",
-      "answer": "Asia"
-    },
-    "35": {
-      "question": "Which two countries share the longest international border?",
-      "answer": "Canada and USA"
-    },
-    "36": {
-      "question": "What is the smallest country in the world?",
-      "answer": "Vatican City"
-    },
-    "37": {
-      "question": "Which of the Seven Wonders is located in Egypt?",
-      "answer": "The Pyramids of Giza"
-    },
-    "38": {
-      "question": "What is the name of the world\u2019s longest river?",
-      "answer": "The Nile"
-    },
-    "39": {
-      "question": "Which city in India would you find the Taj Mahal in?",
-      "answer": "Agra"
-    },
-    "40": {
-      "question": "By what name were the Egyptian kings/rulers known?",
-      "answer": "Pharaohs"
-    },
-    "41": {
-      "question": "How many Pyramids of Giza were made?",
-      "answer": "3"
-    },
-    "42": {
-      "question": "In which year World War I begin?",
-      "answer": "1914"
-    },
-    "43": {
-      "question": "John F. Kennedy was assassinated in which city?",
-      "answer": "Dallas"
-    },
-    "44": {
-      "question": "Which song by Luis Fonsi and Daddy Yankee has the most views (of all time) on YouTube?",
-      "answer": "Despacito"
-    },
-    "45": {
-      "question": "What is known as the home of the greek gods?",
-      "answer": "Olympus"
-    },
-    "46": {
-      "question": "Which greek warriors weakness was their heel?",
-      "answer": "Achilles"
-    },
-    "47": {
-      "question": "Who was the messenger of the gods?",
-      "answer": "Hermes"
-    },
-    "48": {
-      "question": "Thor was the son of which God?",
-      "answer": "Odin"
-    },
-    "49": {
-      "question": "The Roman God of War inspired the name of which planet?",
-      "answer": "Mars"
-    },
-    "50": {
-      "question": "What was the name of the Egyptian God of the Sun?",
-      "answer": "Ra"
-    },
-    "51": {
-      "question": "Who is the writer of \u201cMerchant of Venice\u201d?",
-      "answer": "Shakespeare"
-    },
-    "52": {
-      "question": "\u201cAdventure of Sherlock Holmes\u201d was written by which writer?",
-      "answer": "Arthur Conan Doyle"
-    },
-    "53": {
-      "question": "Which country is Aesop\u2019s Fables believed to originate in?",
-      "answer": "Greece"
-    },
-    "54": {
-      "question": "The Hunger Games series was written by which author?",
-      "answer": "Suzanne Collins"
-    },
-    "55": {
-      "question": "The American designer born in 1939 as Ralph Lifshitz is better known as what?",
-      "answer": "Ralph Lauren"
-    },
-    "56": {
-      "question": "The fashion designer, Gianni Versace, came from which country?",
-      "answer": "Italy"
-    },
-    "57": {
-      "question": "When was the company Nike founded?",
-      "answer": "1971"
-    },
-    "58": {
-      "question": "Which fashion brand made the \u201cGenius Jeans\u201d that became part of the Guinness World Records?",
-      "answer": "Gucci"
-    },
-    "59": {
-      "question": "What is the tallest building in the world?",
-      "answer": "Burj Khalifa"
-    },
-    "60": {
-      "question": "Between 1933 to 1947, the Hoover Dam was called what?",
-      "answer": "Boulder Dam"
-    },
-    "61": {
-      "question": "Where can you find the Petronas Towers?",
-      "answer": "Kuala Lumpur"
-    },
-    "62": {
-      "question": "What is the smallest size bed available in the United States?",
-      "answer": "Twin"
-    },
-    "63": {
-      "question": "What design style uses a lot of sea/ocean themed items?",
-      "answer": "Nautical"
-    },
-    "64": {
-      "question": "What's another name for a footrest?",
-      "answer": "Ottoman"
-    },
-    "65": {
-      "question": "Who has been the longest-serving monarch of the United Kingdom?",
-      "answer": "Queen Elizabeth II"
-    },
-    "66": {
-      "question": "World War I began with the death of Archduke Franz Ferdinand, of which country?",
-      "answer": "Austria"
-    },
-    "67": {
-      "question": "Donald Trump and which North Korean leader are known to trade threats over the internet?",
-      "answer": "Kim Jong Un"
-    },
-    "68": {
-      "question": "Leader and political icon Nelson Mandela was from which African country?",
-      "answer": "South Africa"
-    },
-    "69": {
-      "question": "What is the name of the classification of crime which is less serious than a felony?",
-      "answer": "Misdemeanor"
-    },
-    "70": {
-      "question": "What is evidence in court, where a person tells everything they saw or know?",
-      "answer": "Testimony"
-    },
-    "71": {
-      "question": "Who is the group of people sworn to make a decision/deliver a verdict in court?",
-      "answer": "Jury"
-    },
-    "72": {
-      "question": "How many homicides did Ted Bundy admit to?",
-      "answer": "30"
-    },
-    "73": {
-      "question": "Ted Kaczynski was a former graduate of which university?",
-      "answer": "Harvard"
-    },
-    "74": {
-      "question": "Gregory Lee Johnson was convicted in Texas for what in 1989?",
-      "answer": "Burning the flag"
-    },
-    "75": {
-      "question": "What kind of animals are cold-blooded, and have an aquatic larval stage?",
-      "answer": "Amphibians"
-    },
-    "76": {
-      "question": "What kind of fruit can be found at the top of the men\u2019s Wimbledon trophy?",
-      "answer": "Pineapple"
-    },
-    "77": {
-      "question": "What is the best way to kill a spider in Minecraft?",
-      "answer": "with a sword"
-    },
-    "78": {
-      "question": "How many dyes can be crafted in Minecraft?",
-      "answer": "16"
-    },
-    "79": {
-      "question": "What is the maximum amount of beacons you can place in a World (Minecraft)?",
-      "answer": "no limit"
-    },
-    "80": {
-      "question": "What does the Cat Vibe emote do?",
-      "answer": "BRRR"
-    },
-    "81": {
-      "question": "What quantity of paper is required to craft a book?",
-      "answer": "3"
-    },
-    "82": {
-      "question": "How many seconds does TNT take to explode?",
-      "answer": "4"
-    },
-    "83": {
-      "question": "What comes once in a minute, twice in a moment, but never in a thousand years?",
-      "answer": "the letter M"
-    },
-    "84": {
-      "question": "Which word in the dictionary is spelt incorrectly?",
-      "answer": "incorrectly"
-    },
-    "85": {
-      "question": "There are three stoves: a glass stove, a brick stove, and a wood stove. You only have one match. Which do you light up first?",
-      "answer": "you light the match first"
-    },
-    "86": {
-      "question": "Which word becomes shorter when 2 letters are added to it?",
-      "answer": "The word short"
-    },
-    "87": {
-      "question": "Mary has four daughters, and each of her daughters has a brother \u2014 how many children does Mary have?",
-      "answer": "Five"
-    },
-    "88": {
-      "question": "How many blocks do you need to build a fully powered beacon (4 layer pyramid)?",
-      "answer": "164"
-    },
-    "89": {
-      "question": "Which queen was Julius Caesar involved with?",
-      "answer": "Cleopatra"
-    },
-    "90": {
-      "question": "What is the name of the paradise greek warriors go to after death?",
-      "answer": "Elysium"
-    },
-    "91": {
-      "question": "Which desert is the largest in the world?",
-      "answer": "The Antarctic Desert"
-    },
-    "92": {
-      "question": "During which time of the year is the Nutcracker primarily performed?",
-      "answer": "Christmas"
-    },
-    "93": {
-      "question": "Which country produces the most coffee in the world?",
-      "answer": "Brazil"
-    },
-    "94": {
-      "question": "What country has the world\u2019s most ancient forest?",
-      "answer": "Australia"
-    },
-    "95": {
-      "question": "Who invented scissors?",
-      "answer": "Leonardo Da Vinci"
-    },
-    "96": {
-      "question": "Which country was the Caesar salad invented in?",
-      "answer": "Mexico"
-    },
-    "97": {
-      "question": "How many signs are there in the Zodiac?",
-      "answer": "12"
-    },
-    "98": {
-      "question": "What object is said to bring bad luck if it is broken?",
-      "answer": "A mirror"
-    },
-    "99": {
-      "question": "What is the first element on the Periodic Table?",
-      "answer": "Hydrogen"
-    },
-    "100": {
-      "question": "What is an ice hockey puck made from?",
-      "answer": "Rubber"
-    },
-    "101": {
-      "question": "Galileo was the citizen of which country?",
-      "answer": "Italy"
-    },
-    "102": {
-      "question": "What is the only fruit that has its seeds on the outside?",
-      "answer": "Strawberry"
-    },
-    "103": {
-      "question": "What color is a polar bear\u2019s skin?",
-      "answer": "Black"
-    },
-    "104": {
-      "question": "What is the largest lizard?",
-      "answer": "Komodo Dragon"
-    },
-    "105": {
-      "question": "What object does a male penguin often gift to a female penguin to win her over?",
-      "answer": "A rock"
-    },
-    "106": {
-      "question": "In the entire animal kingdom, what is the only male animal known to give birth?",
-      "answer": "Seahorses"
-    },
-    "107": {
-      "question": "What color is the blood of an octopus?",
-      "answer": "Blue"
-    },
-    "108": {
-      "question": "What is Scotland\u2019s national animal?",
-      "answer": "Unicorn"
-    },
-    "109": {
-      "question": "Which animal is known to take up to a month to digest food?",
-      "answer": "A sloth"
-    },
-    "110": {
-      "question": "Which flightless bird is known to be the emblem of New Zealand?",
-      "answer": "Kiwi"
-    },
-    "111": {
-      "question": "What is the proper name for a baby kangaroo?",
-      "answer": "A joey"
-    },
-    "112": {
-      "question": "What is the proper name for a group of crows?",
-      "answer": "Murder"
-    },
-    "113": {
-      "question": "Who was the first woman to win a Nobel Prize (in 1903)?",
-      "answer": "Marie Curie"
-    },
-    "114": {
-      "question": "What is the name of the paradise vikings go to after death?",
-      "answer": "Valhalla"
-    },
-    "115": {
-      "question": "What is Canada's first national sport?",
-      "answer": "Lacrosse"
-    },
-    "116": {
-      "question": "Pixels Minecraft Lounge was originally named...",
-      "answer": "Pixels Game House"
-    },
-    "117": {
-      "question": "The slang term for \u2018Panda\u2019 in Pixels Minecraft Lounge is...",
-      "answer": "Panga"
-    },
-    "118": {
-      "question": "What company is responsible for the largest one-day value drop in stock market history?",
-      "answer": "Meta"
-    },
-    "119": {
-      "question": "What is the term for a minute area of illumination on a display screen, one of many from which an image is composed?",
-      "answer": "pixel"
+      "question": "Using a crafting table, the following materials are needed to craft what item? x5 iron ingots, x1 chest.",
+      "answer": "hopper"
     }
   },
-  "riddle": {
-    "2": {
-      "question": "What kind of coat is always wet when you put it on?",
-      "answer": "a coat of paint"
-    },
-    "3": {
-      "question": "What came first, the chicken or the egg?",
-      "answer": "Dinosaurs"
-    },
-    "4": {
-      "question": "I have branches yet I have no leaves, no trunk and no fruit. What am I?",
-      "answer": "A bank"
-    },
-    "5": {
-      "question": "How many bananas can you eat if your stomach is empty?",
-      "answer": "one"
-    },
-    "6": {
-      "question": "What belongs to you but other people use it more than you?",
-      "answer": "Your name"
-    },
-    "7": {
-      "question": "I never was but always will be. No one ever saw me but everyone knows I exist. I give people the motivation to better themselves every day. What am I?",
-      "answer": "Tomorrow"
-    },
-    "8": {
-      "question": "Paul's height is six feet, he's an assistant at a butcher's shop, and wears size 9 shoes. What does he weigh?",
-      "answer": "meat"
-    },
-    "9": {
-      "question": "What runs, but never walks. Murmurs, but never talks. Has a bed, but never sleeps. And has a mouth, but never eats?",
-      "answer": "a river"
-    },
-    "10": {
-      "question": "I\u2019m light as a feather, but not even the strongest girl can hold me for more than 5 minutes. What am I?",
-      "answer": "breath"
-    },
-    "11": {
-      "question": "How can you go 25 days without sleep?",
-      "answer": "You sleep at night"
-    },
-    "12": {
-      "question": "I speak without a mouth and hear without ears. I have nobody, but come alive with wind. What am I?",
-      "answer": "An echo"
-    },
-    "13": {
-      "question": "You measure my life in hours and I serve you by expiring. I'm quick when I'm thin and slow when I'm fat. The wind is my enemy.",
-      "answer": "A candle"
-    },
-    "14": {
-      "question": "I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. What am I?",
-      "answer": "A map"
-    },
-    "15": {
-      "question": "What is seen in the middle of March and April that can't be seen at the beginning or end of either month?",
-      "answer": "R"
-    },
-    "16": {
-      "question": "You see a boat filled with people. It has not sunk, but when you look again you don't see a single person on the boat. Why?",
-      "answer": "Everyone was married"
-    },
-    "17": {
-      "question": "I come from a mine and get surrounded by wood always. Everyone uses me. What am I?",
-      "answer": "Pencil lead"
-    },
-    "18": {
-      "question": "What makes you, young?",
-      "answer": "ng"
-    },
-    "19": {
-      "question": "I\u2019m often running yet I have no legs. You need me but I don\u2019t need you. What am I?",
-      "answer": "water"
-    },
-    "20": {
-      "question": "I am neither a guest or a trespasser be, to this place I belong, it belongs also to me.",
-      "answer": "Home"
-    },
-    "21": {
-      "question": "Only one color, but not one size, Stuck at the bottom, yet easily flies. Present in sun, but not in rain, Doing no harm, and feeling no pain. What is it?",
-      "answer": "Shadow"
-    },
-    "22": {
-      "question": "Slayer of regrets, old and new, sought by many, found by few. What am I?",
-      "answer": "Redemption"
-    },
-    "23": {
-      "question": "What is greater than God, more evil than the devil, the poor have it, the rich need it, and if you eat it, you\u2019ll die?",
-      "answer": "Nothing"
-    },
-    "24": {
-      "question": "Spelled forwards I\u2019m what you do everyday, spelled backwards I\u2019m something you hate. What am I?",
-      "answer": "Live"
-    },
-    "25": {
-      "question": "What connects two people but touches only one?",
-      "answer": "A wedding ring"
-    },
-    "26": {
-      "question": "What five letter word stays the same when you take away the first, third, and last letter?",
-      "answer": "Empty"
-    },
-    "27": {
-      "question": "I start off dry but come out wet. I go in light and come out heavy. What am I?",
-      "answer": "A teabag"
-    },
-    "28": {
-      "question": "I Start with M, end with X and have never ending amount of letters. What am I?",
-      "answer": "Mailbox"
-    },
-    "30": {
-      "question": "A pregnant lady named her children: Dominique, Regis, Michelle, Fawn, Sophie and Lara. What will she name her next child? Jessica, Katie, Abby or Tilly?",
-      "answer": "Tilly"
-    },
-    "31": {
-      "question": "The more you take, the more you leave behind. What am I?",
-      "answer": "Footsteps"
-    },
-    "32": {
-      "question": "What has hands but can not clap?",
-      "answer": "A clock"
-    },
-    "33": {
-      "question": "What is as big as you are and yet does not weigh anything?",
-      "answer": "Shadow"
-    },
-    "34": {
-      "question": "How can you make seven even?",
-      "answer": "Remove s"
-    },
-    "35": {
-      "question": "What has many keys, but can't even open a single door?",
-      "answer": "A piano"
-    },
-    "36": {
-      "question": "I am useless when together but useful when I am broken apart. What am I?",
-      "answer": "An egg"
-    },
-    "38": {
-      "question": "A woman lived in a small one story cabin. Everything was pink the floor was pink the couch was pink the house was pink. What color were the stairs?",
-      "answer": "None"
-    },
-    "39": {
-      "question": "Mr. Blue lives in a blue house, Mrs. Pink lives in a pink house and Mr. Red lives in a red house. Who lives in the White House?",
-      "answer": "The President"
-    },
-    "40": {
-      "question": "I come right in front of Earth, at the end of time, and twice in a week. What am I?",
-      "answer": "The letter E"
-    },
-    "41": {
-      "question": "Where do fish go on vacation?",
-      "answer": "Finland"
-    },
-    "42": {
-      "question": "Where do zombies go on vacation?",
-      "answer": "The Dead Sea"
-    },
-    "43": {
-      "question": "If\n1 = 5 ,\n2 = 25 ,\n3 = 325 ,\n4 = 4325\n\nThen 5 = ?",
-      "answer": "1"
-    },
-    "44": {
-      "question": "What is the value of 1/2 of 2/3 of 3/4 of 4/5 of 5/6 of 6/7 of 7/8 of 8/9 of 9/10 of 1000?",
-      "answer": "100"
-    },
-    "47": {
-      "question": "If I had 4 eggs\nA thief gives me 3\nMy farm rooster lays 5 eggs\nHow many eggs do I have?",
-      "answer": "3"
-    },
-    "48": {
-      "question": "How many letters are in the alphabet?",
-      "answer": "11"
-    },
-    "49": {
-      "question": "Which is the smallest integer which is greater than 75,555 in which there are four Identical numbers?",
-      "answer": "75777"
-    },
-    "50": {
-      "question": "When do we look at 1 and say 5?",
-      "answer": "In a clock"
-    },
-    "51": {
-      "question": "There are seven people in the office. You a mad person enter the office with a loaded gun and kill six of them.\nHow many people still remain in the office?",
-      "answer": "8"
-    },
-    "52": {
-      "question": "Can you write \"Eleven Thousand Eleven Hundred And Eleven\" in digits?",
-      "answer": "12111"
-    },
-    "53": {
-      "question": "You entered a room with three primitives : An Ape, a monkey and a chimpanzee. Who is the smartest primate in the room which can solve a riddle?",
-      "answer": "me"
-    },
-    "54": {
-      "question": "Can you solve the below equation?\n7 - 7 x 0 + 7 / 7",
-      "answer": "8"
-    },
-    "56": {
-      "question": "Why can't a man marry his widow's sister legally in India?",
-      "answer": "because he's dead"
-    },
-    "57": {
-      "question": "I am best used after I'm broke. What am I?",
-      "answer": "Egg"
-    },
-    "58": {
-      "question": "You're in a room and there is a ghost in the room, but you're the only one in the room. How is this possible?",
-      "answer": "I'm the ghost"
-    },
-    "59": {
-      "question": "A boy and a girl are talking.\n\n\"I am a boy\" - said the child with black hair.\n\n\"I am a girl\" - said the child with white hair.\n\nAt least one of them lied. Who is the boy and who is the girl?",
-      "answer": "they both lied"
-    },
-    "60": {
-      "question": "The United States 22nd and the 24th president got the same father.\nTheir mother is also the same.\nBoth are not twins but born at the same time.\nNone of them are adopted.\nBoth are male.\n\nWho are they ?",
-      "answer": "the same person"
-    },
-    "61": {
-      "question": "If a peacock lays an egg every day and there are two peacocks how many eggs will there be in a week?",
-      "answer": "0"
-    },
-    "62": {
-      "question": "There was this competition where the contestants had to hold 'something'. At the end of the event, the winner was a person who was physically disabled (he had no hands and no feet)! What was that 'something'?",
-      "answer": "Breath"
-    },
-    "63": {
-      "question": "There are three houses in a straight row. One is red, one is blue, and one is white. The red house is left to the middle. The blue house is right of the middle. Where's the white house?",
-      "answer": "In Washington, D.C."
-    },
-    "64": {
-      "question": "In a world where there are 385 days in a year instead of 365 days in a year, how many days in a year would there be?",
-      "answer": "385"
-    }
-  },
-  "unscramble": {
-    "1": {
-      "question": "rrdeDanngE o",
-      "answer": "Ender Dragon"
-    },
-    "2": {
-      "question": "marienct",
-      "answer": "minecart"
-    },
-    "3": {
-      "question": "afcrnetiM",
-      "answer": "Minecraft"
-    },
-    "4": {
-      "question": "yiaawgev",
-      "answer": "giveaway"
-    },
-    "5": {
-      "question": "roddsci",
-      "answer": "discord"
-    },
-    "6": {
-      "question": "tybuoeu",
-      "answer": "youtube"
-    },
-    "7": {
-      "question": "elxip",
-      "answer": "pixel"
-    },
-    "8": {
-      "question": "saicon",
-      "answer": "casino"
-    },
-    "9": {
-      "question": "daniodm",
-      "answer": "diamond"
-    },
-    "11": {
-      "question": "ekbdroc",
-      "answer": "bedrock"
-    },
-    "12": {
-      "question": "istdpepr kao glo",
-      "answer": "stripped oak log"
-    },
-    "13": {
-      "question": "lliuam",
-      "answer": "allium"
-    },
-    "14": {
-      "question": "yumcielm",
-      "answer": "mycelium"
-    },
-    "15": {
-      "question": "aroatetcrt",
-      "answer": "terracotta"
-    },
-    "16": {
-      "question": "herklsu",
-      "answer": "shulker"
-    },
-    "17": {
-      "question": "dmntieeer",
-      "answer": "endermite"
-    },
-    "18": {
-      "question": "toaoxll",
-      "answer": "axolotl"
-    },
-    "19": {
-      "question": "yaall",
-      "answer": "allay"
-    },
-    "20": {
-      "question": "vncaiidtro",
-      "answer": "vindicator"
-    },
-    "21": {
-      "question": "drnee lepra",
-      "answer": "ender pearl"
-    },
-    "22": {
-      "question": "letonkse",
-      "answer": "skeleton"
-    },
-    "23": {
-      "question": "o yxdeesyai",
-      "answer": "oxeye daisy"
-    },
-    "24": {
-      "question": "npyeo",
-      "answer": "peony"
-    },
-    "25": {
-      "question": "dcnorae recoencyt wp",
-      "answer": "cyan concrete powder"
-    },
-    "26": {
-      "question": "rhrohk ls gixleytug ba",
-      "answer": "light gray shulker box"
-    },
-    "27": {
-      "question": "uyromsc imilnn",
-      "answer": "crimson nylium"
-    },
-    "28": {
-      "question": "erau bzetlu",
-      "answer": "azure bluet"
-    },
-    "30": {
-      "question": "ennldadoi",
-      "answer": "dandelion"
-    },
-    "32": {
-      "question": "redenmtie",
-      "answer": "determine"
-    },
-    "33": {
-      "question": "hntereiet",
-      "answer": "netherite"
-    },
-    "34": {
-      "question": "weocrnforl",
-      "answer": "cornflower"
-    },
-    "35": {
-      "question": "avtellfh ill oyye ",
-      "answer": "lily of the valley"
-    },
-    "36": {
-      "question": "iOnbasid",
-      "answer": "Obsidian"
-    },
-    "38": {
-      "question": "nardwe",
-      "answer": "wander"
-    },
-    "39": {
-      "question": "enwrda",
-      "answer": "warden"
-    },
-    "40": {
-      "question": "caognbdrny iiis",
-      "answer": "crying obsidian"
-    },
-    "41": {
-      "question": "toaiorescdn",
-      "answer": "coordinates"
-    },
-    "42": {
-      "question": "dnseotircao",
-      "answer": "decorations"
-    },
-    "43": {
-      "question": "swdros",
-      "answer": "swords"
-    },
-    "44": {
-      "question": "wsrdo",
-      "answer": "words"
-    }
-  }
+  "riddle": {}
 }
