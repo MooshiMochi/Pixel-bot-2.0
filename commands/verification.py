@@ -30,8 +30,8 @@ class Verification(commands.Cog):
             self.v_role_data = json.load(f)
             if not str(const.guild_id) in self.v_role_data:
                 self.v_role_data = {str(const.guild_id): 0}
-
             self.verification_role = self.v_role_data[str(const.guild_id)]
+            print("[Verification]> Loaded verification role: {}".format(self.verification_role) + "\n")
 
         self.get_verification_role.start()
 
@@ -110,6 +110,7 @@ class Verification(commands.Cog):
         with open("data/verification.json", "w") as f:
             self.v_role_data[str(ctx.guild.id)] = verification_role.id
             json.dump(self.v_role_data, f, indent=2)
+            print("[Verification]> Saved verification data.\n")
 
 
     @cog_slash(name="set_verification_role", description="[STAFF] The role that will be given to users whenver they get verified", guild_ids=const.slash_guild_ids, options=[create_option(name="role", description="The verification role to be given", option_type=8, required=True)])
@@ -122,6 +123,7 @@ class Verification(commands.Cog):
         with open("data/verification.json", "w") as f:
             self.v_role_data[str(ctx.guild.id)] = role.id
             json.dump(self.v_role_data, f, indent=2)
+            print("[Verification]> Saved verification data.\n")
 
         await ctx.send("Success!", hidden=True)
     
@@ -252,7 +254,11 @@ class Verification(commands.Cog):
 
         async with self.client.session.get(f"https://api.mojang.com/users/profiles/minecraft/{player_name}") as res:
             if res.status != 200:
-                raise RequestFailure(res.status, (await res.json())["errorMessage"])
+                try:
+                    message = (await res.json())["errorMessage"]
+                except:
+                    message = "Unknown error (Mojang API may be down)."
+                raise RequestFailure(res.status, message)
             
             resp = await res.json()
         
@@ -318,7 +324,7 @@ class Verification(commands.Cog):
     async def account(self, ctx:SlashContext, member:discord.Member=None):
         await ctx.defer(hidden=True)
 
-        user = self.client.players.get(str(member.id), None)
+        user = self.client.players.get(str(member.id if not isinstance(member, discord.Member) else member), None)
         if not user:
             embed = discord.Embed(title="Oh no...",
                                   description=f"It looks like {member.mention} is not linked to any minecraft accounts.", color=self.client.failure)

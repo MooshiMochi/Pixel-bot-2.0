@@ -156,7 +156,8 @@ class LevelSystem(commands.Cog):
                 self.client.lbs["chatlb"][_id]["level"] = self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"]
 
         with open("data/level_system/config.json", "w") as f:
-                json.dump(self.client.lvlsys_config, f, indent=2)
+            json.dump(self.client.lvlsys_config, f, indent=2)
+            print("[Leveling]> Updated leveling config.\n")
 
         return await ctx.send(f"Users will now need to accumulate {new_xp} xp before they can level up!", hidden=True)
 
@@ -188,7 +189,8 @@ class LevelSystem(commands.Cog):
                 self.client.lbs["chatlb"][_id]["level"] = self.client.lvlsys_config[str(ctx.guild_id)]["max_lvl"]
 
         with open("data/level_system/config.json", "w") as f:
-            json.dump(self.client.lvlsys_config, f, indent=2) 
+            json.dump(self.client.lvlsys_config, f, indent=2)
+            print("[Leveling]> Updated leveling config.\n")
 
         return await ctx.send(f"The level cap has been set to `{new_level_cap}`", hidden=True)
 
@@ -250,6 +252,7 @@ class LevelSystem(commands.Cog):
 
         with open("data/level_system/config.json", "w") as f:
             json.dump(self.client.lvlsys_config, f, indent=2)
+            print("[Leveling]> Updated leveling config.\n")
 
         if role:
             return await ctx.send(f"Role {role.mention} will be given when a user reaches level `{level}`", hidden=True)
@@ -407,6 +410,7 @@ class LevelSystem(commands.Cog):
             
             with open("data/level_system/config.json", "w") as f:
                 json.dump(self.client.lvlsys_config, f, indent=2)
+                print("[Leveling]> Updated leveling config.\n")
             
             return 
 
@@ -416,6 +420,7 @@ class LevelSystem(commands.Cog):
 
         with open("data/level_system/config.json", "w") as f:
             json.dump(self.client.lvlsys_config, f, indent=2)
+            print("[Leveling]> Updated leveling config.\n")
         
         return await ctx.send(f"Disabled XP gain in <#{channel.id}>", hidden=True)
 
@@ -440,6 +445,7 @@ class LevelSystem(commands.Cog):
 
         with open("data/level_system/config.json", "w") as f:
             json.dump(self.client.lvlsys_config, f, indent=2)
+            print("[Leveling]> Updated leveling config.\n")
         
         return await ctx.send(f"Enabled XP gain in <#{channel.id}>", hidden=True)
 
@@ -483,6 +489,7 @@ class LevelSystem(commands.Cog):
 
         with open("data/level_system/config.json", "w") as f:
             json.dump(self.client.lvlsys_config, f, indent=2)
+            print("[Leveling]> Updated leveling config.\n")
 
         await ctx.send(response, hidden=True)
 
@@ -502,7 +509,7 @@ class LevelSystem(commands.Cog):
     @commands.guild_only()
     async def cancel_xp_event(self, ctx:SlashContext):
         await ctx.defer(hidden=True)
-        task, channel = self.async_tasks.get(str(ctx.guild_id), None)
+        task, channel = self.async_tasks.get(str(ctx.guild_id), (None, None))
         if not task:
             return await ctx.send("There is no xp event in progress at the moment.", hidden=True)
         
@@ -517,7 +524,8 @@ class LevelSystem(commands.Cog):
         self.xp_per_msg.pop(str(ctx.guild_id), None)
 
         with open("data/level_system/config.json", "w") as f:
-                json.dump(self.client.lvlsys_config, f, indent=2)
+            json.dump(self.client.lvlsys_config, f, indent=2)
+            print("[Leveling]> Updated leveling config.\n")
 
         return await ctx.send("Event cancelled!", hidden=True)
 
@@ -543,6 +551,7 @@ class LevelSystem(commands.Cog):
                     
             with open("data/level_system/config.json", "w") as f:
                 json.dump(self.client.lvlsys_config, f, indent=2)
+                print("[Leveling]> Updated leveling config.\n")
 
 
 def setup(client):

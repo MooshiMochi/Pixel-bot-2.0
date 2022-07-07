@@ -33,8 +33,11 @@ class Riddles(commands.Cog):
             if "active" not in self.config.keys():
                 self.config["active"] = False
 
+            print("[Riddles]> Loaded riddles config.\n")
+
         with open("data/games/riddles.json", "r") as f:
             self.riddles = json.load(f)
+            print("[Riddles]> Loaded {} riddles".format(len(self.riddles)) + "\n")
 
         self.main_ch = self.config.get("channel_id", None)
         
@@ -206,20 +209,24 @@ class Riddles(commands.Cog):
 
         with open("data/games/riddles_config.json", "w") as f:
             json.dump(self.config, f, indent=2)
+            print("[Riddles]> Saved riddles config.\n")
 
         if self.config['active']:
             try:
                 if self.run_riddles.is_running():
                     self.run_riddles.cancel()
+                    await asyncio.sleep(10)
                 self.run_riddles.start()
             except RuntimeError:
                 if self.run_riddles.is_running():
                     self.run_riddles.cancel()
+                    await asyncio.sleep(10)
                 self.run_riddles.start()
 
         else:
             if self.run_riddles.is_running():
                 self.run_riddles.cancel()
+                await asyncio.sleep(10)
 
         return await ctx.send(text, hidden=True)
 
@@ -250,6 +257,7 @@ class Riddles(commands.Cog):
         
         with open("data/games/riddles.json", "w") as f:
             json.dump(self.riddles, f, indent=2)
+            print("[Riddles]> Saved riddles.\n")
 
         return await ctx.embed(embed=em, footer="Riddles")
 
@@ -289,6 +297,7 @@ class Riddles(commands.Cog):
         
         with open("data/games/riddles.json", "w") as f:
             json.dump(self.riddles, f, indent=2)
+            print("[Riddles]> Saved riddles.\n")
 
         return await ctx.embed(embed=em, footer="Riddles")
 

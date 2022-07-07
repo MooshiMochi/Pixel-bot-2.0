@@ -27,7 +27,7 @@ class Giveaways(commands.Cog):
 
         with open("data/giveaways/active.json", "r") as f:
             self.giveaways = json.load(f)
-
+            print("[Giveaways]> Loaded {} giveaways".format(len(self.giveaways)))
 
         self.timeout_button = [create_button(
         style=ButtonStyle.red,
@@ -166,6 +166,7 @@ class Giveaways(commands.Cog):
 
         with open("data/giveaways/active.json", "w") as f:
             json.dump(self.giveaways, f, indent=2)
+            print("[Giveaways]> Created & saved all giveaways.\n")
 
         await ctx.send(f"Success!", hidden=True)
 
@@ -174,28 +175,30 @@ class Giveaways(commands.Cog):
     @tasks.loop(seconds=15.0)
     async def save_giveaways(self):
         with open("data/giveaways/active.json", "w") as f:
-            json.dump(self.giveaways, f, indent=2)    
+            json.dump(self.giveaways, f, indent=2)
+            print("[Giveaways]> Saved all giveaways.\n")
 
     @tasks.loop(count=1)
     async def resume_giveaways(self):
         
         self.save_giveaways.start()
 
-        ts = datetime.utcnow().timestamp()
+        ts = datetime.now().timestamp()
 
         tasks = []
         for key in self.giveaways.keys():
-            if self.giveaways[key]["time"] < ts:
+            if int(self.giveaways[key]["time"]) < ts:
                 tasks.append(self.wait_for_giveaway(key))
         if tasks:
             await asyncio.gather(*tasks)
 
     @tasks.loop(minutes=5)
     async def clear_giveaway_cache(self):
-        ts = datetime.utcnow().timestamp()
+        ts = datetime.now().timestamp()
         for key in self.giveaways.copy().keys():
             if ts - self.giveaways[key]["time"] >= 24*60*60:
                 self.giveaways.pop(key, None)
+                print("[Giveaways]> Removed {} giveaway from cache.\n".format(key))
         
     @resume_giveaways.before_loop
     @save_giveaways.before_loop

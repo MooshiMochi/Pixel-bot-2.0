@@ -91,6 +91,7 @@ class PayoutTasks(commands.Cog):
         
             with open("data/payouts.json", "w") as f:
                 json.dump(self.client.payouts, f, indent=2)
+                print("[Payouts]> Saved data to file.\n")
 
 
     @tasks.loop(seconds=30.0)
@@ -135,7 +136,7 @@ class PayoutTasks(commands.Cog):
         
             with open("data/payouts.json", "w") as f:
                 json.dump(self.client.payouts, f, indent=2)
-
+                print("[Payouts]> Saved data to file.\n")
 
     @send_payouts.before_loop
     @mm_monthly_payout.before_loop

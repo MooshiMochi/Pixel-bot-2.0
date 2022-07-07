@@ -23,9 +23,11 @@ class GuildEvents(commands.Cog):
 
         with open("data/events_and_updates/updates.json", "r") as f:
             self.updates = json.load(f)
+            print("[Updates]> Loaded updates.json.\n")
 
         with open("data/events_and_updates/events.json", "r") as f:
             self.events = json.load(f)
+            print("[Events]> Loaded events.json.\n")
     
         self.getting_ready.start()
 
@@ -56,9 +58,11 @@ class GuildEvents(commands.Cog):
     async def save_data(self):
         with open("data/events_and_updates/updates.json", "w") as f:
             json.dump(self.updates, f, indent=2)
+            print("[Updates]> Saved updates.json.\n")
             
         with open("data/events_and_updates/events.json", "w") as f:
             json.dump(self.events, f, indent=2)
+            print("[Events]> Saved events.json.\n")
 
     @getting_ready.before_loop
     @save_data.before_loop

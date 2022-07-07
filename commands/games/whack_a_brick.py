@@ -54,6 +54,7 @@ class WhackABrick(commands.Cog):
     async def save_wab_data(self):
         with open("data/wab.json", "w") as f:
             json.dump(self.client.wab_data, f, indent=2)
+            print("[Whack A Brick]> Saved WAB data.\n")
             
 
     @save_wab_data.before_loop

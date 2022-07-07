@@ -53,6 +53,7 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
 
         with open("data/reactions_db.json", "r") as f:
             self.data = json.load(f)
+            print("[Reaction Roles]> Loaded {} reaction roles".format(len(self.data)) + "\n")
 
         if not self.data:
             self.data = {}
@@ -65,6 +66,7 @@ class ReactionRoles(commands.Cog, name="Reaction Roles"):
     async def save_reaction_data(self):
         with open("data/reactions_db.json", "w") as f:
             json.dump(self.data, f, indent=2)
+            print("[Reaction Roles]> Saved reaction roles.\n")
 
     @save_reaction_data.before_loop
     async def before_save_reaction_data(self):

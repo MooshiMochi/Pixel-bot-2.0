@@ -32,12 +32,15 @@ class EconomyCommands(commands.Cog):
 
         with open("data/economy/user_logs.json", "r") as f:
             self.eco_user_logs = json.load(f)
+            print("[Economy]> Loaded user logs.\n")
         
         with open("data/economy/shopitems.json", "r") as f:
             self.shopdata = json.load(f)
+            print("[Economy]> Loaded shop items.\n")
 
         with open("data/economy/economydata.json", "r") as f:
             self.client.economydata = json.load(f)
+            print("[Economy]> Loaded economy data.\n")
         
         self.cash_logs_channel = self.client.eco_config.get("cash_logs_channel_id", 0)
         self.income_logs_channel = self.client.eco_config.get("income_logs_channel_id", 0)
@@ -94,12 +97,13 @@ class EconomyCommands(commands.Cog):
         self.update_loop.start()
         self.isready = True
 
-    @tasks.loop(minutes=1)
+    @tasks.loop(minutes=5)
     async def update_loop(self):
 
         with open("data/economy/economydata.json", "w") as f:
             economydatalocal = self.client.economydata.copy()
             json.dump(economydatalocal, f, indent=2)
+            print("[Economy]> Saved economy data.\n")
 
         for item, itemdata in self.shopdata.copy().items():
             try:
@@ -110,9 +114,11 @@ class EconomyCommands(commands.Cog):
                 pass
         with open("data/economy/shopitems.json", "w") as f:
             json.dump(self.shopdata, f, indent=2)
+            print("[Economy]> Saved shop data.\n")
 
         with open("data/economy/user_logs.json", "w") as f:
             json.dump(self.eco_user_logs, f, indent=2)
+            print("[Economy]> Saved user logs.\n")
 
 
     async def check_user(self, authorid):
@@ -312,6 +318,7 @@ class EconomyCommands(commands.Cog):
 
         with open("data/economy/config.json", "w") as f:
             json.dump(self.client.eco_config, f, indent=2)
+            print("[Economy] Config updated\n")
 
         return await ctx.embed(embed=em, footer="Economy")
         
@@ -1371,12 +1378,15 @@ class EconomyCommands(commands.Cog):
 
         with open("data/economy/user_logs.json", "w") as f:
             json.dump(self.eco_user_logs, f, indent=2)        
+            print("[Economy] User logs reset\n")
 
         with open("data/economy/shopitems.json", "w") as f:
             json.dump(self.shopdata, f, indent=2)
+            print("[Economy] Shop items reset\n")
 
         with open("data/economy/economydata.json", "w") as f:
             json.dump(self.client.economydata, f, indent=2)
+            print("[Economy] Economy data reset\n")
 
         self.client.eco_config = {
             "cash_logs": False,
@@ -1390,6 +1400,7 @@ class EconomyCommands(commands.Cog):
 
         with open("data/economy/config.json", "w") as f:
             json.dump(self.client.eco_config, f, indent=2)
+            print("[Economy] Economy config reset\n")
 
         em = discord.Embed(description="**Economy reset successfully!**", color=self.client.failure)
         em.set_footer(text="TitanMC | Economy", icon_url=self.client.png)
