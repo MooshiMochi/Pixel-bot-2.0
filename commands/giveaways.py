@@ -172,7 +172,7 @@ class Giveaways(commands.Cog):
 
         self.client.loop.create_task(self.wait_for_giveaway(str(msg.id)))
 
-    @tasks.loop(seconds=15.0)
+    @tasks.loop(minutes=5.0)
     async def save_giveaways(self):
         with open("data/giveaways/active.json", "w") as f:
             json.dump(self.giveaways, f, indent=2)
@@ -181,6 +181,7 @@ class Giveaways(commands.Cog):
     @tasks.loop(count=1)
     async def resume_giveaways(self):
         
+        self.clear_giveaway_cache.start()
         self.save_giveaways.start()
 
         ts = datetime.now().timestamp()
