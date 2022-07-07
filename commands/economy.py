@@ -185,8 +185,7 @@ class EconomyCommands(commands.Cog):
 
     async def add_coins(self, ctx, user:discord.Member, amount:int, where:str="wallet", all:bool=False):
         data = await self.check_user(user.id)
-
-        data[where] += amount
+        self.client.economydata[str(user.id)][where] += amount
 
         if not all:
             await self.economy_log("pay_logs", user.mention, amount, f"{ctx.author.mention} used /add_money")
