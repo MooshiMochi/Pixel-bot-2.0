@@ -1310,7 +1310,6 @@ class EconomyCommands(commands.Cog):
             playerslist.append([discordid, memberdata["wallet"] + memberdata["bank"]])
 
         playerslist = sorted(playerslist, key=lambda x: x[1], reverse=True)
-
         embeds = []
 
         ranking = 1
