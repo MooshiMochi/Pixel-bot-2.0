@@ -71,7 +71,32 @@ class Miscellaneous(commands.Cog):
                 color = Embed.Empty
         else:
             color = Embed.Empty
-            
+        
+        if author_url and (author_url.startswith("http") or author_url.startswith("https")):
+            author_url = author_url
+        else:
+            author_url = None
+
+        if author_icon_url and (author_icon_url.startswith("http") or author_icon_url.startswith("https")):
+            author_icon_url = author_icon_url
+        else:
+            author_icon_url = None
+
+        if thumbnail_url and (thumbnail_url.startswith("http") or thumbnail_url.startswith("https")):
+            thumbnail_url = thumbnail_url
+        else:
+            thumbnail_url = None
+
+        if footer_icon_url and (footer_icon_url.startswith("http") or footer_icon_url.startswith("https")):
+            footer_icon_url = footer_icon_url
+        else:
+            footer_icon_url = None
+
+        if image_url and (image_url.startswith("http") or image_url.startswith("https")):
+            image_url = image_url
+        else:
+            image_url = None         
+
         em = Embed(title=title if title else "", description=desc if desc else "\u200b", color=color)
         em.set_footer(text=footer if footer else "", icon_url=footer_icon_url if footer_icon_url else "")
         em.set_thumbnail(url=thumbnail_url) if thumbnail_url else None
