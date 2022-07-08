@@ -598,11 +598,14 @@ class EconomyCommands(commands.Cog):
         create_option(name="message_when_purchased", description="The message the bot will reply with to the buyer when the item is purchased", option_type=3, required=False),
         create_option(name="show_in_inv", description="If the item will show in the buyer's inventory", option_type=5, required=False),
         ])
-    @commands.has_permissions(manage_roles=True)
+    @commands.has_permissions(administrator=True)
     @commands.guild_only()
     async def create_item(self, ctx:SlashContext, item_name:str=None, item_description:str=None, price:int=100000, stock_amount:int=None, item_category:str=None, show_in_inv:bool=False, availability_duration:str=None, role_to_receive:discord.Role=None, role_to_remove:discord.Role=None, min_balance:int=0, message_when_purchased:str=None, role_required:discord.Role=None):
         await ctx.defer(hidden=True)
         
+        if not ctx.author.guild_permissions.administrator:
+            return await ctx.embed(embed=discord.Embed(color=self.client.failure, description="You must be an administrator to use this command."), footer="Economy")
+
         if availability_duration:
             time_in_seconds = int(await self.client.format_duration(availability_duration))
             if time_in_seconds < 600:
