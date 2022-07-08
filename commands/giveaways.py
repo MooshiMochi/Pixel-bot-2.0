@@ -27,7 +27,8 @@ class Giveaways(commands.Cog):
 
         with open("data/giveaways/active.json", "r") as f:
             self.giveaways = json.load(f)
-            print("[Giveaways]> Loaded {} giveaways".format(len(self.giveaways)))
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Giveaways]> Loaded {len(self.giveaways)} giveaways.\n")
 
         self.timeout_button = [create_button(
         style=ButtonStyle.red,
@@ -166,7 +167,8 @@ class Giveaways(commands.Cog):
 
         with open("data/giveaways/active.json", "w") as f:
             json.dump(self.giveaways, f, indent=2)
-            print("[Giveaways]> Created & saved all giveaways.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Giveaways]> Created & saved all giveaways.\n")
 
         await ctx.send(f"Success!", hidden=True)
 
@@ -176,7 +178,8 @@ class Giveaways(commands.Cog):
     async def save_giveaways(self):
         with open("data/giveaways/active.json", "w") as f:
             json.dump(self.giveaways, f, indent=2)
-            print("[Giveaways]> Saved all giveaways.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Giveaways]> Saved all giveaways.\n")
 
     @tasks.loop(count=1)
     async def resume_giveaways(self):
@@ -199,7 +202,8 @@ class Giveaways(commands.Cog):
         for key in self.giveaways.copy().keys():
             if ts - self.giveaways[key]["time"] >= 24*60*60:
                 self.giveaways.pop(key, None)
-                print("[Giveaways]> Removed {} giveaway from cache.\n".format(key))
+                ts = datetime.now().strftime("%H:%M:%S")
+                print(f"[{ts}][Giveaways]> Removed {key} giveaway from cache.\n")
         
     @resume_giveaways.before_loop
     @save_giveaways.before_loop

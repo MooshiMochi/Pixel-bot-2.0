@@ -39,7 +39,8 @@ class McMadness(commands.Cog):
                 self.config["tournament_id"] = None
             if "ping_role_id" not in self.config.keys():
                 self.config["ping_role_id"] = "\u200b"
-            print("[MM]> Loaded config.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][MM]> Loaded config.\n")
 
         self.mm_channel_id = self.config.get("mm_channel_id", None)
         self.tournament_id = self.config.get("tournament_id", None)
@@ -60,7 +61,8 @@ class McMadness(commands.Cog):
 
         with open("data/games/quiz_questions.json", "r", encoding="utf8") as f:
             self.quiz_data = json.load(f)
-            print("[MM]> Loaded quiz data.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][MM]> Loaded quiz data.\n")
 
         self.participants = {}
         self.members_ready = False
@@ -670,7 +672,8 @@ class McMadness(commands.Cog):
                 "options": opts,
                 "answer": answer}
             json.dump(self.quiz_data, f, indent=2)
-            print("[MM]> Added new question to the quiz game.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][MM]> Added new question to the quiz game.\n")
         
         text = (
             f"New Question Added:\n"
@@ -712,7 +715,8 @@ class McMadness(commands.Cog):
                 "options": opts,
                 "answer": answer}
             json.dump(self.quiz_data, f, indent=2)
-            print("[MM]> Edited question in the quiz game.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][MM]> Edited question in the quiz game.\n")
         
         text = (
             f"Question data changed to:\n"
@@ -739,7 +743,8 @@ class McMadness(commands.Cog):
                 
         with open("data/games/quiz_questions.json", "w", encoding="utf8") as f:
             json.dump(self.quiz_data, f, indent=2)
-            print("[MM]> Deleted question from the quiz game.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][MM]> Deleted question from the quiz game.\n")
         
         return await ctx.send(f"Deleted `{question_to_delete}` from the {difficulty.capitalize()} questions.", hidden=True)
 
@@ -848,7 +853,8 @@ class McMadness(commands.Cog):
 
         with open("data/games/mm_config.json", "w") as f:
             json.dump(self.config, f, indent=2)
-            print("[MM]> Loaded config file.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][MM]> Loaded config file.\n")
 
         if self.tournamet.is_running():
             self.tournamet.cancel()

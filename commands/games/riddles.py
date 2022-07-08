@@ -15,6 +15,8 @@ from discord_slash.utils.manage_commands import create_option, create_choice
 
 from utils.paginator import Paginator
 
+from datetime import datetime
+
 from constants import const
 
 
@@ -33,11 +35,13 @@ class Riddles(commands.Cog):
             if "active" not in self.config.keys():
                 self.config["active"] = False
 
-            print("[Riddles]> Loaded riddles config.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Riddles]> Loaded riddles config.\n")
 
         with open("data/games/riddles.json", "r") as f:
             self.riddles = json.load(f)
-            print("[Riddles]> Loaded {} riddles".format(len(self.riddles)) + "\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Riddles]> Loaded {len(self.riddles)} riddles.\n")
 
         self.main_ch = self.config.get("channel_id", None)
         
@@ -209,7 +213,8 @@ class Riddles(commands.Cog):
 
         with open("data/games/riddles_config.json", "w") as f:
             json.dump(self.config, f, indent=2)
-            print("[Riddles]> Saved riddles config.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Riddles]> Saved riddles config.\n")
 
         if self.config['active']:
             try:
@@ -257,7 +262,8 @@ class Riddles(commands.Cog):
         
         with open("data/games/riddles.json", "w") as f:
             json.dump(self.riddles, f, indent=2)
-            print("[Riddles]> Saved riddles.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Riddles]> Saved riddles.\n")
 
         return await ctx.embed(embed=em, footer="Riddles")
 
@@ -297,7 +303,8 @@ class Riddles(commands.Cog):
         
         with open("data/games/riddles.json", "w") as f:
             json.dump(self.riddles, f, indent=2)
-            print("[Riddles]> Saved riddles.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Riddles]> Saved riddles.\n")
 
         return await ctx.embed(embed=em, footer="Riddles")
 

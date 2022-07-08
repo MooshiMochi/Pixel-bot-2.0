@@ -20,7 +20,8 @@ class Raffle(commands.Cog):
     
         with open("data/raffle/raffles.json", "r") as f:
             self.raffles = json.load(f)
-            print("[Raffles]> Loaded {} raffles".format(len(self.raffles)) + "\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Raffles]> Loaded {len(self.raffles)} raffles.\n")
 
         self.getting_ready.start()
 
@@ -107,7 +108,8 @@ class Raffle(commands.Cog):
 
         with open("data/raffle/raffles.json", "w") as f:
             json.dump(self.raffles, f, indent=2)
-            print("[Raffles]> Saved raffles to file.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Raffles]> Saved raffles to file.\n")
         return
 
 
@@ -157,7 +159,8 @@ class Raffle(commands.Cog):
 
         with open("data/raffle/raffles.json", "w") as f:
             json.dump(self.raffles, f, indent=2)
-            print("[Raffles]> Saved raffles to file.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Raffles]> Saved raffles to file.\n")
         
         em = discord.Embed(title="New raffle has been scheduled", description=f"Time:\n> <t:{int(scheduled_time.timestamp())}:R>\n\nChannel:\n> <#{channel.id}>\n\nNumber of winners:\n> {winners}", color=self.client.failure)
         em.set_footer(text="TitanMC | Raffle", icon_url=self.client.png)

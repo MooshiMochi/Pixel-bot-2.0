@@ -23,7 +23,8 @@ class Suggestions(commands.Cog):
 
         with open("data/suggestions_config.json", "r") as f:
             self.config = json.load(f)
-            print("[Suggestions]> Loaded {} suggestions".format(len(self.config)) + "\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Suggestions]> Loaded suggestions config.\n")
 
             if not "enabled" in self.config.keys():
                 self.config["enabled"] = False
@@ -240,7 +241,8 @@ class Suggestions(commands.Cog):
         
         with open("data/suggestions_config.json", "w") as f:
             json.dump(self.config, f, indent=2)
-            print("[Suggestions]> Saved config to data/suggestions_config.json.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Suggestions]> Saved config to data/suggestions_config.json.\n")
 
         return await ctx.send(embed=em, hidden=True)
         

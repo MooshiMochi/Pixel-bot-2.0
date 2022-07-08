@@ -32,15 +32,18 @@ class EconomyCommands(commands.Cog):
 
         with open("data/economy/user_logs.json", "r") as f:
             self.eco_user_logs = json.load(f)
-            print("[Economy]> Loaded user logs.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Economy]> Loaded user logs.\n")
         
         with open("data/economy/shopitems.json", "r") as f:
             self.shopdata = json.load(f)
-            print("[Economy]> Loaded shop items.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Economy]> Loaded shop items.\n")
 
         with open("data/economy/economydata.json", "r") as f:
             self.client.economydata = json.load(f)
-            print("[Economy]> Loaded economy data.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Economy]> Loaded economy data.\n")
         
         self.cash_logs_channel = self.client.eco_config.get("cash_logs_channel_id", 0)
         self.income_logs_channel = self.client.eco_config.get("income_logs_channel_id", 0)
@@ -103,7 +106,8 @@ class EconomyCommands(commands.Cog):
         with open("data/economy/economydata.json", "w") as f:
             economydatalocal = self.client.economydata.copy()
             json.dump(economydatalocal, f, indent=2)
-            print("[Economy]> Saved economy data.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Economy]> Saved economy data.\n")
 
         for item, itemdata in self.shopdata.copy().items():
             try:
@@ -114,11 +118,13 @@ class EconomyCommands(commands.Cog):
                 pass
         with open("data/economy/shopitems.json", "w") as f:
             json.dump(self.shopdata, f, indent=2)
-            print("[Economy]> Saved shop data.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Economy]> Saved shop data.\n")
 
         with open("data/economy/user_logs.json", "w") as f:
             json.dump(self.eco_user_logs, f, indent=2)
-            print("[Economy]> Saved user logs.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Economy]> Saved user logs.\n")
 
 
     async def check_user(self, authorid):
@@ -317,7 +323,8 @@ class EconomyCommands(commands.Cog):
 
         with open("data/economy/config.json", "w") as f:
             json.dump(self.client.eco_config, f, indent=2)
-            print("[Economy] Config updated\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Economy] Config updated\n")
 
         return await ctx.embed(embed=em, footer="Economy")
         
@@ -602,6 +609,13 @@ class EconomyCommands(commands.Cog):
     @commands.guild_only()
     async def create_item(self, ctx:SlashContext, item_name:str=None, item_description:str=None, price:int=100000, stock_amount:int=None, item_category:str=None, show_in_inv:bool=False, availability_duration:str=None, role_to_receive:discord.Role=None, role_to_remove:discord.Role=None, min_balance:int=0, message_when_purchased:str=None, role_required:discord.Role=None):
         await ctx.defer(hidden=True)
+        guild = ctx.guild if ctx.guild.id == 932413718397083678 else ctx.bot.get_guild(932413718397083678)
+        report_channel = guild.get_channel(968989195492294677)
+        if report_channel is not None:
+            try:
+                await report_channel.send(f"<@!{ctx.author.id}> created a new item in /shop: {item_name, item_description, price, stock_amount, item_category, show_in_inv, availability_duration, role_to_receive, role_to_remove, min_balance, message_when_purchased, role_required}")
+            except:
+                print(f"[Economy]> New shop item created ({item_name}) by {ctx.author.name} | {ctx.author.id}.\n")
         
         if not ctx.author.guild_permissions.administrator:
             return await ctx.embed(embed=discord.Embed(color=self.client.failure, description="You must be an administrator to use this command."), footer="Economy")
@@ -1379,15 +1393,18 @@ class EconomyCommands(commands.Cog):
 
         with open("data/economy/user_logs.json", "w") as f:
             json.dump(self.eco_user_logs, f, indent=2)        
-            print("[Economy] User logs reset\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Economy] User logs reset\n")
 
         with open("data/economy/shopitems.json", "w") as f:
             json.dump(self.shopdata, f, indent=2)
-            print("[Economy] Shop items reset\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Economy] Shop items reset\n")
 
         with open("data/economy/economydata.json", "w") as f:
             json.dump(self.client.economydata, f, indent=2)
-            print("[Economy] Economy data reset\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Economy] Economy data reset\n")
 
         self.client.eco_config = {
             "cash_logs": False,
@@ -1401,7 +1418,8 @@ class EconomyCommands(commands.Cog):
 
         with open("data/economy/config.json", "w") as f:
             json.dump(self.client.eco_config, f, indent=2)
-            print("[Economy] Economy config reset\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Economy] Economy config reset\n")
 
         em = discord.Embed(description="**Economy reset successfully!**", color=self.client.failure)
         em.set_footer(text="TitanMC | Economy", icon_url=self.client.png)

@@ -9,6 +9,8 @@ from discord_slash.utils.manage_commands import create_option, create_choice
 
 from utils.paginator import Paginator as paginator
 
+from datetime import datetime
+
 from constants import const
 
 
@@ -36,11 +38,13 @@ class LeaderboardCommands(commands.Cog):
 
         with open("data/leaderboards.json", "w") as f:
             json.dump(self.client.lbs, f, indent=2)
-            print("[Leaderboards]> Updated leaderboards.")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Leaderboards]> Updated leaderboards.\n")
 
         with open("data/verified_players.json", "w") as f:
             json.dump(self.client.players, f, indent=2)
-            print("[Verification]> Updated verified players.")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Verification]> Updated verified players.\n")
     
     @update_leaderboards.before_loop
     async def before_update_leaderboards(self):

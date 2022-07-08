@@ -16,6 +16,7 @@ from discord_slash.model import ButtonStyle
 from discord_slash.error import RequestFailure
 from discord_slash.model import BucketType
 
+from datetime import datetime
 
 bool_converter = Converters.Boolean
 
@@ -31,7 +32,8 @@ class Verification(commands.Cog):
             if not str(const.guild_id) in self.v_role_data:
                 self.v_role_data = {str(const.guild_id): 0}
             self.verification_role = self.v_role_data[str(const.guild_id)]
-            print("[Verification]> Loaded verification role: {}".format(self.verification_role) + "\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Verification]> Loaded verification role: {self.verification_role}.\n")
 
         self.get_verification_role.start()
 
@@ -110,7 +112,8 @@ class Verification(commands.Cog):
         with open("data/verification.json", "w") as f:
             self.v_role_data[str(ctx.guild.id)] = verification_role.id
             json.dump(self.v_role_data, f, indent=2)
-            print("[Verification]> Saved verification data.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Verification]> Saved verification data.\n")
 
 
     @cog_slash(name="set_verification_role", description="[STAFF] The role that will be given to users whenver they get verified", guild_ids=const.slash_guild_ids, options=[create_option(name="role", description="The verification role to be given", option_type=8, required=True)])
@@ -123,7 +126,8 @@ class Verification(commands.Cog):
         with open("data/verification.json", "w") as f:
             self.v_role_data[str(ctx.guild.id)] = role.id
             json.dump(self.v_role_data, f, indent=2)
-            print("[Verification]> Saved verification data.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Verification]> Saved verification data.\n")
 
         await ctx.send("Success!", hidden=True)
     

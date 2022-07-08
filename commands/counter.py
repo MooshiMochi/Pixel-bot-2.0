@@ -19,11 +19,13 @@ class Counter(commands.Cog):
 
         with open("data/counters/counter_config.json", "r") as f:
             self.config = json.load(f)
-            print("[Counters]> Loaded config.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Counters]> Loaded config.\n")
 
         with open("data/counters/counters.json", "r") as f:
             self.counters = json.load(f)
-            print("[Counters]> Loaded counters.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Counters]> Loaded counters.\n")
 
         self.categories = {}
 
@@ -118,7 +120,8 @@ class Counter(commands.Cog):
 
         with open("data/counters/counter_config.json", "w") as f:
             json.dump(self.config, f, indent=2)
-            print("[Counters]> Saved config.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Counters]> Saved config.\n")
 
         return await ctx.send(f"Set new counter category to {category.mention}", hidden=True)
 
@@ -157,7 +160,8 @@ class Counter(commands.Cog):
 
         with open("data/counters/counters.json", "w") as f:
             json.dump(self.counters, f, indent=2)
-            print("[Counters]> Saved counters.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Counters]> Saved counters.\n")
 
         self.client.loop.create_task(self.sleeping_func(ctx.guild, str(channel.id)))
 
@@ -211,7 +215,8 @@ class Counter(commands.Cog):
 
         with open("data/counters/counters.json", "w") as f:
             json.dump(self.counters, f, indent=2)
-            print("[Counters]> Saved counters.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Counters]> Saved counters.\n")
 
         return await ctx.send(f"Counter edited!\n> Name: `{new_name if new_name else 'unchanged'}`\n> Counting Days: `{new_days if new_days else 'unchagned'}`", hidden=True)
 
@@ -237,7 +242,8 @@ class Counter(commands.Cog):
 
         with open("data/counters/counters.json", "w") as f:
             json.dump(self.counters, f, indent=2)
-            print("[Counters]> Saved counters.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Counters]> Saved counters.\n")
 
         return await ctx.send(f"Counter `{vc_id}` deleted successfully!", hidden=True)
 

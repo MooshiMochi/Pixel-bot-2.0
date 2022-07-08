@@ -318,8 +318,8 @@ client = MyClient(command_prefix=commands.when_mentioned_or(const.prefix), case_
 
 with open("data/level_system/config.json", "r") as f:
     client.lvlsys_config = json.load(f)
-    print("[Leveling]> Loaded leveling config.\n")
-
+    ts = datetime.now().strftime("%H:%M:%S")
+    print(f"[{ts}][Leveling]> Loaded leveling config.\n")
 with open("data/leaderboards.json", "r") as f:
     client.lbs = json.load(f)
 
@@ -332,7 +332,8 @@ with open("data/leaderboards.json", "r") as f:
     client.lbs["riddles"] = {} if "riddles" not in client.lbs.keys() else client.lbs["riddles"]
 
     client.lbs["msgs"] = {} if "msgs" not in client.lbs.keys() else client.lbs["msgs"]
-    print("[Leaderboard]> Loaded leaderboards: " + ", ".join(client.lbs.keys()) + ".\n")
+    ts = datetime.now().strftime("%H:%M:%S")
+    print(f"[{ts}][Leaderboard]> Loaded leaderboards: " + ", ".join(client.lbs.keys()) + ".\n")
 
 with open("data/games/payouts.json", "r") as f:
     client.payouts = json.load(f)
@@ -340,7 +341,8 @@ with open("data/games/payouts.json", "r") as f:
     client.payouts["mm"] = {"ts": 0, "month": 1} if "mm" not in client.payouts.keys() else client.payouts["mm"]
 
     client.payouts["msgs"] = {"ts": 1643605260, "month": 1} if "msgs" not in client.payouts.keys() else client.payouts["msgs"]
-    print("[Payouts]> Loaded payouts.json.\n")
+    ts = datetime.now().strftime("%H:%M:%S")
+    print(f"[{ts}][Payouts]> Loaded payouts.json.\n")
 
 with open("data/economy/config.json", "r") as f:
     client.eco_config = json.load(f)

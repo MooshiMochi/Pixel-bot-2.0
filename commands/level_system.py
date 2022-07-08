@@ -157,7 +157,8 @@ class LevelSystem(commands.Cog):
 
         with open("data/level_system/config.json", "w") as f:
             json.dump(self.client.lvlsys_config, f, indent=2)
-            print("[Leveling]> Updated leveling config.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Leveling]> Updated leveling config.\n")
 
         return await ctx.send(f"Users will now need to accumulate {new_xp} xp before they can level up!", hidden=True)
 
@@ -190,7 +191,8 @@ class LevelSystem(commands.Cog):
 
         with open("data/level_system/config.json", "w") as f:
             json.dump(self.client.lvlsys_config, f, indent=2)
-            print("[Leveling]> Updated leveling config.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Leveling]> Updated leveling config.\n")
 
         return await ctx.send(f"The level cap has been set to `{new_level_cap}`", hidden=True)
 
@@ -252,7 +254,8 @@ class LevelSystem(commands.Cog):
 
         with open("data/level_system/config.json", "w") as f:
             json.dump(self.client.lvlsys_config, f, indent=2)
-            print("[Leveling]> Updated leveling config.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Leveling]> Updated leveling config.\n")
 
         if role:
             return await ctx.send(f"Role {role.mention} will be given when a user reaches level `{level}`", hidden=True)
@@ -410,7 +413,8 @@ class LevelSystem(commands.Cog):
             
             with open("data/level_system/config.json", "w") as f:
                 json.dump(self.client.lvlsys_config, f, indent=2)
-                print("[Leveling]> Updated leveling config.\n")
+                ts = datetime.now().strftime("%H:%M:%S")
+                print(f"[{ts}][Leveling]> Updated leveling config.\n")
             
             return 
 
@@ -420,7 +424,8 @@ class LevelSystem(commands.Cog):
 
         with open("data/level_system/config.json", "w") as f:
             json.dump(self.client.lvlsys_config, f, indent=2)
-            print("[Leveling]> Updated leveling config.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Leveling]> Updated leveling config.\n")
         
         return await ctx.send(f"Disabled XP gain in <#{channel.id}>", hidden=True)
 
@@ -445,7 +450,8 @@ class LevelSystem(commands.Cog):
 
         with open("data/level_system/config.json", "w") as f:
             json.dump(self.client.lvlsys_config, f, indent=2)
-            print("[Leveling]> Updated leveling config.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Leveling]> Updated leveling config.\n")
         
         return await ctx.send(f"Enabled XP gain in <#{channel.id}>", hidden=True)
 
@@ -489,7 +495,8 @@ class LevelSystem(commands.Cog):
 
         with open("data/level_system/config.json", "w") as f:
             json.dump(self.client.lvlsys_config, f, indent=2)
-            print("[Leveling]> Updated leveling config.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Leveling]> Updated leveling config.\n")
 
         await ctx.send(response, hidden=True)
 
@@ -525,7 +532,8 @@ class LevelSystem(commands.Cog):
 
         with open("data/level_system/config.json", "w") as f:
             json.dump(self.client.lvlsys_config, f, indent=2)
-            print("[Leveling]> Updated leveling config.\n")
+            ts = datetime.now().strftime("%H:%M:%S")
+            print(f"[{ts}][Leveling]> Updated leveling config.\n")
 
         return await ctx.send("Event cancelled!", hidden=True)
 
@@ -551,7 +559,8 @@ class LevelSystem(commands.Cog):
                     
             with open("data/level_system/config.json", "w") as f:
                 json.dump(self.client.lvlsys_config, f, indent=2)
-                print("[Leveling]> Updated leveling config.\n")
+                ts = datetime.now().strftime("%H:%M:%S")
+                print(f"[{ts}][Leveling]> Updated leveling config.\n")
 
 
 def setup(client):
