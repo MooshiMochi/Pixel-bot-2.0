@@ -615,7 +615,7 @@ class EconomyCommands(commands.Cog):
             try:
                 await report_channel.send(
                     embed=discord.Embed(title="⚠️ New Shop Item ⚠️", 
-                    description=(f"<@!{ctx.author.id}> created a new item in /shop: "
+                    description=(f"<@!{ctx.author.id}> created a new item in /shop:\n"
                     f"Name: {item_name}\nDescription: {item_description}\nPrice: {price}\nStock Amount: {stock_amount}\n"
                     f"Category: {item_category}\nShow in Inventory: {show_in_inv}\nAvailability Duration: {availability_duration}\n"
                     f"Role Required: {role_required}\nRole To Receive: {role_to_receive}\nRole To Remove: {role_to_remove}\n"
@@ -625,7 +625,7 @@ class EconomyCommands(commands.Cog):
                 print(f"[{ts}][ERROR][Economy]> Attempted to send new item alert. Failed: {e}")
             finally:
                 print(f"[Economy]> New shop item created by {ctx.author.name}#{ctx.author.discriminator} | {ctx.author_id}: Name - {item_name} | Category {item_category}.")
-                
+
         if not ctx.author.guild_permissions.administrator:
             return await ctx.embed(embed=discord.Embed(color=self.client.failure, description="You must be an administrator to use this command."), footer="Economy")
 
